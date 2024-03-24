@@ -328,6 +328,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.712, 1.49538, 5.37162)
 
 [node name="GhostDog" parent="Monsters" instance=ExtResource("13_bqc4j")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.7676, 1.52268, 0.271557)
+speed = 10
 
 [node name="FireGuy" parent="Monsters" instance=ExtResource("14_op84i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.1032, 1, 1)
@@ -352,6 +353,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.2359, 1.46059, -7.45011)
 
 [node name="Hynine6" parent="Monsters" instance=ExtResource("18_q12t6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.4236, 1.46079, -7.57136)
+speed = 20
 
 [connection signal="body_entered" from="SceneDoor" to="SceneDoor" method="_on_body_entered"]
 [connection signal="body_exited" from="SceneDoor" to="SceneDoor" method="_on_body_exited"]

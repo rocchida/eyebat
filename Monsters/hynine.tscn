@@ -28,6 +28,7 @@ _data = {
 
 [node name="Hynine" type="Node3D"]
 script = ExtResource("1_0dpen")
+strength = 12
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(0.08, 6.99382e-09, 0, -6.99382e-09, 0.08, 0, 0, 0, -0.021, 6.31339e-08, 0.722168, 0)

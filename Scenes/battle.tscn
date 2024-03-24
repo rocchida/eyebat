@@ -24,6 +24,7 @@ ssil_sharpness = 0.33
 
 [node name="Battle" type="Node3D"]
 script = ExtResource("1_8t3rd")
+debug = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_c1sn8")
@@ -104,10 +105,7 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -40.0
-offset_top = -40.0
+offset_left = -280.0
+offset_top = -104.0
 grow_horizontal = 0
 grow_vertical = 0
-
-[node name="Panel" type="Panel" parent="CanvasLayer/HBoxContainer"]
-layout_mode = 2
