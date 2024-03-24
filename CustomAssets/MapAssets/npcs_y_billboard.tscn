@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://b5w3hur261lbq"]
+
+[ext_resource type="Texture2D" uid="uid://bbpbilri2kxtf" path="res://ImportedAssets/CharacterArt/Small-8-Direction-Characters_by_AxulArt.png" id="1_6jwui"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_c0ux0"]
+size = Vector3(0.179443, 0.153687, 0.147949)
+
+[node name="Npcs" type="CharacterBody3D"]
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+billboard = 2
+shaded = true
+texture_filter = 0
+texture = ExtResource("1_6jwui")
+hframes = 8
+vframes = 12
+frame = 52
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00256348, 0.00543213, -0.000732422)
+shape = SubResource("BoxShape3D_c0ux0")

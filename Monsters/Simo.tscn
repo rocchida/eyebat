@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://xr6lj3x6pq14"]
+
+[ext_resource type="Script" path="res://Monsters/Monster.gd" id="1_wofa8"]
+[ext_resource type="Texture2D" uid="uid://bb3ulieucn1ib" path="res://CustomAssets/CharacterArt/30_monster_art/2 - BIAaGk4.png" id="2_wn5ek"]
+
+[node name="Simo" type="Node3D"]
+script = ExtResource("1_wofa8")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, 0, 0.787819, 0)
+billboard = 2
+alpha_cut = 2
+texture = ExtResource("2_wn5ek")

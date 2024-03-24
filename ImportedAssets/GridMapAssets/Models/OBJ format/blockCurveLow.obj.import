@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://by7lyuahgaxi3"
+path="res://.godot/imported/blockCurveLow.obj-d7cc4bad49d7ee9d96867e4a3006acc5.mesh"
+
+[deps]
+
+files=["res://.godot/imported/blockCurveLow.obj-d7cc4bad49d7ee9d96867e4a3006acc5.mesh"]
+
+source_file="res://ImportedAssets/GridMapAssets/Models/OBJ format/blockCurveLow.obj"
+dest_files=["res://.godot/imported/blockCurveLow.obj-d7cc4bad49d7ee9d96867e4a3006acc5.mesh", "res://.godot/imported/blockCurveLow.obj-d7cc4bad49d7ee9d96867e4a3006acc5.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false
