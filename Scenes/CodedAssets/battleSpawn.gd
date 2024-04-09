@@ -11,5 +11,6 @@ func set_occupying_monster(_monster: Monster, face_left: bool):
 	_occupying_monster = _monster
 	add_child(_monster)
 	_monster.set_global_position(self.get_global_position())
+	_monster.init_healthbar()
 	if (face_left):
 		_monster.flip_sprite()

@@ -418,7 +418,7 @@ texture_filter = 0
 texture = ExtResource("2_e2akw")
 hframes = 8
 vframes = 3
-frame = 23
+frame = 1
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.997862, -0.0653506, 0, 0.0653506, 0.997862, 0, 0.285364, 0.949582)

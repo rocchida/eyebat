@@ -21,6 +21,9 @@ func populate_spawns(enemy_monster_roster: Array[Monster], player_monster_roster
 	_enemy_spawns.populate_spawns(enemy_monster_roster)
 	_player_spawns.populate_spawns(player_monster_roster)
 	set_initiative(enemy_monster_roster, player_monster_roster)
+	for m in _initiative:
+		m.toggle_selector()
+	_initiative[0].toggle_selector()
 	
 func set_initiative(enemy_monster_roster: Array[Monster], player_monster_roster: Array[Monster]):
 	_initiative.append_array(enemy_monster_roster)
@@ -35,6 +38,8 @@ func sort_by_speed(a:Monster, b:Monster):
 
 func end_turn():
 	if (debug): print(_initiative[current_turn].name + " ends their turn")
+	_initiative[current_turn].toggle_selector()
 	current_turn = current_turn + 1
 	if current_turn >= _initiative.size(): current_turn = 0
 	if (debug): print(_initiative[current_turn].name + " begins their turn")
+	_initiative[current_turn].toggle_selector()

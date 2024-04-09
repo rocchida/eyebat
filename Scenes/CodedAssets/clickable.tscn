@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dyha3hn24vliy"]
+
+[ext_resource type="Script" path="res://Monsters/StaticBody3D.gd" id="1_j0ix2"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ka3qt"]
+size = Vector3(1, 1.5351, 0.294922)
+
+[node name="Clickable" type="Node3D"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+script = ExtResource("1_j0ix2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.796783, -0.0126953)
+shape = SubResource("BoxShape3D_ka3qt")

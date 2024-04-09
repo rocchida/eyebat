@@ -12,4 +12,4 @@ func _process(_delta):
 	$WorldEnvironment.environment.sky_rotation.y += 0.0005
 	if ($WorldEnvironment.environment.sky_rotation.y > 359.9995):
 		$WorldEnvironment.environment.sky_rotation.y == 0
-	
+
