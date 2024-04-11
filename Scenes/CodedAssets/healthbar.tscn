@@ -1,0 +1,45 @@
+[gd_scene load_steps=4 format=3 uid="uid://dq8qruw4xeapp"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8wull"]
+bg_color = Color(0.6, 0.6, 0.6, 0.356863)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5ekrd"]
+bg_color = Color(0.678431, 0.156863, 0.176471, 0.666667)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_guykr"]
+viewport_path = NodePath("SubViewport")
+
+[node name="Healthbar" type="Node3D"]
+
+[node name="SubViewport" type="SubViewport" parent="."]
+disable_3d = true
+transparent_bg = true
+
+[node name="HealthBar3D" type="ProgressBar" parent="SubViewport"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 193.5
+offset_top = 42.5
+offset_right = 446.5
+offset_bottom = 93.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_8wull")
+theme_override_styles/fill = SubResource("StyleBoxFlat_5ekrd")
+value = 100.0
+show_percentage = false
+
+[node name="Healthbar" type="Sprite3D" parent="."]
+transform = Transform3D(0.401217, 0, 0, 0, 0.277203, 0, 0, 0, 1, 0, 1.60816, 0)
+billboard = 1
+texture = SubResource("ViewportTexture_guykr")

@@ -1,13 +1,38 @@
-[gd_scene load_steps=3 format=3 uid="uid://xr6lj3x6pq14"]
+[gd_scene load_steps=7 format=3 uid="uid://xr6lj3x6pq14"]
 
 [ext_resource type="Script" path="res://Monsters/Monster.gd" id="1_wofa8"]
 [ext_resource type="Texture2D" uid="uid://bb3ulieucn1ib" path="res://CustomAssets/CharacterArt/30_monster_art/2 - BIAaGk4.png" id="2_wn5ek"]
+[ext_resource type="Texture2D" uid="uid://d1vnpqemfxhj1" path="res://ImportedAssets/UI/pointer.png" id="3_bloto"]
+[ext_resource type="PackedScene" uid="uid://0n6qt3r5hf7i" path="res://Scenes/CodedAssets/health_bar_3d.tscn" id="4_5dr24"]
+[ext_resource type="PackedScene" uid="uid://dyha3hn24vliy" path="res://Scenes/CodedAssets/clickable.tscn" id="5_habew"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_aybvv"]
+viewport_path = NodePath("HealthBar/SubViewport")
 
 [node name="Simo" type="Node3D"]
 script = ExtResource("1_wofa8")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, 0, 0.787819, 0)
-billboard = 2
-alpha_cut = 2
+alpha_cut = 3
 texture = ExtResource("2_wn5ek")
+
+[node name="Selector" type="Sprite3D" parent="."]
+transform = Transform3D(-0.000579428, 0.100582, 0, -0.105059, -0.000554737, 0, 0, 0, 1, -0.0227709, 1.83387, 0)
+rotation_order = 0
+modulate = Color(0, 0, 0, 1)
+texture = ExtResource("3_bloto")
+
+[node name="HealthBar" type="Node3D" parent="."]
+
+[node name="SubViewport" type="SubViewport" parent="HealthBar"]
+disable_3d = true
+transparent_bg = true
+
+[node name="HealthBar3D" parent="HealthBar/SubViewport" instance=ExtResource("4_5dr24")]
+
+[node name="HealthBar" type="Sprite3D" parent="HealthBar"]
+transform = Transform3D(0.174239, 0, 0, 0, 0.0701671, 0, 0, 0, 1, 0, 1.61934, 0)
+texture = SubResource("ViewportTexture_aybvv")
+
+[node name="Clickable" parent="." instance=ExtResource("5_habew")]
