@@ -6,7 +6,7 @@ class_name Monster
 @export var max_health: int = 12
 @export var strength: int = 5
 @export var speed : int = 5
-var health : int = 10
+var health : int 
 var healthbar
 var root : BattleScene
 
@@ -16,11 +16,14 @@ func _ready():
 
 func init_healthbar():
 	healthbar.set_max(float(max_health))
-	healthbar.set_value(float(health))
+	healthbar.set_value(float(max_health))
+	health = max_health
 
 func take_damage():
 	if healthbar.get_value() > 0:
+		print(health)
 		health -= 1
+		print(health)
 		healthbar.set_value(health)
 		get_parent().get_parent().get_parent().end_turn()
 	
