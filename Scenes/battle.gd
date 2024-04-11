@@ -43,3 +43,6 @@ func end_turn():
 	if current_turn >= _initiative.size(): current_turn = 0
 	if (debug): print(_initiative[current_turn].name + " begins their turn")
 	_initiative[current_turn].toggle_selector()
+	
+	#if (_initiative[current_turn].get_parent().get_parent() == _enemy_spawns):
+		#_player_spawns.get_children()

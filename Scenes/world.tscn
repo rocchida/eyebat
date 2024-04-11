@@ -327,6 +327,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.1032, 1, 1)
 
 [node name="Gargoyle" parent="Monsters" instance=ExtResource("15_2rjtg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.6383, 1.49538, 3.92585)
+max_health = 120
 
 [node name="Hynine" parent="Monsters" instance=ExtResource("16_m5paf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.3915, 1.48368, -7.55595)

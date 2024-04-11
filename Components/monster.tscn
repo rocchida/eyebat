@@ -1,14 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://kkyykd1h6siy"]
+[gd_scene load_steps=2 format=3 uid="uid://kkyykd1h6siy"]
 
 [ext_resource type="Script" path="res://Scenes/CodedAssets/Monster.gd" id="1_qlcc7"]
-[ext_resource type="PackedScene" uid="uid://dojkb7d58g3o1" path="res://Components/health_component.tscn" id="3_fndvy"]
 
 [node name="Monster" type="Node3D"]
 script = ExtResource("1_qlcc7")
-
-[node name="HealthComponent" parent="." instance=ExtResource("3_fndvy")]
-
-[node name="ProgressBar" type="ProgressBar" parent="."]
-offset_right = 100.0
-offset_bottom = 27.0
-value = 100.0
