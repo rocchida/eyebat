@@ -22,7 +22,7 @@ ssr_max_steps = 32
 ssil_intensity = 2.36
 ssil_sharpness = 0.33
 
-[node name="Battle" type="Node3D"]
+[node name="Battle2" type="Node3D"]
 script = ExtResource("1_4ewh6")
 debug = true
 
@@ -52,8 +52,7 @@ transform = Transform3D(1, 0, 0, 0, 0.756196, 0.654345, 0, -0.654345, 0.756196, 
 keep_aspect = 0
 fov = 73.7
 
-[node name="EnemySpawns" parent="." node_paths=PackedStringArray("spawn_points_4") instance=ExtResource("5_50qfr")]
-spawn_points_4 = [NodePath("BattleSpawn"), NodePath("BattleSpawn2"), NodePath("BattleSpawn3"), NodePath("BattleSpawn4")]
+[node name="EnemySpawns" parent="." instance=ExtResource("5_50qfr")]
 face_left = true
 
 [node name="BattleSpawn" parent="EnemySpawns" instance=ExtResource("6_icfer")]
@@ -72,8 +71,7 @@ seeBarrel = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.74858, 0.99397, 5.17958)
 seeBarrel = false
 
-[node name="PlayerSpawns" parent="." node_paths=PackedStringArray("spawn_points_4") instance=ExtResource("5_50qfr")]
-spawn_points_4 = [NodePath("BattleSpawn"), NodePath("BattleSpawn2"), NodePath("BattleSpawn3"), NodePath("BattleSpawn4")]
+[node name="PlayerSpawns" parent="." instance=ExtResource("5_50qfr")]
 
 [node name="BattleSpawn" parent="PlayerSpawns" instance=ExtResource("6_icfer")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.95189, 0.9947, 4.09382)

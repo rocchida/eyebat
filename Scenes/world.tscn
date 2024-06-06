@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://bdsnxtasgjx2o"]
+[gd_scene load_steps=44 format=3 uid="uid://bdsnxtasgjx2o"]
 
 [ext_resource type="Script" path="res://Scripts/world.gd" id="1_hijai"]
 [ext_resource type="PackedScene" uid="uid://dba8t7daowokd" path="res://Scenes/CodedAssets/player.tscn" id="2_icr3f"]
@@ -15,10 +15,15 @@
 [ext_resource type="PackedScene" uid="uid://b6jd4rcvxobhd" path="res://Monsters/GhostDog.tscn" id="13_bqc4j"]
 [ext_resource type="PackedScene" uid="uid://bynhu3gl80enj" path="res://Monsters/FireGuy.tscn" id="14_op84i"]
 [ext_resource type="PackedScene" uid="uid://5n67mp7f6l4b" path="res://Monsters/Gargoyle.tscn" id="15_2rjtg"]
+[ext_resource type="Resource" uid="uid://bkxxshxbpc6he" path="res://Resources/attack_spit.tres" id="16_irmos"]
 [ext_resource type="PackedScene" uid="uid://0gi7ywf5qj55" path="res://Monsters/hynine.tscn" id="16_m5paf"]
 [ext_resource type="PackedScene" uid="uid://drwerjtsibk1s" path="res://Monsters/hynine-ghost.tscn" id="17_kulk1"]
 [ext_resource type="PackedScene" uid="uid://bg33pmncvteu6" path="res://Monsters/hynine-the-red.tscn" id="18_q12t6"]
+[ext_resource type="Script" path="res://Resources/attack_base.gd" id="20_88g2n"]
+[ext_resource type="Resource" uid="uid://dxlwicbfo1hq6" path="res://Resources/attack_sigh.tres" id="21_7sy1e"]
 [ext_resource type="PackedScene" uid="uid://dflsb13iuqvgf" path="res://Monsters/magei.tscn" id="21_qgg3r"]
+[ext_resource type="Resource" uid="uid://1fxil6c6rtoh" path="res://Resources/attack_slash.tres" id="22_d12ge"]
+[ext_resource type="Resource" uid="uid://cgu7jdttiq5im" path="res://Resources/attack_firebolt.tres" id="23_r822j"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_mt7vc"]
 panorama = ExtResource("4_21lx8")
@@ -48,6 +53,84 @@ shader_parameter/wave_speed = 1.5
 material = SubResource("ShaderMaterial_jcfxb")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_8hhi2"]
+
+[sub_resource type="Resource" id="Resource_hmmnr"]
+script = ExtResource("20_88g2n")
+type = 0
+damage = 2
+name = "Icicle"
+
+[sub_resource type="Resource" id="Resource_yxw6t"]
+script = ExtResource("20_88g2n")
+type = 0
+damage = 2
+name = "Dance"
+
+[sub_resource type="Resource" id="Resource_h6jtf"]
+script = ExtResource("20_88g2n")
+type = 0
+damage = 4
+name = "Sing"
+
+[sub_resource type="Resource" id="Resource_yqp0k"]
+script = ExtResource("20_88g2n")
+type = 0
+damage = 2
+name = "Macaroni"
+
+[sub_resource type="Resource" id="Resource_1rpbd"]
+script = ExtResource("20_88g2n")
+type = 0
+damage = 2
+name = "Seance"
+
+[sub_resource type="Resource" id="Resource_6b640"]
+script = ExtResource("20_88g2n")
+type = 0
+damage = 2
+name = "Haunt"
+
+[sub_resource type="Resource" id="Resource_sea5d"]
+script = ExtResource("20_88g2n")
+type = 0
+damage = 2
+name = "Sing"
+
+[sub_resource type="Resource" id="Resource_5sn25"]
+script = ExtResource("20_88g2n")
+type = 0
+damage = 2
+name = "Boo!"
+
+[sub_resource type="Resource" id="Resource_u65ir"]
+script = ExtResource("20_88g2n")
+type = 0
+damage = 2
+name = "Throw Bird"
+
+[sub_resource type="Resource" id="Resource_u0k2j"]
+script = ExtResource("20_88g2n")
+type = 0
+damage = 2
+name = "Yell"
+
+[sub_resource type="Resource" id="Resource_clpfo"]
+script = ExtResource("20_88g2n")
+type = 0
+damage = 2
+name = "Cry"
+
+[sub_resource type="Resource" id="Resource_7jb66"]
+script = ExtResource("20_88g2n")
+type = 0
+damage = 2
+name = "Spank"
+
+[sub_resource type="Resource" id="Resource_nyobb"]
+script = ExtResource("20_88g2n")
+type = 0
+damage = 2
+name = "Spank"
 
 [node name="World" type="Node3D"]
 script = ExtResource("1_hijai")
@@ -239,7 +322,7 @@ size = Vector3(1, 4.6582, 1)
 
 [node name="player" parent="." node_paths=PackedStringArray("monster_roster") instance=ExtResource("2_icr3f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 3, 1)
-monster_roster = [NodePath("../Monsters/Hynine"), NodePath("../Monsters/FireGuy"), NodePath("../Monsters/Hynine-ghost"), NodePath("../Monsters/Hynine-red")]
+monster_roster = [NodePath("../Monsters/Hynine"), NodePath("../Monsters/Hynine-ghost"), NodePath("../Monsters/Hynine-red"), NodePath("../Monsters/Magei")]
 
 [node name="testnut" parent="." instance=ExtResource("3_yn2xu")]
 transform = Transform3D(110, 0, 0, 0, -13.72, -109.141, 0, 109.141, -13.72, 7.86892, 11.5862, -114.782)
@@ -305,7 +388,7 @@ shape = SubResource("SphereShape3D_8hhi2")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.7948, 2.02413, -4.92663)
 script = ExtResource("10_02i1u")
 _target_scene = "res://Scenes/battle.tscn"
-_encounter_monster_roster = [NodePath("../Monsters/GhostDog"), NodePath("../Monsters/Gargoyle"), NodePath("../Monsters/Simo"), NodePath("../Monsters/Magei")]
+_encounter_monster_roster = [NodePath("../Monsters/Simo"), NodePath("../Monsters/GhostDog"), NodePath("../Monsters/FireGuy"), NodePath("../Monsters/Gargoyle")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SceneDoor"]
 transform = Transform3D(1.768, 0, 0, 0, 2.058, 0, 0, 0, 1.63479, 0, 0, 0)
@@ -317,30 +400,38 @@ shape = SubResource("SphereShape3D_8hhi2")
 
 [node name="Simo" parent="Monsters" instance=ExtResource("12_xawwd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.712, 1.49538, 5.37162)
+attacks = Array[ExtResource("20_88g2n")]([SubResource("Resource_hmmnr"), SubResource("Resource_yxw6t"), SubResource("Resource_h6jtf"), SubResource("Resource_yqp0k")])
 
 [node name="GhostDog" parent="Monsters" instance=ExtResource("13_bqc4j")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.7676, 1.52268, 0.271557)
 speed = 40
+attacks = Array[ExtResource("20_88g2n")]([SubResource("Resource_1rpbd"), SubResource("Resource_6b640"), SubResource("Resource_sea5d"), SubResource("Resource_5sn25")])
 
 [node name="FireGuy" parent="Monsters" instance=ExtResource("14_op84i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.1032, 1, 1)
+attacks = Array[ExtResource("20_88g2n")]([ExtResource("16_irmos"), ExtResource("21_7sy1e"), ExtResource("22_d12ge"), ExtResource("23_r822j")])
 
 [node name="Gargoyle" parent="Monsters" instance=ExtResource("15_2rjtg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.6383, 1.49538, 3.92585)
 max_health = 120
+attacks = Array[ExtResource("20_88g2n")]([ExtResource("23_r822j"), SubResource("Resource_u65ir"), SubResource("Resource_u0k2j"), SubResource("Resource_clpfo")])
 
 [node name="Hynine" parent="Monsters" instance=ExtResource("16_m5paf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.3915, 1.48368, -7.55595)
+attacks = Array[ExtResource("20_88g2n")]([ExtResource("21_7sy1e"), ExtResource("21_7sy1e"), ExtResource("16_irmos"), ExtResource("23_r822j")])
 
 [node name="Hynine-ghost" parent="Monsters" instance=ExtResource("17_kulk1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.2359, 1.46059, -7.45011)
+attacks = Array[ExtResource("20_88g2n")]([ExtResource("22_d12ge"), ExtResource("22_d12ge"), ExtResource("16_irmos"), ExtResource("16_irmos")])
 
 [node name="Hynine-red" parent="Monsters" instance=ExtResource("18_q12t6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.4236, 1.46079, -7.57136)
 speed = 20
+attacks = Array[ExtResource("20_88g2n")]([ExtResource("21_7sy1e"), ExtResource("23_r822j"), ExtResource("22_d12ge"), ExtResource("16_irmos")])
 
 [node name="Magei" parent="Monsters" instance=ExtResource("21_qgg3r")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.3274, 1.49569, -5.7669)
+attacks = Array[ExtResource("20_88g2n")]([ExtResource("21_7sy1e"), ExtResource("22_d12ge"), SubResource("Resource_7jb66"), SubResource("Resource_nyobb")])
 
 [connection signal="body_entered" from="SceneDoor2" to="SceneDoor2" method="_on_body_entered"]
 [connection signal="body_exited" from="SceneDoor2" to="SceneDoor2" method="_on_body_exited"]

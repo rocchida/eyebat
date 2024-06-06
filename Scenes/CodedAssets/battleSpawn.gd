@@ -1,7 +1,9 @@
 extends Node3D
 class_name BattleSpawn
+signal monster_clicked
 
 @export var seeBarrel: bool = true
+@export var enemySpawn: bool = false
 var _occupying_monster: Monster = null
 
 func _ready():
@@ -14,3 +16,4 @@ func set_occupying_monster(_monster: Monster, face_left: bool):
 	_monster.init_healthbar()
 	if (face_left):
 		_monster.flip_sprite()
+

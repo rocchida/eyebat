@@ -2,10 +2,15 @@ extends Node3D
 class_name Monster
 
 
-@export var texture: Sprite3D
 @export var max_health: int = 12
 @export var strength: int = 5
 @export var speed : int = 5
+@export var mana : int = 5
+@export var intelligence : int = 5
+
+@export var texture: Sprite3D
+@export var attacks : Array[Attack]
+
 var health : int 
 var healthbar
 var root : BattleScene
@@ -13,20 +18,18 @@ var root : BattleScene
 func _ready():
 	healthbar = $HealthBar/SubViewport/HealthBar3D
 
-
 func init_healthbar():
 	healthbar.set_max(float(max_health))
 	healthbar.set_value(float(max_health))
 	health = max_health
 
-func take_damage():
+func take_damage(damage : int):
 	if healthbar.get_value() > 0:
 		print(health)
-		health -= 1
+		health -= damage
 		print(health)
 		healthbar.set_value(health)
-		get_parent().get_parent().get_parent().end_turn()
-	
+		SceneTool.get_root().end_turn()
 
 func flip_sprite():
 	var sprite3d : Sprite3D = $Sprite3D
@@ -38,3 +41,9 @@ func toggle_selector():
 
 func get_speed():
 	return speed
+
+func get_attack_names():
+	var names : Array[String]
+	for attack in attacks:
+		names.append(attack.name)
+	return names

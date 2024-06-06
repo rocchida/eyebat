@@ -56,3 +56,4 @@ func _detatch_monsters_from_scene(monsters: Array):
 	for m in monsters:
 		m.get_parent().remove_child(m)
 
+
