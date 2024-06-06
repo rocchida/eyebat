@@ -32,7 +32,7 @@ _data = {
 [sub_resource type="ViewportTexture" id="ViewportTexture_6ioqv"]
 viewport_path = NodePath("HealthBar/SubViewport")
 
-[node name="Hynine" type="Node3D"]
+[node name="Hynine2" type="Node3D"]
 script = ExtResource("1_5niao")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]

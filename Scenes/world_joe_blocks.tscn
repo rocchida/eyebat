@@ -237,7 +237,7 @@ size = Vector3(1, 4.6582, 1)
 
 [node name="player" parent="." node_paths=PackedStringArray("monster_roster") instance=ExtResource("2_mbqng")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 3, 1)
-monster_roster = [NodePath("../Monsters/Hynine"), NodePath("../Monsters/Hynine2"), NodePath("../Monsters/Hynine3"), NodePath("../Monsters/Hynine4")]
+monster_roster = [null, null, null, null]
 
 [node name="testnut" parent="." instance=ExtResource("3_8l5d3")]
 transform = Transform3D(110, 0, 0, 0, -13.72, -109.141, 0, 109.141, -13.72, 7.86892, 11.5862, -114.782)
@@ -291,7 +291,7 @@ metadata/_editor_floor_ = Vector3(0, 1, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.7948, 2.02413, -4.92663)
 script = ExtResource("10_u8ur4")
 _target_scene = "res://Scenes/battle.tscn"
-_encounter_monster_roster = [NodePath("../Monsters/GhostDog"), NodePath("../Monsters/Gargoyle"), NodePath("../Monsters/Hynine5"), NodePath("../Monsters/Hynine6")]
+_encounter_monster_roster = [null, null, null, null]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SceneDoor"]
 transform = Transform3D(1.768, 0, 0, 0, 2.058, 0, 0, 0, 1.63479, 0, 0, 0)

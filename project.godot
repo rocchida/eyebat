@@ -17,6 +17,7 @@ config/features=PackedStringArray("4.2", "Forward Plus")
 [autoload]
 
 SceneSwitcher="*res://SceneSwitcher.gd"
+SceneTool="*res://scene_tool.gd"
 
 [display]
 

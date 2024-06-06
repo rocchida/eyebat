@@ -5,8 +5,17 @@ var _enemy_spawns : SpawnGroup
 var _player_spawns : SpawnGroup
 var _initiative : Array[Monster]
 enum state {ENEMIES_AND_PLAYERS_ALIVE, ENEMIES_DEAD, PLAYERS_DEAD, ALL_DEAD}
-var current_turn : int
+enum turn_state {SELECTING_ACTION, ACTION_SELECTED}
+var current_turn_state : turn_state = turn_state.SELECTING_ACTION
+var current_turn : int = 0
+var currently_selected_button : int = -1
 @export var debug : bool
+@onready var UI = $Ui
+
+func _ready():
+	SceneTool.set_root(self)
+	UI.set_buttons(_initiative[current_turn].get_attack_names())
+	UI.set_current_monster_stats(_initiative[current_turn])
 
 func _process(delta):
 	if Input.is_action_just_pressed("ui_accept"):
@@ -43,6 +52,19 @@ func end_turn():
 	if current_turn >= _initiative.size(): current_turn = 0
 	if (debug): print(_initiative[current_turn].name + " begins their turn")
 	_initiative[current_turn].toggle_selector()
-	
-	#if (_initiative[current_turn].get_parent().get_parent() == _enemy_spawns):
-		#_player_spawns.get_children()
+	UI.set_buttons(_initiative[current_turn].get_attack_names())
+	UI.set_current_monster_stats(_initiative[current_turn])
+	UI.set_attack_description(null, null)
+	currently_selected_button = -1
+
+func monster_clicked(monster : Monster):
+	if currently_selected_button != -1:
+		monster.take_damage(_initiative[current_turn].attacks[currently_selected_button].get_damage(_initiative[current_turn]))
+
+func monster_hovered(monster : Monster):
+	UI.set_hovered_monster_stats(monster)
+
+func _on_ui_button_clicked(i : int):
+	currently_selected_button = i
+	UI.set_attack_description(_initiative[current_turn].attacks[i], _initiative[current_turn])
+
