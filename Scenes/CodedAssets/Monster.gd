@@ -8,8 +8,8 @@ class_name Monster
 @export var mana : int = 5
 @export var intelligence : int = 5
 
-@export var texture: Sprite3D
 @export var attacks : Array[Attack]
+@export var portrait: PackedScene
 
 var health : int 
 var healthbar
@@ -47,3 +47,6 @@ func get_attack_names():
 	for attack in attacks:
 		names.append(attack.name)
 	return names
+
+func get_portrait():
+	return portrait.instantiate() as Node2D

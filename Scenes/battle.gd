@@ -16,6 +16,7 @@ func _ready():
 	SceneTool.set_root(self)
 	UI.set_buttons(_initiative[current_turn].get_attack_names())
 	UI.set_current_monster_stats(_initiative[current_turn])
+	UI.set_initiative_board(_initiative)
 
 func _process(delta):
 	if Input.is_action_just_pressed("ui_accept"):

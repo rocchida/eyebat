@@ -5,6 +5,7 @@ var buttons : Array
 @onready var attack_desc_text : Label = $ColorMenu/ScrollContainer/Label
 @onready var monster_desc_text : Label = $ColorMenu/CurrentMonsterStats/Label
 @onready var hovered_monster_desc_text : Label = $ColorMenu/HoveredMonsterStats/Label
+@onready var initiative_board : HBoxContainer = $InitiativeBoard/HBoxContainer
 
 func _ready():
 	buttons.append($ColorMenu/HBoxContainer/MenuButton)
@@ -31,6 +32,9 @@ func set_hovered_monster_stats(monster : Monster):
 	else : hovered_monster_desc_text.set_text(monster.name + "\nHP: " + str(monster.health) + "/" + str(monster.max_health)  + "     STR: " + str(monster.strength)
 	+ "\nMANA: " + str(monster.mana) + "       INT: " + str(monster.intelligence) + "\nSPD: " + str(monster.speed))
 
+func set_initiative_board(initiative: Array[Monster]):
+	for m in initiative:
+		initiative_board.add_child(m.get_portrait())
 
 func _on_menu_button_pressed():
 	button_clicked.emit(0)

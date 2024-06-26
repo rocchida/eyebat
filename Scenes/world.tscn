@@ -322,7 +322,7 @@ size = Vector3(1, 4.6582, 1)
 
 [node name="player" parent="." node_paths=PackedStringArray("monster_roster") instance=ExtResource("2_icr3f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 3, 1)
-monster_roster = [NodePath("../Monsters/Hynine"), NodePath("../Monsters/Hynine-ghost"), NodePath("../Monsters/Hynine-red"), NodePath("../Monsters/Magei")]
+monster_roster = [NodePath("../PortraitTest/Hynine"), NodePath("../PortraitTest/Hynine2"), NodePath("../PortraitTest/Hynine3"), NodePath("../PortraitTest/Hynine4")]
 
 [node name="testnut" parent="." instance=ExtResource("3_yn2xu")]
 transform = Transform3D(110, 0, 0, 0, -13.72, -109.141, 0, 109.141, -13.72, 7.86892, 11.5862, -114.782)
@@ -388,7 +388,7 @@ shape = SubResource("SphereShape3D_8hhi2")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.7948, 2.02413, -4.92663)
 script = ExtResource("10_02i1u")
 _target_scene = "res://Scenes/battle.tscn"
-_encounter_monster_roster = [NodePath("../Monsters/Simo"), NodePath("../Monsters/GhostDog"), NodePath("../Monsters/FireGuy"), NodePath("../Monsters/Gargoyle")]
+_encounter_monster_roster = [NodePath("../PortraitTest/Hynine5"), NodePath("../PortraitTest/Hynine6"), NodePath("../PortraitTest/Hynine7"), NodePath("../PortraitTest/Hynine8")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SceneDoor"]
 transform = Transform3D(1.768, 0, 0, 0, 2.058, 0, 0, 0, 1.63479, 0, 0, 0)
@@ -432,6 +432,24 @@ attacks = Array[ExtResource("20_88g2n")]([ExtResource("21_7sy1e"), ExtResource("
 [node name="Magei" parent="Monsters" instance=ExtResource("21_qgg3r")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.3274, 1.49569, -5.7669)
 attacks = Array[ExtResource("20_88g2n")]([ExtResource("21_7sy1e"), ExtResource("22_d12ge"), SubResource("Resource_7jb66"), SubResource("Resource_nyobb")])
+
+[node name="PortraitTest" type="Node" parent="."]
+
+[node name="Hynine" parent="PortraitTest" instance=ExtResource("16_m5paf")]
+
+[node name="Hynine2" parent="PortraitTest" instance=ExtResource("16_m5paf")]
+
+[node name="Hynine3" parent="PortraitTest" instance=ExtResource("16_m5paf")]
+
+[node name="Hynine4" parent="PortraitTest" instance=ExtResource("16_m5paf")]
+
+[node name="Hynine5" parent="PortraitTest" instance=ExtResource("16_m5paf")]
+
+[node name="Hynine6" parent="PortraitTest" instance=ExtResource("16_m5paf")]
+
+[node name="Hynine7" parent="PortraitTest" instance=ExtResource("16_m5paf")]
+
+[node name="Hynine8" parent="PortraitTest" instance=ExtResource("16_m5paf")]
 
 [connection signal="body_entered" from="SceneDoor2" to="SceneDoor2" method="_on_body_entered"]
 [connection signal="body_exited" from="SceneDoor2" to="SceneDoor2" method="_on_body_exited"]

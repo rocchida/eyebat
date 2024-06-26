@@ -1,9 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://0gi7ywf5qj55"]
+[gd_scene load_steps=14 format=3 uid="uid://0gi7ywf5qj55"]
 
 [ext_resource type="Script" path="res://Monsters/Monster.gd" id="1_0dpen"]
+[ext_resource type="PackedScene" uid="uid://bsrvwow1gl7ux" path="res://Scenes/CodedAssets/CharacterPortraits/hynine_portrait.tscn" id="2_mleto"]
+[ext_resource type="Resource" uid="uid://cgu7jdttiq5im" path="res://Resources/attack_firebolt.tres" id="2_qpibv"]
 [ext_resource type="Texture2D" uid="uid://ioavpxax8o61" path="res://CustomAssets/CharacterArt/Hynine_Spritesheet.png" id="2_t4hbm"]
 [ext_resource type="Texture2D" uid="uid://d1vnpqemfxhj1" path="res://ImportedAssets/UI/pointer.png" id="3_68fl4"]
+[ext_resource type="Resource" uid="uid://dxlwicbfo1hq6" path="res://Resources/attack_sigh.tres" id="3_aij18"]
+[ext_resource type="Resource" uid="uid://1fxil6c6rtoh" path="res://Resources/attack_slash.tres" id="4_neola"]
 [ext_resource type="PackedScene" uid="uid://0n6qt3r5hf7i" path="res://Scenes/CodedAssets/health_bar_3d.tscn" id="4_qiw4m"]
+[ext_resource type="Resource" uid="uid://bkxxshxbpc6he" path="res://Resources/attack_spit.tres" id="5_7io1p"]
 [ext_resource type="PackedScene" uid="uid://dyha3hn24vliy" path="res://Scenes/CodedAssets/clickable.tscn" id="5_xcx82"]
 
 [sub_resource type="Animation" id="Animation_a5f5j"]
@@ -35,6 +40,8 @@ viewport_path = NodePath("HealthBar/SubViewport")
 [node name="Hynine" type="Node3D"]
 script = ExtResource("1_0dpen")
 strength = 12
+attacks = Array[Resource("res://Resources/attack_base.gd")]([ExtResource("2_qpibv"), ExtResource("3_aij18"), ExtResource("4_neola"), ExtResource("5_7io1p")])
+portrait = ExtResource("2_mleto")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(0.08, 6.99382e-09, 0, -6.99382e-09, 0.08, 0, 0, 0, -0.021, 6.31339e-08, 0.722168, 0)
