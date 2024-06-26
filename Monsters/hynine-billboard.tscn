@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://du4uulnnnd4v1"]
 
 [ext_resource type="Script" path="res://Monsters/Monster.gd" id="1_7lby1"]
-[ext_resource type="Texture2D" uid="uid://ioavpxax8o61" path="res://CustomAssets/CharacterArt/Hynine_Spritesheet.png" id="2_ahgh7"]
+[ext_resource type="Texture2D" uid="uid://ioavpxax8o61" path="res://CustomAssets/CharacterArt/Monster Sheet/Hynine_Spritesheet.png" id="2_ahgh7"]
 
 [sub_resource type="Animation" id="Animation_a5f5j"]
 resource_name = "idle"

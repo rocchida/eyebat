@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://dflsb13iuqvgf"]
 
 [ext_resource type="Script" path="res://Monsters/Monster.gd" id="1_4020y"]
-[ext_resource type="Texture2D" uid="uid://botpihw6frhkt" path="res://CustomAssets/CharacterArt/Magei_Spritesheet.png" id="2_ien57"]
+[ext_resource type="Texture2D" uid="uid://botpihw6frhkt" path="res://CustomAssets/CharacterArt/Monster Sheet/Magei_Spritesheet.png" id="2_ien57"]
 [ext_resource type="Texture2D" uid="uid://d1vnpqemfxhj1" path="res://ImportedAssets/UI/pointer.png" id="3_cxa3g"]
 [ext_resource type="PackedScene" uid="uid://0n6qt3r5hf7i" path="res://Scenes/CodedAssets/health_bar_3d.tscn" id="4_7m5ea"]
 [ext_resource type="PackedScene" uid="uid://dyha3hn24vliy" path="res://Scenes/CodedAssets/clickable.tscn" id="5_f12vh"]

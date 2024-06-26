@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Monsters/Monster.gd" id="1_0dpen"]
 [ext_resource type="PackedScene" uid="uid://bsrvwow1gl7ux" path="res://Scenes/CodedAssets/CharacterPortraits/hynine_portrait.tscn" id="2_mleto"]
 [ext_resource type="Resource" uid="uid://cgu7jdttiq5im" path="res://Resources/attack_firebolt.tres" id="2_qpibv"]
-[ext_resource type="Texture2D" uid="uid://ioavpxax8o61" path="res://CustomAssets/CharacterArt/Hynine_Spritesheet.png" id="2_t4hbm"]
+[ext_resource type="Texture2D" uid="uid://ioavpxax8o61" path="res://CustomAssets/CharacterArt/Monster Sheet/Hynine_Spritesheet.png" id="2_t4hbm"]
 [ext_resource type="Texture2D" uid="uid://d1vnpqemfxhj1" path="res://ImportedAssets/UI/pointer.png" id="3_68fl4"]
 [ext_resource type="Resource" uid="uid://dxlwicbfo1hq6" path="res://Resources/attack_sigh.tres" id="3_aij18"]
 [ext_resource type="Resource" uid="uid://1fxil6c6rtoh" path="res://Resources/attack_slash.tres" id="4_neola"]
@@ -50,7 +50,7 @@ texture_filter = 0
 texture = ExtResource("2_t4hbm")
 hframes = 8
 vframes = 4
-frame = 9
+frame = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

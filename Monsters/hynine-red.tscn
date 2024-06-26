@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://dd7y6taruvr3v"]
 
 [ext_resource type="Script" path="res://Monsters/Monster.gd" id="1_77wmg"]
-[ext_resource type="Texture2D" uid="uid://ioavpxax8o61" path="res://CustomAssets/CharacterArt/Hynine_Spritesheet.png" id="2_ti0vh"]
+[ext_resource type="Texture2D" uid="uid://ioavpxax8o61" path="res://CustomAssets/CharacterArt/Monster Sheet/Hynine_Spritesheet.png" id="2_ti0vh"]
 [ext_resource type="Texture2D" uid="uid://d1vnpqemfxhj1" path="res://ImportedAssets/UI/pointer.png" id="3_x6kvg"]
 
 [sub_resource type="Animation" id="Animation_a5f5j"]
