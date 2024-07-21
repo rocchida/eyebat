@@ -1,15 +1,77 @@
-[gd_scene load_steps=14 format=3 uid="uid://0gi7ywf5qj55"]
+[gd_scene load_steps=19 format=3 uid="uid://0gi7ywf5qj55"]
 
 [ext_resource type="Script" path="res://Monsters/Monster.gd" id="1_0dpen"]
 [ext_resource type="PackedScene" uid="uid://bsrvwow1gl7ux" path="res://Scenes/CodedAssets/CharacterPortraits/hynine_portrait.tscn" id="2_mleto"]
-[ext_resource type="Resource" uid="uid://cgu7jdttiq5im" path="res://Resources/attack_firebolt.tres" id="2_qpibv"]
+[ext_resource type="Resource" uid="uid://cgu7jdttiq5im" path="res://Resources/Attacks/attack_firebolt.tres" id="2_sqyfe"]
 [ext_resource type="Texture2D" uid="uid://ioavpxax8o61" path="res://CustomAssets/CharacterArt/Monster Sheet/Hynine_Spritesheet.png" id="2_t4hbm"]
 [ext_resource type="Texture2D" uid="uid://d1vnpqemfxhj1" path="res://ImportedAssets/UI/pointer.png" id="3_68fl4"]
-[ext_resource type="Resource" uid="uid://dxlwicbfo1hq6" path="res://Resources/attack_sigh.tres" id="3_aij18"]
-[ext_resource type="Resource" uid="uid://1fxil6c6rtoh" path="res://Resources/attack_slash.tres" id="4_neola"]
+[ext_resource type="Resource" uid="uid://dxlwicbfo1hq6" path="res://Resources/Attacks/attack_sigh.tres" id="3_te330"]
+[ext_resource type="Resource" uid="uid://1fxil6c6rtoh" path="res://Resources/Attacks/attack_slash.tres" id="4_cvwhh"]
 [ext_resource type="PackedScene" uid="uid://0n6qt3r5hf7i" path="res://Scenes/CodedAssets/health_bar_3d.tscn" id="4_qiw4m"]
-[ext_resource type="Resource" uid="uid://bkxxshxbpc6he" path="res://Resources/attack_spit.tres" id="5_7io1p"]
+[ext_resource type="Resource" uid="uid://bkxxshxbpc6he" path="res://Resources/Attacks/attack_spit.tres" id="5_68uy5"]
 [ext_resource type="PackedScene" uid="uid://dyha3hn24vliy" path="res://Scenes/CodedAssets/clickable.tscn" id="5_xcx82"]
+[ext_resource type="PackedScene" uid="uid://mmylq3dq6hon" path="res://Scenes/CodedAssets/mana_bar_3d.tscn" id="10_tp2vr"]
+
+[sub_resource type="Animation" id="Animation_j01o8"]
+resource_name = "attack_bad"
+length = 0.65
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "position_3d"
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/path = NodePath("Sprite3D")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0.722, 0, 0.1, 1, -1, 0.722, 0, 0.3, 1, -1, 0.722, 0, 0.6, 1, 6.31339e-08, 0.722168, 0)
+
+[sub_resource type="Animation" id="Animation_jobp6"]
+resource_name = "attack_good"
+length = 0.65
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "position_3d"
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/path = NodePath("Sprite3D")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0.722, 0, 0.1, 1, 1, 0.722, 0, 0.3, 1, 1, 0.722, 0, 0.6, 1, 6.31339e-08, 0.722168, 0)
+
+[sub_resource type="Animation" id="Animation_gp0kn"]
+resource_name = "damaged"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
 
 [sub_resource type="Animation" id="Animation_a5f5j"]
 resource_name = "idle"
@@ -31,26 +93,32 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_dimbn"]
 _data = {
+"attack_bad": SubResource("Animation_j01o8"),
+"attack_good": SubResource("Animation_jobp6"),
+"damaged": SubResource("Animation_gp0kn"),
 "idle": SubResource("Animation_a5f5j")
 }
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_fsr5g"]
 viewport_path = NodePath("HealthBar/SubViewport")
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_7uvk6"]
+viewport_path = NodePath("ManaBar/SubViewport")
+
 [node name="Hynine" type="Node3D"]
 script = ExtResource("1_0dpen")
-strength = 12
-attacks = Array[Resource("res://Resources/attack_base.gd")]([ExtResource("2_qpibv"), ExtResource("3_aij18"), ExtResource("4_neola"), ExtResource("5_7io1p")])
+max_health = 120
+max_mana = 20
+attacks = [ExtResource("2_sqyfe"), ExtResource("3_te330"), ExtResource("4_cvwhh"), ExtResource("5_68uy5")]
 portrait = ExtResource("2_mleto")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform3D(0.08, 6.99382e-09, 0, -6.99382e-09, 0.08, 0, 0, 0, -0.021, 6.31339e-08, 0.722168, 0)
+transform = Transform3D(0.075, 1.13247e-08, 0, -1.13247e-08, 0.075, 0, 0, 0, -0.075, 0, 0.722, 0)
 alpha_cut = 2
 texture_filter = 0
 texture = ExtResource("2_t4hbm")
 hframes = 8
 vframes = 4
-frame = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -59,13 +127,13 @@ libraries = {
 autoplay = "idle"
 
 [node name="Selector" type="Sprite3D" parent="."]
-transform = Transform3D(-0.000579428, 0.100582, 0, -0.105059, -0.000554737, 0, 0, 0, 1, -0.106973, 1.41408, 0)
+transform = Transform3D(-0.000579428, 0.100582, 0, -0.105059, -0.000554737, 0, 0, 0, 1, -0.106373, 1.52288, 0)
 rotation_order = 0
 modulate = Color(0, 0, 0, 1)
 texture = ExtResource("3_68fl4")
 
 [node name="HealthBar" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0976116, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0976116, 0.16116, 0)
 
 [node name="SubViewport" type="SubViewport" parent="HealthBar"]
 disable_3d = true
@@ -76,5 +144,18 @@ transparent_bg = true
 [node name="HealthBar" type="Sprite3D" parent="HealthBar"]
 transform = Transform3D(0.174239, 0, 0, 0, 0.0701671, 0, 0, 0, 1, 0, 1.19833, 0)
 texture = SubResource("ViewportTexture_fsr5g")
+
+[node name="ManaBar" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0976116, 0.0810282, 0)
+
+[node name="SubViewport" type="SubViewport" parent="ManaBar"]
+disable_3d = true
+transparent_bg = true
+
+[node name="ManaBar3D" parent="ManaBar/SubViewport" instance=ExtResource("10_tp2vr")]
+
+[node name="ManaBar" type="Sprite3D" parent="ManaBar"]
+transform = Transform3D(0.174239, 0, 0, 0, 0.0701671, 0, 0, 0, 1, 0, 1.19833, 0)
+texture = SubResource("ViewportTexture_7uvk6")
 
 [node name="Clickable" parent="." instance=ExtResource("5_xcx82")]

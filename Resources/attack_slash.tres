@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="Attack" load_steps=2 format=3 uid="uid://1fxil6c6rtoh"]
-
-[ext_resource type="Script" path="res://Resources/attack_base.gd" id="1_xmkw7"]
-
-[resource]
-script = ExtResource("1_xmkw7")
-type = 0
-damage = 5
-name = "Slash"

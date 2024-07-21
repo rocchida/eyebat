@@ -59,7 +59,10 @@ func end_turn():
 	currently_selected_button = -1
 
 func monster_clicked(monster : Monster):
-	if currently_selected_button != -1:
+	if currently_selected_button != -1 and _initiative[current_turn].mana >= _initiative[current_turn].attacks[currently_selected_button].mana_cost:
+		_initiative[current_turn].run_attack_anim(_player_spawns.contains(_initiative[current_turn]))
+		_initiative[current_turn].attacks[currently_selected_button].play_sound($AudioStreamPlayer)
+		_initiative[current_turn].drain_mana(_initiative[current_turn].attacks[currently_selected_button].mana_cost)
 		monster.take_damage(_initiative[current_turn].attacks[currently_selected_button].get_damage(_initiative[current_turn]))
 
 func monster_hovered(monster : Monster):

@@ -20,17 +20,17 @@ func set_buttons(attacks : Array[String]):
 
 func set_attack_description(attack : Attack, monster : Monster):
 	if (attack == null): attack_desc_text.set_text("")
-	else: attack_desc_text.set_text(attack.get_attack_name() + "\nDamage: " + str(attack.get_damage(monster)))
+	else: attack_desc_text.set_text(attack.get_attack_name() + "\nDamage: " + str(attack.get_damage_formula(monster)))
 
 func set_current_monster_stats(monster : Monster):
 	if (monster == null): monster_desc_text.set_text("")
-	else : monster_desc_text.set_text(monster.name + "\nHP: " + str(monster.health) + "/" + str(monster.max_health)  + "     STR: " + str(monster.strength)
-	+ "\nMANA: " + str(monster.mana) + "       INT: " + str(monster.intelligence) + "\nSPD: " + str(monster.speed))
+	else : monster_desc_text.set_text(monster.name + "\nHP: " + str(monster.health) + "/" + str(monster.max_health)  + "     STR: " + str(monster.str)
+	+ "\nMANA: " + str(monster.mana) + "       INT: " + str(monster.intl) + "\nSPD: " + str(monster.dex))
 
 func set_hovered_monster_stats(monster : Monster):
 	if (monster == null): hovered_monster_desc_text.set_text("")
-	else : hovered_monster_desc_text.set_text(monster.name + "\nHP: " + str(monster.health) + "/" + str(monster.max_health)  + "     STR: " + str(monster.strength)
-	+ "\nMANA: " + str(monster.mana) + "       INT: " + str(monster.intelligence) + "\nSPD: " + str(monster.speed))
+	else : hovered_monster_desc_text.set_text(monster.name + "\nHP: " + str(monster.health) + "/" + str(monster.max_health)  + "     STR: " + str(monster.str)
+	+ "\nMANA: " + str(monster.mana) + "       INT: " + str(monster.intl) + "\nSPD: " + str(monster.dex))
 
 func set_initiative_board(initiative: Array[Monster]):
 	for m in initiative:
