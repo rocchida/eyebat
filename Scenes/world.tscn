@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://bdsnxtasgjx2o"]
+[gd_scene load_steps=40 format=3 uid="uid://bdsnxtasgjx2o"]
 
 [ext_resource type="Script" path="res://Scripts/world.gd" id="1_hijai"]
 [ext_resource type="PackedScene" uid="uid://dba8t7daowokd" path="res://Scenes/CodedAssets/player.tscn" id="2_icr3f"]
@@ -11,9 +11,7 @@
 [ext_resource type="MeshLibrary" uid="uid://bignsdns4h2ag" path="res://CustomAssets/GridMapAssets/Mesh_Library.tres" id="9_ydcxs"]
 [ext_resource type="PackedScene" uid="uid://0uah50n2ynp4" path="res://ImportedAssets/GridMapAssets/Models/GLTF format/doorLargeClosed.glb" id="10_1iaji"]
 [ext_resource type="Script" path="res://Scenes/CodedAssets/SceneDoor.gd" id="10_02i1u"]
-[ext_resource type="PackedScene" uid="uid://xr6lj3x6pq14" path="res://Monsters/Simo.tscn" id="12_xawwd"]
 [ext_resource type="PackedScene" uid="uid://b6jd4rcvxobhd" path="res://Monsters/GhostDog.tscn" id="13_bqc4j"]
-[ext_resource type="PackedScene" uid="uid://bynhu3gl80enj" path="res://Monsters/FireGuy.tscn" id="14_op84i"]
 [ext_resource type="PackedScene" uid="uid://5n67mp7f6l4b" path="res://Monsters/Gargoyle.tscn" id="15_2rjtg"]
 [ext_resource type="Resource" uid="uid://bkxxshxbpc6he" path="res://Resources/Attacks/attack_spit.tres" id="16_irmos"]
 [ext_resource type="PackedScene" uid="uid://0gi7ywf5qj55" path="res://Monsters/hynine.tscn" id="16_m5paf"]
@@ -24,7 +22,6 @@
 [ext_resource type="PackedScene" uid="uid://dflsb13iuqvgf" path="res://Monsters/magei.tscn" id="21_qgg3r"]
 [ext_resource type="Resource" uid="uid://1fxil6c6rtoh" path="res://Resources/Attacks/attack_slash.tres" id="22_d12ge"]
 [ext_resource type="Resource" uid="uid://cgu7jdttiq5im" path="res://Resources/Attacks/attack_firebolt.tres" id="23_r822j"]
-[ext_resource type="PackedScene" path="res://Monsters/Gnome.tscn" id="25_r86tm"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_mt7vc"]
 panorama = ExtResource("4_21lx8")
@@ -55,283 +52,217 @@ material = SubResource("ShaderMaterial_jcfxb")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_8hhi2"]
 
-[sub_resource type="Resource" id="Resource_hmmnr"]
-script = ExtResource("20_88g2n")
-type = 0
-damage = 2
-name = "Icicle"
-
-[sub_resource type="Resource" id="Resource_yxw6t"]
-script = ExtResource("20_88g2n")
-type = 0
-damage = 2
-name = "Dance"
-
-[sub_resource type="Resource" id="Resource_h6jtf"]
-script = ExtResource("20_88g2n")
-type = 0
-damage = 4
-name = "Sing"
-
-[sub_resource type="Resource" id="Resource_yqp0k"]
-script = ExtResource("20_88g2n")
-type = 0
-damage = 2
-name = "Macaroni"
-
 [sub_resource type="Resource" id="Resource_1rpbd"]
 script = ExtResource("20_88g2n")
 type = 0
-damage = 2
 name = "Seance"
+dex = false
+str = false
+will = false
+cha = false
+intl = false
+mana_cost = 0
+d4s = 0
+d6s = 0
+d8s = 0
+d10s = 0
+d12s = 0
+d20s = 0
+percent_buffed = 1.0
+percent_nerfed = 1.0
 
 [sub_resource type="Resource" id="Resource_6b640"]
 script = ExtResource("20_88g2n")
 type = 0
-damage = 2
 name = "Haunt"
+dex = false
+str = false
+will = false
+cha = false
+intl = false
+mana_cost = 0
+d4s = 0
+d6s = 0
+d8s = 0
+d10s = 0
+d12s = 0
+d20s = 0
+percent_buffed = 1.0
+percent_nerfed = 1.0
 
 [sub_resource type="Resource" id="Resource_sea5d"]
 script = ExtResource("20_88g2n")
 type = 0
-damage = 2
 name = "Sing"
+dex = false
+str = false
+will = false
+cha = false
+intl = false
+mana_cost = 0
+d4s = 0
+d6s = 0
+d8s = 0
+d10s = 0
+d12s = 0
+d20s = 0
+percent_buffed = 1.0
+percent_nerfed = 1.0
 
 [sub_resource type="Resource" id="Resource_5sn25"]
 script = ExtResource("20_88g2n")
 type = 0
-damage = 2
 name = "Boo!"
+dex = false
+str = false
+will = false
+cha = false
+intl = false
+mana_cost = 0
+d4s = 0
+d6s = 0
+d8s = 0
+d10s = 0
+d12s = 0
+d20s = 0
+percent_buffed = 1.0
+percent_nerfed = 1.0
 
 [sub_resource type="Resource" id="Resource_u65ir"]
 script = ExtResource("20_88g2n")
 type = 0
-damage = 2
 name = "Throw Bird"
+dex = false
+str = false
+will = false
+cha = false
+intl = false
+mana_cost = 0
+d4s = 0
+d6s = 0
+d8s = 0
+d10s = 0
+d12s = 0
+d20s = 0
+percent_buffed = 1.0
+percent_nerfed = 1.0
 
 [sub_resource type="Resource" id="Resource_u0k2j"]
 script = ExtResource("20_88g2n")
 type = 0
-damage = 2
 name = "Yell"
+dex = false
+str = false
+will = false
+cha = false
+intl = false
+mana_cost = 0
+d4s = 0
+d6s = 0
+d8s = 0
+d10s = 0
+d12s = 0
+d20s = 0
+percent_buffed = 1.0
+percent_nerfed = 1.0
 
 [sub_resource type="Resource" id="Resource_clpfo"]
 script = ExtResource("20_88g2n")
 type = 0
-damage = 2
 name = "Cry"
+dex = false
+str = false
+will = false
+cha = false
+intl = false
+mana_cost = 0
+d4s = 0
+d6s = 0
+d8s = 0
+d10s = 0
+d12s = 0
+d20s = 0
+percent_buffed = 1.0
+percent_nerfed = 1.0
 
 [sub_resource type="Resource" id="Resource_7jb66"]
 script = ExtResource("20_88g2n")
 type = 0
-damage = 2
 name = "Spank"
+dex = false
+str = false
+will = false
+cha = false
+intl = false
+mana_cost = 0
+d4s = 0
+d6s = 0
+d8s = 0
+d10s = 0
+d12s = 0
+d20s = 0
+percent_buffed = 1.0
+percent_nerfed = 1.0
 
 [sub_resource type="Resource" id="Resource_nyobb"]
 script = ExtResource("20_88g2n")
 type = 0
-damage = 2
 name = "Spank"
+dex = false
+str = false
+will = false
+cha = false
+intl = false
+mana_cost = 0
+d4s = 0
+d6s = 0
+d8s = 0
+d10s = 0
+d12s = 0
+d20s = 0
+percent_buffed = 1.0
+percent_nerfed = 1.0
 
 [sub_resource type="Resource" id="Resource_iaj1a"]
 script = ExtResource("20_88g2n")
 type = 0
-damage = 2
 name = "Spank"
+dex = false
+str = false
+will = false
+cha = false
+intl = false
+mana_cost = 0
+d4s = 0
+d6s = 0
+d8s = 0
+d10s = 0
+d12s = 0
+d20s = 0
+percent_buffed = 1.0
+percent_nerfed = 1.0
 
 [sub_resource type="Resource" id="Resource_ypwhj"]
 script = ExtResource("20_88g2n")
 type = 0
-damage = 2
 name = "Hawk Tuah"
+dex = false
+str = false
+will = false
+cha = false
+intl = false
+mana_cost = 0
+d4s = 0
+d6s = 0
+d8s = 0
+d10s = 0
+d12s = 0
+d20s = 0
+percent_buffed = 1.0
+percent_nerfed = 1.0
 
 [node name="World" type="Node3D"]
 script = ExtResource("1_hijai")
-
-[node name="map" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -59.9, 0, 0)
-visible = false
-
-[node name="CSGBox3D" type="CSGBox3D" parent="map"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.21097, 1.8291, -3.64882)
-visible = false
-use_collision = true
-size = Vector3(1, 4.6582, 1)
-
-[node name="CSGBox3D2" type="CSGBox3D" parent="map"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.87599, 1.64545, -6.32456)
-use_collision = true
-size = Vector3(1, 4.6582, 1)
-
-[node name="CSGBox3D3" type="CSGBox3D" parent="map"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.08696, 0.904727, -7.29763)
-use_collision = true
-size = Vector3(1, 4.6582, 1)
-
-[node name="CSGBox3D4" type="CSGBox3D" parent="map"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.2222, 1.69308, 1.61517)
-use_collision = true
-size = Vector3(1, 4.6582, 1)
-
-[node name="CSGBox3D5" type="CSGBox3D" parent="map"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.47027, 2.18732, -2.03364)
-use_collision = true
-size = Vector3(1, 4.6582, 1)
-
-[node name="CSGBox3D6" type="CSGBox3D" parent="map"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.2593, 1.32165, -0.712613)
-use_collision = true
-size = Vector3(1, 4.6582, 1)
-
-[node name="CSGBox3D7" type="CSGBox3D" parent="map"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.8472, 0.954557, -6.91624)
-use_collision = true
-size = Vector3(1, 4.6582, 1)
-
-[node name="CSGBox3D8" type="CSGBox3D" parent="map"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.7278, 1.82022, -8.23727)
-use_collision = true
-size = Vector3(1, 4.6582, 1)
-
-[node name="CSGBox3D9" type="CSGBox3D" parent="map"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.0698, 0.15653, 4.67794)
-use_collision = true
-size = Vector3(1, 4.6582, 1)
-
-[node name="CSGBox3D10" type="CSGBox3D" parent="map"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.21097, -0.865665, -12.025)
-use_collision = true
-size = Vector3(1, 4.6582, 1)
-
-[node name="CSGBox3D11" type="CSGBox3D" parent="map"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.3508, 0.0790968, -10.704)
-use_collision = true
-size = Vector3(1, 4.6582, 1)
-
-[node name="CSGBox3D12" type="CSGBox3D" parent="map"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.0163, -1.73133, -10.704)
-use_collision = true
-size = Vector3(1, 4.6582, 1)
-
-[node name="CSGBox3D13" type="CSGBox3D" parent="map"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.13983, -0.786568, 0.382811)
-use_collision = true
-size = Vector3(1, 4.6582, 1)
-
-[node name="CSGBox3D14" type="CSGBox3D" parent="map"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.76126, -1.65223, 1.70384)
-use_collision = true
-size = Vector3(1, 4.6582, 1)
-
-[node name="CSGBox3D15" type="CSGBox3D" parent="map"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.97223, -0.172344, 3.02487)
-use_collision = true
-size = Vector3(1, 4.6582, 1)
-
-[node name="CSGBox3D16" type="CSGBox3D" parent="map"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.1832, 1.96696, 4.3459)
-use_collision = true
-size = Vector3(1, 4.6582, 1)
-
-[node name="CSGBox3D17" type="CSGBox3D" parent="map"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.79325, 1.10129, 5.66693)
-use_collision = true
-size = Vector3(1, 4.6582, 1)
-
-[node name="ground" type="CSGBox3D" parent="map"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.69323, -0.469965, -5.22906)
-use_collision = true
-size = Vector3(38.97, 1, 32.1158)
-
-[node name="CSGBox3D18" type="CSGBox3D" parent="map"]
-transform = Transform3D(-0.454519, 0, -0.890737, 0, 1, 0, 0.890737, 0, -0.454519, 5.90734, 1.8291, 1.74115)
-use_collision = true
-size = Vector3(1, 4.6582, 1)
-
-[node name="CSGBox3D19" type="CSGBox3D" parent="map"]
-transform = Transform3D(-0.454519, 0, -0.890737, 0, 1, 0, 0.890737, 0, -0.454519, 10.6028, 1.64545, -1.57382)
-use_collision = true
-size = Vector3(1, 4.6582, 1)
-
-[node name="CSGBox3D20" type="CSGBox3D" parent="map"]
-transform = Transform3D(-0.454519, 0, -0.890737, 0, 1, 0, 0.890737, 0, -0.454519, 12.4745, 0.904727, -3.10093)
-use_collision = true
-size = Vector3(1, 4.6582, 1)
-
-[node name="CSGBox3D21" type="CSGBox3D" parent="map"]
-transform = Transform3D(-0.454519, 0, -0.890737, 0, 1, 0, 0.890737, 0, -0.454519, -4.24082, 1.69308, 10.0474)
-use_collision = true
-size = Vector3(1, 4.6582, 1)
-
-[node name="CSGBox3D22" type="CSGBox3D" parent="map"]
-transform = Transform3D(-0.454519, 0, -0.890737, 0, 1, 0, 0.890737, 0, -0.454519, 8.86895, 2.18732, -7.61642)
-use_collision = true
-size = Vector3(1, 4.6582, 1)
-
-[node name="CSGBox3D23" type="CSGBox3D" parent="map"]
-transform = Transform3D(-0.454519, 0, -0.890737, 0, 1, 0, 0.890737, 0, -0.454519, 6.68733, 1.32165, -6.24746)
-use_collision = true
-size = Vector3(1, 4.6582, 1)
-
-[node name="CSGBox3D24" type="CSGBox3D" parent="map"]
-transform = Transform3D(-0.454519, 0, -0.890737, 0, 1, 0, 0.890737, 0, -0.454519, 15.662, 0.954557, -10.1866)
-use_collision = true
-size = Vector3(1, 4.6582, 1)
-
-[node name="CSGBox3D25" type="CSGBox3D" parent="map"]
-transform = Transform3D(-0.454519, 0, -0.890737, 0, 1, 0, 0.890737, 0, -0.454519, 18.148, 1.82022, -12.152)
-use_collision = true
-size = Vector3(1, 4.6582, 1)
-
-[node name="CSGBox3D26" type="CSGBox3D" parent="map"]
-transform = Transform3D(-0.454519, 0, -0.890737, 0, 1, 0, 0.890737, 0, -0.454519, 6.34483, 0.15653, -17.4361)
-use_collision = true
-size = Vector3(1, 4.6582, 1)
-
-[node name="CSGBox3D35" type="CSGBox3D" parent="map"]
-transform = Transform3D(-0.703892, 0, 0.710308, 0, 1, 0, -0.710308, 0, -0.703892, 10.4467, -1.42536, 3.41615)
-use_collision = true
-size = Vector3(1, 4.6582, 1)
-
-[node name="CSGBox3D27" type="CSGBox3D" parent="map"]
-transform = Transform3D(-0.384778, 0, -0.923009, 0, 1, 0, 0.923009, 0, -0.384778, 7.2827, -0.865665, 3.6735)
-use_collision = true
-size = Vector3(1, 4.6582, 1)
-
-[node name="CSGBox3D28" type="CSGBox3D" parent="map"]
-transform = Transform3D(-0.454519, 0, -0.890737, 0, 1, 0, 0.890737, 0, -0.454519, 16.9922, 0.0790968, -4.4599)
-use_collision = true
-size = Vector3(1, 4.6582, 1)
-
-[node name="CSGBox3D29" type="CSGBox3D" parent="map"]
-transform = Transform3D(-0.454519, 0, -0.890737, 0, 1, 0, 0.890737, 0, -0.454519, 6.37138, -1.73133, 16.354)
-use_collision = true
-size = Vector3(1, 4.6582, 1)
-
-[node name="CSGBox3D30" type="CSGBox3D" parent="map"]
-transform = Transform3D(-0.454519, 0, -0.890737, 0, 1, 0, 0.890737, 0, -0.454519, 6.11181, -0.786568, -7.52967)
-use_collision = true
-size = Vector3(1, 4.6582, 1)
-
-[node name="CSGBox3D31" type="CSGBox3D" parent="map"]
-transform = Transform3D(-0.454519, 0, -0.890737, 0, 1, 0, 0.890737, 0, -0.454519, 1.79845, -1.65223, -1.98305)
-use_collision = true
-size = Vector3(1, 4.6582, 1)
-
-[node name="CSGBox3D32" type="CSGBox3D" parent="map"]
-transform = Transform3D(-0.454519, 0, -0.890737, 0, 1, 0, 0.890737, 0, -0.454519, -0.38317, -0.172344, -0.614088)
-use_collision = true
-size = Vector3(1, 4.6582, 1)
-
-[node name="CSGBox3D33" type="CSGBox3D" parent="map"]
-transform = Transform3D(-0.454519, 0, -0.890737, 0, 1, 0, 0.890737, 0, -0.454519, -2.56479, 1.96696, 0.754872)
-use_collision = true
-size = Vector3(1, 4.6582, 1)
-
-[node name="CSGBox3D34" type="CSGBox3D" parent="map"]
-transform = Transform3D(-0.454519, 0, -0.890737, 0, 1, 0, 0.890737, 0, -0.454519, 0.793008, 1.10129, -8.73195)
-use_collision = true
-size = Vector3(1, 4.6582, 1)
 
 [node name="player" parent="." node_paths=PackedStringArray("monster_roster") instance=ExtResource("2_icr3f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 3, 1)
@@ -411,18 +342,9 @@ shape = SubResource("SphereShape3D_8hhi2")
 
 [node name="Monsters" type="Node" parent="."]
 
-[node name="Simo" parent="Monsters" instance=ExtResource("12_xawwd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.712, 1.49538, 5.37162)
-attacks = Array[ExtResource("20_88g2n")]([SubResource("Resource_hmmnr"), SubResource("Resource_yxw6t"), SubResource("Resource_h6jtf"), SubResource("Resource_yqp0k")])
-
 [node name="GhostDog" parent="Monsters" instance=ExtResource("13_bqc4j")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.7676, 1.52268, 0.271557)
-speed = 40
 attacks = Array[ExtResource("20_88g2n")]([SubResource("Resource_1rpbd"), SubResource("Resource_6b640"), SubResource("Resource_sea5d"), SubResource("Resource_5sn25")])
-
-[node name="FireGuy" parent="Monsters" instance=ExtResource("14_op84i")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.1032, 1, 1)
-attacks = Array[ExtResource("20_88g2n")]([ExtResource("16_irmos"), ExtResource("21_7sy1e"), ExtResource("22_d12ge"), ExtResource("23_r822j")])
 
 [node name="Gargoyle" parent="Monsters" instance=ExtResource("15_2rjtg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.6383, 1.49538, 3.92585)
@@ -439,7 +361,6 @@ attacks = Array[ExtResource("20_88g2n")]([ExtResource("22_d12ge"), ExtResource("
 
 [node name="Hynine-red" parent="Monsters" instance=ExtResource("18_q12t6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.4236, 1.46079, -7.57136)
-speed = 20
 attacks = Array[ExtResource("20_88g2n")]([ExtResource("21_7sy1e"), ExtResource("23_r822j"), ExtResource("22_d12ge"), ExtResource("16_irmos")])
 
 [node name="Magei" parent="Monsters" instance=ExtResource("21_qgg3r")]
@@ -466,8 +387,190 @@ attacks = Array[ExtResource("20_88g2n")]([ExtResource("21_7sy1e"), ExtResource("
 
 [node name="Hynine8" parent="PortraitTest" instance=ExtResource("16_m5paf")]
 
-[node name="Gnome" parent="." instance=ExtResource("25_r86tm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.4566, 1.49538, 5.34012)
+[node name="old_map" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -59.9, 0, 0)
+visible = false
+
+[node name="CSGBox3D" type="CSGBox3D" parent="old_map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.21097, 1.8291, -3.64882)
+visible = false
+use_collision = true
+size = Vector3(1, 4.6582, 1)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="old_map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.87599, 1.64545, -6.32456)
+use_collision = true
+size = Vector3(1, 4.6582, 1)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="old_map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.08696, 0.904727, -7.29763)
+use_collision = true
+size = Vector3(1, 4.6582, 1)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="old_map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.2222, 1.69308, 1.61517)
+use_collision = true
+size = Vector3(1, 4.6582, 1)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="old_map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.47027, 2.18732, -2.03364)
+use_collision = true
+size = Vector3(1, 4.6582, 1)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="old_map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.2593, 1.32165, -0.712613)
+use_collision = true
+size = Vector3(1, 4.6582, 1)
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="old_map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.8472, 0.954557, -6.91624)
+use_collision = true
+size = Vector3(1, 4.6582, 1)
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="old_map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.7278, 1.82022, -8.23727)
+use_collision = true
+size = Vector3(1, 4.6582, 1)
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="old_map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.0698, 0.15653, 4.67794)
+use_collision = true
+size = Vector3(1, 4.6582, 1)
+
+[node name="CSGBox3D10" type="CSGBox3D" parent="old_map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.21097, -0.865665, -12.025)
+use_collision = true
+size = Vector3(1, 4.6582, 1)
+
+[node name="CSGBox3D11" type="CSGBox3D" parent="old_map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.3508, 0.0790968, -10.704)
+use_collision = true
+size = Vector3(1, 4.6582, 1)
+
+[node name="CSGBox3D12" type="CSGBox3D" parent="old_map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.0163, -1.73133, -10.704)
+use_collision = true
+size = Vector3(1, 4.6582, 1)
+
+[node name="CSGBox3D13" type="CSGBox3D" parent="old_map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.13983, -0.786568, 0.382811)
+use_collision = true
+size = Vector3(1, 4.6582, 1)
+
+[node name="CSGBox3D14" type="CSGBox3D" parent="old_map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.76126, -1.65223, 1.70384)
+use_collision = true
+size = Vector3(1, 4.6582, 1)
+
+[node name="CSGBox3D15" type="CSGBox3D" parent="old_map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.97223, -0.172344, 3.02487)
+use_collision = true
+size = Vector3(1, 4.6582, 1)
+
+[node name="CSGBox3D16" type="CSGBox3D" parent="old_map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.1832, 1.96696, 4.3459)
+use_collision = true
+size = Vector3(1, 4.6582, 1)
+
+[node name="CSGBox3D17" type="CSGBox3D" parent="old_map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.79325, 1.10129, 5.66693)
+use_collision = true
+size = Vector3(1, 4.6582, 1)
+
+[node name="ground" type="CSGBox3D" parent="old_map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.69323, -0.469965, -5.22906)
+use_collision = true
+size = Vector3(38.97, 1, 32.1158)
+
+[node name="CSGBox3D18" type="CSGBox3D" parent="old_map"]
+transform = Transform3D(-0.454519, 0, -0.890737, 0, 1, 0, 0.890737, 0, -0.454519, 5.90734, 1.8291, 1.74115)
+use_collision = true
+size = Vector3(1, 4.6582, 1)
+
+[node name="CSGBox3D19" type="CSGBox3D" parent="old_map"]
+transform = Transform3D(-0.454519, 0, -0.890737, 0, 1, 0, 0.890737, 0, -0.454519, 10.6028, 1.64545, -1.57382)
+use_collision = true
+size = Vector3(1, 4.6582, 1)
+
+[node name="CSGBox3D20" type="CSGBox3D" parent="old_map"]
+transform = Transform3D(-0.454519, 0, -0.890737, 0, 1, 0, 0.890737, 0, -0.454519, 12.4745, 0.904727, -3.10093)
+use_collision = true
+size = Vector3(1, 4.6582, 1)
+
+[node name="CSGBox3D21" type="CSGBox3D" parent="old_map"]
+transform = Transform3D(-0.454519, 0, -0.890737, 0, 1, 0, 0.890737, 0, -0.454519, -4.24082, 1.69308, 10.0474)
+use_collision = true
+size = Vector3(1, 4.6582, 1)
+
+[node name="CSGBox3D22" type="CSGBox3D" parent="old_map"]
+transform = Transform3D(-0.454519, 0, -0.890737, 0, 1, 0, 0.890737, 0, -0.454519, 8.86895, 2.18732, -7.61642)
+use_collision = true
+size = Vector3(1, 4.6582, 1)
+
+[node name="CSGBox3D23" type="CSGBox3D" parent="old_map"]
+transform = Transform3D(-0.454519, 0, -0.890737, 0, 1, 0, 0.890737, 0, -0.454519, 6.68733, 1.32165, -6.24746)
+use_collision = true
+size = Vector3(1, 4.6582, 1)
+
+[node name="CSGBox3D24" type="CSGBox3D" parent="old_map"]
+transform = Transform3D(-0.454519, 0, -0.890737, 0, 1, 0, 0.890737, 0, -0.454519, 15.662, 0.954557, -10.1866)
+use_collision = true
+size = Vector3(1, 4.6582, 1)
+
+[node name="CSGBox3D25" type="CSGBox3D" parent="old_map"]
+transform = Transform3D(-0.454519, 0, -0.890737, 0, 1, 0, 0.890737, 0, -0.454519, 18.148, 1.82022, -12.152)
+use_collision = true
+size = Vector3(1, 4.6582, 1)
+
+[node name="CSGBox3D26" type="CSGBox3D" parent="old_map"]
+transform = Transform3D(-0.454519, 0, -0.890737, 0, 1, 0, 0.890737, 0, -0.454519, 6.34483, 0.15653, -17.4361)
+use_collision = true
+size = Vector3(1, 4.6582, 1)
+
+[node name="CSGBox3D35" type="CSGBox3D" parent="old_map"]
+transform = Transform3D(-0.703892, 0, 0.710308, 0, 1, 0, -0.710308, 0, -0.703892, 10.4467, -1.42536, 3.41615)
+use_collision = true
+size = Vector3(1, 4.6582, 1)
+
+[node name="CSGBox3D27" type="CSGBox3D" parent="old_map"]
+transform = Transform3D(-0.384778, 0, -0.923009, 0, 1, 0, 0.923009, 0, -0.384778, 7.2827, -0.865665, 3.6735)
+use_collision = true
+size = Vector3(1, 4.6582, 1)
+
+[node name="CSGBox3D28" type="CSGBox3D" parent="old_map"]
+transform = Transform3D(-0.454519, 0, -0.890737, 0, 1, 0, 0.890737, 0, -0.454519, 16.9922, 0.0790968, -4.4599)
+use_collision = true
+size = Vector3(1, 4.6582, 1)
+
+[node name="CSGBox3D29" type="CSGBox3D" parent="old_map"]
+transform = Transform3D(-0.454519, 0, -0.890737, 0, 1, 0, 0.890737, 0, -0.454519, 6.37138, -1.73133, 16.354)
+use_collision = true
+size = Vector3(1, 4.6582, 1)
+
+[node name="CSGBox3D30" type="CSGBox3D" parent="old_map"]
+transform = Transform3D(-0.454519, 0, -0.890737, 0, 1, 0, 0.890737, 0, -0.454519, 6.11181, -0.786568, -7.52967)
+use_collision = true
+size = Vector3(1, 4.6582, 1)
+
+[node name="CSGBox3D31" type="CSGBox3D" parent="old_map"]
+transform = Transform3D(-0.454519, 0, -0.890737, 0, 1, 0, 0.890737, 0, -0.454519, 1.79845, -1.65223, -1.98305)
+use_collision = true
+size = Vector3(1, 4.6582, 1)
+
+[node name="CSGBox3D32" type="CSGBox3D" parent="old_map"]
+transform = Transform3D(-0.454519, 0, -0.890737, 0, 1, 0, 0.890737, 0, -0.454519, -0.38317, -0.172344, -0.614088)
+use_collision = true
+size = Vector3(1, 4.6582, 1)
+
+[node name="CSGBox3D33" type="CSGBox3D" parent="old_map"]
+transform = Transform3D(-0.454519, 0, -0.890737, 0, 1, 0, 0.890737, 0, -0.454519, -2.56479, 1.96696, 0.754872)
+use_collision = true
+size = Vector3(1, 4.6582, 1)
+
+[node name="CSGBox3D34" type="CSGBox3D" parent="old_map"]
+transform = Transform3D(-0.454519, 0, -0.890737, 0, 1, 0, 0.890737, 0, -0.454519, 0.793008, 1.10129, -8.73195)
+use_collision = true
+size = Vector3(1, 4.6582, 1)
 
 [connection signal="body_entered" from="SceneDoor2" to="SceneDoor2" method="_on_body_entered"]
 [connection signal="body_exited" from="SceneDoor2" to="SceneDoor2" method="_on_body_exited"]
