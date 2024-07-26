@@ -17,7 +17,7 @@ var health : int
 var healthbar
 var mana : int
 var manabar
-var root : BattleScene
+#var root : BattleScene
 
 func _ready():
 	healthbar = $HealthBar/SubViewport/HealthBar3D
@@ -39,7 +39,7 @@ func take_damage(damage : int):
 		health -= damage
 		print(health)
 		healthbar.set_value(health)
-		SceneTool.get_root().end_turn()
+		#SceneTool.get_root().end_turn()
 
 func drain_mana(m : int):
 	if manabar.get_value() > 0:
@@ -62,6 +62,9 @@ func get_attack_names():
 	for attack in attacks:
 		names.append(attack.name)
 	return names
+
+func is_deadzo():
+	return health > 0
 
 func get_portrait():
 	return portrait.instantiate() as Node2D

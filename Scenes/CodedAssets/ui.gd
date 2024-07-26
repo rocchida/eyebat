@@ -2,6 +2,7 @@ extends Control
 signal button_clicked(int)
 
 var buttons : Array
+var btn : Button
 @onready var attack_desc_text : Label = $ColorMenu/ScrollContainer/Label
 @onready var monster_desc_text : Label = $ColorMenu/CurrentMonsterStats/Label
 @onready var hovered_monster_desc_text : Label = $ColorMenu/HoveredMonsterStats/Label
@@ -17,6 +18,16 @@ func set_buttons(attacks : Array[String]):
 	for i in range(buttons.size()):
 		if attacks[i] != null:
 			buttons[i].set_text(attacks[i])
+
+func hide_buttons():
+	for btn : Button in buttons:
+		if btn.is_visible_in_tree(): 
+			btn.hide()
+
+func show_buttons():
+	for btn in buttons:
+		if !btn.is_visible_in_tree(): 
+			btn.show()
 
 func set_attack_description(attack : Attack, monster : Monster):
 	if (attack == null): attack_desc_text.set_text("")

@@ -1,11 +1,11 @@
 extends Node3D
 class_name BattleScene
 
-var _enemy_spawns : SpawnGroup
-var _player_spawns : SpawnGroup
-var _initiative : Array[Monster]
 enum state {ENEMIES_AND_PLAYERS_ALIVE, ENEMIES_DEAD, PLAYERS_DEAD, ALL_DEAD}
 enum turn_state {SELECTING_ACTION, ACTION_SELECTED}
+var enemy_spawns : SpawnGroup
+var player_spawns : SpawnGroup
+var initiative : Array[Monster]
 var current_turn_state : turn_state = turn_state.SELECTING_ACTION
 var current_turn : int = 0
 var currently_selected_button : int = -1
@@ -14,32 +14,29 @@ var currently_selected_button : int = -1
 
 func _ready():
 	SceneTool.set_root(self)
-	UI.set_buttons(_initiative[current_turn].get_attack_names())
-	UI.set_current_monster_stats(_initiative[current_turn])
-	UI.set_initiative_board(_initiative)
-
-func _process(delta):
-	if Input.is_action_just_pressed("ui_accept"):
-		end_turn()
+	UI.set_buttons(current_monster().get_attack_names())
+	UI.set_current_monster_stats(current_monster())
+	UI.set_initiative_board(initiative)
+	if is_enemy(initiative.front()): perform_ai_turn(current_monster())
 
 func _prepare():
-	_enemy_spawns = $EnemySpawns
-	_player_spawns = $PlayerSpawns
+	enemy_spawns = $EnemySpawns
+	player_spawns = $PlayerSpawns
 
 func populate_spawns(enemy_monster_roster: Array[Monster], player_monster_roster: Array[Monster]):
 	_prepare()
-	_enemy_spawns.populate_spawns(enemy_monster_roster)
-	_player_spawns.populate_spawns(player_monster_roster)
+	enemy_spawns.populate_spawns(enemy_monster_roster)
+	player_spawns.populate_spawns(player_monster_roster)
 	set_initiative(enemy_monster_roster, player_monster_roster)
-	for m in _initiative:
+	for m in initiative:
 		m.toggle_selector()
-	_initiative[0].toggle_selector()
+	initiative[0].toggle_selector()
 	
 func set_initiative(enemy_monster_roster: Array[Monster], player_monster_roster: Array[Monster]):
-	_initiative.append_array(enemy_monster_roster)
-	_initiative.append_array(player_monster_roster)
-	_initiative.sort_custom(sort_by_speed)
-	if (debug): for m in _initiative: print(m.name + ", speed: " + str(m.get_speed()))
+	initiative.append_array(enemy_monster_roster)
+	initiative.append_array(player_monster_roster)
+	initiative.sort_custom(sort_by_speed)
+	if (debug): for m in initiative: print(m.name + ", speed: " + str(m.get_speed()))
 
 func sort_by_speed(a:Monster, b:Monster):
 	if a.get_speed() > b.get_speed():
@@ -47,28 +44,83 @@ func sort_by_speed(a:Monster, b:Monster):
 	return false
 
 func end_turn():
-	if (debug): print(_initiative[current_turn].name + " ends their turn")
-	_initiative[current_turn].toggle_selector()
+	if (debug): print(current_monster().name + " ends their turn")
+	current_monster().toggle_selector()
+	
 	current_turn = current_turn + 1
-	if current_turn >= _initiative.size(): current_turn = 0
-	if (debug): print(_initiative[current_turn].name + " begins their turn")
-	_initiative[current_turn].toggle_selector()
-	UI.set_buttons(_initiative[current_turn].get_attack_names())
-	UI.set_current_monster_stats(_initiative[current_turn])
-	UI.set_attack_description(null, null)
+	if current_turn >= initiative.size(): current_turn = 0
 	currently_selected_button = -1
+	if (debug): print(current_monster().name + " begins their turn")
+	current_monster().toggle_selector()
+	
+	if (is_enemy(current_monster())):
+		perform_ai_turn(current_monster())
+	else:
+		UI.show_buttons()
+		UI.set_buttons(current_monster().get_attack_names())
+		UI.set_current_monster_stats(current_monster())
+		UI.set_attack_description(null, null)
+		
 
-func monster_clicked(monster : Monster):
-	if currently_selected_button != -1 and _initiative[current_turn].mana >= _initiative[current_turn].attacks[currently_selected_button].mana_cost:
-		_initiative[current_turn].run_attack_anim(_player_spawns.contains(_initiative[current_turn]))
-		_initiative[current_turn].attacks[currently_selected_button].play_sound($AudioStreamPlayer)
-		_initiative[current_turn].drain_mana(_initiative[current_turn].attacks[currently_selected_button].mana_cost)
-		monster.take_damage(_initiative[current_turn].attacks[currently_selected_button].get_damage(_initiative[current_turn]))
+func monster_clicked(clicked_monster : Monster):
+	if currently_selected_button != -1 and current_monster().mana >= current_monster().attacks[currently_selected_button].mana_cost:
+		run_attack(current_monster(), clicked_monster, current_monster().attacks[currently_selected_button])
+		end_turn()
+
+func run_attack(attacker : Monster, receiver : Monster, attack : Attack):
+	attacker.run_attack_anim(is_enemy(attacker))
+	attack.play_sound($AudioStreamPlayer)
+	attacker.drain_mana(attack.mana_cost)
+	receiver.take_damage(attack.get_damage(attacker))
 
 func monster_hovered(monster : Monster):
 	UI.set_hovered_monster_stats(monster)
 
 func _on_ui_button_clicked(i : int):
 	currently_selected_button = i
-	UI.set_attack_description(_initiative[current_turn].attacks[i], _initiative[current_turn])
+	UI.set_attack_description(current_monster().attacks[i], current_monster())
+
+func current_monster():
+	return initiative[current_turn]
+
+func is_enemy(m : Monster):
+	return (m.get_parent().get_parent() == enemy_spawns)
+
+func perform_ai_turn(m : Monster):
+	print("ENEMY TURN")
+	UI.hide_buttons()
+	await get_tree().create_timer(5.0).timeout
+	perform_ai_attack(current_monster())
+	end_turn()
+
+func perform_ai_attack(m : Monster):
+	var chosen_target = null
+	for monster in initiative:
+		if !is_enemy(monster):
+			chosen_target = monster
+			break
+	
+	var chosen_attack = null
+	for atk in m.attacks:
+		if m.mana > atk.mana_cost:
+			chosen_attack = atk
+	run_attack(m, chosen_target, chosen_attack)
+
+#func ai_choose_target():
+	#
+
+func get_living_enemies():
+	var ret : Array[Monster]
+	for m in initiative:
+		if is_enemy(m) and !m.is_deadzo():
+			ret.append(m)
+	return ret
+
+func get_living_goodguys():
+	var ret : Array[Monster]
+	for m in initiative:
+		if !is_enemy(m) and !m.is_deadzo():
+			ret.append(m)
+	return ret
+	
 
