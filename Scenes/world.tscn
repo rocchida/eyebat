@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://bdsnxtasgjx2o"]
+[gd_scene load_steps=41 format=3 uid="uid://bdsnxtasgjx2o"]
 
 [ext_resource type="Script" path="res://Scripts/world.gd" id="1_hijai"]
 [ext_resource type="PackedScene" uid="uid://dba8t7daowokd" path="res://Scenes/CodedAssets/player.tscn" id="2_icr3f"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://0uah50n2ynp4" path="res://ImportedAssets/GridMapAssets/Models/GLTF format/doorLargeClosed.glb" id="10_1iaji"]
 [ext_resource type="Script" path="res://Scenes/CodedAssets/SceneDoor.gd" id="10_02i1u"]
 [ext_resource type="PackedScene" uid="uid://byepnlfkyuq6v" path="res://Monsters/Gnome.tscn" id="12_6m0vq"]
+[ext_resource type="PackedScene" uid="uid://bslkd8a74b7r4" path="res://Monsters/Goblin.tscn" id="12_gppj7"]
 [ext_resource type="PackedScene" uid="uid://b6jd4rcvxobhd" path="res://Monsters/GhostDog.tscn" id="13_bqc4j"]
 [ext_resource type="PackedScene" uid="uid://5n67mp7f6l4b" path="res://Monsters/Gargoyle.tscn" id="15_2rjtg"]
 [ext_resource type="Resource" uid="uid://bkxxshxbpc6he" path="res://Resources/Attacks/attack_spit.tres" id="16_irmos"]
@@ -230,7 +231,7 @@ script = ExtResource("1_hijai")
 
 [node name="player" parent="." node_paths=PackedStringArray("monster_roster") instance=ExtResource("2_icr3f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 3, 1)
-monster_roster = [NodePath("../PortraitTest/Hynine3"), NodePath("../PortraitTest/Hynine4"), NodePath("../Monsters/Gnome")]
+monster_roster = [NodePath("../PortraitTest/Hynine3"), NodePath("../PortraitTest/Hynine4"), NodePath("../Monsters/Gnome"), NodePath("../Monsters/Goblin")]
 
 [node name="testnut" parent="." instance=ExtResource("3_yn2xu")]
 transform = Transform3D(110, 0, 0, 0, -13.72, -109.141, 0, 109.141, -13.72, 7.86892, 11.5862, -114.782)
@@ -305,6 +306,9 @@ shape = SubResource("SphereShape3D_8hhi2")
 [node name="doorLargeClosed2" parent="SceneDoor" instance=ExtResource("10_1iaji")]
 
 [node name="Monsters" type="Node" parent="."]
+
+[node name="Goblin" parent="Monsters" instance=ExtResource("12_gppj7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.5427, 1.98251, -1.1276)
 
 [node name="Gnome" parent="Monsters" instance=ExtResource("12_6m0vq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.52668, 0)

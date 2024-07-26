@@ -1,0 +1,137 @@
+[gd_scene load_steps=18 format=3 uid="uid://bslkd8a74b7r4"]
+
+[ext_resource type="Script" path="res://Monsters/Monster.gd" id="1_8gmwr"]
+[ext_resource type="Resource" uid="uid://cgu7jdttiq5im" path="res://Resources/Attacks/attack_firebolt.tres" id="2_78hmi"]
+[ext_resource type="Resource" uid="uid://dxlwicbfo1hq6" path="res://Resources/Attacks/attack_sigh.tres" id="3_xor8k"]
+[ext_resource type="Resource" uid="uid://1fxil6c6rtoh" path="res://Resources/Attacks/attack_slash.tres" id="4_tvwy0"]
+[ext_resource type="Resource" uid="uid://dliqvxokfeu8m" path="res://Resources/Attacks/attack_scorch.tres" id="5_73tu6"]
+[ext_resource type="PackedScene" uid="uid://bsrvwow1gl7ux" path="res://Scenes/CodedAssets/CharacterPortraits/hynine_portrait.tscn" id="6_stely"]
+[ext_resource type="Texture2D" uid="uid://bc2vhkygnfsvq" path="res://CustomAssets/CharacterArt/Monster Sheet/Gobin_Spritesheet.png" id="7_7bm6m"]
+[ext_resource type="Texture2D" uid="uid://d1vnpqemfxhj1" path="res://ImportedAssets/UI/pointer.png" id="8_oljje"]
+[ext_resource type="PackedScene" uid="uid://0n6qt3r5hf7i" path="res://Scenes/CodedAssets/health_bar_3d.tscn" id="9_7byty"]
+[ext_resource type="PackedScene" path="res://Scenes/CodedAssets/mana_bar_3d.tscn" id="10_c4igo"]
+[ext_resource type="PackedScene" uid="uid://dyha3hn24vliy" path="res://Scenes/CodedAssets/clickable.tscn" id="11_skitq"]
+
+[sub_resource type="Animation" id="Animation_j01o8"]
+resource_name = "attack"
+length = 0.90001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "position_3d"
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/path = NodePath("Sprite3D")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0.722, 0, 0.1, 1, -1, 0.722, 0, 0.3, 1, -1, 0.722, 0, 0.6, 1, 6.31339e-08, 0.722168, 0)
+
+[sub_resource type="Animation" id="Animation_gp0kn"]
+resource_name = "damaged"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_a5f5j"]
+resource_name = "idle"
+length = 2.45834
+loop_mode = 1
+step = 0.0416667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.583333, 0.708333, 0.75, 0.791667, 0.833333, 1.08333, 1.125, 1.20833, 1.25, 1.375, 1.95833, 2, 2.04167, 2.125, 2.20833, 2.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dimbn"]
+_data = {
+"attack": SubResource("Animation_j01o8"),
+"damaged": SubResource("Animation_gp0kn"),
+"idle": SubResource("Animation_a5f5j")
+}
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_fsr5g"]
+viewport_path = NodePath("HealthBar/SubViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_7uvk6"]
+viewport_path = NodePath("ManaBar/SubViewport")
+
+[node name="Goblin" type="Node3D"]
+script = ExtResource("1_8gmwr")
+max_health = 120
+max_mana = 20
+attacks = Array[Resource("res://Resources/Attacks/attack_base.gd")]([ExtResource("2_78hmi"), ExtResource("3_xor8k"), ExtResource("4_tvwy0"), ExtResource("5_73tu6")])
+portrait = ExtResource("6_stely")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(0.075, 1.13247e-08, 0, -1.13247e-08, 0.075, 0, 0, 0, -0.075, 0, 0.722, 0)
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("7_7bm6m")
+hframes = 8
+vframes = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_dimbn")
+}
+autoplay = "idle"
+
+[node name="Selector" type="Sprite3D" parent="."]
+transform = Transform3D(-0.000579428, 0.100582, 0, -0.105059, -0.000554737, 0, 0, 0, 1, -0.106373, 1.80408, 0)
+rotation_order = 0
+modulate = Color(0, 0, 0, 1)
+texture = ExtResource("8_oljje")
+
+[node name="HealthBar" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0976116, 0.312456, 0)
+
+[node name="SubViewport" type="SubViewport" parent="HealthBar"]
+disable_3d = true
+transparent_bg = true
+
+[node name="HealthBar3D" parent="HealthBar/SubViewport" instance=ExtResource("9_7byty")]
+
+[node name="HealthBar" type="Sprite3D" parent="HealthBar"]
+transform = Transform3D(0.174239, 0, 0, 0, 0.0701671, 0, 0, 0, 1, 0, 1.19833, 0)
+texture = SubResource("ViewportTexture_fsr5g")
+
+[node name="ManaBar" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0976116, 0.232324, 0)
+
+[node name="SubViewport" type="SubViewport" parent="ManaBar"]
+disable_3d = true
+transparent_bg = true
+
+[node name="ManaBar3D" parent="ManaBar/SubViewport" instance=ExtResource("10_c4igo")]
+
+[node name="ManaBar" type="Sprite3D" parent="ManaBar"]
+transform = Transform3D(0.174239, 0, 0, 0, 0.0701671, 0, 0, 0, 1, 0, 1.19833, 0)
+texture = SubResource("ViewportTexture_7uvk6")
+
+[node name="Clickable" parent="." instance=ExtResource("11_skitq")]
