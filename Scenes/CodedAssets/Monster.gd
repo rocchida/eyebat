@@ -64,7 +64,7 @@ func get_attack_names():
 	return names
 
 func is_deadzo():
-	return health > 0
+	return health <= 0
 
 func get_portrait():
 	return portrait.instantiate() as Node2D

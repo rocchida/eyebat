@@ -9,6 +9,7 @@ var initiative : Array[Monster]
 var current_turn_state : turn_state = turn_state.SELECTING_ACTION
 var current_turn : int = 0
 var currently_selected_button : int = -1
+var struggle_atk = "res://Resources/Attacks/struggle.tres"
 @export var debug : bool
 @onready var UI = $Ui
 
@@ -89,25 +90,31 @@ func is_enemy(m : Monster):
 func perform_ai_turn(m : Monster):
 	print("ENEMY TURN")
 	UI.hide_buttons()
-	await get_tree().create_timer(5.0).timeout
+	await get_tree().create_timer(3.5).timeout
 	perform_ai_attack(current_monster())
 	end_turn()
 
 func perform_ai_attack(m : Monster):
-	var chosen_target = null
-	for monster in initiative:
-		if !is_enemy(monster):
-			chosen_target = monster
-			break
-	
-	var chosen_attack = null
-	for atk in m.attacks:
-		if m.mana > atk.mana_cost:
-			chosen_attack = atk
+	var chosen_target = ai_choose_target()
+	var chosen_attack = ai_choose_attack(m)
 	run_attack(m, chosen_target, chosen_attack)
 
-#func ai_choose_target():
-	#
+func ai_choose_target():
+	var living_goodguys = get_living_goodguys()
+	var num = randi_range(0, living_goodguys.size() - 1)
+	return living_goodguys[num]
+
+func ai_choose_attack(m : Monster):
+	var viable_attacks : Array[Attack]
+	for atk in m.attacks:
+		if atk.mana_cost <= m.mana:
+			viable_attacks.append(atk)
+	if viable_attacks.is_empty(): 
+		return struggle_atk
+	
+	var num = randi_range(0, viable_attacks.size() - 1)
+	return viable_attacks[num]
+	
 
 func get_living_enemies():
 	var ret : Array[Monster]

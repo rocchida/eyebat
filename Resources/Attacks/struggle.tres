@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="Attack" load_steps=3 format=3 uid="uid://dpyc7vtfk3wm0"]
+
+[ext_resource type="Script" path="res://Resources/Attacks/attack_base.gd" id="1_mevtf"]
+[ext_resource type="AudioStream" uid="uid://c4px0bmvq43et" path="res://ImportedAssets/Audio/AttackSounds/gash.wav" id="2_xe8kf"]
+
+[resource]
+script = ExtResource("1_mevtf")
+type = 0
+name = "Spit"
+sound = ExtResource("2_xe8kf")
+dex = true
+str = false
+will = false
+cha = false
+intl = false
+mana_cost = 0
+d4s = 1
+d6s = 0
+d8s = 0
+d10s = 0
+d12s = 0
+d20s = 0
+percent_buffed = 1.0
+percent_nerfed = 1.0
