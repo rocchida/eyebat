@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://0gi7ywf5qj55"]
+[gd_scene load_steps=19 format=3 uid="uid://0gi7ywf5qj55"]
 
 [ext_resource type="Script" path="res://Monsters/Monster.gd" id="1_0dpen"]
 [ext_resource type="PackedScene" uid="uid://bsrvwow1gl7ux" path="res://Scenes/CodedAssets/CharacterPortraits/hynine_portrait.tscn" id="2_mleto"]
@@ -8,28 +8,9 @@
 [ext_resource type="Resource" uid="uid://dxlwicbfo1hq6" path="res://Resources/Attacks/attack_sigh.tres" id="3_te330"]
 [ext_resource type="Resource" uid="uid://1fxil6c6rtoh" path="res://Resources/Attacks/attack_slash.tres" id="4_cvwhh"]
 [ext_resource type="PackedScene" uid="uid://0n6qt3r5hf7i" path="res://Scenes/CodedAssets/health_bar_3d.tscn" id="4_qiw4m"]
-[ext_resource type="Script" path="res://Resources/Attacks/attack_base.gd" id="5_o8f2f"]
+[ext_resource type="Resource" uid="uid://dliqvxokfeu8m" path="res://Resources/Attacks/attack_scorch.tres" id="5_xaakm"]
 [ext_resource type="PackedScene" uid="uid://dyha3hn24vliy" path="res://Scenes/CodedAssets/clickable.tscn" id="5_xcx82"]
 [ext_resource type="PackedScene" uid="uid://mmylq3dq6hon" path="res://Scenes/CodedAssets/mana_bar_3d.tscn" id="10_tp2vr"]
-
-[sub_resource type="Resource" id="Resource_amn8t"]
-script = ExtResource("5_o8f2f")
-type = 0
-name = "Spank"
-dex = false
-str = false
-will = false
-cha = false
-intl = false
-mana_cost = 0
-d4s = 3
-d6s = 0
-d8s = 2
-d10s = 0
-d12s = 0
-d20s = 0
-percent_buffed = 1.0
-percent_nerfed = 1.0
 
 [sub_resource type="Animation" id="Animation_j01o8"]
 resource_name = "attack_bad"
@@ -128,7 +109,7 @@ viewport_path = NodePath("ManaBar/SubViewport")
 script = ExtResource("1_0dpen")
 max_health = 120
 max_mana = 20
-attacks = Array[ExtResource("5_o8f2f")]([ExtResource("2_sqyfe"), ExtResource("3_te330"), ExtResource("4_cvwhh"), SubResource("Resource_amn8t")])
+attacks = Array[Resource("res://Resources/Attacks/attack_base.gd")]([ExtResource("2_sqyfe"), ExtResource("3_te330"), ExtResource("4_cvwhh"), ExtResource("5_xaakm")])
 portrait = ExtResource("2_mleto")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]

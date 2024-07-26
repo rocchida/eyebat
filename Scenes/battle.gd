@@ -122,5 +122,5 @@ func get_living_goodguys():
 		if !is_enemy(m) and !m.is_deadzo():
 			ret.append(m)
 	return ret
-	
+
 

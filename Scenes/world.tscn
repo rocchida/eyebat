@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://bdsnxtasgjx2o"]
+[gd_scene load_steps=39 format=3 uid="uid://bdsnxtasgjx2o"]
 
 [ext_resource type="Script" path="res://Scripts/world.gd" id="1_hijai"]
 [ext_resource type="PackedScene" uid="uid://dba8t7daowokd" path="res://Scenes/CodedAssets/player.tscn" id="2_icr3f"]
@@ -21,6 +21,7 @@
 [ext_resource type="Resource" uid="uid://dxlwicbfo1hq6" path="res://Resources/Attacks/attack_sigh.tres" id="21_7sy1e"]
 [ext_resource type="PackedScene" uid="uid://dflsb13iuqvgf" path="res://Monsters/magei.tscn" id="21_qgg3r"]
 [ext_resource type="Resource" uid="uid://1fxil6c6rtoh" path="res://Resources/Attacks/attack_slash.tres" id="22_d12ge"]
+[ext_resource type="Resource" uid="uid://dliqvxokfeu8m" path="res://Resources/Attacks/attack_scorch.tres" id="23_jdttg"]
 [ext_resource type="Resource" uid="uid://cgu7jdttiq5im" path="res://Resources/Attacks/attack_firebolt.tres" id="23_r822j"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_mt7vc"]
@@ -223,44 +224,6 @@ d20s = 0
 percent_buffed = 1.0
 percent_nerfed = 1.0
 
-[sub_resource type="Resource" id="Resource_iaj1a"]
-script = ExtResource("20_88g2n")
-type = 0
-name = "Spank"
-dex = false
-str = false
-will = false
-cha = false
-intl = false
-mana_cost = 0
-d4s = 0
-d6s = 0
-d8s = 0
-d10s = 0
-d12s = 0
-d20s = 0
-percent_buffed = 1.0
-percent_nerfed = 1.0
-
-[sub_resource type="Resource" id="Resource_ypwhj"]
-script = ExtResource("20_88g2n")
-type = 0
-name = "Hawk Tuah"
-dex = false
-str = false
-will = false
-cha = false
-intl = false
-mana_cost = 0
-d4s = 0
-d6s = 0
-d8s = 0
-d10s = 0
-d12s = 0
-d20s = 0
-percent_buffed = 1.0
-percent_nerfed = 1.0
-
 [node name="World" type="Node3D"]
 script = ExtResource("1_hijai")
 
@@ -370,10 +333,10 @@ attacks = Array[ExtResource("20_88g2n")]([ExtResource("21_7sy1e"), ExtResource("
 [node name="PortraitTest" type="Node" parent="."]
 
 [node name="Hynine" parent="PortraitTest" instance=ExtResource("16_m5paf")]
-attacks = Array[ExtResource("20_88g2n")]([ExtResource("21_7sy1e"), ExtResource("22_d12ge"), ExtResource("16_irmos"), SubResource("Resource_iaj1a")])
+attacks = Array[ExtResource("20_88g2n")]([ExtResource("21_7sy1e"), ExtResource("22_d12ge"), ExtResource("16_irmos"), ExtResource("23_jdttg")])
 
 [node name="Hynine2" parent="PortraitTest" instance=ExtResource("16_m5paf")]
-attacks = Array[ExtResource("20_88g2n")]([ExtResource("21_7sy1e"), ExtResource("22_d12ge"), ExtResource("16_irmos"), SubResource("Resource_ypwhj")])
+attacks = Array[ExtResource("20_88g2n")]([ExtResource("21_7sy1e"), ExtResource("22_d12ge"), ExtResource("16_irmos"), ExtResource("23_jdttg")])
 
 [node name="Hynine3" parent="PortraitTest" instance=ExtResource("16_m5paf")]
 
