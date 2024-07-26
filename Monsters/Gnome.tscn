@@ -1,19 +1,20 @@
-[gd_scene load_steps=18 format=3 uid="uid://0gi7ywf5qj55"]
+[gd_scene load_steps=19 format=3 uid="uid://byepnlfkyuq6v"]
 
-[ext_resource type="Script" path="res://Monsters/Monster.gd" id="1_0dpen"]
-[ext_resource type="PackedScene" uid="uid://bsrvwow1gl7ux" path="res://Scenes/CodedAssets/CharacterPortraits/hynine_portrait.tscn" id="2_mleto"]
-[ext_resource type="Resource" uid="uid://cgu7jdttiq5im" path="res://Resources/Attacks/attack_firebolt.tres" id="2_sqyfe"]
-[ext_resource type="Texture2D" uid="uid://ioavpxax8o61" path="res://CustomAssets/CharacterArt/Monster Sheet/Hynine_Spritesheet.png" id="2_t4hbm"]
-[ext_resource type="Texture2D" uid="uid://d1vnpqemfxhj1" path="res://ImportedAssets/UI/pointer.png" id="3_68fl4"]
-[ext_resource type="Resource" uid="uid://dxlwicbfo1hq6" path="res://Resources/Attacks/attack_sigh.tres" id="3_te330"]
-[ext_resource type="Resource" uid="uid://1fxil6c6rtoh" path="res://Resources/Attacks/attack_slash.tres" id="4_cvwhh"]
-[ext_resource type="PackedScene" uid="uid://0n6qt3r5hf7i" path="res://Scenes/CodedAssets/health_bar_3d.tscn" id="4_qiw4m"]
-[ext_resource type="Resource" uid="uid://dliqvxokfeu8m" path="res://Resources/Attacks/attack_scorch.tres" id="5_xaakm"]
-[ext_resource type="PackedScene" uid="uid://dyha3hn24vliy" path="res://Scenes/CodedAssets/clickable.tscn" id="5_xcx82"]
-[ext_resource type="PackedScene" path="res://Scenes/CodedAssets/mana_bar_3d.tscn" id="10_tp2vr"]
+[ext_resource type="Script" path="res://Monsters/Monster.gd" id="1_0nr25"]
+[ext_resource type="Resource" uid="uid://cgu7jdttiq5im" path="res://Resources/Attacks/attack_firebolt.tres" id="2_86oyb"]
+[ext_resource type="Resource" uid="uid://dxlwicbfo1hq6" path="res://Resources/Attacks/attack_sigh.tres" id="3_ebgix"]
+[ext_resource type="Resource" uid="uid://1fxil6c6rtoh" path="res://Resources/Attacks/attack_slash.tres" id="4_rgboe"]
+[ext_resource type="Resource" uid="uid://dliqvxokfeu8m" path="res://Resources/Attacks/attack_scorch.tres" id="5_4joqx"]
+[ext_resource type="PackedScene" uid="uid://bsrvwow1gl7ux" path="res://Scenes/CodedAssets/CharacterPortraits/hynine_portrait.tscn" id="6_n3qpe"]
+[ext_resource type="Texture2D" uid="uid://cge3ick3vajqp" path="res://CustomAssets/CharacterArt/Monster Sheet/Gnome_Spritesheet.png" id="7_u0kwc"]
+[ext_resource type="Texture2D" uid="uid://d1vnpqemfxhj1" path="res://ImportedAssets/UI/pointer.png" id="8_igyk7"]
+[ext_resource type="PackedScene" uid="uid://0n6qt3r5hf7i" path="res://Scenes/CodedAssets/health_bar_3d.tscn" id="9_7m1si"]
+[ext_resource type="PackedScene" path="res://Scenes/CodedAssets/mana_bar_3d.tscn" id="10_wocpk"]
+[ext_resource type="PackedScene" uid="uid://dyha3hn24vliy" path="res://Scenes/CodedAssets/clickable.tscn" id="11_c5378"]
 
 [sub_resource type="Animation" id="Animation_gp0kn"]
 resource_name = "damaged"
+length = 0.80001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -46,8 +47,32 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_j01o8"]
+resource_name = "Idle"
+length = 2.00001
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.6, 0.7, 1, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [2, 3, 4, 5, 6, 7]
+}
+tracks/1/type = "position_3d"
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/path = NodePath("Sprite3D")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0.722, 0, 0.1, 1, -1, 0.722, 0, 0.3, 1, -1, 0.722, 0, 0.6, 1, 6.31339e-08, 0.722168, 0)
+
+[sub_resource type="Animation" id="Animation_jobp6"]
 resource_name = "attack"
-length = 0.65
+length = 0.80001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -66,11 +91,12 @@ tracks/1/enabled = false
 tracks/1/path = NodePath("Sprite3D")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/keys = PackedFloat32Array(0, 1, 0, 0.722, 0, 0.1, 1, -1, 0.722, 0, 0.3, 1, -1, 0.722, 0, 0.6, 1, 6.31339e-08, 0.722168, 0)
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0.722, 0, 0.1, 1, 1, 0.722, 0, 0.3, 1, 1, 0.722, 0, 0.6, 1, 6.31339e-08, 0.722168, 0)
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_dimbn"]
 _data = {
-"attack": SubResource("Animation_j01o8"),
+"Idle": SubResource("Animation_j01o8"),
+"attack": SubResource("Animation_jobp6"),
 "damaged": SubResource("Animation_gp0kn"),
 "idle": SubResource("Animation_a5f5j")
 }
@@ -81,20 +107,20 @@ viewport_path = NodePath("HealthBar/SubViewport")
 [sub_resource type="ViewportTexture" id="ViewportTexture_7uvk6"]
 viewport_path = NodePath("ManaBar/SubViewport")
 
-[node name="Hynine" type="Node3D"]
-script = ExtResource("1_0dpen")
+[node name="Gnome" type="Node3D"]
+script = ExtResource("1_0nr25")
 max_health = 120
 max_mana = 20
-attacks = Array[Resource("res://Resources/Attacks/attack_base.gd")]([ExtResource("2_sqyfe"), ExtResource("3_te330"), ExtResource("4_cvwhh"), ExtResource("5_xaakm")])
-portrait = ExtResource("2_mleto")
+attacks = Array[Resource("res://Resources/Attacks/attack_base.gd")]([ExtResource("2_86oyb"), ExtResource("3_ebgix"), ExtResource("4_rgboe"), ExtResource("5_4joqx")])
+portrait = ExtResource("6_n3qpe")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(0.075, 1.13247e-08, 0, -1.13247e-08, 0.075, 0, 0, 0, -0.075, 0, 0.722, 0)
 alpha_cut = 2
 texture_filter = 0
-texture = ExtResource("2_t4hbm")
+texture = ExtResource("7_u0kwc")
 hframes = 8
-vframes = 4
+frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -103,35 +129,35 @@ libraries = {
 autoplay = "idle"
 
 [node name="Selector" type="Sprite3D" parent="."]
-transform = Transform3D(-0.000579428, 0.100582, 0, -0.105059, -0.000554737, 0, 0, 0, 1, -0.106373, 1.52288, 0)
+transform = Transform3D(-0.000579428, 0.100582, 0, -0.105059, -0.000554737, 0, 0, 0, 1, -0.106373, 1.85468, 0)
 rotation_order = 0
 modulate = Color(0, 0, 0, 1)
-texture = ExtResource("3_68fl4")
+texture = ExtResource("8_igyk7")
 
 [node name="HealthBar" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0976116, 0.16116, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0976116, 0.391013, 0)
 
 [node name="SubViewport" type="SubViewport" parent="HealthBar"]
 disable_3d = true
 transparent_bg = true
 
-[node name="HealthBar3D" parent="HealthBar/SubViewport" instance=ExtResource("4_qiw4m")]
+[node name="HealthBar3D" parent="HealthBar/SubViewport" instance=ExtResource("9_7m1si")]
 
 [node name="HealthBar" type="Sprite3D" parent="HealthBar"]
 transform = Transform3D(0.174239, 0, 0, 0, 0.0701671, 0, 0, 0, 1, 0, 1.19833, 0)
 texture = SubResource("ViewportTexture_fsr5g")
 
 [node name="ManaBar" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0976116, 0.0810282, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0976116, 0.310881, 0)
 
 [node name="SubViewport" type="SubViewport" parent="ManaBar"]
 disable_3d = true
 transparent_bg = true
 
-[node name="ManaBar3D" parent="ManaBar/SubViewport" instance=ExtResource("10_tp2vr")]
+[node name="ManaBar3D" parent="ManaBar/SubViewport" instance=ExtResource("10_wocpk")]
 
 [node name="ManaBar" type="Sprite3D" parent="ManaBar"]
 transform = Transform3D(0.174239, 0, 0, 0, 0.0701671, 0, 0, 0, 1, 0, 1.19833, 0)
 texture = SubResource("ViewportTexture_7uvk6")
 
-[node name="Clickable" parent="." instance=ExtResource("5_xcx82")]
+[node name="Clickable" parent="." instance=ExtResource("11_c5378")]

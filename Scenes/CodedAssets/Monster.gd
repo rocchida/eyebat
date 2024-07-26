@@ -70,10 +70,7 @@ func get_portrait():
 	return portrait.instantiate() as Node2D
 
 func run_attack_anim(monster_is_ally):
-	if monster_is_ally:
-		$AnimationPlayer.play("attack_good")
-	else:
-		$AnimationPlayer.play("attack_bad")
+	$AnimationPlayer.play("attack")
 	$AnimationPlayer.queue("idle")
 	
 func run_damaged_anim():
