@@ -13,9 +13,9 @@ class_name Monster
 @export var attacks : Array[Attack]
 @export var portrait: PackedScene
 
-var health : int 
+@export var health : int = 15
 var healthbar
-var mana : int
+@export var mana : int = 5
 var manabar
 #var root : BattleScene
 
@@ -25,12 +25,10 @@ func _ready():
 
 func init_health_and_mana_bar():
 	healthbar.set_max(float(max_health))
-	healthbar.set_value(float(max_health))
-	health = max_health
+	healthbar.set_value(float(health))
 	
 	manabar.set_max(float(max_mana))
-	manabar.set_value(float(max_mana))
-	mana = max_mana
+	manabar.set_value(float(mana))
 
 func take_damage(damage : int):
 	run_damaged_anim()

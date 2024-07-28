@@ -3,7 +3,7 @@ var mouse = Vector2()
 
 
 func _input(event):
-	print(event)
+	#print(event)
 	if event is InputEventMouse:
 		mouse = event.position
 		hover_selection()

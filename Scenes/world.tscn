@@ -11,8 +11,8 @@
 [ext_resource type="MeshLibrary" uid="uid://bignsdns4h2ag" path="res://CustomAssets/GridMapAssets/Mesh_Library.tres" id="9_ydcxs"]
 [ext_resource type="PackedScene" uid="uid://0uah50n2ynp4" path="res://ImportedAssets/GridMapAssets/Models/GLTF format/doorLargeClosed.glb" id="10_1iaji"]
 [ext_resource type="Script" path="res://Scenes/CodedAssets/SceneDoor.gd" id="10_02i1u"]
-[ext_resource type="PackedScene" uid="uid://byepnlfkyuq6v" path="res://Monsters/Gnome.tscn" id="12_6m0vq"]
-[ext_resource type="PackedScene" uid="uid://bslkd8a74b7r4" path="res://Monsters/Goblin.tscn" id="12_gppj7"]
+[ext_resource type="PackedScene" uid="uid://dxbfvlk53cyl3" path="res://Monsters/Gnome.tscn" id="12_6m0vq"]
+[ext_resource type="PackedScene" uid="uid://hfq76bo2bkcm" path="res://Monsters/Goblin.tscn" id="12_gppj7"]
 [ext_resource type="PackedScene" uid="uid://b6jd4rcvxobhd" path="res://Monsters/GhostDog.tscn" id="13_bqc4j"]
 [ext_resource type="PackedScene" uid="uid://5n67mp7f6l4b" path="res://Monsters/Gargoyle.tscn" id="15_2rjtg"]
 [ext_resource type="Resource" uid="uid://bkxxshxbpc6he" path="res://Resources/Attacks/attack_spit.tres" id="16_irmos"]
@@ -284,8 +284,8 @@ metadata/_editor_floor_ = Vector3(0, 5, 0)
 [node name="SceneDoor2" type="Area3D" parent="." node_paths=PackedStringArray("_encounter_monster_roster")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.3761, 1.9851, -6.87699)
 script = ExtResource("10_02i1u")
-_target_scene = "res://Scenes/battle_joe_blocks.tscn"
-_encounter_monster_roster = [null, null, null, null]
+_target_scene = "res://Scenes/battle2.tscn"
+_encounter_monster_roster = [NodePath("../Monsters/Goblin3"), NodePath("../Monsters/Goblin2")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SceneDoor2"]
 transform = Transform3D(1.768, 0, 0, 0, 2.058, 0, 0, 0, 1.63479, 0, 0, 0)
@@ -297,7 +297,7 @@ shape = SubResource("SphereShape3D_8hhi2")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.7948, 2.02413, -4.92663)
 script = ExtResource("10_02i1u")
 _target_scene = "res://Scenes/battle.tscn"
-_encounter_monster_roster = [NodePath("../PortraitTest/Hynine5"), NodePath("../PortraitTest/Hynine6"), NodePath("../PortraitTest/Hynine7"), NodePath("../PortraitTest/Hynine8")]
+_encounter_monster_roster = [NodePath("../PortraitTest/Hynine6")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SceneDoor"]
 transform = Transform3D(1.768, 0, 0, 0, 2.058, 0, 0, 0, 1.63479, 0, 0, 0)
@@ -309,9 +309,13 @@ shape = SubResource("SphereShape3D_8hhi2")
 
 [node name="Goblin" parent="Monsters" instance=ExtResource("12_gppj7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.5427, 1.98251, -1.1276)
+health = 120
+mana = 20
 
 [node name="Gnome" parent="Monsters" instance=ExtResource("12_6m0vq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.52668, 0)
+health = 120
+mana = 20
 
 [node name="GhostDog" parent="Monsters" instance=ExtResource("13_bqc4j")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.7676, 1.52268, 0.271557)
@@ -325,6 +329,8 @@ attacks = Array[ExtResource("20_88g2n")]([ExtResource("23_r822j"), SubResource("
 [node name="Hynine" parent="Monsters" instance=ExtResource("16_m5paf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.3915, 1.48368, -7.55595)
 attacks = Array[ExtResource("20_88g2n")]([ExtResource("21_7sy1e"), ExtResource("21_7sy1e"), ExtResource("16_irmos"), ExtResource("23_r822j")])
+health = 10
+mana = 20
 
 [node name="Hynine-ghost" parent="Monsters" instance=ExtResource("17_kulk1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.2359, 1.46059, -7.45011)
@@ -337,6 +343,10 @@ attacks = Array[ExtResource("20_88g2n")]([ExtResource("21_7sy1e"), ExtResource("
 [node name="Magei" parent="Monsters" instance=ExtResource("21_qgg3r")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.3274, 1.49569, -5.7669)
 attacks = Array[ExtResource("20_88g2n")]([ExtResource("21_7sy1e"), ExtResource("22_d12ge"), SubResource("Resource_7jb66"), SubResource("Resource_nyobb")])
+
+[node name="Goblin2" parent="Monsters" instance=ExtResource("12_gppj7")]
+
+[node name="Goblin3" parent="Monsters" instance=ExtResource("12_gppj7")]
 
 [node name="PortraitTest" type="Node" parent="."]
 

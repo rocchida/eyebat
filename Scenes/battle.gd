@@ -12,8 +12,10 @@ var currently_selected_button : int = -1
 var struggle_atk = "res://Resources/Attacks/struggle.tres"
 @export var debug : bool
 @onready var UI = $Ui
+var _scene_switcher
 
 func _ready():
+	_scene_switcher = get_node("/root/SceneSwitcher")
 	SceneTool.set_root(self)
 	UI.set_buttons(current_monster().get_attack_names())
 	UI.set_current_monster_stats(current_monster())
@@ -48,8 +50,12 @@ func end_turn():
 	if (debug): print(current_monster().name + " ends their turn")
 	current_monster().toggle_selector()
 	
+	if(battle_is_over()):
+		_scene_switcher.goto_overworld_scene("res://Scenes/world.tscn", get_all_goodguys())
+	
 	current_turn = current_turn + 1
 	if current_turn >= initiative.size(): current_turn = 0
+	
 	currently_selected_button = -1
 	if (debug): print(current_monster().name + " begins their turn")
 	current_monster().toggle_selector()
@@ -61,7 +67,11 @@ func end_turn():
 		UI.set_buttons(current_monster().get_attack_names())
 		UI.set_current_monster_stats(current_monster())
 		UI.set_attack_description(null, null)
-		
+
+func battle_is_over():
+	if get_living_enemies().size() <= 0 or get_living_goodguys().size() <= 0:
+		return true
+	return false
 
 func monster_clicked(clicked_monster : Monster):
 	if currently_selected_button != -1 and current_monster().mana >= current_monster().attacks[currently_selected_button].mana_cost:
@@ -96,11 +106,13 @@ func perform_ai_turn(m : Monster):
 
 func perform_ai_attack(m : Monster):
 	var chosen_target = ai_choose_target()
+	if (chosen_target == null): return
 	var chosen_attack = ai_choose_attack(m)
 	run_attack(m, chosen_target, chosen_attack)
 
 func ai_choose_target():
 	var living_goodguys = get_living_goodguys()
+	if (living_goodguys.size() <= 0): return null
 	var num = randi_range(0, living_goodguys.size() - 1)
 	return living_goodguys[num]
 
@@ -127,6 +139,13 @@ func get_living_goodguys():
 	var ret : Array[Monster]
 	for m in initiative:
 		if !is_enemy(m) and !m.is_deadzo():
+			ret.append(m)
+	return ret
+
+func get_all_goodguys():
+	var ret : Array[Monster]
+	for m in initiative:
+		if !is_enemy(m):
 			ret.append(m)
 	return ret
 

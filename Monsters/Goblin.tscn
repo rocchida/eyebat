@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bslkd8a74b7r4"]
+[gd_scene load_steps=18 format=3 uid="uid://hfq76bo2bkcm"]
 
 [ext_resource type="Script" path="res://Monsters/Monster.gd" id="1_8gmwr"]
 [ext_resource type="Resource" uid="uid://cgu7jdttiq5im" path="res://Resources/Attacks/attack_firebolt.tres" id="2_78hmi"]
@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://bc2vhkygnfsvq" path="res://CustomAssets/CharacterArt/Monster Sheet/Gobin_Spritesheet.png" id="7_7bm6m"]
 [ext_resource type="Texture2D" uid="uid://d1vnpqemfxhj1" path="res://ImportedAssets/UI/pointer.png" id="8_oljje"]
 [ext_resource type="PackedScene" uid="uid://0n6qt3r5hf7i" path="res://Scenes/CodedAssets/health_bar_3d.tscn" id="9_7byty"]
-[ext_resource type="PackedScene" path="res://Scenes/CodedAssets/mana_bar_3d.tscn" id="10_c4igo"]
+[ext_resource type="PackedScene" uid="uid://mmylq3dq6hon" path="res://Scenes/CodedAssets/mana_bar_3d.tscn" id="10_c4igo"]
 [ext_resource type="PackedScene" uid="uid://dyha3hn24vliy" path="res://Scenes/CodedAssets/clickable.tscn" id="11_skitq"]
 
 [sub_resource type="Animation" id="Animation_j01o8"]
@@ -85,6 +85,7 @@ viewport_path = NodePath("ManaBar/SubViewport")
 script = ExtResource("1_8gmwr")
 max_health = 120
 max_mana = 20
+dex = 8
 attacks = Array[Resource("res://Resources/Attacks/attack_base.gd")]([ExtResource("2_78hmi"), ExtResource("3_xor8k"), ExtResource("4_tvwy0"), ExtResource("5_73tu6")])
 portrait = ExtResource("6_stely")
 

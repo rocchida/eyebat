@@ -1,11 +1,15 @@
 extends CharacterBody3D
 class_name Player
 
-@export var monster_roster : Array[Monster]
+@export var monster_roster : Array[Monster] 
 @onready var _playerBody = $"."
 const _SPEED = 5.0
 const _JUMP_VELOCITY = 4.5
 var _gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+
+
+func _ready():
+	print("")
 	
 # _physics_process is a function provided by Godot. TLDR - It runs like once a frame
 # I used this as a main method and broke down all logic into smaller functions for readability
@@ -38,3 +42,9 @@ func _move_player(direction):
 	else:
 		velocity.x = move_toward(velocity.x, 0, _SPEED)
 		velocity.z = move_toward(velocity.z, 0, _SPEED)
+
+func set_monster_roster(roster : Array[Monster]):
+	monster_roster.clear()
+	for m in roster:
+		monster_roster.append(m)
+	

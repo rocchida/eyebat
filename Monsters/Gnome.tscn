@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://byepnlfkyuq6v"]
+[gd_scene load_steps=18 format=3 uid="uid://dxbfvlk53cyl3"]
 
 [ext_resource type="Script" path="res://Monsters/Monster.gd" id="1_0nr25"]
 [ext_resource type="Resource" uid="uid://cgu7jdttiq5im" path="res://Resources/Attacks/attack_firebolt.tres" id="2_86oyb"]
@@ -9,8 +9,31 @@
 [ext_resource type="Texture2D" uid="uid://cge3ick3vajqp" path="res://CustomAssets/CharacterArt/Monster Sheet/Gnome_Spritesheet.png" id="7_u0kwc"]
 [ext_resource type="Texture2D" uid="uid://d1vnpqemfxhj1" path="res://ImportedAssets/UI/pointer.png" id="8_igyk7"]
 [ext_resource type="PackedScene" uid="uid://0n6qt3r5hf7i" path="res://Scenes/CodedAssets/health_bar_3d.tscn" id="9_7m1si"]
-[ext_resource type="PackedScene" path="res://Scenes/CodedAssets/mana_bar_3d.tscn" id="10_wocpk"]
+[ext_resource type="PackedScene" uid="uid://mmylq3dq6hon" path="res://Scenes/CodedAssets/mana_bar_3d.tscn" id="10_wocpk"]
 [ext_resource type="PackedScene" uid="uid://dyha3hn24vliy" path="res://Scenes/CodedAssets/clickable.tscn" id="11_c5378"]
+
+[sub_resource type="Animation" id="Animation_jobp6"]
+resource_name = "attack"
+length = 0.80001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "position_3d"
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/path = NodePath("Sprite3D")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0.722, 0, 0.1, 1, 1, 0.722, 0, 0.3, 1, 1, 0.722, 0, 0.6, 1, 6.31339e-08, 0.722168, 0)
 
 [sub_resource type="Animation" id="Animation_gp0kn"]
 resource_name = "damaged"
@@ -45,29 +68,6 @@ tracks/0/keys = {
 "update": 1,
 "values": [2, 3, 4, 5, 6, 7]
 }
-
-[sub_resource type="Animation" id="Animation_jobp6"]
-resource_name = "attack"
-length = 0.80001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite3D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/1/type = "position_3d"
-tracks/1/imported = false
-tracks/1/enabled = false
-tracks/1/path = NodePath("Sprite3D")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = PackedFloat32Array(0, 1, 0, 0.722, 0, 0.1, 1, 1, 0.722, 0, 0.3, 1, 1, 0.722, 0, 0.6, 1, 6.31339e-08, 0.722168, 0)
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_dimbn"]
 _data = {
