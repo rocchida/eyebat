@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://hfq76bo2bkcm"]
+[gd_scene load_steps=21 format=3 uid="uid://hfq76bo2bkcm"]
 
 [ext_resource type="Script" path="res://Monsters/Monster.gd" id="1_8gmwr"]
 [ext_resource type="Resource" uid="uid://cgu7jdttiq5im" path="res://Resources/Attacks/attack_firebolt.tres" id="2_78hmi"]
@@ -7,10 +7,25 @@
 [ext_resource type="Resource" uid="uid://dliqvxokfeu8m" path="res://Resources/Attacks/attack_scorch.tres" id="5_73tu6"]
 [ext_resource type="PackedScene" uid="uid://bsrvwow1gl7ux" path="res://Scenes/CodedAssets/CharacterPortraits/hynine_portrait.tscn" id="6_stely"]
 [ext_resource type="Texture2D" uid="uid://bc2vhkygnfsvq" path="res://CustomAssets/CharacterArt/Monster Sheet/Gobin_Spritesheet.png" id="7_7bm6m"]
+[ext_resource type="Shader" path="res://Monsters/outline.gdshader" id="7_o7l1x"]
 [ext_resource type="Texture2D" uid="uid://d1vnpqemfxhj1" path="res://ImportedAssets/UI/pointer.png" id="8_oljje"]
+[ext_resource type="Script" path="res://Monsters/Outline_Initiate.gd" id="8_oq418"]
 [ext_resource type="PackedScene" uid="uid://0n6qt3r5hf7i" path="res://Scenes/CodedAssets/health_bar_3d.tscn" id="9_7byty"]
 [ext_resource type="PackedScene" uid="uid://mmylq3dq6hon" path="res://Scenes/CodedAssets/mana_bar_3d.tscn" id="10_c4igo"]
 [ext_resource type="PackedScene" uid="uid://dyha3hn24vliy" path="res://Scenes/CodedAssets/clickable.tscn" id="11_skitq"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bbg1j"]
+render_priority = 0
+shader = ExtResource("7_o7l1x")
+shader_parameter/onoff = null
+shader_parameter/line_color = Color(1, 1, 1, 1)
+shader_parameter/glowSize = 15.0
+shader_parameter/glowDensity = 3
+shader_parameter/glowRadialCoverage = 4
+shader_parameter/glowAngle = 1.57
+shader_parameter/glowSharpness = 1.0
+shader_parameter/alphaThreshold = 0.2
+shader_parameter/sprite_texture = ExtResource("7_7bm6m")
 
 [sub_resource type="Animation" id="Animation_j01o8"]
 resource_name = "attack"
@@ -91,11 +106,13 @@ portrait = ExtResource("6_stely")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(0.075, 1.13247e-08, 0, -1.13247e-08, 0.075, 0, 0, 0, -0.075, 0, 0.722, 0)
+material_override = SubResource("ShaderMaterial_bbg1j")
 alpha_cut = 2
 texture_filter = 0
 texture = ExtResource("7_7bm6m")
 hframes = 8
 vframes = 3
+script = ExtResource("8_oq418")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

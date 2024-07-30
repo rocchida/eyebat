@@ -48,9 +48,19 @@ func flip_sprite():
 	var sprite3d : Sprite3D = $Sprite3D
 	sprite3d.flip_h = true
 
-func toggle_selector():
-	var selector : Sprite3D = $Selector
-	selector.visible = not selector.visible
+#func toggle_selector():
+#	var selector : Sprite3D = $Selector
+#	selector.visible = not selector.visible
+	
+func toggle_on_shader():
+	#var selector : Sprite3D = $Selector
+	#selector.visible = not selector.visible
+	$Sprite3D._set_alpha_one()
+
+func toggle_off_shader():
+	#var selector : Sprite3D = $Selector
+	#selector.visible = not selector.visible
+	$Sprite3D._set_alpha_zero()
 
 func get_speed():
 	return dex

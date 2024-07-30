@@ -31,9 +31,12 @@ func populate_spawns(enemy_monster_roster: Array[Monster], player_monster_roster
 	enemy_spawns.populate_spawns(enemy_monster_roster)
 	player_spawns.populate_spawns(player_monster_roster)
 	set_initiative(enemy_monster_roster, player_monster_roster)
+	#for m in initiative:
+	#	m.toggle_selector()
+	#initiative[0].toggle_selector()
 	for m in initiative:
-		m.toggle_selector()
-	initiative[0].toggle_selector()
+		m.toggle_off_shader()
+	initiative[0].toggle_on_shader()
 	
 func set_initiative(enemy_monster_roster: Array[Monster], player_monster_roster: Array[Monster]):
 	initiative.append_array(enemy_monster_roster)
@@ -48,7 +51,7 @@ func sort_by_speed(a:Monster, b:Monster):
 
 func end_turn():
 	if (debug): print(current_monster().name + " ends their turn")
-	current_monster().toggle_selector()
+	current_monster().toggle_off_shader()
 	
 	if(battle_is_over()):
 		_scene_switcher.goto_overworld_scene("res://Scenes/world.tscn", get_all_goodguys())
@@ -58,7 +61,7 @@ func end_turn():
 	
 	currently_selected_button = -1
 	if (debug): print(current_monster().name + " begins their turn")
-	current_monster().toggle_selector()
+	current_monster().toggle_on_shader()
 	
 	if (is_enemy(current_monster())):
 		perform_ai_turn(current_monster())

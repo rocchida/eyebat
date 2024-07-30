@@ -24,6 +24,10 @@ PlayerMonsterRoster="*res://player_monster_roster.gd"
 
 window/size/mode=2
 
+[dotnet]
+
+project/assembly_name="2DHD Demo"
+
 [input]
 
 jump={
