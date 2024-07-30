@@ -18,8 +18,8 @@
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("7_afcvv")
-shader_parameter/onoff = null
-shader_parameter/line_color = Color(1, 1, 1, 1)
+shader_parameter/onoff = 1.0
+shader_parameter/line_color = Color(1, 1, 1, 0)
 shader_parameter/glowSize = 15.0
 shader_parameter/glowDensity = 3
 shader_parameter/glowRadialCoverage = 4

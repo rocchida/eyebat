@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://dyha3hn24vliy" path="res://Scenes/CodedAssets/clickable.tscn" id="11_skitq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bbg1j"]
+resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("7_o7l1x")
 shader_parameter/onoff = null
