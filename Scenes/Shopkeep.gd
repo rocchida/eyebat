@@ -17,4 +17,4 @@ func _on_body_exited(body: Player):
 
 func _on_body_entered(body: Player):
 	$"../UI".visible = true
-	$"../UI/Panel/AnimationPlayer".play("shopkeep")
+	$"../UI/Panel/Control/AnimationPlayer".play("shopkeep")
