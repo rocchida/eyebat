@@ -13,6 +13,7 @@ var struggle_atk = "res://Resources/Attacks/struggle.tres"
 @export var debug : bool
 @onready var UI = $Ui
 var _scene_switcher
+var currently_targeted_monsters : Array[Monster]
 
 func _ready():
 	_scene_switcher = get_node("/root/SceneSwitcher")
@@ -31,9 +32,6 @@ func populate_spawns(enemy_monster_roster: Array[Monster], player_monster_roster
 	enemy_spawns.populate_spawns(enemy_monster_roster)
 	player_spawns.populate_spawns(player_monster_roster)
 	set_initiative(enemy_monster_roster, player_monster_roster)
-	#for m in initiative:
-	#	m.toggle_selector()
-	#initiative[0].toggle_selector()
 	for m in initiative:
 		m.toggle_off_shader()
 	initiative[0].toggle_on_shader()
@@ -51,7 +49,8 @@ func sort_by_speed(a:Monster, b:Monster):
 
 func end_turn():
 	if (debug): print(current_monster().name + " ends their turn")
-	current_monster().toggle_off_shader()
+	for m in initiative:
+		m.toggle_off_shader()
 	
 	if(battle_is_over()):
 		_scene_switcher.goto_overworld_scene("res://Scenes/world.tscn", get_all_goodguys())
@@ -77,15 +76,43 @@ func battle_is_over():
 	return false
 
 func monster_clicked(clicked_monster : Monster):
-	if currently_selected_button != -1 and current_monster().mana >= current_monster().attacks[currently_selected_button].mana_cost:
-		run_attack(current_monster(), clicked_monster, current_monster().attacks[currently_selected_button])
+	if currently_selected_button == -1 or current_monster().mana < current_selected_attack().mana_cost:
+		return
+	
+	var ms : Array[Monster] = get_attacks_possible_targets()
+	if clicked_monster not in ms:
+		return
+	
+	if (currently_targeted_monsters.has(clicked_monster)):
+		currently_targeted_monsters.erase(clicked_monster)
+		if (clicked_monster == current_monster()):
+			clicked_monster.toggle_on_shader()
+		else: clicked_monster.toggle_off_shader() 
+	else: 
+		currently_targeted_monsters.append(clicked_monster)
+		clicked_monster.set_outline_color(Color.DARK_RED)
+	
+	if (currently_targeted_monsters.size() == current_selected_attack().num_of_targets):
+		run_attack(current_monster(), currently_targeted_monsters, current_selected_attack())
+		currently_targeted_monsters.clear()
 		end_turn()
 
-func run_attack(attacker : Monster, receiver : Monster, attack : Attack):
+func get_attacks_possible_targets():
+	match current_selected_attack().target_type:
+		Attack.target_types.ALL: return initiative
+		Attack.target_types.ONLY_ALLIES: return get_all_goodguys()
+		Attack.target_types.ONLY_ENEMIES: return get_living_enemies()
+		Attack.target_types.ONLY_SELF: 
+			var ret : Array[Monster]
+			ret.append(current_monster())
+			return ret
+
+func run_attack(attacker : Monster, receivers : Array[Monster], attack : Attack):
 	attacker.run_attack_anim(is_enemy(attacker))
 	attack.play_sound($AudioStreamPlayer)
 	attacker.drain_mana(attack.mana_cost)
-	receiver.take_damage(attack.get_damage(attacker))
+	for m in receivers:
+		m.take_damage(attack.get_damage(attacker))
 
 func monster_hovered(monster : Monster):
 	UI.set_hovered_monster_stats(monster)
@@ -96,6 +123,9 @@ func _on_ui_button_clicked(i : int):
 
 func current_monster():
 	return initiative[current_turn]
+
+func current_selected_attack() -> Attack:
+	return current_monster().attacks[currently_selected_button]
 
 func is_enemy(m : Monster):
 	return (m.get_parent().get_parent() == enemy_spawns)
@@ -117,7 +147,9 @@ func ai_choose_target():
 	var living_goodguys = get_living_goodguys()
 	if (living_goodguys.size() <= 0): return null
 	var num = randi_range(0, living_goodguys.size() - 1)
-	return living_goodguys[num]
+	var targets : Array[Monster]
+	targets.append(living_goodguys[num])
+	return targets
 
 func ai_choose_attack(m : Monster):
 	var viable_attacks : Array[Attack]

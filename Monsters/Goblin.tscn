@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://hfq76bo2bkcm"]
+[gd_scene load_steps=20 format=3 uid="uid://hfq76bo2bkcm"]
 
 [ext_resource type="Script" path="res://Monsters/Monster.gd" id="1_8gmwr"]
 [ext_resource type="Resource" uid="uid://cgu7jdttiq5im" path="res://Resources/Attacks/attack_firebolt.tres" id="2_78hmi"]
@@ -8,7 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://bsrvwow1gl7ux" path="res://Scenes/CodedAssets/CharacterPortraits/hynine_portrait.tscn" id="6_stely"]
 [ext_resource type="Texture2D" uid="uid://bc2vhkygnfsvq" path="res://CustomAssets/CharacterArt/Monster Sheet/Gobin_Spritesheet.png" id="7_7bm6m"]
 [ext_resource type="Shader" path="res://Monsters/outline.gdshader" id="7_o7l1x"]
-[ext_resource type="Texture2D" uid="uid://d1vnpqemfxhj1" path="res://ImportedAssets/UI/pointer.png" id="8_oljje"]
 [ext_resource type="Script" path="res://Monsters/Outline_Initiate.gd" id="8_oq418"]
 [ext_resource type="PackedScene" uid="uid://0n6qt3r5hf7i" path="res://Scenes/CodedAssets/health_bar_3d.tscn" id="9_7byty"]
 [ext_resource type="PackedScene" uid="uid://mmylq3dq6hon" path="res://Scenes/CodedAssets/mana_bar_3d.tscn" id="10_c4igo"]
@@ -120,12 +119,6 @@ libraries = {
 "": SubResource("AnimationLibrary_dimbn")
 }
 autoplay = "idle"
-
-[node name="Selector" type="Sprite3D" parent="."]
-transform = Transform3D(-0.000579428, 0.100582, 0, -0.105059, -0.000554737, 0, 0, 0, 1, -0.106373, 1.80408, 0)
-rotation_order = 0
-modulate = Color(0, 0, 0, 1)
-texture = ExtResource("8_oljje")
 
 [node name="HealthBar" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0976116, 0.312456, 0)

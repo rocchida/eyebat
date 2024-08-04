@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dxbfvlk53cyl3"]
+[gd_scene load_steps=20 format=3 uid="uid://dxbfvlk53cyl3"]
 
 [ext_resource type="Script" path="res://Monsters/Monster.gd" id="1_0nr25"]
 [ext_resource type="Resource" uid="uid://cgu7jdttiq5im" path="res://Resources/Attacks/attack_firebolt.tres" id="2_86oyb"]
@@ -9,7 +9,6 @@
 [ext_resource type="Shader" path="res://Monsters/outline.gdshader" id="7_lhvbi"]
 [ext_resource type="Texture2D" uid="uid://cge3ick3vajqp" path="res://CustomAssets/CharacterArt/Monster Sheet/Gnome_Spritesheet.png" id="7_u0kwc"]
 [ext_resource type="Script" path="res://Monsters/Outline_Initiate.gd" id="8_dx7x3"]
-[ext_resource type="Texture2D" uid="uid://d1vnpqemfxhj1" path="res://ImportedAssets/UI/pointer.png" id="8_igyk7"]
 [ext_resource type="PackedScene" uid="uid://0n6qt3r5hf7i" path="res://Scenes/CodedAssets/health_bar_3d.tscn" id="9_7m1si"]
 [ext_resource type="PackedScene" uid="uid://mmylq3dq6hon" path="res://Scenes/CodedAssets/mana_bar_3d.tscn" id="10_wocpk"]
 [ext_resource type="PackedScene" uid="uid://dyha3hn24vliy" path="res://Scenes/CodedAssets/clickable.tscn" id="11_c5378"]
@@ -120,12 +119,6 @@ libraries = {
 "": SubResource("AnimationLibrary_dimbn")
 }
 autoplay = "idle"
-
-[node name="Selector" type="Sprite3D" parent="."]
-transform = Transform3D(-0.000579428, 0.100582, 0, -0.105059, -0.000554737, 0, 0, 0, 1, -0.106373, 1.85468, 0)
-rotation_order = 0
-modulate = Color(0, 0, 0, 1)
-texture = ExtResource("8_igyk7")
 
 [node name="HealthBar" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0976116, 0.391013, 0)

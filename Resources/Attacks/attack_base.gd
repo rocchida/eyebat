@@ -1,9 +1,11 @@
 extends Resource
 class_name Attack
 
-enum attack_type {STANDARD, STATUS, HEAL}
-@export var type : attack_type = attack_type.STANDARD
-@export var name : String = "Spank"
+enum target_types {ALL, ONLY_ALLIES, ONLY_ENEMIES, ONLY_SELF}
+@export var num_of_targets : int = 1
+@export var hover_target_outline_clr : Color = Color.DARK_RED
+@export var target_type : target_types = target_types.ALL
+@export var name : String = "Default Attack Name"
 @export var sound : AudioStream
 
 @export var dex : bool = false
@@ -69,9 +71,6 @@ func get_damage_formula(m : Monster):
 
 func get_attack_name():
 	return name
-
-func get_type():
-	return type
 
 func play_sound(audio_player: AudioStreamPlayer):
 	if sound != null:

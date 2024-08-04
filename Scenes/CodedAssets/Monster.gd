@@ -33,11 +33,8 @@ func init_health_and_mana_bar():
 func take_damage(damage : int):
 	run_damaged_anim()
 	if healthbar.get_value() > 0:
-		print(health)
 		health -= damage
-		print(health)
 		healthbar.set_value(health)
-		#SceneTool.get_root().end_turn()
 
 func drain_mana(m : int):
 	if manabar.get_value() > 0:
@@ -47,22 +44,15 @@ func drain_mana(m : int):
 func flip_sprite():
 	var sprite3d : Sprite3D = $Sprite3D
 	sprite3d.flip_h = true
-
-#func toggle_selector():
-#	var selector : Sprite3D = $Selector
-#	selector.visible = not selector.visible
 	
 func toggle_on_shader():
-	#var selector : Sprite3D = $Selector
-	#selector.visible = not selector.visible
 	$Sprite3D._set_alpha_one()
-	#$Sprite3D.material_override.set_shader_parameter("shader_parameter/glowRadialCoverage",float(4))
 
 func toggle_off_shader():
-	#var selector : Sprite3D = $Selector
-	#selector.visible = not selector.visible
 	$Sprite3D._set_alpha_zero()
-	#$Sprite3D.material_override.set_shader_parameter("shader_parameter/glowRadialCoverage",float(0))
+
+func set_outline_color(clr : Color):
+	$Sprite3D._set_outline_color(clr)
 
 func get_speed():
 	return dex

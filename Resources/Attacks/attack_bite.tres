@@ -5,6 +5,7 @@
 
 [resource]
 script = ExtResource("1_ow0jh")
+num_of_targets = 1
 type = 0
 name = "Bite"
 sound = ExtResource("2_j7m0i")

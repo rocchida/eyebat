@@ -1,10 +1,9 @@
-[gd_scene load_steps=22 format=3 uid="uid://0gi7ywf5qj55"]
+[gd_scene load_steps=21 format=3 uid="uid://0gi7ywf5qj55"]
 
 [ext_resource type="Script" path="res://Monsters/Monster.gd" id="1_0dpen"]
 [ext_resource type="PackedScene" uid="uid://bsrvwow1gl7ux" path="res://Scenes/CodedAssets/CharacterPortraits/hynine_portrait.tscn" id="2_mleto"]
 [ext_resource type="Resource" uid="uid://cgu7jdttiq5im" path="res://Resources/Attacks/attack_firebolt.tres" id="2_sqyfe"]
 [ext_resource type="Texture2D" uid="uid://ioavpxax8o61" path="res://CustomAssets/CharacterArt/Monster Sheet/Hynine_Spritesheet.png" id="2_t4hbm"]
-[ext_resource type="Texture2D" uid="uid://d1vnpqemfxhj1" path="res://ImportedAssets/UI/pointer.png" id="3_68fl4"]
 [ext_resource type="Resource" uid="uid://dxlwicbfo1hq6" path="res://Resources/Attacks/attack_sigh.tres" id="3_te330"]
 [ext_resource type="Resource" uid="uid://1fxil6c6rtoh" path="res://Resources/Attacks/attack_slash.tres" id="4_cvwhh"]
 [ext_resource type="PackedScene" uid="uid://0n6qt3r5hf7i" path="res://Scenes/CodedAssets/health_bar_3d.tscn" id="4_qiw4m"]
@@ -139,12 +138,6 @@ libraries = {
 "": SubResource("AnimationLibrary_dimbn")
 }
 autoplay = "idle"
-
-[node name="Selector" type="Sprite3D" parent="."]
-transform = Transform3D(-0.000579428, 0.100582, 0, -0.105059, -0.000554737, 0, 0, 0, 1, -0.106373, 1.52288, 0)
-rotation_order = 0
-modulate = Color(0, 0, 0, 1)
-texture = ExtResource("3_68fl4")
 
 [node name="HealthBar" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0976116, 0.16116, 0)

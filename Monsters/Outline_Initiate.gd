@@ -13,3 +13,5 @@ func _set_alpha_one():
 	material_override.set_shader_parameter("line_color",Color(1, 1, 1, 1))
 	#material_override.set_shader_parameter("shader_parameter/glowRadialCoverage",float(4))
 
+func _set_outline_color(clr : Color):
+	material_override.set_shader_parameter("line_color", clr)

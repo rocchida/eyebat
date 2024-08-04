@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://bdsnxtasgjx2o"]
+[gd_scene load_steps=60 format=3 uid="uid://bdsnxtasgjx2o"]
 
 [ext_resource type="Script" path="res://Scripts/world.gd" id="1_hijai"]
 [ext_resource type="PackedScene" uid="uid://dba8t7daowokd" path="res://Scenes/CodedAssets/player.tscn" id="2_icr3f"]
@@ -18,7 +18,9 @@
 [ext_resource type="PackedScene" uid="uid://5n67mp7f6l4b" path="res://Monsters/Gargoyle.tscn" id="15_2rjtg"]
 [ext_resource type="Resource" uid="uid://bkxxshxbpc6he" path="res://Resources/Attacks/attack_spit.tres" id="16_irmos"]
 [ext_resource type="PackedScene" uid="uid://0gi7ywf5qj55" path="res://Monsters/hynine.tscn" id="16_m5paf"]
+[ext_resource type="Resource" uid="uid://chfgp7jgyggp0" path="res://Resources/Attacks/attack_stub_toe.tres" id="17_0uw20"]
 [ext_resource type="PackedScene" uid="uid://drwerjtsibk1s" path="res://Monsters/hynine-ghost.tscn" id="17_kulk1"]
+[ext_resource type="Resource" uid="uid://bg0ofxtr4dppa" path="res://Resources/Attacks/magic_missile.tres" id="17_m4ngw"]
 [ext_resource type="PackedScene" uid="uid://bg33pmncvteu6" path="res://Monsters/hynine-the-red.tscn" id="18_q12t6"]
 [ext_resource type="Script" path="res://Resources/Attacks/attack_base.gd" id="20_88g2n"]
 [ext_resource type="Resource" uid="uid://dxlwicbfo1hq6" path="res://Resources/Attacks/attack_sigh.tres" id="21_7sy1e"]
@@ -34,7 +36,7 @@
 [ext_resource type="Material" uid="uid://chvymj2xaq44q" path="res://deep_fire.tres" id="32_3ywun"]
 [ext_resource type="Texture2D" uid="uid://cbniu1tm214eu" path="res://ImportedAssets/ParticleEffects/particle_sprite_smoke.webp" id="33_imrae"]
 [ext_resource type="PackedScene" uid="uid://d0dsmhx747f3p" path="res://CustomAssets/New folder/objects/rocks/rock_1.tscn" id="35_ntgmj"]
-[ext_resource type="MeshLibrary" uid="uid://52o8ecnx4gbm" path="res://lazaresque.tres" id="37_u5hm2"]
+[ext_resource type="MeshLibrary" uid="uid://b3u22aw7e05yx" path="res://lazaresque.tres" id="37_u5hm2"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_mt7vc"]
 panorama = ExtResource("4_21lx8")
@@ -67,7 +69,9 @@ material = SubResource("ShaderMaterial_jcfxb")
 
 [sub_resource type="Resource" id="Resource_1rpbd"]
 script = ExtResource("20_88g2n")
-type = 0
+num_of_targets = 1
+hover_target_outline_clr = Color(0.545098, 0, 0, 1)
+target_type = 0
 name = "Seance"
 dex = false
 str = false
@@ -86,7 +90,9 @@ percent_nerfed = 1.0
 
 [sub_resource type="Resource" id="Resource_6b640"]
 script = ExtResource("20_88g2n")
-type = 0
+num_of_targets = 1
+hover_target_outline_clr = Color(0.545098, 0, 0, 1)
+target_type = 0
 name = "Haunt"
 dex = false
 str = false
@@ -105,7 +111,9 @@ percent_nerfed = 1.0
 
 [sub_resource type="Resource" id="Resource_sea5d"]
 script = ExtResource("20_88g2n")
-type = 0
+num_of_targets = 1
+hover_target_outline_clr = Color(0.545098, 0, 0, 1)
+target_type = 0
 name = "Sing"
 dex = false
 str = false
@@ -124,7 +132,9 @@ percent_nerfed = 1.0
 
 [sub_resource type="Resource" id="Resource_5sn25"]
 script = ExtResource("20_88g2n")
-type = 0
+num_of_targets = 1
+hover_target_outline_clr = Color(0.545098, 0, 0, 1)
+target_type = 0
 name = "Boo!"
 dex = false
 str = false
@@ -143,7 +153,9 @@ percent_nerfed = 1.0
 
 [sub_resource type="Resource" id="Resource_u65ir"]
 script = ExtResource("20_88g2n")
-type = 0
+num_of_targets = 1
+hover_target_outline_clr = Color(0.545098, 0, 0, 1)
+target_type = 0
 name = "Throw Bird"
 dex = false
 str = false
@@ -162,7 +174,9 @@ percent_nerfed = 1.0
 
 [sub_resource type="Resource" id="Resource_u0k2j"]
 script = ExtResource("20_88g2n")
-type = 0
+num_of_targets = 1
+hover_target_outline_clr = Color(0.545098, 0, 0, 1)
+target_type = 0
 name = "Yell"
 dex = false
 str = false
@@ -181,7 +195,9 @@ percent_nerfed = 1.0
 
 [sub_resource type="Resource" id="Resource_clpfo"]
 script = ExtResource("20_88g2n")
-type = 0
+num_of_targets = 1
+hover_target_outline_clr = Color(0.545098, 0, 0, 1)
+target_type = 0
 name = "Cry"
 dex = false
 str = false
@@ -200,8 +216,10 @@ percent_nerfed = 1.0
 
 [sub_resource type="Resource" id="Resource_7jb66"]
 script = ExtResource("20_88g2n")
-type = 0
-name = "Spank"
+num_of_targets = 1
+hover_target_outline_clr = Color(0.545098, 0, 0, 1)
+target_type = 0
+name = "Default Attack Name"
 dex = false
 str = false
 will = false
@@ -219,8 +237,10 @@ percent_nerfed = 1.0
 
 [sub_resource type="Resource" id="Resource_nyobb"]
 script = ExtResource("20_88g2n")
-type = 0
-name = "Spank"
+num_of_targets = 1
+hover_target_outline_clr = Color(0.545098, 0, 0, 1)
+target_type = 0
+name = "Default Attack Name"
 dex = false
 str = false
 will = false
@@ -381,6 +401,7 @@ shape = SubResource("SphereShape3D_8hhi2")
 
 [node name="Goblin" parent="Monsters" instance=ExtResource("12_gppj7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.5427, 1.98251, -1.1276)
+attacks = Array[ExtResource("20_88g2n")]([ExtResource("23_r822j"), ExtResource("21_7sy1e"), ExtResource("17_m4ngw"), ExtResource("17_0uw20")])
 health = 120
 mana = 20
 
