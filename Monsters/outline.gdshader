@@ -3,7 +3,7 @@ render_mode unshaded,blend_mix,depth_prepass_alpha,cull_disabled,specular_disabl
 uniform sampler2D sprite_texture : source_color, filter_linear;
 uniform float onoff; //on and off switch
 
-uniform vec4 line_color : source_color = vec4(1.0,1.0,1.0,1.0); // Glow or outline color
+uniform vec4 line_color : source_color = vec4(1.0,1.0,1.0,0.0); // Glow or outline color
 uniform float glowSize: hint_range(0.0, 300) = 15.0; // Size of glow
 uniform int glowDensity: hint_range(0, 30) = 3; // How many stamps to repeat in one direction
 uniform int glowRadialCoverage: hint_range(0, 32) = 4; // How many directions to spread out
@@ -23,9 +23,9 @@ void fragment() {
 	ALPHA = col.a;
 	
 	//if (onoff == 1.0){
-	//	col.a = 1.0;
+	//	 glowRadialCoverage= 1.0;
 	//}else{
-	//	col.a = 0.0;
+	//	glowRadialCoverage = 0.0;
 	//}
 	
 	vec2 pixel_size = 1.0 / vec2(textureSize(sprite_texture, 0)); // Set pixel size
