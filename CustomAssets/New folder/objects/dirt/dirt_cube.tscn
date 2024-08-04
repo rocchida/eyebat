@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://c242dkxss5tjf"]
+
+[ext_resource type="PackedScene" uid="uid://cfvk3ala2w0i6" path="res://CustomAssets/New folder/models/dirt_models/DirtCube.glb" id="1_vquw5"]
+[ext_resource type="Texture2D" uid="uid://dquo77at8068h" path="res://CustomAssets/New folder/textures/DirtTexture.png" id="2_58r6x"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k3b0e"]
+albedo_texture = ExtResource("2_58r6x")
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_i7gi8"]
+points = PackedVector3Array(-0.5, -0.5, -0.5, -0.5, -0.5, 0.499995, -0.5, 0.5, -0.5, 0.499995, -0.5, -0.5, 0.499995, -0.5, 0.499995, -0.5, 0.5, 0.499995, 0.499995, 0.5, -0.5, 0.499995, 0.5, 0.499995)
+
+[node name="DirtCube" instance=ExtResource("1_vquw5")]
+
+[node name="DirtCube" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_k3b0e")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="DirtCube" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DirtCube/StaticBody3D" index="0"]
+shape = SubResource("ConvexPolygonShape3D_i7gi8")

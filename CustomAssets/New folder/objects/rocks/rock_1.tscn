@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://d0dsmhx747f3p"]
+
+[ext_resource type="PackedScene" uid="uid://bk633btlfv8vd" path="res://CustomAssets/New folder/models/rocks/Rock_1.glb" id="1_rrx5d"]
+[ext_resource type="Texture2D" uid="uid://cy56x3ukctb68" path="res://CustomAssets/New folder/textures/RockTexture_1.png" id="2_1jji1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e6y74"]
+albedo_texture = ExtResource("2_1jji1")
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_3ux70"]
+points = PackedVector3Array(0.0979656, -0.336514, -0.246737, 0.106708, -0.325858, -0.244208, 0.0970289, -0.499793, -0.185885, 0.0626829, -0.472536, -0.22154, -0.141312, -0.475938, -0.199164, -0.152656, -0.371922, -0.214292, -0.199336, -0.26899, -0.174843, -0.175398, -0.216682, -0.158839, 0.0954157, -0.296545, -0.230685, 0.114462, -0.168936, -0.0224441, 0.217604, -0.41963, -0.123476, 0.152919, -0.499793, -0.143371, -0.156559, -0.499793, -0.161126, -0.217914, -0.174208, -0.091566, -0.19486, -0.499793, -0.0867989, -0.26246, -0.434997, 0.0211887, -0.24664, -0.22173, -0.0999812, 0.0777223, -0.154467, -0.0347508, 0.0615901, -0.262521, -0.211131, 0.185912, -0.247939, 0.147807, 0.212504, -0.239078, 0.100963, -0.118258, -0.117825, 0.016519, 0.263399, -0.383999, 0.0234263, 0.175192, -0.499793, 0.0485748, -0.147661, -0.339805, 0.208659, -0.10785, -0.25968, 0.203746, -0.0818306, -0.181499, 0.170572, -0.152604, -0.499793, 0.140559, -0.221661, -0.450103, 0.12869, -0.235971, -0.421762, 0.1086, -0.268236, -0.409797, 0.0234749, -0.0805817, -0.399627, 0.2502, 0.197673, -0.290563, 0.161329, 0.248204, -0.303948, 0.0945912, 0.0410345, -0.499793, 0.20112, -0.135171, -0.40374, 0.229868, -0.198347, -0.463151, 0.158362, 0.0332806, -0.443634, 0.246212)
+
+[node name="Rock_1" instance=ExtResource("1_rrx5d")]
+
+[node name="Rock_1" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_e6y74")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Rock_1" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Rock_1/StaticBody3D" index="0"]
+shape = SubResource("ConvexPolygonShape3D_3ux70")
