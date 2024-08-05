@@ -2,8 +2,7 @@
 
 [ext_resource type="Script" path="res://Monsters/StaticBody3D.gd" id="1_j0ix2"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_ka3qt"]
-size = Vector3(1, 1.5351, 0.294922)
+[sub_resource type="BoxShape3D" id="BoxShape3D_s17of"]
 
 [node name="Clickable" type="Node3D"]
 
@@ -11,5 +10,8 @@ size = Vector3(1, 1.5351, 0.294922)
 script = ExtResource("1_j0ix2")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.796783, -0.0126953)
-shape = SubResource("BoxShape3D_ka3qt")
+shape = SubResource("BoxShape3D_s17of")
+
+[connection signal="input_event" from="StaticBody3D" to="StaticBody3D" method="_on_input_event"]
+[connection signal="mouse_entered" from="StaticBody3D" to="StaticBody3D" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="StaticBody3D" to="StaticBody3D" method="_on_mouse_exited"]

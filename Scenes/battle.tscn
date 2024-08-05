@@ -261,6 +261,8 @@ keep_aspect = 0
 current = true
 script = ExtResource("5_ah3ax")
 
+[node name="Ui" parent="." instance=ExtResource("9_jbq26")]
+
 [node name="EnemySpawns" parent="." node_paths=PackedStringArray("spawn_points_4") instance=ExtResource("6_72pnm")]
 spawn_points_4 = [NodePath("BattleSpawn"), NodePath("BattleSpawn2"), NodePath("BattleSpawn3"), NodePath("BattleSpawn4")]
 face_left = true
@@ -323,8 +325,6 @@ transform = Transform3D(1.75942, 0, 0, 0, 5.53934, 0, 0, 0, 7.17728, -7.74095, 1
 use_collision = true
 size = Vector3(1, 4.6582, 0.312988)
 
-[node name="Ui" parent="." instance=ExtResource("9_jbq26")]
-
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
@@ -363,7 +363,7 @@ lifetime = 3.0
 process_material = ExtResource("11_it5iv")
 draw_pass_1 = SubResource("QuadMesh_lvyj0")
 
+[connection signal="button_clicked" from="Ui" to="." method="_on_ui_button_clicked"]
 [connection signal="monster_clicked" from="EnemySpawns/BattleSpawn" to="." method="_on_battle_spawn_monster_clicked"]
 [connection signal="monster_clicked" from="EnemySpawns/BattleSpawn" to="EnemySpawns" method="_on_battle_spawn_monster_clicked"]
 [connection signal="monster_clicked" from="PlayerSpawns/BattleSpawn" to="PlayerSpawns" method="_on_battle_spawn_monster_clicked"]
-[connection signal="button_clicked" from="Ui" to="." method="_on_ui_button_clicked"]

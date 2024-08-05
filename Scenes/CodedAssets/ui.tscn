@@ -34,6 +34,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("1_v5ee4")
 
 [node name="ColorMenu" type="NinePatchRect" parent="."]
@@ -56,6 +57,7 @@ visible = false
 layout_mode = 1
 offset_right = 435.0
 offset_bottom = 101.0
+mouse_filter = 2
 
 [node name="CheckButton" type="CheckButton" parent="ColorMenu/VBoxContainer"]
 modulate = Color(0, 0, 0, 1)
@@ -91,6 +93,7 @@ offset_top = -44.5
 offset_bottom = 44.5
 grow_horizontal = 0
 grow_vertical = 2
+mouse_filter = 2
 theme_override_constants/h_separation = 45
 theme_override_constants/v_separation = 45
 columns = 3
@@ -162,6 +165,7 @@ offset_right = 134.0
 offset_bottom = 38.5
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="MenuButton" type="MenuButton" parent="ColorMenu/HBoxContainer"]
 layout_mode = 2

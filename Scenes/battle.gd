@@ -116,6 +116,18 @@ func run_attack(attacker : Monster, receivers : Array[Monster], attack : Attack)
 
 func monster_hovered(monster : Monster):
 	UI.set_hovered_monster_stats(monster)
+	if (currently_selected_button == -1):
+		monster.set_outline_color(Color.WHITE_SMOKE)
+	monster.set_outline_color(current_selected_attack().hover_target_outline_clr)
+
+func monster_unhovered(monster : Monster):
+	UI.set_hovered_monster_stats(monster)
+	if (monster != current_monster()):
+		monster.toggle_off_shader()
+	elif (currently_targeted_monsters.has(monster)): 
+		return
+	else:
+		monster.toggle_on_shader()
 
 func _on_ui_button_clicked(i : int):
 	currently_selected_button = i

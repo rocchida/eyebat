@@ -147,3 +147,4 @@ transform = Transform3D(0.174239, 0, 0, 0, 0.0701671, 0, 0, 0, 1, 0, 1.19833, 0)
 texture = SubResource("ViewportTexture_7uvk6")
 
 [node name="Clickable" parent="." instance=ExtResource("11_skitq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.424715)
