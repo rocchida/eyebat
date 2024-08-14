@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://p82gjl15bn5l"]
+[gd_scene load_steps=9 format=3 uid="uid://p82gjl15bn5l"]
 
 [ext_resource type="PackedScene" uid="uid://c242dkxss5tjf" path="res://CustomAssets/New folder/objects/dirt/dirt_cube.tscn" id="1_byrns"]
 [ext_resource type="PackedScene" uid="uid://bsg5ecqvpsodh" path="res://CustomAssets/New folder/objects/dirt/dirt_slope.tscn" id="2_uulsp"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://ki2w3othe8yn" path="res://CustomAssets/New folder/objects/trees/pine_tree.tscn" id="5_pmp3d"]
 [ext_resource type="PackedScene" uid="uid://d0dsmhx747f3p" path="res://CustomAssets/New folder/objects/rocks/rock_1.tscn" id="6_6q8de"]
 [ext_resource type="PackedScene" uid="uid://c38xv4p3ib2mh" path="res://CustomAssets/New folder/objects/campfire/campfire.tscn" id="7_i3088"]
+[ext_resource type="PackedScene" uid="uid://d2wgtjqv6a0kk" path="res://CustomAssets/New folder/objects/water/Water_1.tscn" id="8_lem6a"]
 
 [node name="LazeresqueTileset" type="Node3D"]
 
@@ -29,3 +30,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
 
 [node name="Campfire" parent="." instance=ExtResource("7_i3088")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 0)
+
+[node name="water1" parent="." instance=ExtResource("8_lem6a")]
