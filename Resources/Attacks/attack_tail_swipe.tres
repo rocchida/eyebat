@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="Attack" load_steps=3 format=3 uid="uid://b6t3if43h724w"]
+
+[ext_resource type="Script" path="res://Resources/Attacks/attack_base.gd" id="1_uejql"]
+[ext_resource type="AudioStream" uid="uid://76bil3rxe5gn" path="res://ImportedAssets/Audio/AttackSounds/tail_swipe.wav" id="2_whdkk"]
+
+[resource]
+script = ExtResource("1_uejql")
+type = 0
+name = "Tail Swipe"
+sound = ExtResource("2_whdkk")
+dex = false
+str = true
+will = false
+cha = false
+intl = false
+mana_cost = 3
+d4s = 0
+d6s = 1
+d8s = 0
+d10s = 0
+d12s = 0
+d20s = 0
+percent_buffed = 1.0
+percent_nerfed = 1.0

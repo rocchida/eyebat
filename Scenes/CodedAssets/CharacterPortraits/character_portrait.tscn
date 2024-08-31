@@ -1,0 +1,40 @@
+[gd_scene load_steps=8 format=3 uid="uid://c6gajmwpj8rcx"]
+
+[ext_resource type="Texture2D" uid="uid://ct1mtp5no2lar" path="res://CustomAssets/CharacterArt/CharacterPortraits/Hynine_portrait.png" id="1_ftyt0"]
+[ext_resource type="Script" path="res://Scenes/CodedAssets/CharacterPortraits/character_portrait.gd" id="2_y2r5y"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_h2cww"]
+
+[sub_resource type="Gradient" id="Gradient_eakgy"]
+colors = PackedColorArray(1, 0.258824, 0.176471, 1, 1, 0.639216, 0.6, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_8w84y"]
+gradient = SubResource("Gradient_eakgy")
+fill_to = Vector2(0, 1)
+
+[sub_resource type="Gradient" id="Gradient_8jbl5"]
+colors = PackedColorArray(0.227451, 0.45098, 1, 1, 0.682353, 0.788235, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_y78cd"]
+gradient = SubResource("Gradient_8jbl5")
+fill_to = Vector2(0, 1)
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("2_y2r5y")
+
+[node name="CharacterPortrait" type="Sprite2D" parent="."]
+texture = ExtResource("1_ftyt0")
+
+[node name="BadBackground" type="Sprite2D" parent="."]
+z_index = -1
+texture_filter = 1
+material = SubResource("CanvasItemMaterial_h2cww")
+scale = Vector2(3.125, 3.125)
+texture = SubResource("GradientTexture2D_8w84y")
+
+[node name="GoodBackground" type="Sprite2D" parent="."]
+z_index = -1
+texture_filter = 1
+material = SubResource("CanvasItemMaterial_h2cww")
+scale = Vector2(3.125, 3.125)
+texture = SubResource("GradientTexture2D_y78cd")

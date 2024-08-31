@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://3thxt01hahcn"
+path="res://.godot/imported/ladderBroken.obj-df6e6c660b2bc16a171cd543c22d6724.mesh"
+
+[deps]
+
+files=["res://.godot/imported/ladderBroken.obj-df6e6c660b2bc16a171cd543c22d6724.mesh"]
+
+source_file="res://ImportedAssets/GridMapAssets/Models/OBJ format/ladderBroken.obj"
+dest_files=["res://.godot/imported/ladderBroken.obj-df6e6c660b2bc16a171cd543c22d6724.mesh", "res://.godot/imported/ladderBroken.obj-df6e6c660b2bc16a171cd543c22d6724.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

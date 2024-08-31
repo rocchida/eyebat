@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="Attack" load_steps=3 format=3 uid="uid://dliqvxokfeu8m"]
+
+[ext_resource type="Script" path="res://Resources/Attacks/attack_base.gd" id="1_rydu8"]
+[ext_resource type="AudioStream" uid="uid://d3avxnpgk0sgb" path="res://ImportedAssets/Audio/AttackSounds/revive.wav" id="2_5cxt5"]
+
+[resource]
+script = ExtResource("1_rydu8")
+type = 0
+name = "Scorch"
+sound = ExtResource("2_5cxt5")
+dex = false
+str = false
+will = false
+cha = false
+intl = true
+mana_cost = 4
+d4s = 1
+d6s = 0
+d8s = 0
+d10s = 0
+d12s = 0
+d20s = 0
+percent_buffed = 1.0
+percent_nerfed = 1.0

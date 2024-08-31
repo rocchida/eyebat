@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://kkyykd1h6siy"]
+
+[ext_resource type="Script" path="res://Scenes/CodedAssets/Monster.gd" id="1_qlcc7"]
+
+[node name="Monster" type="Node3D"]
+script = ExtResource("1_qlcc7")

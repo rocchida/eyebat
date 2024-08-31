@@ -1,0 +1,38 @@
+[gd_resource type="Resource" script_class="Attack" load_steps=5 format=3 uid="uid://dxlwicbfo1hq6"]
+
+[ext_resource type="Script" path="res://Resources/Statuses/status_base.gd" id="1_17xyi"]
+[ext_resource type="Script" path="res://Resources/Attacks/attack_base.gd" id="1_q76vk"]
+[ext_resource type="AudioStream" uid="uid://c8tbm76spt2kn" path="res://ImportedAssets/Audio/AttackSounds/bite.wav" id="2_fg034"]
+
+[sub_resource type="Resource" id="Resource_naxjl"]
+script = ExtResource("1_17xyi")
+name = "Bleed"
+chance_to_hit = 100
+max_stacks_possible = 0
+stacks_on_hit = 0
+percent_dmg_max_hp_per_turn = 0.25
+percent_dmg_current_hp_per_turn = 0.0
+flat_dmg_per_turn = 0
+stat_debuffs = Array[Resource("res://Resources/Statuses/stat_status_base.gd")]([])
+stat_buffs = Array[Resource("res://Resources/Statuses/stat_status_base.gd")]([])
+
+[resource]
+script = ExtResource("1_q76vk")
+num_of_targets = 1
+hover_target_outline_clr = Color(0.545098, 0, 0, 1)
+target_type = 0
+name = "Bleed"
+sound = ExtResource("2_fg034")
+dex = false
+str = false
+will = false
+cha = false
+intl = false
+mana_cost = 1
+attack_status = SubResource("Resource_naxjl")
+d4s = 0
+d6s = 0
+d8s = 0
+d10s = 0
+d12s = 0
+d20s = 0

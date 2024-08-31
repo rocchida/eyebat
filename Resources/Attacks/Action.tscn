@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://cwo8sqjgmuaqy"]
+
+[sub_resource type="GDScript" id="GDScript_bnjkn"]
+script/source = "extends Node
+class_name Action
+
+
+@export var damage : int = 2
+@export var attack_name : String = \"Attack\"
+"
+
+[node name="Action" type="Node"]
+script = SubResource("GDScript_bnjkn")

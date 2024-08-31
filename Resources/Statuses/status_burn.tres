@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Status" load_steps=4 format=3 uid="uid://ctw5jw6fne42e"]
+
+[ext_resource type="Script" path="res://Resources/Statuses/status_base.gd" id="1_bga6h"]
+[ext_resource type="Script" path="res://Resources/Statuses/stat_status_base.gd" id="2_e8452"]
+
+[sub_resource type="Resource" id="Resource_pascu"]
+script = ExtResource("2_e8452")
+stat = 0
+percent_affected = 15
+
+[resource]
+script = ExtResource("1_bga6h")
+name = "Burn"
+chance_to_hit = 100
+max_stacks_possible = 3
+stacks_on_hit = 3
+percent_dmg_max_hp_per_turn = 20
+percent_dmg_current_hp_per_turn = 0
+stat_debuffs = Array[ExtResource("2_e8452")]([SubResource("Resource_pascu")])
+stat_buffs = Array[ExtResource("2_e8452")]([])

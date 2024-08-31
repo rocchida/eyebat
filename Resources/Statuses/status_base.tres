@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Status" load_steps=2 format=3 uid="uid://dh2qkhgnnsn11"]
+
+[ext_resource type="Script" path="res://Resources/Statuses/status_base.gd" id="1_gkolh"]
+
+[resource]
+script = ExtResource("1_gkolh")
+name = ""
+chance_to_hit = 0
+max_stacks_possible = 0
+stacks_on_hit = 0
+percent_dmg_max_hp_per_turn = 0
+percent_dmg_current_hp_per_turn = 0
+stat_debuffs = Array[Resource("res://Resources/Statuses/stat_status_base.gd")]([])
+stat_buffs = Array[Resource("res://Resources/Statuses/stat_status_base.gd")]([])
