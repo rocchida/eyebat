@@ -48,7 +48,8 @@ func sort_by_speed(a:Monster, b:Monster):
 	return false
 
 func end_turn():
-	if (debug): print(current_monster().name + " ends their turn")
+	UI.hide_buttons()
+	UI.debug(current_monster().name + " ends their turn \n")
 	for m in initiative:
 		m.toggle_off_shader()
 	
@@ -59,8 +60,11 @@ func end_turn():
 	if current_turn >= initiative.size(): current_turn = 0
 	
 	currently_selected_button = -1
-	if (debug): print(current_monster().name + " begins their turn")
+	UI.debug(current_monster().name + " begins their turn")
+	
 	current_monster().toggle_on_shader()
+	
+	statuses_take_effect(current_monster())
 	
 	if (is_enemy(current_monster())):
 		perform_ai_turn(current_monster())
@@ -69,6 +73,31 @@ func end_turn():
 		UI.set_buttons(current_monster().get_attack_names())
 		UI.set_current_monster_stats(current_monster())
 		UI.set_attack_description(null, null)
+
+func statuses_take_effect(m : Monster):
+	for status : Status in m.current_statuses_dict:
+		if m.current_statuses_dict[status] <= 0:
+			continue
+		var dmg : int = 0
+		if (status.percent_dmg_current_hp_per_turn != 0):
+			var percent_dmg = int(status.percent_dmg_current_hp_per_turn * float(m.max_health))
+			UI.debug(m.name + " is damaged by " + status.name + ", it inflicts " + str(status.percent_dmg_current_hp_per_turn) + "% of current hp (" + str(m.health) + ") for a total of " + str(percent_dmg))
+			dmg += percent_dmg
+		if (status.percent_dmg_max_hp_per_turn != 0):
+			var percent_dmg = int(status.percent_dmg_max_hp_per_turn * float(m.max_health))
+			UI.debug(m.name + " is damaged by " + status.name + ", it inflicts " + str(status.percent_dmg_max_hp_per_turn) + "% of max hp (" + str(m.max_health) + ") for a total of " + str(percent_dmg))
+			dmg += percent_dmg
+		if (status.flat_dmg_per_turn != 0):
+			var percent_dmg = int(status.flat_dmg_per_turn * float(m.max_health))
+			UI.debug(m.name + " is damaged by " + status.name + ", it inflicts " + str(status.flat_dmg_per_turn) + " dmg")
+			dmg += status.flat_dmg_per_turn
+		m.take_damage(dmg)
+		await get_tree().create_timer(4).timeout
+		if m.current_statuses_dict[status] == 1: UI.debug(m.name + " wears off status " + status.name)
+		m.current_statuses_dict[status] -= 1
+		if m.current_statuses_dict[status] < 0: m.current_statuses_dict[status] = 0
+	
+	#m.current_statuses = m.current_statuses_dict.filter(func(status : Status): return m.current_statuses_dict[status] > 0)
 
 func battle_is_over():
 	if get_living_enemies().size() <= 0 or get_living_goodguys().size() <= 0:
@@ -83,14 +112,7 @@ func monster_clicked(clicked_monster : Monster):
 	if clicked_monster not in ms:
 		return
 	
-	if (currently_targeted_monsters.has(clicked_monster)):
-		currently_targeted_monsters.erase(clicked_monster)
-		if (clicked_monster == current_monster()):
-			clicked_monster.toggle_on_shader()
-		else: clicked_monster.toggle_off_shader() 
-	else: 
-		currently_targeted_monsters.append(clicked_monster)
-		clicked_monster.set_outline_color(Color.DARK_RED)
+	currently_targeted_monsters.append(clicked_monster)
 	
 	if (currently_targeted_monsters.size() == current_selected_attack().num_of_targets):
 		run_attack(current_monster(), currently_targeted_monsters, current_selected_attack())
@@ -112,26 +134,43 @@ func run_attack(attacker : Monster, receivers : Array[Monster], attack : Attack)
 	attack.play_sound($AudioStreamPlayer)
 	attacker.drain_mana(attack.mana_cost)
 	for m in receivers:
+		UI.debug(attacker.name + " uses " + attack.name + " on " + m.name)
 		m.take_damage(attack.get_damage(attacker))
+		if attack.attack_status != null:
+			UI.debug(attack.inflict_statuses(m))
 
 func monster_hovered(monster : Monster):
 	UI.set_hovered_monster_stats(monster)
-	if (currently_selected_button == -1):
-		monster.set_outline_color(Color.WHITE_SMOKE)
-	monster.set_outline_color(current_selected_attack().hover_target_outline_clr)
+	#if (currently_selected_button == -1):
+		#monster.set_outline_color(Color.WHITE_SMOKE)
+	#monster.set_outline_color(current_selected_attack().hover_target_outline_clr)
 
 func monster_unhovered(monster : Monster):
 	UI.set_hovered_monster_stats(monster)
-	if (monster != current_monster()):
-		monster.toggle_off_shader()
-	elif (currently_targeted_monsters.has(monster)): 
-		return
-	else:
-		monster.toggle_on_shader()
+	#if (monster != current_monster()):
+		#monster.toggle_off_shader()
+	#elif (currently_targeted_monsters.has(monster)): 
+		#return
+	#else:
+		#monster.toggle_on_shader()
 
 func _on_ui_button_clicked(i : int):
+	if currently_selected_button != -1:
+		current_monster().toggle_on_shader()
 	currently_selected_button = i
 	UI.set_attack_description(current_monster().attacks[i], current_monster())
+	clear_all_monster_outlines()
+	outline_possible_targets()
+
+func clear_all_monster_outlines():
+	for m in initiative:
+		if m != current_monster():
+			m.toggle_off_shader()
+
+func outline_possible_targets():
+	var targets = get_attacks_possible_targets()
+	for m : Monster in targets:
+		m.set_outline_color(current_selected_attack().hover_target_outline_clr)
 
 func current_monster():
 	return initiative[current_turn]
@@ -144,7 +183,6 @@ func is_enemy(m : Monster):
 
 func perform_ai_turn(m : Monster):
 	print("ENEMY TURN")
-	UI.hide_buttons()
 	await get_tree().create_timer(3.5).timeout
 	perform_ai_attack(current_monster())
 	end_turn()
@@ -169,6 +207,7 @@ func ai_choose_attack(m : Monster):
 		if atk.mana_cost <= m.mana:
 			viable_attacks.append(atk)
 	if viable_attacks.is_empty(): 
+#	TODO struggle_atk is not loaded figure out how to load properly
 		return struggle_atk
 	
 	var num = randi_range(0, viable_attacks.size() - 1)
@@ -195,5 +234,3 @@ func get_all_goodguys():
 		if !is_enemy(m):
 			ret.append(m)
 	return ret
-
-

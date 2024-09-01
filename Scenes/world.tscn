@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=3 uid="uid://bdsnxtasgjx2o"]
+[gd_scene load_steps=65 format=3 uid="uid://bdsnxtasgjx2o"]
 
 [ext_resource type="Script" path="res://Scripts/world.gd" id="1_hijai"]
 [ext_resource type="PackedScene" uid="uid://dba8t7daowokd" path="res://Scenes/CodedAssets/player.tscn" id="2_icr3f"]
@@ -18,7 +18,6 @@
 [ext_resource type="PackedScene" uid="uid://5n67mp7f6l4b" path="res://Monsters/Gargoyle.tscn" id="15_2rjtg"]
 [ext_resource type="Resource" uid="uid://bkxxshxbpc6he" path="res://Resources/Attacks/attack_spit.tres" id="16_irmos"]
 [ext_resource type="PackedScene" uid="uid://0gi7ywf5qj55" path="res://Monsters/hynine.tscn" id="16_m5paf"]
-[ext_resource type="Resource" uid="uid://chfgp7jgyggp0" path="res://Resources/Attacks/attack_stub_toe.tres" id="17_0uw20"]
 [ext_resource type="PackedScene" uid="uid://drwerjtsibk1s" path="res://Monsters/hynine-ghost.tscn" id="17_kulk1"]
 [ext_resource type="Resource" uid="uid://bg0ofxtr4dppa" path="res://Resources/Attacks/magic_missile.tres" id="17_m4ngw"]
 [ext_resource type="PackedScene" uid="uid://bg33pmncvteu6" path="res://Monsters/hynine-the-red.tscn" id="18_q12t6"]
@@ -28,6 +27,7 @@
 [ext_resource type="Resource" uid="uid://1fxil6c6rtoh" path="res://Resources/Attacks/attack_slash.tres" id="22_d12ge"]
 [ext_resource type="Resource" uid="uid://dliqvxokfeu8m" path="res://Resources/Attacks/attack_scorch.tres" id="23_jdttg"]
 [ext_resource type="Resource" uid="uid://cgu7jdttiq5im" path="res://Resources/Attacks/attack_firebolt.tres" id="23_r822j"]
+[ext_resource type="Resource" uid="uid://dbwvwjiduwv1k" path="res://Resources/Statuses/torch.tres" id="24_ekaf5"]
 [ext_resource type="Script" path="res://Scenes/OverworldUI.gd" id="26_07yq2"]
 [ext_resource type="Texture2D" uid="uid://bsqtjhlergule" path="res://CustomAssets/CharacterArt/Shopkeep.png" id="26_va63k"]
 [ext_resource type="PackedScene" uid="uid://cfngr0rlfj6o8" path="res://Monsters/Mage.tscn" id="26_wviae"]
@@ -68,6 +68,28 @@ shader_parameter/wave_speed = 1.5
 material = SubResource("ShaderMaterial_jcfxb")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_8hhi2"]
+
+[sub_resource type="Resource" id="Resource_nt603"]
+script = ExtResource("20_88g2n")
+num_of_targets = 1
+hover_target_outline_clr = Color(0.545098, 0, 0, 1)
+target_type = 0
+name = "Torch"
+dex = false
+str = false
+will = false
+cha = false
+intl = false
+mana_cost = 2
+d4s = 0
+d6s = 0
+d8s = 0
+d10s = 0
+d12s = 0
+d20s = 0
+percent_buffed = 1.0
+percent_nerfed = 1.0
+attack_status = ExtResource("24_ekaf5")
 
 [sub_resource type="Resource" id="Resource_1rpbd"]
 script = ExtResource("20_88g2n")
@@ -215,6 +237,28 @@ d12s = 0
 d20s = 0
 percent_buffed = 1.0
 percent_nerfed = 1.0
+
+[sub_resource type="Resource" id="Resource_osh0u"]
+script = ExtResource("20_88g2n")
+num_of_targets = 1
+hover_target_outline_clr = Color(0.545098, 0, 0, 1)
+target_type = 0
+name = "Default Attack Name"
+dex = false
+str = false
+will = false
+cha = false
+intl = false
+mana_cost = 0
+d4s = 0
+d6s = 0
+d8s = 0
+d10s = 0
+d12s = 0
+d20s = 0
+percent_buffed = 1.0
+percent_nerfed = 1.0
+attack_status = ExtResource("24_ekaf5")
 
 [sub_resource type="Resource" id="Resource_7jb66"]
 script = ExtResource("20_88g2n")
@@ -405,7 +449,7 @@ shape = SubResource("SphereShape3D_8hhi2")
 
 [node name="Goblin" parent="Monsters" instance=ExtResource("12_gppj7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.5427, 1.98251, -1.1276)
-attacks = Array[ExtResource("20_88g2n")]([ExtResource("23_r822j"), ExtResource("21_7sy1e"), ExtResource("17_m4ngw"), ExtResource("17_0uw20")])
+attacks = Array[ExtResource("20_88g2n")]([ExtResource("23_r822j"), ExtResource("21_7sy1e"), ExtResource("17_m4ngw"), SubResource("Resource_nt603")])
 health = 120
 mana = 20
 
@@ -425,7 +469,7 @@ attacks = Array[ExtResource("20_88g2n")]([ExtResource("23_r822j"), SubResource("
 
 [node name="Hynine" parent="Monsters" instance=ExtResource("16_m5paf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.3915, 1.48368, -7.55595)
-attacks = Array[ExtResource("20_88g2n")]([ExtResource("21_7sy1e"), ExtResource("21_7sy1e"), ExtResource("16_irmos"), ExtResource("23_r822j")])
+attacks = Array[ExtResource("20_88g2n")]([ExtResource("21_7sy1e"), ExtResource("21_7sy1e"), ExtResource("16_irmos"), SubResource("Resource_osh0u")])
 health = 10
 mana = 20
 
@@ -464,6 +508,7 @@ attacks = Array[ExtResource("20_88g2n")]([ExtResource("21_7sy1e"), ExtResource("
 [node name="Hynine5" parent="PortraitTest" instance=ExtResource("16_m5paf")]
 
 [node name="Hynine6" parent="PortraitTest" instance=ExtResource("16_m5paf")]
+max_health = 15
 
 [node name="Hynine7" parent="PortraitTest" instance=ExtResource("16_m5paf")]
 

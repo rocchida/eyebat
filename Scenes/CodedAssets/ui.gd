@@ -7,12 +7,16 @@ var btn : Button
 @onready var monster_desc_text : Label = $ColorMenu/CurrentMonsterStats/Label
 @onready var hovered_monster_desc_text : Label = $ColorMenu/HoveredMonsterStats/Label
 @onready var initiative_board : HBoxContainer = $InitiativeBoard/HBoxContainer
+@onready var action_text : RichTextLabel = $ColorMenu/RichTextLabel
 
 func _ready():
 	buttons.append($ColorMenu/HBoxContainer/MenuButton)
 	buttons.append($ColorMenu/HBoxContainer/MenuButton2)
 	buttons.append($ColorMenu/HBoxContainer/MenuButton3)
 	buttons.append($ColorMenu/HBoxContainer/MenuButton4)
+
+func debug(text : String):
+	action_text.append_text(text + '\n')
 
 func set_buttons(attacks : Array[String]):
 	for i in range(buttons.size()):

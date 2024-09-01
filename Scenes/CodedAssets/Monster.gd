@@ -17,7 +17,9 @@ class_name Monster
 var healthbar
 @export var mana : int = 5
 var manabar
-#var root : BattleScene
+
+#var current_statuses : Array[Status]
+var current_statuses_dict = {}
 
 func _ready():
 	healthbar = $HealthBar/SubViewport/HealthBar3D
@@ -68,6 +70,9 @@ func is_deadzo():
 
 func get_portrait():
 	return portrait.instantiate() as Node2D
+
+func has_status(status : Status):
+	return current_statuses_dict.has(status)
 
 func run_attack_anim(monster_is_ally):
 	$AnimationPlayer.play("attack")

@@ -24,6 +24,7 @@ enum target_types {ALL, ONLY_ALLIES, ONLY_ENEMIES, ONLY_SELF}
 @export var d20s : int = 0
 @export var percent_buffed : float = 1
 @export var percent_nerfed : float = 1
+@export var attack_status : Status
 
 func get_damage(monster : Monster):
 	var damage = 0
@@ -42,6 +43,16 @@ func get_damage(monster : Monster):
 	damage += add_rolls(d20s, 20)
 	
 	return damage
+
+func inflict_statuses(m: Monster):
+	if !status_succeeded(attack_status.chance_to_hit):
+		return
+	if (m.current_statuses_dict.has(attack_status)):
+		m.current_statuses_dict[attack_status] += attack_status.stacks_on_hit
+		m.current_statuses_dict[attack_status] = min(m.current_statuses_dict[attack_status], attack_status.max_stacks_possible)
+		return name + " is affected by " + attack_status.name + " again from attack"
+	else: m.current_statuses_dict[attack_status] = attack_status.stacks_on_hit
+	return m.name + " recieves " + attack_status.name + " from attack"
 
 func add_rolls(num_of_die: int, die: int):
 	var ret = 0
@@ -76,3 +87,13 @@ func play_sound(audio_player: AudioStreamPlayer):
 	if sound != null:
 		audio_player.stream = sound
 		audio_player.play()
+
+func status_succeeded(chance : int):
+	if (chance == 100): return true
+	if (chance == 0): return false
+	var chance_roll = randi_range(1,100)
+	if (chance_roll < chance): 
+		print('STATUS SUCCEEDED, CHANCE:' + str(chance) + '   ROLL:' + str(chance_roll))
+		return true
+	print('STATUS FAILED, CHANCE:' + str(chance) + '   ROLL:' + str(chance_roll))
+	return false
