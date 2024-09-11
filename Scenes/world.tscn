@@ -30,7 +30,7 @@
 [ext_resource type="Resource" uid="uid://cgu7jdttiq5im" path="res://Resources/Attacks/attack_firebolt.tres" id="23_r822j"]
 [ext_resource type="Script" path="res://Scenes/OverworldUI.gd" id="26_07yq2"]
 [ext_resource type="Texture2D" uid="uid://bsqtjhlergule" path="res://CustomAssets/CharacterArt/Shopkeep.png" id="26_va63k"]
-[ext_resource type="PackedScene" uid="uid://cfngr0rlfj6o8" path="res://Monsters/Mage.tscn" id="26_wviae"]
+[ext_resource type="PackedScene" uid="uid://cfngr0rlfj6o8" path="res://Monsters/Simo.tscn" id="26_wviae"]
 [ext_resource type="Script" path="res://Scenes/Shopkeep.gd" id="28_ngbrb"]
 [ext_resource type="PackedScene" uid="uid://c38xv4p3ib2mh" path="res://CustomAssets/New folder/objects/campfire/campfire.tscn" id="30_6y506"]
 [ext_resource type="Material" uid="uid://chvymj2xaq44q" path="res://deep_fire.tres" id="32_3ywun"]

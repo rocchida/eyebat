@@ -1,0 +1,333 @@
+[gd_scene load_steps=22 format=3 uid="uid://bmbb3n3gk6sh8"]
+
+[ext_resource type="Script" path="res://Monsters/Monster.gd" id="1_xws4o"]
+[ext_resource type="Resource" uid="uid://cgu7jdttiq5im" path="res://Resources/Attacks/attack_firebolt.tres" id="2_8ajym"]
+[ext_resource type="Resource" uid="uid://dxlwicbfo1hq6" path="res://Resources/Attacks/attack_sigh.tres" id="3_8icji"]
+[ext_resource type="Resource" uid="uid://1fxil6c6rtoh" path="res://Resources/Attacks/attack_slash.tres" id="4_5s2wp"]
+[ext_resource type="Resource" uid="uid://dliqvxokfeu8m" path="res://Resources/Attacks/attack_scorch.tres" id="5_3yh7t"]
+[ext_resource type="PackedScene" uid="uid://bsrvwow1gl7ux" path="res://Scenes/CodedAssets/CharacterPortraits/hynine_portrait.tscn" id="6_ylwro"]
+[ext_resource type="Shader" path="res://Monsters/outline.gdshader" id="7_eky4r"]
+[ext_resource type="Texture2D" uid="uid://ioavpxax8o61" path="res://CustomAssets/CharacterArt/Monster Sheet/Hynine_Spritesheet.png" id="8_1rj6p"]
+[ext_resource type="Script" path="res://Monsters/Outline_Initiate.gd" id="9_vr1uh"]
+[ext_resource type="PackedScene" uid="uid://0n6qt3r5hf7i" path="res://Scenes/CodedAssets/health_bar_3d.tscn" id="10_q3rea"]
+[ext_resource type="PackedScene" uid="uid://mmylq3dq6hon" path="res://Scenes/CodedAssets/mana_bar_3d.tscn" id="11_vmbh1"]
+[ext_resource type="PackedScene" uid="uid://dyha3hn24vliy" path="res://Scenes/CodedAssets/clickable.tscn" id="12_rpy0y"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_351w6"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("7_eky4r")
+shader_parameter/onoff = 1.0
+shader_parameter/line_color = Color(1, 1, 1, 0)
+shader_parameter/glowSize = 15.0
+shader_parameter/glowDensity = 3
+shader_parameter/glowRadialCoverage = 4
+shader_parameter/glowAngle = 1.57
+shader_parameter/glowSharpness = 1.0
+shader_parameter/alphaThreshold = 0.2
+shader_parameter/sprite_texture = ExtResource("8_1rj6p")
+
+[sub_resource type="Animation" id="Animation_j01o8"]
+resource_name = "attack"
+length = 1.25
+loop_mode = 1
+step = 0.0416667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.208333, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [2, 0, 2]
+}
+tracks/1/type = "position_3d"
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/path = NodePath("Sprite3D")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0.722, 0, 0.1, 1, -1, 0.722, 0, 0.3, 1, -1, 0.722, 0, 1.04167, 1, 6.31339e-08, 0.722168, 0)
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite3D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.208333, 0.25, 1.125),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0.695, 0), Vector3(0.266, 0.6, 0), Vector3(0.0193584, 0.784937, 0), Vector3(-0.104042, 0.695, 0), Vector3(-0.104042, 0.695, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite3D:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.291667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.075, -0.075, -0.075), Vector3(-0.075, -0.065, -0.075), Vector3(-0.075, -0.075, -0.075)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite3D:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.291667, 0.333333, 0.416667, 0.5, 0.583333, 0.666667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 3.14159), Vector3(0, 0, 3.05433), Vector3(0, 0, 3.31613), Vector3(0, 0, 3.14159), Vector3(0, 0, 3.08051), Vector3(0, 0, 3.22886), Vector3(0, 0, 3.08051), Vector3(0, 0, 3.14159)]
+}
+
+[sub_resource type="Animation" id="Animation_gp0kn"]
+resource_name = "damaged"
+length = 1.33334
+loop_mode = 1
+step = 0.0416667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [2, 1, 2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite3D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.416667, 0.625, 0.958333, 1.04167, 1.16667, 1.25, 1.29167, 1.33333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.075, -0.075, -0.075), Vector3(-0.075, -0.075, -0.075), Vector3(-0.075, -0.065, -0.075), Vector3(-0.075, -0.075, -0.075), Vector3(-0.075, -0.075, -0.075), Vector3(-0.075, -0.065, -0.075), Vector3(-0.075, -0.085, -0.075), Vector3(-0.075, -0.075, -0.075), Vector3(-0.075, -0.065, -0.075), Vector3(-0.075, -0.075, -0.075)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite3D:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.0833333, 0.125, 0.166667, 0.208333, 0.25, 0.291667, 0.333333, 0.958333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 3.14159), Vector3(0, 0, 3.22886), Vector3(0, 0, 3.05433), Vector3(0, 0, 3.31613), Vector3(0, 0, 3.05433), Vector3(0, 0, 3.31613), Vector3(0, 0, 3.05433), Vector3(0, 0, 3.14159), Vector3(0, 0, 3.14159)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite3D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.416667, 0.625, 0.958333, 1.04167, 1.16667, 1.25, 1.29167, 1.33333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0.695, 0), Vector3(0.813, 0.61, 0), Vector3(0.813, 0.695, 0), Vector3(0.813, 0.695, 0), Vector3(0.813, 0.61, 0), Vector3(0.3252, 0.84641, 0), Vector3(0, 0.695, 0), Vector3(0, 0.61, 0), Vector3(0, 0.695, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_a5f5j"]
+resource_name = "idle"
+length = 2.0
+loop_mode = 1
+step = 0.0416667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite3D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0.694815, 0), Vector3(0, 0.61, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite3D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.075, -0.075, -0.075), Vector3(-0.075, -0.065, -0.075)]
+}
+
+[sub_resource type="Animation" id="Animation_13ln1"]
+resource_name = "selected"
+length = 0.750005
+loop_mode = 1
+step = 0.0416667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite3D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.375),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0.695, 0), Vector3(0, 0.61, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite3D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.375),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.075, -0.075, -0.075), Vector3(-0.075, -0.065, -0.075)]
+}
+
+[sub_resource type="Animation" id="Animation_yva54"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.722, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite3D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.075, -0.075, -0.075)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite3D:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 3.05433)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dimbn"]
+_data = {
+"RESET": SubResource("Animation_yva54"),
+"attack": SubResource("Animation_j01o8"),
+"damaged": SubResource("Animation_gp0kn"),
+"idle": SubResource("Animation_a5f5j"),
+"selected": SubResource("Animation_13ln1")
+}
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_fsr5g"]
+viewport_path = NodePath("HealthBar/SubViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_7uvk6"]
+viewport_path = NodePath("ManaBar/SubViewport")
+
+[node name="Hynine" type="Node3D"]
+script = ExtResource("1_xws4o")
+max_health = 10
+max_mana = 20
+attacks = Array[Resource("res://Resources/Attacks/attack_base.gd")]([ExtResource("2_8ajym"), ExtResource("3_8icji"), ExtResource("4_5s2wp"), ExtResource("5_3yh7t")])
+portrait = ExtResource("6_ylwro")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(0.0747146, 0.00653667, 0, -0.00653667, 0.0747146, 0, 0, 0, -0.075, 0, 0.722, 0)
+material_override = SubResource("ShaderMaterial_351w6")
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("8_1rj6p")
+hframes = 8
+vframes = 4
+frame = 2
+script = ExtResource("9_vr1uh")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_dimbn")
+}
+autoplay = "idle"
+
+[node name="HealthBar" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0976116, 0.16116, 0)
+
+[node name="SubViewport" type="SubViewport" parent="HealthBar"]
+disable_3d = true
+transparent_bg = true
+
+[node name="HealthBar3D" parent="HealthBar/SubViewport" instance=ExtResource("10_q3rea")]
+
+[node name="HealthBar" type="Sprite3D" parent="HealthBar"]
+transform = Transform3D(0.174239, 0, 0, 0, 0.0701671, 0, 0, 0, 1, 0, 1.19833, 0)
+texture = SubResource("ViewportTexture_fsr5g")
+
+[node name="ManaBar" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0976116, 0.0810282, 0)
+
+[node name="SubViewport" type="SubViewport" parent="ManaBar"]
+disable_3d = true
+transparent_bg = true
+
+[node name="ManaBar3D" parent="ManaBar/SubViewport" instance=ExtResource("11_vmbh1")]
+
+[node name="ManaBar" type="Sprite3D" parent="ManaBar"]
+transform = Transform3D(0.174239, 0, 0, 0, 0.0701671, 0, 0, 0, 1, 0, 1.19833, 0)
+texture = SubResource("ViewportTexture_7uvk6")
+
+[node name="Clickable" parent="." instance=ExtResource("12_rpy0y")]
