@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=3 uid="uid://bdsnxtasgjx2o"]
+[gd_scene load_steps=65 format=3 uid="uid://bdsnxtasgjx2o"]
 
 [ext_resource type="Script" path="res://Scripts/world.gd" id="1_hijai"]
 [ext_resource type="PackedScene" uid="uid://dba8t7daowokd" path="res://Scenes/CodedAssets/player.tscn" id="2_icr3f"]
@@ -30,7 +30,7 @@
 [ext_resource type="Resource" uid="uid://cgu7jdttiq5im" path="res://Resources/Attacks/attack_firebolt.tres" id="23_r822j"]
 [ext_resource type="Script" path="res://Scenes/OverworldUI.gd" id="26_07yq2"]
 [ext_resource type="Texture2D" uid="uid://bsqtjhlergule" path="res://CustomAssets/CharacterArt/Shopkeep.png" id="26_va63k"]
-[ext_resource type="PackedScene" uid="uid://cfngr0rlfj6o8" path="res://Monsters/Mage.tscn" id="26_wviae"]
+[ext_resource type="PackedScene" uid="uid://cfngr0rlfj6o8" path="res://Monsters/Simo.tscn" id="26_wviae"]
 [ext_resource type="Script" path="res://Scenes/Shopkeep.gd" id="28_ngbrb"]
 [ext_resource type="PackedScene" uid="uid://c38xv4p3ib2mh" path="res://CustomAssets/New folder/objects/campfire/campfire.tscn" id="30_6y506"]
 [ext_resource type="Material" uid="uid://chvymj2xaq44q" path="res://deep_fire.tres" id="32_3ywun"]
@@ -39,6 +39,8 @@
 [ext_resource type="MeshLibrary" uid="uid://b3u22aw7e05yx" path="res://lazaresque.tres" id="37_u5hm2"]
 [ext_resource type="Script" path="res://Scenes/StaticBody3D.gd" id="38_ywdbg"]
 [ext_resource type="Script" path="res://Scenes/CollisionShape3D.gd" id="39_ry1jq"]
+[ext_resource type="PackedScene" uid="uid://djtiph0nrnwyp" path="res://Monsters/ANIM_TEST.tscn" id="40_5tjmr"]
+[ext_resource type="PackedScene" uid="uid://dnsjds8lv4kod" path="res://Monsters/ANIM_TEST_UPDATED.tscn" id="41_orocy"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_mt7vc"]
 panorama = ExtResource("4_21lx8")
@@ -325,8 +327,9 @@ data = {
 }
 metadata/_editor_floor_ = Vector3(0, 1, 0)
 
-[node name="player" parent="." instance=ExtResource("2_icr3f")]
+[node name="player" parent="." node_paths=PackedStringArray("monster_roster") instance=ExtResource("2_icr3f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.9048, 5.63985, 26.3588)
+monster_roster = [NodePath("../Hynine"), NodePath("../Hynine3"), NodePath("../Hynine4")]
 
 [node name="testnut" parent="." instance=ExtResource("3_yn2xu")]
 transform = Transform3D(77.4165, -52.7882, 57.6202, 40.0929, -42.789, -93.068, 67.0764, 86.5015, -10.874, 7.86892, 11.5862, -18.926)
@@ -393,7 +396,7 @@ shape = SubResource("SphereShape3D_8hhi2")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.5454, 4.01099, 20.5823)
 script = ExtResource("10_02i1u")
 _target_scene = "res://Scenes/battle.tscn"
-_encounter_monster_roster = [NodePath("../PortraitTest/Hynine6")]
+_encounter_monster_roster = [NodePath("../Hynine2"), NodePath("../Hynine5")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SceneDoor"]
 transform = Transform3D(1.768, 0, 0, 0, 2.058, 0, 0, 0, 1.63479, 0, 0, 0)
@@ -783,6 +786,31 @@ script = ExtResource("38_ywdbg")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 shape = SubResource("BoxShape3D_0rwky")
 script = ExtResource("39_ry1jq")
+
+[node name="Hynine" parent="." instance=ExtResource("40_5tjmr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.92594, 4, 26.1808)
+max_health = 100
+health = 100
+
+[node name="Hynine2" parent="." instance=ExtResource("40_5tjmr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.3234, 0, 14.9552)
+max_health = 100
+health = 100
+
+[node name="Hynine3" parent="." instance=ExtResource("41_orocy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.75364, 4.16501, 26.4202)
+max_health = 100
+health = 100
+
+[node name="Hynine4" parent="." instance=ExtResource("41_orocy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.75364, 4.16501, 26.4202)
+max_health = 100
+health = 100
+
+[node name="Hynine5" parent="." instance=ExtResource("41_orocy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.75364, 4.16501, 26.4202)
+max_health = 100
+health = 100
 
 [connection signal="body_entered" from="SceneDoor2" to="SceneDoor2" method="_on_body_entered"]
 [connection signal="body_exited" from="SceneDoor2" to="SceneDoor2" method="_on_body_exited"]

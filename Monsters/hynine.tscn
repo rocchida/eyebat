@@ -123,14 +123,12 @@ attacks = Array[Resource("res://Resources/Attacks/attack_base.gd")]([ExtResource
 portrait = ExtResource("2_mleto")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform3D(0.075, 1.13247e-08, 0, -1.13247e-08, 0.075, 0, 0, 0, -0.075, 0, 0.722, 0)
 material_override = SubResource("ShaderMaterial_351w6")
 alpha_cut = 2
 texture_filter = 0
 texture = ExtResource("2_t4hbm")
 hframes = 8
 vframes = 4
-frame = 3
 script = ExtResource("8_03oev")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
