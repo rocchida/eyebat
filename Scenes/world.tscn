@@ -1,4 +1,6 @@
+
 [gd_scene load_steps=31 format=3 uid="uid://bdsnxtasgjx2o"]
+
 
 [ext_resource type="Script" path="res://Scripts/world.gd" id="1_hijai"]
 [ext_resource type="PackedScene" uid="uid://dba8t7daowokd" path="res://Scenes/CodedAssets/player.tscn" id="2_icr3f"]
@@ -121,7 +123,7 @@ shape = SubResource("SphereShape3D_8hhi2")
 
 [node name="Monsters" type="Node" parent="."]
 
-[node name="Player Monsters" type="Node" parent="Monsters"]
+
 
 [node name="Goblin" parent="Monsters/Player Monsters" instance=ExtResource("12_gppj7")]
 
@@ -129,7 +131,9 @@ shape = SubResource("SphereShape3D_8hhi2")
 
 [node name="Door Monsters" type="Node" parent="Monsters"]
 
+
 [node name="Gnome" parent="Monsters/Door Monsters" instance=ExtResource("12_6m0vq")]
+
 
 [node name="Shop Monsters" type="Node" parent="Monsters"]
 

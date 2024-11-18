@@ -262,6 +262,18 @@ grow_vertical = 2
 layout_mode = 2
 label_settings = SubResource("LabelSettings_y8v18")
 
+[node name="RichTextLabel" type="RichTextLabel" parent="ColorMenu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.635
+anchor_right = 0.866
+anchor_bottom = 1.0
+offset_left = 3.47992
+offset_top = 7.0
+offset_right = -1.63208
+offset_bottom = -8.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+
 [node name="InitiativeBoard" type="NinePatchRect" parent="."]
 layout_mode = 1
 anchors_preset = 10

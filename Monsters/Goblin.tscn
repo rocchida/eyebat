@@ -4,6 +4,7 @@
 [ext_resource type="Resource" uid="uid://cgu7jdttiq5im" path="res://Resources/Attacks/attack_firebolt.tres" id="2_78hmi"]
 [ext_resource type="Resource" uid="uid://dxlwicbfo1hq6" path="res://Resources/Attacks/attack_sigh.tres" id="3_xor8k"]
 [ext_resource type="Resource" uid="uid://1fxil6c6rtoh" path="res://Resources/Attacks/attack_slash.tres" id="4_tvwy0"]
+
 [ext_resource type="Resource" uid="uid://dliqvxokfeu8m" path="res://Resources/Attacks/attack_scorch.tres" id="5_73tu6"]
 [ext_resource type="PackedScene" uid="uid://l1476gvgrjti" path="res://Scenes/CodedAssets/CharacterPortraits/hynine_portrait.tscn" id="6_stely"]
 [ext_resource type="Texture2D" uid="uid://bc2vhkygnfsvq" path="res://CustomAssets/CharacterArt/Monster Sheet/Gobin_Spritesheet.png" id="7_7bm6m"]
@@ -47,7 +48,7 @@ viewport_path = NodePath("ManaBar/SubViewport")
 script = ExtResource("1_8gmwr")
 max_mana = 20
 dex = 8
-attacks = Array[Resource("res://Resources/Attacks/attack_base.gd")]([ExtResource("2_78hmi"), ExtResource("3_xor8k"), ExtResource("4_tvwy0"), ExtResource("5_73tu6")])
+attacks = Array[Resource("res://Resources/Attacks/attack_base.gd")]([ExtResource("2_78hmi"), ExtResource("3_xor8k"), ExtResource("4_tvwy0"), ExtResource("5_mp4ki")])
 portrait = ExtResource("6_stely")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]

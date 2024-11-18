@@ -18,6 +18,15 @@ var manabar
 @export var portrait: PackedScene
 
 
+@export var health : int = 15
+var healthbar
+@export var mana : int = 5
+var manabar
+
+#var current_statuses : Array[Status]
+var current_statuses_dict = {}
+
+
 func _ready():
 	healthbar = $HealthBar/SubViewport/HealthBar3D
 	manabar = $ManaBar/SubViewport/ManaBar3D
@@ -67,6 +76,9 @@ func is_deadzo():
 
 func get_portrait():
 	return portrait.instantiate() as Node2D
+
+func has_status(status : Status):
+	return current_statuses_dict.has(status)
 
 func run_attack_anim(monster_is_ally):
 	$AnimationPlayer.play("attack")
