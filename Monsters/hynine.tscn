@@ -1,7 +1,7 @@
-[gd_scene load_steps=21 format=3 uid="uid://0gi7ywf5qj55"]
+[gd_scene load_steps=22 format=3 uid="uid://djtiph0nrnwyp"]
 
 [ext_resource type="Script" path="res://Monsters/Monster.gd" id="1_0dpen"]
-[ext_resource type="PackedScene" uid="uid://bsrvwow1gl7ux" path="res://Scenes/CodedAssets/CharacterPortraits/hynine_portrait.tscn" id="2_mleto"]
+[ext_resource type="PackedScene" uid="uid://l1476gvgrjti" path="res://Scenes/CodedAssets/CharacterPortraits/hynine_portrait.tscn" id="2_mleto"]
 [ext_resource type="Resource" uid="uid://cgu7jdttiq5im" path="res://Resources/Attacks/attack_firebolt.tres" id="2_sqyfe"]
 [ext_resource type="Texture2D" uid="uid://ioavpxax8o61" path="res://CustomAssets/CharacterArt/Monster Sheet/Hynine_Spritesheet.png" id="2_t4hbm"]
 [ext_resource type="Resource" uid="uid://dxlwicbfo1hq6" path="res://Resources/Attacks/attack_sigh.tres" id="3_te330"]
@@ -11,7 +11,10 @@
 [ext_resource type="PackedScene" uid="uid://dyha3hn24vliy" path="res://Scenes/CodedAssets/clickable.tscn" id="5_xcx82"]
 [ext_resource type="Shader" path="res://Monsters/outline.gdshader" id="7_afcvv"]
 [ext_resource type="Script" path="res://Monsters/Outline_Initiate.gd" id="8_03oev"]
+[ext_resource type="Animation" uid="uid://bmi0kajb71q28" path="res://attack.res" id="10_4fqv8"]
 [ext_resource type="PackedScene" uid="uid://mmylq3dq6hon" path="res://Scenes/CodedAssets/mana_bar_3d.tscn" id="10_tp2vr"]
+[ext_resource type="Animation" uid="uid://dpwlpgg8b327o" path="res://idle.res" id="10_wsgst"]
+[ext_resource type="Animation" uid="uid://dronyst6kkj11" path="res://damaged.res" id="11_4yt4q"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_351w6"]
 resource_local_to_scene = true
@@ -27,65 +30,48 @@ shader_parameter/glowSharpness = 1.0
 shader_parameter/alphaThreshold = 0.2
 shader_parameter/sprite_texture = ExtResource("2_t4hbm")
 
-[sub_resource type="Animation" id="Animation_j01o8"]
-resource_name = "attack"
-length = 0.65
+[sub_resource type="Animation" id="Animation_yva54"]
+length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/path = NodePath("Sprite3D:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
+"update": 0,
+"values": [Vector3(0, 0.722, 0)]
 }
-tracks/1/type = "position_3d"
+tracks/1/type = "value"
 tracks/1/imported = false
-tracks/1/enabled = false
-tracks/1/path = NodePath("Sprite3D")
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite3D:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/keys = PackedFloat32Array(0, 1, 0, 0.722, 0, 0.1, 1, -1, 0.722, 0, 0.3, 1, -1, 0.722, 0, 0.6, 1, 6.31339e-08, 0.722168, 0)
-
-[sub_resource type="Animation" id="Animation_gp0kn"]
-resource_name = "damaged"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite3D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
+tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1]
+"update": 0,
+"values": [Vector3(-0.075, -0.075, -0.075)]
 }
-
-[sub_resource type="Animation" id="Animation_a5f5j"]
-resource_name = "idle"
-length = 1.20834
-loop_mode = 1
-step = 0.0416667
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite3D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0416667, 0.0833333, 0.125, 0.166667, 0.208333, 0.25, 0.291667, 0.333333, 0.375, 0.416667, 0.458333, 0.5, 0.541667, 0.583333, 0.625, 0.666667, 0.708333, 0.75, 0.791667, 0.833333, 0.875, 0.916667, 0.958333, 1, 1.04167, 1.08333, 1.125, 1.16667, 1.20833),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [2, 2, 3, 3, 3, 4, 4, 5, 5, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 16, 17, 18, 19, 20, 21, 22, 23, 2]
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite3D:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 3.05433)]
 }
 
 [sub_resource type="Animation" id="Animation_13ln1"]
 resource_name = "selected"
-length = 1.20834
+length = 0.750005
 loop_mode = 1
 step = 0.0416667
 tracks/0/type = "value"
@@ -95,17 +81,42 @@ tracks/0/path = NodePath("Sprite3D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0416667, 0.0833333, 0.125, 0.166667, 0.208333, 0.25, 0.291667, 0.333333, 0.375, 0.416667, 0.458333, 0.5, 0.541667, 0.583333, 0.625, 0.666667, 0.708333, 0.75, 0.791667, 0.833333, 0.875, 0.916667, 0.958333, 1, 1.04167, 1.08333, 1.125, 1.16667, 1.20833),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [2, 2, 3, 3, 3, 4, 4, 5, 5, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 16, 17, 18, 19, 20, 21, 22, 23, 2]
+"values": [2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite3D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.375),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0.695, 0), Vector3(0, 0.61, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite3D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.375),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.075, -0.075, -0.075), Vector3(-0.075, -0.065, -0.075)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_dimbn"]
 _data = {
-"attack": SubResource("Animation_j01o8"),
-"damaged": SubResource("Animation_gp0kn"),
-"idle": SubResource("Animation_a5f5j"),
+"RESET": SubResource("Animation_yva54"),
+"attack": ExtResource("10_4fqv8"),
+"damaged": ExtResource("11_4yt4q"),
+"idle": ExtResource("10_wsgst"),
 "selected": SubResource("Animation_13ln1")
 }
 
@@ -123,14 +134,14 @@ attacks = Array[Resource("res://Resources/Attacks/attack_base.gd")]([ExtResource
 portrait = ExtResource("2_mleto")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform3D(0.075, 1.13247e-08, 0, -1.13247e-08, 0.075, 0, 0, 0, -0.075, 0, 0.722, 0)
+transform = Transform3D(0.0747146, 0.00653639, 0, -0.00653639, 0.0747146, 0, 0, 0, -0.075, 0, 0.722, 0)
 material_override = SubResource("ShaderMaterial_351w6")
 alpha_cut = 2
 texture_filter = 0
 texture = ExtResource("2_t4hbm")
 hframes = 8
 vframes = 4
-frame = 3
+frame = 2
 script = ExtResource("8_03oev")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -166,3 +177,9 @@ transform = Transform3D(0.174239, 0, 0, 0, 0.0701671, 0, 0, 0, 1, 0, 1.19833, 0)
 texture = SubResource("ViewportTexture_7uvk6")
 
 [node name="Clickable" parent="." instance=ExtResource("5_xcx82")]
+
+[node name="Status Tracker" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.51797, 0)
+alpha_cut = 2
+texture_filter = 0
+text = "A"

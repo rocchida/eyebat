@@ -2,8 +2,12 @@ extends Node3D
 class_name Monster
 
 
-@export var max_health: int = 12
-@export var max_mana : int = 5
+@export var max_health: int = 120
+@export var max_mana : int = 50
+@export var health : int = 120
+var healthbar
+@export var mana : int = 50
+var manabar
 @export var dex : int = 5
 @export var str : int = 5
 @export var will : int = 5
@@ -13,6 +17,7 @@ class_name Monster
 @export var attacks : Array[Attack]
 @export var portrait: PackedScene
 
+
 @export var health : int = 15
 var healthbar
 @export var mana : int = 5
@@ -20,6 +25,7 @@ var manabar
 
 #var current_statuses : Array[Status]
 var current_statuses_dict = {}
+
 
 func _ready():
 	healthbar = $HealthBar/SubViewport/HealthBar3D
