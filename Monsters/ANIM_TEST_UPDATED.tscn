@@ -1,11 +1,11 @@
-[gd_scene load_steps=20 format=3 uid="uid://dnsjds8lv4kod"]
+[gd_scene load_steps=20 format=3 uid="uid://cy8spuswodl0t"]
 
 [ext_resource type="Script" path="res://Monsters/Monster.gd" id="1_1nbbp"]
 [ext_resource type="Resource" uid="uid://cgu7jdttiq5im" path="res://Resources/Attacks/attack_firebolt.tres" id="2_xc8ej"]
 [ext_resource type="Resource" uid="uid://dxlwicbfo1hq6" path="res://Resources/Attacks/attack_sigh.tres" id="3_aejre"]
 [ext_resource type="Resource" uid="uid://1fxil6c6rtoh" path="res://Resources/Attacks/attack_slash.tres" id="4_krw6b"]
 [ext_resource type="Resource" uid="uid://dliqvxokfeu8m" path="res://Resources/Attacks/attack_scorch.tres" id="5_j3pw2"]
-[ext_resource type="PackedScene" uid="uid://bsrvwow1gl7ux" path="res://Scenes/CodedAssets/CharacterPortraits/hynine_portrait.tscn" id="6_m0bcr"]
+[ext_resource type="PackedScene" uid="uid://l1476gvgrjti" path="res://Scenes/CodedAssets/CharacterPortraits/hynine_portrait.tscn" id="6_m0bcr"]
 [ext_resource type="Script" path="res://Monsters/Sprite3D.gd" id="7_ayfv3"]
 [ext_resource type="Animation" uid="uid://dpwlpgg8b327o" path="res://idle.res" id="9_5wg55"]
 [ext_resource type="Texture2D" uid="uid://mel16ahnhddx" path="res://CustomAssets/CharacterArt/Shading_Test_3.png" id="9_tofb6"]

@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://drwuk4epb1yfj"]
+
+[node name="StatusLabel" type="RichTextLabel"]
+offset_right = 2237.0
+offset_bottom = 1419.0
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 120
+text = "PSN:3 / BRN:2"
+fit_content = true
