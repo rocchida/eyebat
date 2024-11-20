@@ -17,11 +17,7 @@ var manabar
 @export var attacks : Array[Attack]
 @export var portrait: PackedScene
 
-
-@export var health : int = 15
-var healthbar
-@export var mana : int = 5
-var manabar
+@onready var status_tracker = $"Status Tracker"
 
 #var current_statuses : Array[Status]
 var current_statuses_dict = {}
@@ -87,4 +83,7 @@ func run_attack_anim(monster_is_ally):
 func run_damaged_anim():
 	$AnimationPlayer.play("damaged")
 	$AnimationPlayer.queue("idle")
+
+func update_status_tracker():
+	status_tracker.update_text(current_statuses_dict)
 	

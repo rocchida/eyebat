@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://djtiph0nrnwyp"]
+[gd_scene load_steps=23 format=3 uid="uid://djtiph0nrnwyp"]
 
 [ext_resource type="Script" path="res://Monsters/Monster.gd" id="1_0dpen"]
 [ext_resource type="PackedScene" uid="uid://l1476gvgrjti" path="res://Scenes/CodedAssets/CharacterPortraits/hynine_portrait.tscn" id="2_mleto"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://mmylq3dq6hon" path="res://Scenes/CodedAssets/mana_bar_3d.tscn" id="10_tp2vr"]
 [ext_resource type="Animation" uid="uid://dpwlpgg8b327o" path="res://idle.res" id="10_wsgst"]
 [ext_resource type="Animation" uid="uid://dronyst6kkj11" path="res://damaged.res" id="11_4yt4q"]
+[ext_resource type="PackedScene" uid="uid://k5amlj5tgi33" path="res://status_tracker.tscn" id="16_evw14"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_351w6"]
 resource_local_to_scene = true
@@ -128,8 +129,6 @@ viewport_path = NodePath("ManaBar/SubViewport")
 
 [node name="Hynine" type="Node3D"]
 script = ExtResource("1_0dpen")
-max_health = 10
-max_mana = 20
 attacks = Array[Resource("res://Resources/Attacks/attack_base.gd")]([ExtResource("2_sqyfe"), ExtResource("3_te330"), ExtResource("4_cvwhh"), ExtResource("5_xaakm")])
 portrait = ExtResource("2_mleto")
 
@@ -178,8 +177,4 @@ texture = SubResource("ViewportTexture_7uvk6")
 
 [node name="Clickable" parent="." instance=ExtResource("5_xcx82")]
 
-[node name="Status Tracker" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.51797, 0)
-alpha_cut = 2
-texture_filter = 0
-text = "A"
+[node name="Status Tracker" parent="." instance=ExtResource("16_evw14")]

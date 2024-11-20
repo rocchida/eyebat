@@ -1,6 +1,4 @@
-
 [gd_scene load_steps=31 format=3 uid="uid://bdsnxtasgjx2o"]
-
 
 [ext_resource type="Script" path="res://Scripts/world.gd" id="1_hijai"]
 [ext_resource type="PackedScene" uid="uid://dba8t7daowokd" path="res://Scenes/CodedAssets/player.tscn" id="2_icr3f"]
@@ -11,7 +9,7 @@
 [ext_resource type="Script" path="res://Scenes/CodedAssets/SceneDoor.gd" id="10_02i1u"]
 [ext_resource type="PackedScene" uid="uid://dxbfvlk53cyl3" path="res://Monsters/Gnome.tscn" id="12_6m0vq"]
 [ext_resource type="Texture2D" uid="uid://dl3plqwoor2bt" path="res://ImportedAssets/CharacterArt/Mage Idle.png" id="12_byxew"]
-[ext_resource type="PackedScene" uid="uid://hfq76bo2bkcm" path="res://Monsters/Goblin.tscn" id="12_gppj7"]
+[ext_resource type="PackedScene" uid="uid://c8khql4r5dw0w" path="res://Monsters/Goblin.tscn" id="12_gppj7"]
 [ext_resource type="Script" path="res://Scenes/OverworldUI.gd" id="26_07yq2"]
 [ext_resource type="Texture2D" uid="uid://bsqtjhlergule" path="res://CustomAssets/CharacterArt/Shopkeep.png" id="26_va63k"]
 [ext_resource type="Script" path="res://Scenes/Shopkeep.gd" id="28_ngbrb"]
@@ -20,7 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://cbniu1tm214eu" path="res://ImportedAssets/ParticleEffects/particle_sprite_smoke.webp" id="33_imrae"]
 [ext_resource type="PackedScene" uid="uid://d0dsmhx747f3p" path="res://CustomAssets/New folder/objects/rocks/rock_1.tscn" id="35_ntgmj"]
 [ext_resource type="MeshLibrary" uid="uid://b3u22aw7e05yx" path="res://lazaresque.tres" id="37_u5hm2"]
-[ext_resource type="PackedScene" uid="uid://djtiph0nrnwyp" path="res://Monsters/hynine.tscn" id="40_5tjmr"]
+[ext_resource type="PackedScene" uid="uid://djtiph0nrnwyp" path="res://Monsters/Hynine.tscn" id="40_5tjmr"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_8hhi2"]
 
@@ -96,7 +94,7 @@ script = ExtResource("1_hijai")
 
 [node name="player" parent="." node_paths=PackedStringArray("monster_roster") instance=ExtResource("2_icr3f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.9048, 5.63985, 26.3588)
-monster_roster = [NodePath("../Monsters/Player Monsters/Hynine"), NodePath("../Monsters/Player Monsters/Goblin")]
+monster_roster = [NodePath("../Monsters/Player Monsters/Hynine")]
 
 [node name="SceneDoor2" type="Area3D" parent="."]
 transform = Transform3D(-0.00275765, 0, -0.999996, 0, 1, 0, 0.999996, 0, -0.00275765, -8.11297, 3.95873, 20.8433)
@@ -123,19 +121,19 @@ shape = SubResource("SphereShape3D_8hhi2")
 
 [node name="Monsters" type="Node" parent="."]
 
-
-
-[node name="Goblin" parent="Monsters/Player Monsters" instance=ExtResource("12_gppj7")]
-
-[node name="Hynine" parent="Monsters/Player Monsters" instance=ExtResource("40_5tjmr")]
-
 [node name="Door Monsters" type="Node" parent="Monsters"]
-
 
 [node name="Gnome" parent="Monsters/Door Monsters" instance=ExtResource("12_6m0vq")]
 
-
 [node name="Shop Monsters" type="Node" parent="Monsters"]
+
+[node name="Player Monsters" type="Node" parent="Monsters"]
+
+[node name="Hynine" parent="Monsters/Player Monsters" instance=ExtResource("40_5tjmr")]
+
+[node name="Monsters_Player Monsters#Goblin" parent="." instance=ExtResource("12_gppj7")]
+
+[node name="Monsters_Player Monsters#Hynine" parent="." instance=ExtResource("40_5tjmr")]
 
 [node name="UI" type="Control" parent="."]
 visible = false

@@ -48,11 +48,17 @@ func inflict_statuses(m: Monster):
 	if !status_succeeded(attack_status.chance_to_hit):
 		return
 	if (m.current_statuses_dict.has(attack_status)):
+		var stacks_were : String = str(m.current_statuses_dict[attack_status])
 		m.current_statuses_dict[attack_status] += attack_status.stacks_on_hit
 		m.current_statuses_dict[attack_status] = min(m.current_statuses_dict[attack_status], attack_status.max_stacks_possible)
-		return name + " is affected by " + attack_status.name + " again from attack"
+		if (m.current_statuses_dict[attack_status] == attack_status.max_stacks_possible):
+			return name + " is affected by " + attack_status.name + ", stacks are at max value! " + stacks_were_and_are(stacks_were, str( m.current_statuses_dict[attack_status])) 
+		return name + " is affected by " + attack_status.name + " again from attack" + stacks_were_and_are(stacks_were, str(m.current_statuses_dict[attack_status]))
 	else: m.current_statuses_dict[attack_status] = attack_status.stacks_on_hit
-	return m.name + " recieves " + attack_status.name + " from attack"
+	return m.name + " recieves " + attack_status.name + " from attack (" + str(attack_status.stacks_on_hit) + " stacks)"
+
+func stacks_were_and_are(were : String, are : String):
+	return "(Stacks were: " + were + ", now are: " + are + ")"
 
 func add_rolls(num_of_die: int, die: int):
 	var ret = 0

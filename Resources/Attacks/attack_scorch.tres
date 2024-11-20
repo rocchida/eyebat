@@ -1,20 +1,35 @@
-[gd_resource type="Resource" script_class="Attack" load_steps=3 format=3 uid="uid://dliqvxokfeu8m"]
+[gd_resource type="Resource" script_class="Attack" load_steps=5 format=3 uid="uid://dliqvxokfeu8m"]
 
+[ext_resource type="Script" path="res://Resources/Statuses/status_base.gd" id="1_4wfup"]
 [ext_resource type="Script" path="res://Resources/Attacks/attack_base.gd" id="1_rydu8"]
 [ext_resource type="AudioStream" uid="uid://d3avxnpgk0sgb" path="res://ImportedAssets/Audio/AttackSounds/revive.wav" id="2_5cxt5"]
 
+[sub_resource type="Resource" id="Resource_8ya3k"]
+script = ExtResource("1_4wfup")
+name = "BRN"
+chance_to_hit = 100
+max_stacks_possible = 12
+stacks_on_hit = 3
+percent_dmg_max_hp_per_turn = 0.0
+percent_dmg_current_hp_per_turn = 0.0
+flat_dmg_per_turn = 10
+stat_debuffs = Array[Resource("res://Resources/Statuses/stat_status_base.gd")]([])
+stat_buffs = Array[Resource("res://Resources/Statuses/stat_status_base.gd")]([])
+
 [resource]
 script = ExtResource("1_rydu8")
-type = 0
+num_of_targets = 1
+hover_target_outline_clr = Color(0.545098, 0, 0, 1)
+target_type = 0
 name = "Scorch"
 sound = ExtResource("2_5cxt5")
 dex = false
 str = false
 will = false
 cha = false
-intl = true
-mana_cost = 4
-d4s = 1
+intl = false
+mana_cost = 2
+d4s = 0
 d6s = 0
 d8s = 0
 d10s = 0
@@ -22,3 +37,4 @@ d12s = 0
 d20s = 0
 percent_buffed = 1.0
 percent_nerfed = 1.0
+attack_status = SubResource("Resource_8ya3k")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dxbfvlk53cyl3"]
+[gd_scene load_steps=21 format=3 uid="uid://dxbfvlk53cyl3"]
 
 [ext_resource type="Script" path="res://Monsters/Monster.gd" id="1_0nr25"]
 [ext_resource type="Resource" uid="uid://cgu7jdttiq5im" path="res://Resources/Attacks/attack_firebolt.tres" id="2_86oyb"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://dyha3hn24vliy" path="res://Scenes/CodedAssets/clickable.tscn" id="11_c5378"]
 [ext_resource type="Animation" uid="uid://dpwlpgg8b327o" path="res://idle.res" id="11_lvaig"]
 [ext_resource type="Animation" uid="uid://dronyst6kkj11" path="res://damaged.res" id="12_nolnv"]
+[ext_resource type="PackedScene" uid="uid://k5amlj5tgi33" path="res://status_tracker.tscn" id="16_kvqxe"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6y8jq"]
 resource_local_to_scene = true
@@ -91,3 +92,5 @@ transform = Transform3D(0.174239, 0, 0, 0, 0.0701671, 0, 0, 0, 1, 0, 1.19833, 0)
 texture = SubResource("ViewportTexture_7uvk6")
 
 [node name="Clickable" parent="." instance=ExtResource("11_c5378")]
+
+[node name="Status Tracker" parent="." instance=ExtResource("16_kvqxe")]

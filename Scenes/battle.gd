@@ -48,6 +48,7 @@ func sort_by_speed(a:Monster, b:Monster):
 	return false
 
 func end_turn():
+	update_status_trackers()
 	UI.hide_buttons()
 	UI.debug(current_monster().name + " ends their turn \n")
 	for m in initiative:
@@ -74,9 +75,14 @@ func end_turn():
 		UI.set_current_monster_stats(current_monster())
 		UI.set_attack_description(null, null)
 
+func update_status_trackers():
+	for m : Monster in initiative:
+		m.update_status_tracker()
+
 func statuses_take_effect(m : Monster):
 	for status : Status in m.current_statuses_dict:
 		if m.current_statuses_dict[status] <= 0:
+			update_status_trackers()
 			continue
 		var dmg : int = 0
 		if (status.percent_dmg_current_hp_per_turn != 0):
@@ -93,11 +99,17 @@ func statuses_take_effect(m : Monster):
 			dmg += status.flat_dmg_per_turn
 		m.take_damage(dmg)
 		await get_tree().create_timer(4).timeout
+		var stacks_were : String = str(m.current_statuses_dict[status])
 		if m.current_statuses_dict[status] == 1: UI.debug(m.name + " wears off status " + status.name)
 		m.current_statuses_dict[status] -= 1
 		if m.current_statuses_dict[status] < 0: m.current_statuses_dict[status] = 0
+		print("(Stacks were: " + stacks_were + ", now are: " + str(m.current_statuses_dict[status]) + ")")
+		update_status_trackers()
 	
 	#m.current_statuses = m.current_statuses_dict.filter(func(status : Status): return m.current_statuses_dict[status] > 0)
+func stacks_were_and_are(were : String, are : String):
+	return "(Stacks were: " + were + ", now are: " + are + ")"
+
 
 func battle_is_over():
 	if get_living_enemies().size() <= 0 or get_living_goodguys().size() <= 0:
