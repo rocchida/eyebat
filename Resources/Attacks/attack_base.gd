@@ -8,11 +8,11 @@ enum target_types {ALL, ONLY_ALLIES, ONLY_ENEMIES, ONLY_SELF}
 @export var name : String = "Default Attack Name"
 @export var sound : AudioStream
 
-@export var dex : bool = false
-@export var str : bool = false
-@export var will : bool = false
-@export var cha : bool = false
-@export var intl : bool = false
+@export var atk : bool = false
+@export var def : bool = false
+@export var magic : bool = false
+@export var res : bool = false
+@export var spd : bool = false
 
 @export var mana_cost : int = 0
 
@@ -29,11 +29,11 @@ enum target_types {ALL, ONLY_ALLIES, ONLY_ENEMIES, ONLY_SELF}
 func get_damage(monster : Monster):
 	var damage = 0
 	
-	if (dex): damage += monster.dex
-	if (str): damage += monster.str
-	if (will): damage += monster.will
-	if (cha): damage += monster.cha
-	if (intl): damage += monster.intl
+	if (atk): damage += monster.get_modded_atk()
+	if (def): damage += monster.get_modded_def()
+	if (magic): damage += monster.get_modded_magic()
+	if (res): damage += monster.get_modded_res()
+	if (spd): damage += monster.get_modded_spd()
 	
 	damage += add_rolls(d4s, 4)
 	damage += add_rolls(d6s, 6)
@@ -46,7 +46,7 @@ func get_damage(monster : Monster):
 
 func inflict_statuses(m: Monster):
 	if !status_succeeded(attack_status.chance_to_hit):
-		return
+		return m.name + " resists against the " + attack_status.name + " status effect"
 	if (m.current_statuses_dict.has(attack_status)):
 		var stacks_were : String = str(m.current_statuses_dict[attack_status])
 		m.current_statuses_dict[attack_status] += attack_status.stacks_on_hit
@@ -71,11 +71,11 @@ func roll_die(die: int):
 
 func get_damage_formula(m : Monster):
 	var ret = ""
-	if (dex): ret += "+DEX(" + str(m.dex) + ")"
-	if (str): ret += " +STR(" +str( m.str) + ")"
-	if (will): ret += " +WILL(" + str(m.will) + ")"
-	if (cha): ret += " +CHA(" + str(m.cha) + ")"
-	if (intl): ret += " +INTL(" + str(m.intl) + ")"
+	if (atk): ret += "+ATK(" + str(m.get_modded_atk()) + ")"
+	if (def): ret += " +DEF(" +str( m.get_modded_def()) + ")"
+	if (magic): ret += " +MAGIC(" + str(m.get_modded_magic()) + ")"
+	if (res): ret += " +RES(" + str(m.get_modded_res()) + ")"
+	if (spd): ret += " +SPD(" + str(m.get_modded_spd()) + ")"
 	
 	if (d4s > 0): ret += " +" + str(d4s) + "d4 "
 	if (d6s > 0): ret += " +" + str(d6s) + "d6 "
