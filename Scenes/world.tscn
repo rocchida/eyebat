@@ -18,7 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://cbniu1tm214eu" path="res://ImportedAssets/ParticleEffects/particle_sprite_smoke.webp" id="33_imrae"]
 [ext_resource type="PackedScene" uid="uid://d0dsmhx747f3p" path="res://CustomAssets/New folder/objects/rocks/rock_1.tscn" id="35_ntgmj"]
 [ext_resource type="MeshLibrary" uid="uid://b3u22aw7e05yx" path="res://lazaresque.tres" id="37_u5hm2"]
-[ext_resource type="PackedScene" uid="uid://djtiph0nrnwyp" path="res://Monsters/Hynine.tscn" id="40_5tjmr"]
+[ext_resource type="PackedScene" uid="uid://djtiph0nrnwyp" path="res://Monsters/hynine.tscn" id="40_5tjmr"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_8hhi2"]
 
@@ -94,7 +94,7 @@ script = ExtResource("1_hijai")
 
 [node name="player" parent="." node_paths=PackedStringArray("monster_roster") instance=ExtResource("2_icr3f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.9048, 5.63985, 26.3588)
-monster_roster = [NodePath("../Monsters/Player Monsters/Hynine")]
+monster_roster = [NodePath("../Monsters/Player Monsters/Hynine"), NodePath("../Monsters/Player Monsters/Gnome")]
 
 [node name="SceneDoor2" type="Area3D" parent="."]
 transform = Transform3D(-0.00275765, 0, -0.999996, 0, 1, 0, 0.999996, 0, -0.00275765, -8.11297, 3.95873, 20.8433)
@@ -111,7 +111,7 @@ shape = SubResource("SphereShape3D_8hhi2")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.5454, 4.01099, 20.5823)
 script = ExtResource("10_02i1u")
 _target_scene = "res://Scenes/battle.tscn"
-_encounter_monster_roster = [NodePath("../Monsters/Door Monsters/Gnome")]
+_encounter_monster_roster = [NodePath("../Monsters/Door Monsters/Gnome"), NodePath("../Monsters/Door Monsters/Hynine")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SceneDoor"]
 transform = Transform3D(1.768, 0, 0, 0, 2.058, 0, 0, 0, 1.63479, 0, 0, 0)
@@ -125,11 +125,15 @@ shape = SubResource("SphereShape3D_8hhi2")
 
 [node name="Gnome" parent="Monsters/Door Monsters" instance=ExtResource("12_6m0vq")]
 
+[node name="Hynine" parent="Monsters/Door Monsters" instance=ExtResource("40_5tjmr")]
+
 [node name="Shop Monsters" type="Node" parent="Monsters"]
 
 [node name="Player Monsters" type="Node" parent="Monsters"]
 
 [node name="Hynine" parent="Monsters/Player Monsters" instance=ExtResource("40_5tjmr")]
+
+[node name="Gnome" parent="Monsters/Player Monsters" instance=ExtResource("12_6m0vq")]
 
 [node name="Monsters_Player Monsters#Goblin" parent="." instance=ExtResource("12_gppj7")]
 

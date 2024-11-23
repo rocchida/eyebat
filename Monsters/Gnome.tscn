@@ -1,11 +1,12 @@
-[gd_scene load_steps=21 format=3 uid="uid://dxbfvlk53cyl3"]
+[gd_scene load_steps=27 format=3 uid="uid://dxbfvlk53cyl3"]
 
 [ext_resource type="Script" path="res://Monsters/Monster.gd" id="1_0nr25"]
-[ext_resource type="Resource" uid="uid://cgu7jdttiq5im" path="res://Resources/Attacks/attack_firebolt.tres" id="2_86oyb"]
-[ext_resource type="Resource" uid="uid://dxlwicbfo1hq6" path="res://Resources/Attacks/attack_sigh.tres" id="3_ebgix"]
 [ext_resource type="Resource" uid="uid://1fxil6c6rtoh" path="res://Resources/Attacks/attack_slash.tres" id="4_rgboe"]
 [ext_resource type="Resource" uid="uid://dliqvxokfeu8m" path="res://Resources/Attacks/attack_scorch.tres" id="5_4joqx"]
+[ext_resource type="Script" path="res://Resources/Statuses/status_base.gd" id="5_v1pyg"]
+[ext_resource type="Script" path="res://Resources/Statuses/stat_status_base.gd" id="6_1m20c"]
 [ext_resource type="PackedScene" uid="uid://l1476gvgrjti" path="res://Scenes/CodedAssets/CharacterPortraits/hynine_portrait.tscn" id="6_n3qpe"]
+[ext_resource type="Script" path="res://Resources/Attacks/attack_base.gd" id="6_pmbpi"]
 [ext_resource type="Shader" path="res://Monsters/outline.gdshader" id="7_lhvbi"]
 [ext_resource type="Texture2D" uid="uid://cge3ick3vajqp" path="res://CustomAssets/CharacterArt/Monster Sheet/Gnome_Spritesheet.png" id="7_u0kwc"]
 [ext_resource type="Script" path="res://Monsters/Outline_Initiate.gd" id="8_dx7x3"]
@@ -16,6 +17,79 @@
 [ext_resource type="Animation" uid="uid://dpwlpgg8b327o" path="res://idle.res" id="11_lvaig"]
 [ext_resource type="Animation" uid="uid://dronyst6kkj11" path="res://damaged.res" id="12_nolnv"]
 [ext_resource type="PackedScene" uid="uid://k5amlj5tgi33" path="res://status_tracker.tscn" id="16_kvqxe"]
+
+[sub_resource type="Resource" id="Resource_upukf"]
+script = ExtResource("5_v1pyg")
+name = "PSN"
+chance_to_hit = 100
+max_stacks_possible = 4
+stacks_on_hit = 3
+percent_dmg_max_hp_per_turn = 0.05
+percent_dmg_current_hp_per_turn = 0.0
+flat_dmg_per_turn = 0
+stat_debuffs = Array[ExtResource("6_1m20c")]([])
+stat_buffs = Array[ExtResource("6_1m20c")]([])
+
+[sub_resource type="Resource" id="Resource_585sw"]
+script = ExtResource("6_pmbpi")
+num_of_targets = 1
+hover_target_outline_clr = Color(0.545098, 0, 0, 1)
+target_type = 0
+name = "Poison"
+atk = false
+def = false
+magic = false
+res = false
+spd = false
+mana_cost = 0
+d4s = 0
+d6s = 0
+d8s = 0
+d10s = 0
+d12s = 0
+d20s = 0
+percent_buffed = 1.0
+percent_nerfed = 1.0
+attack_status = SubResource("Resource_upukf")
+
+[sub_resource type="Resource" id="Resource_080l1"]
+script = ExtResource("6_1m20c")
+stat = 2
+percent_affected = 0.3
+
+[sub_resource type="Resource" id="Resource_irr5i"]
+script = ExtResource("5_v1pyg")
+name = "Sword Buff"
+chance_to_hit = 100
+max_stacks_possible = 5
+stacks_on_hit = 3
+percent_dmg_max_hp_per_turn = 0.0
+percent_dmg_current_hp_per_turn = 0.0
+flat_dmg_per_turn = 0
+stat_debuffs = Array[ExtResource("6_1m20c")]([])
+stat_buffs = Array[ExtResource("6_1m20c")]([SubResource("Resource_080l1")])
+
+[sub_resource type="Resource" id="Resource_e643t"]
+script = ExtResource("6_pmbpi")
+num_of_targets = 1
+hover_target_outline_clr = Color(0.545098, 0, 0, 1)
+target_type = 0
+name = "Sword Dance"
+atk = false
+def = false
+magic = false
+res = false
+spd = false
+mana_cost = 0
+d4s = 0
+d6s = 0
+d8s = 0
+d10s = 0
+d12s = 0
+d20s = 0
+percent_buffed = 1.0
+percent_nerfed = 1.0
+attack_status = SubResource("Resource_irr5i")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6y8jq"]
 resource_local_to_scene = true
@@ -46,7 +120,7 @@ viewport_path = NodePath("ManaBar/SubViewport")
 
 [node name="Gnome" type="Node3D"]
 script = ExtResource("1_0nr25")
-attacks = Array[Resource("res://Resources/Attacks/attack_base.gd")]([ExtResource("2_86oyb"), ExtResource("3_ebgix"), ExtResource("4_rgboe"), ExtResource("5_4joqx")])
+attacks = Array[ExtResource("6_pmbpi")]([ExtResource("4_rgboe"), ExtResource("5_4joqx"), SubResource("Resource_585sw"), SubResource("Resource_e643t")])
 portrait = ExtResource("6_n3qpe")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
