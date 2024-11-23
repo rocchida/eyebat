@@ -22,6 +22,7 @@ func _ready():
 	UI.set_current_monster_stats(current_monster())
 	UI.set_initiative_board(initiative)
 	if is_enemy(initiative.front()): perform_ai_turn(current_monster())
+	UI.hide_buttons()
 
 func _prepare():
 	enemy_spawns = $EnemySpawns
@@ -54,6 +55,8 @@ func end_turn():
 	for m in initiative:
 		m.toggle_off_shader()
 	
+	await get_tree().create_timer(4).timeout
+	
 	if(battle_is_over()):
 		_scene_switcher.goto_overworld_scene("res://Scenes/world.tscn", get_all_goodguys())
 	
@@ -61,7 +64,10 @@ func end_turn():
 	if current_turn >= initiative.size(): current_turn = 0
 	
 	currently_selected_button = -1
-	UI.debug(current_monster().name + " begins their turn")
+	if (current_monster() in get_all_goodguys()):
+		UI.debug("Player's " + current_monster().name + " begins their turn")
+	else:
+		UI.debug("Enemy " + current_monster().name + " begins their turn")
 	
 	current_monster().toggle_on_shader()
 	
@@ -96,14 +102,17 @@ func statuses_take_effect(m : Monster):
 		if (status.flat_dmg_per_turn != 0):
 			var percent_dmg = int(status.flat_dmg_per_turn * float(m.max_health))
 			UI.debug(m.name + " is damaged by " + status.name + ", it inflicts " + str(status.flat_dmg_per_turn) + " dmg")
+			UI.debug("HP: " + str(m.health) + " -> NEW HP: " + str(m.health - status.flat_dmg_per_turn))
 			dmg += status.flat_dmg_per_turn
 		m.take_damage(dmg)
-		await get_tree().create_timer(4).timeout
+		get_tree().create_timer(4).timeout
 		var stacks_were : String = str(m.current_statuses_dict[status])
-		if m.current_statuses_dict[status] == 1: UI.debug(m.name + " wears off status " + status.name)
+		if m.current_statuses_dict[status] == 1: 
+			UI.debug(m.name + " wears off status " + status.name)
 		m.current_statuses_dict[status] -= 1
-		if m.current_statuses_dict[status] < 0: m.current_statuses_dict[status] = 0
-		print("(Stacks were: " + stacks_were + ", now are: " + str(m.current_statuses_dict[status]) + ")")
+		if m.current_statuses_dict[status] < 0: 
+			m.current_statuses_dict[status] = 0
+		UI.debug("(" + m.name  + "'s " + status.name +  " Stacks were: " + stacks_were + ", now are: " + str(m.current_statuses_dict[status]) + ")")
 		update_status_trackers()
 	
 	#m.current_statuses = m.current_statuses_dict.filter(func(status : Status): return m.current_statuses_dict[status] > 0)
