@@ -43,7 +43,7 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -111.0
+offset_top = -159.0
 grow_horizontal = 2
 grow_vertical = 0
 texture = ExtResource("1_f0uyr")
@@ -275,6 +275,7 @@ offset_bottom = -8.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 
 [node name="InitiativeBoard" type="NinePatchRect" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -301,11 +302,28 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="TextureRect" type="TextureRect" parent="InitiativeBoard/HBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 texture = ExtResource("3_1ncel")
 expand_mode = 5
 stretch_mode = 4
+
+[node name="Initiative" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -367.0
+offset_right = 366.0
+offset_bottom = 92.0
+grow_horizontal = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/normal_font_size = 33
+bbcode_enabled = true
+text = "[center]Example[/center]"
 
 [connection signal="pressed" from="ColorMenu/HBoxContainer/MenuButton" to="." method="_on_menu_button_pressed"]
 [connection signal="pressed" from="ColorMenu/HBoxContainer/MenuButton2" to="." method="_on_menu_button_2_pressed"]

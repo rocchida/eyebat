@@ -76,6 +76,7 @@ func take_damage(damage : int):
 		health -= damage
 		healthbar.set_value(health)
 
+
 func drain_mana(m : int):
 	if manabar.get_value() > 0:
 		mana -= m
@@ -122,4 +123,8 @@ func run_damaged_anim():
 
 func update_status_tracker():
 	status_tracker.update_text(current_statuses_dict)
+
+func kill_monster():
+	self.visible = false
+	current_statuses_dict.clear()
 	

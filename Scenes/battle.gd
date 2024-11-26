@@ -23,6 +23,7 @@ func _ready():
 	UI.set_initiative_board(initiative)
 	if is_enemy(initiative.front()): perform_ai_turn(current_monster())
 	UI.hide_buttons()
+	UI.set_initiative_text(0, initiative, get_living_enemies())
 
 func _prepare():
 	enemy_spawns = $EnemySpawns
@@ -62,6 +63,11 @@ func end_turn():
 	
 	current_turn = current_turn + 1
 	if current_turn >= initiative.size(): current_turn = 0
+	while (initiative[current_turn].is_deadzo()):
+		current_turn += 1
+		if current_turn >= initiative.size(): current_turn = 0
+	if current_turn >= initiative.size(): current_turn = 0
+	UI.set_initiative_text(current_turn, initiative, get_living_enemies())
 	
 	currently_selected_button = -1
 	if (current_monster() in get_all_goodguys()):
@@ -72,6 +78,11 @@ func end_turn():
 	current_monster().toggle_on_shader()
 	
 	statuses_take_effect(current_monster())
+	if (current_monster().is_deadzo()):
+		UI.debug(current_monster().name + " is killed by its status!")
+		current_monster().kill_monster()
+		end_turn()
+		return
 	
 	if (is_enemy(current_monster())):
 		perform_ai_turn(current_monster())
@@ -157,6 +168,10 @@ func run_attack(attacker : Monster, receivers : Array[Monster], attack : Attack)
 	for m in receivers:
 		UI.debug(attacker.name + " uses " + attack.name + " on " + m.name)
 		m.take_damage(attack.get_damage(attacker))
+		if (m.is_deadzo()):
+			UI.debug(m.name + " was killed by " + attack.name + "!")
+			m.kill_monster()
+			return
 		if attack.attack_status != null:
 			UI.debug(attack.inflict_statuses(m))
 
