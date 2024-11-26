@@ -1,14 +1,16 @@
-[gd_scene load_steps=23 format=3 uid="uid://djtiph0nrnwyp"]
+[gd_scene load_steps=29 format=3 uid="uid://djtiph0nrnwyp"]
 
 [ext_resource type="Script" path="res://Monsters/Monster.gd" id="1_0dpen"]
 [ext_resource type="PackedScene" uid="uid://l1476gvgrjti" path="res://Scenes/CodedAssets/CharacterPortraits/hynine_portrait.tscn" id="2_mleto"]
 [ext_resource type="Resource" uid="uid://cgu7jdttiq5im" path="res://Resources/Attacks/attack_firebolt.tres" id="2_sqyfe"]
 [ext_resource type="Texture2D" uid="uid://ioavpxax8o61" path="res://CustomAssets/CharacterArt/Monster Sheet/Hynine_Spritesheet.png" id="2_t4hbm"]
-[ext_resource type="Resource" uid="uid://dxlwicbfo1hq6" path="res://Resources/Attacks/attack_sigh.tres" id="3_te330"]
 [ext_resource type="Resource" uid="uid://1fxil6c6rtoh" path="res://Resources/Attacks/attack_slash.tres" id="4_cvwhh"]
 [ext_resource type="PackedScene" uid="uid://0n6qt3r5hf7i" path="res://Scenes/CodedAssets/health_bar_3d.tscn" id="4_qiw4m"]
+[ext_resource type="Script" path="res://Resources/Statuses/status_base.gd" id="5_murb2"]
 [ext_resource type="Resource" uid="uid://dliqvxokfeu8m" path="res://Resources/Attacks/attack_scorch.tres" id="5_xaakm"]
 [ext_resource type="PackedScene" uid="uid://dyha3hn24vliy" path="res://Scenes/CodedAssets/clickable.tscn" id="5_xcx82"]
+[ext_resource type="Script" path="res://Resources/Attacks/attack_base.gd" id="6_gcfww"]
+[ext_resource type="Script" path="res://Resources/Statuses/stat_status_base.gd" id="6_p24of"]
 [ext_resource type="Shader" path="res://Monsters/outline.gdshader" id="7_afcvv"]
 [ext_resource type="Script" path="res://Monsters/Outline_Initiate.gd" id="8_03oev"]
 [ext_resource type="Animation" uid="uid://bmi0kajb71q28" path="res://attack.res" id="10_4fqv8"]
@@ -16,6 +18,50 @@
 [ext_resource type="Animation" uid="uid://dpwlpgg8b327o" path="res://idle.res" id="10_wsgst"]
 [ext_resource type="Animation" uid="uid://dronyst6kkj11" path="res://damaged.res" id="11_4yt4q"]
 [ext_resource type="PackedScene" uid="uid://k5amlj5tgi33" path="res://status_tracker.tscn" id="16_evw14"]
+
+[sub_resource type="Resource" id="Resource_qlv5x"]
+script = ExtResource("6_p24of")
+stat = 2
+percent_affected = 0.9
+
+[sub_resource type="Resource" id="Resource_mynkx"]
+script = ExtResource("6_p24of")
+stat = 1
+percent_affected = 0.3
+
+[sub_resource type="Resource" id="Resource_peran"]
+script = ExtResource("5_murb2")
+name = "POOF"
+chance_to_hit = 100
+max_stacks_possible = 4
+stacks_on_hit = 3
+percent_dmg_max_hp_per_turn = 0.05
+percent_dmg_current_hp_per_turn = 0.0
+flat_dmg_per_turn = 0
+stat_debuffs = Array[ExtResource("6_p24of")]([SubResource("Resource_mynkx")])
+stat_buffs = Array[ExtResource("6_p24of")]([SubResource("Resource_qlv5x")])
+
+[sub_resource type="Resource" id="Resource_moled"]
+script = ExtResource("6_gcfww")
+num_of_targets = 1
+hover_target_outline_clr = Color(0.545098, 0, 0, 1)
+target_type = 0
+name = "Poof"
+atk = false
+def = false
+magic = false
+res = false
+spd = false
+mana_cost = 0
+d4s = 0
+d6s = 0
+d8s = 0
+d10s = 0
+d12s = 0
+d20s = 0
+percent_buffed = 1.0
+percent_nerfed = 1.0
+attack_status = SubResource("Resource_peran")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_351w6"]
 resource_local_to_scene = true
@@ -129,7 +175,7 @@ viewport_path = NodePath("ManaBar/SubViewport")
 
 [node name="Hynine" type="Node3D"]
 script = ExtResource("1_0dpen")
-attacks = Array[Resource("res://Resources/Attacks/attack_base.gd")]([ExtResource("2_sqyfe"), ExtResource("3_te330"), ExtResource("4_cvwhh"), ExtResource("5_xaakm")])
+attacks = Array[ExtResource("6_gcfww")]([ExtResource("2_sqyfe"), ExtResource("4_cvwhh"), ExtResource("5_xaakm"), SubResource("Resource_moled")])
 portrait = ExtResource("2_mleto")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
