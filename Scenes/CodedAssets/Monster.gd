@@ -70,6 +70,17 @@ func get_stat_with_buffs_and_debuffs(stat : int, statType : StatStatus.stats):
 	var updated_stat = stat + buff_mod + debuff_mod
 	return updated_stat
 
+func take_blockable_damage(ui : UI, damage : int):
+	var first_blocking_status : Status = get_first_status_with_blocking()
+	if first_blocking_status != null:
+		ui.debug("Damaged blocked by " + first_blocking_status.name + " status!")
+		if first_blocking_status.lose_stack_when_damaged: 
+			decrement_status(ui, first_blocking_status)
+		return
+	
+	take_damage(damage)
+	if damage > 0: update_statuses_after_taking_damage(ui)
+
 func take_damage(damage : int):
 	run_damaged_anim()
 	if healthbar.get_value() > 0:
@@ -127,4 +138,43 @@ func update_status_tracker():
 func kill_monster():
 	self.visible = false
 	current_statuses_dict.clear()
-	
+
+func decrement_status(ui : UI, status : Status):
+	var stacks_were : String = str(current_statuses_dict[status])
+	if current_statuses_dict[status] == 1: 
+		ui.debug(name + " wears off status " + status.name)
+	current_statuses_dict[status] -= 1
+	if current_statuses_dict[status] < 0: 
+		current_statuses_dict[status] = 0
+	ui.debug("(" + name  + "'s " + status.name +  " Stacks were: " + stacks_were + ", now are: " + str(current_statuses_dict[status]) + ")")
+	update_status_tracker()
+
+func increment_status(ui : UI, status : Status):
+	var stacks_were : String = str(current_statuses_dict[status])
+	current_statuses_dict[status] += 1
+	ui.debug("(" + name  + "'s " + status.name +  " Stacks were: " + stacks_were + ", now are: " + str(current_statuses_dict[status]) + ")")
+	update_status_tracker()
+
+func update_statuses_after_attacking(ui : UI):
+	for status in current_statuses_dict:
+		if status.lose_stack_when_attacking:
+			ui.debug("Status stack decrements from attack")
+			decrement_status(ui, status)
+		if status.gain_stack_when_attacking:
+			ui.debug("Status stack increments from attack")
+			increment_status(ui, status)
+
+func update_statuses_after_taking_damage(ui : UI):
+	for status : Status in current_statuses_dict:
+		if status.lose_stack_when_damaged:
+			ui.debug("Status stack decrements from receiving damage")
+			decrement_status(ui, status)
+		if status.gain_stack_when_damaged:
+			ui.debug("Status stack increments from receiving damage")
+			increment_status(ui, status)
+
+func get_first_status_with_blocking():
+	for status in current_statuses_dict:
+		if current_statuses_dict[status] > 0 and status.block_all_dmg:
+			return status
+	return null

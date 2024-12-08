@@ -38,6 +38,13 @@ stacks_on_hit = 3
 percent_dmg_max_hp_per_turn = 0.05
 percent_dmg_current_hp_per_turn = 0.0
 flat_dmg_per_turn = 0
+lose_stack_on_turn = false
+gain_stack_on_turn = false
+lose_stack_when_attacking = false
+gain_stack_when_attacking = false
+lose_stack_when_damaged = false
+gain_stack_when_damaged = false
+block_all_dmg = false
 stat_debuffs = Array[ExtResource("6_p24of")]([SubResource("Resource_mynkx")])
 stat_buffs = Array[ExtResource("6_p24of")]([SubResource("Resource_qlv5x")])
 
