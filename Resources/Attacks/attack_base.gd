@@ -8,6 +8,9 @@ enum target_types {ALL, ONLY_ALLIES, ONLY_ENEMIES, ONLY_SELF}
 @export var name : String = "Default Attack Name"
 @export var sound : AudioStream
 
+@export var is_heal : bool = false
+@export_range(0, 1) var percent_dmg_lifesteal : float = 0
+
 @export var atk : bool = false
 @export var def : bool = false
 @export var magic : bool = false

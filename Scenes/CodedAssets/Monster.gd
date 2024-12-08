@@ -70,16 +70,33 @@ func get_stat_with_buffs_and_debuffs(stat : int, statType : StatStatus.stats):
 	var updated_stat = stat + buff_mod + debuff_mod
 	return updated_stat
 
+func receive_attack(ui : UI, attack : Attack, attacker : Monster):
+	ui.debug(attacker.name + " uses " + attack.name + " on " + name)
+	if attack.is_heal:
+		take_heal(ui, attack.get_damage(attacker))
+	else:
+		var dmg_done = take_blockable_damage(ui, attack.get_damage(attacker))
+		if attack.percent_dmg_lifesteal != 0 and dmg_done != 0:
+			ui.debug("Attacking " + attacker.name + " is healed " + str(attack.percent_dmg_lifesteal) + " from lifesteal!")
+			attacker.take_heal(ui, attack.percent_dmg_lifesteal * dmg_done)
+	if (is_deadzo()):
+		ui.debug(name + " was killed by " + attack.name + "!")
+		kill_monster()
+		return
+	if attack.attack_status != null:
+		ui.debug(attack.inflict_statuses(self))
+
 func take_blockable_damage(ui : UI, damage : int):
 	var first_blocking_status : Status = get_first_status_with_blocking()
 	if first_blocking_status != null:
 		ui.debug("Damaged blocked by " + first_blocking_status.name + " status!")
 		if first_blocking_status.lose_stack_when_damaged: 
 			decrement_status(ui, first_blocking_status)
-		return
+		return 0
 	
 	take_damage(damage)
 	if damage > 0: update_statuses_after_taking_damage(ui)
+	return damage
 
 func take_damage(damage : int):
 	run_damaged_anim()
@@ -87,6 +104,12 @@ func take_damage(damage : int):
 		health -= damage
 		healthbar.set_value(health)
 
+func take_heal(ui : UI, amount : int):
+	ui.debug(name + " healed for " + str(amount))
+	health = min(health + amount, max_health)
+	if healthbar.get_value() > 0:
+		health += amount
+		healthbar.set_value(health)
 
 func drain_mana(m : int):
 	if manabar.get_value() > 0:
@@ -144,8 +167,8 @@ func decrement_status(ui : UI, status : Status):
 	if current_statuses_dict[status] == 1: 
 		ui.debug(name + " wears off status " + status.name)
 	current_statuses_dict[status] -= 1
-	if current_statuses_dict[status] < 0: 
-		current_statuses_dict[status] = 0
+	if current_statuses_dict[status] <= 0: 
+		current_statuses_dict.erase(status)
 	ui.debug("(" + name  + "'s " + status.name +  " Stacks were: " + stacks_were + ", now are: " + str(current_statuses_dict[status]) + ")")
 	update_status_tracker()
 

@@ -102,7 +102,8 @@ func statuses_take_effect(m : Monster):
 			update_status_trackers()
 			continue
 		if status.gain_stack_on_turn: m.increment_status(UI, status)
-		m.take_damage(status.get_status_damage(UI, m))
+		if status.dmg_is_heal: m.take_heal(UI, status.get_status_damage(UI, m))
+		else: m.take_damage(status.get_status_damage(UI, m))
 		get_tree().create_timer(4).timeout
 		if status.lose_stack_on_turn: m.decrement_status(UI, status)
 		update_status_trackers()
@@ -143,14 +144,7 @@ func run_attack(attacker : Monster, receivers : Array[Monster], attack : Attack)
 	attacker.drain_mana(attack.mana_cost)
 	attacker.update_statuses_after_attacking(UI)
 	for m in receivers:
-		UI.debug(attacker.name + " uses " + attack.name + " on " + m.name)
-		m.take_blockable_damage(UI, attack.get_damage(attacker))
-		if (m.is_deadzo()):
-			UI.debug(m.name + " was killed by " + attack.name + "!")
-			m.kill_monster()
-			return
-		if attack.attack_status != null:
-			UI.debug(attack.inflict_statuses(m))
+		m.receive_attack(UI, attack, attacker)
 
 func monster_hovered(monster : Monster):
 	UI.set_hovered_monster_stats(monster)

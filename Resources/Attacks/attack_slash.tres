@@ -1,24 +1,49 @@
-[gd_resource type="Resource" script_class="Attack" load_steps=3 format=3 uid="uid://1fxil6c6rtoh"]
+[gd_resource type="Resource" script_class="Attack" load_steps=5 format=3 uid="uid://1fxil6c6rtoh"]
 
 [ext_resource type="Script" path="res://Resources/Attacks/attack_base.gd" id="1_p7rw7"]
+[ext_resource type="Script" path="res://Resources/Statuses/status_base.gd" id="1_wt8hv"]
 [ext_resource type="AudioStream" uid="uid://cahh6u2b5puyf" path="res://ImportedAssets/Audio/AttackSounds/shank.wav" id="2_74doh"]
+
+[sub_resource type="Resource" id="Resource_yqnwv"]
+script = ExtResource("1_wt8hv")
+name = "ORB"
+chance_to_hit = 100
+max_stacks_possible = 10
+stacks_on_hit = 3
+percent_dmg_max_hp_per_turn = 0.0
+percent_dmg_current_hp_per_turn = 0.0
+flat_dmg_per_turn = 10
+dmg_is_heal = true
+lose_stack_on_turn = true
+gain_stack_on_turn = false
+lose_stack_when_attacking = false
+gain_stack_when_attacking = false
+lose_stack_when_damaged = false
+gain_stack_when_damaged = false
+block_all_dmg = false
+stat_debuffs = Array[Resource("res://Resources/Statuses/stat_status_base.gd")]([])
+stat_buffs = Array[Resource("res://Resources/Statuses/stat_status_base.gd")]([])
 
 [resource]
 script = ExtResource("1_p7rw7")
-type = 0
-name = "Slash"
+num_of_targets = 1
+hover_target_outline_clr = Color(0.545098, 0, 0, 1)
+target_type = 0
+name = "Healing Slash"
 sound = ExtResource("2_74doh")
-dex = true
-str = false
-will = false
-cha = false
-intl = false
+is_heal = true
+atk = false
+def = false
+magic = true
+res = false
+spd = false
 mana_cost = 1
 d4s = 0
-d6s = 1
+d6s = 2
 d8s = 0
 d10s = 0
 d12s = 0
 d20s = 0
 percent_buffed = 1.0
 percent_nerfed = 1.0
+attack_status = SubResource("Resource_yqnwv")
