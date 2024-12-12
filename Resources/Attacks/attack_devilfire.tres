@@ -1,0 +1,49 @@
+[gd_resource type="Resource" script_class="Attack" load_steps=5 format=3 uid="uid://lqupr5diak70"]
+
+[ext_resource type="Script" path="res://Resources/Statuses/status_base.gd" id="1_hqkjv"]
+[ext_resource type="Resource" uid="uid://cksrs68v61k2v" path="res://Resources/Attacks/statstatus_sapped.tres" id="2_cbdch"]
+[ext_resource type="Script" path="res://Resources/Attacks/attack_base.gd" id="3_2jica"]
+
+[sub_resource type="Resource" id="Resource_t2bne"]
+script = ExtResource("1_hqkjv")
+name = "Hellfire"
+chance_to_hit = 70
+max_stacks_possible = 4
+stacks_on_hit = 2
+percent_dmg_max_hp_per_turn = 0.1
+percent_dmg_current_hp_per_turn = 0.0
+flat_dmg_per_turn = 0
+dmg_is_heal = false
+lose_stack_on_turn = true
+gain_stack_on_turn = false
+lose_stack_when_attacking = false
+gain_stack_when_attacking = false
+lose_stack_when_damaged = false
+gain_stack_when_damaged = false
+block_all_dmg = false
+stat_debuffs = Array[Resource("res://Resources/Statuses/stat_status_base.gd")]([ExtResource("2_cbdch")])
+stat_buffs = Array[Resource("res://Resources/Statuses/stat_status_base.gd")]([])
+
+[resource]
+script = ExtResource("3_2jica")
+num_of_targets = 1
+hover_target_outline_clr = Color(0.545098, 0, 0, 1)
+target_type = 0
+name = "Devilfire"
+is_heal = false
+percent_dmg_lifesteal = 0.0
+atk = false
+def = false
+magic = true
+res = false
+spd = false
+mana_cost = 2
+d4s = 0
+d6s = 0
+d8s = 0
+d10s = 0
+d12s = 0
+d20s = 0
+percent_buffed = 1.0
+percent_nerfed = 1.0
+attack_status = SubResource("Resource_t2bne")
