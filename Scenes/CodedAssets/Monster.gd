@@ -169,7 +169,7 @@ func decrement_status(ui : UI, status : Status):
 	current_statuses_dict[status] -= 1
 	if current_statuses_dict[status] <= 0: 
 		current_statuses_dict.erase(status)
-	ui.debug("(" + name  + "'s " + status.name +  " Stacks were: " + stacks_were + ", now are: " + str(current_statuses_dict[status]) + ")")
+	else: ui.debug("(" + name  + "'s " + status.name +  " Stacks were: " + stacks_were + ", now are: " + str(current_statuses_dict[status]) + ")")
 	update_status_tracker()
 
 func increment_status(ui : UI, status : Status):
