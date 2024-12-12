@@ -93,7 +93,7 @@ ssil_sharpness = 0.33
 script = ExtResource("1_hijai")
 
 [node name="player" parent="." node_paths=PackedStringArray("monster_roster") instance=ExtResource("2_icr3f")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.9048, 5.63985, 26.3588)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.9129, 5.67045, 26.3472)
 monster_roster = [NodePath("../Monsters/Player Monsters/Hynine"), NodePath("../Monsters/Player Monsters/Gnome")]
 
 [node name="SceneDoor2" type="Area3D" parent="."]
@@ -229,7 +229,7 @@ transform = Transform3D(1.768, 0, 0, 0, 2.058, 0, 0, 0, 1.63479, 0, 0, 0)
 shape = SubResource("SphereShape3D_8hhi2")
 
 [node name="Sprite3D" type="Sprite3D" parent="Shopkeep"]
-transform = Transform3D(4.10053, 0, 0, 0, 3.89533, 0, 0, 0, 1, 0, 0, 0)
+transform = Transform3D(4.10053, 0, 0, 0, 3.89533, 0, 0, 0, 1, 0.0631123, 0.158037, 0.740541)
 texture_filter = 0
 texture = ExtResource("12_byxew")
 hframes = 6

@@ -12,7 +12,7 @@ func _process(delta):
 
 
 func _on_body_exited(body: Player):
-	$"../UI".visible = false
+	$"../UI".visible = false 
 
 
 func _on_body_entered(body: Player):
