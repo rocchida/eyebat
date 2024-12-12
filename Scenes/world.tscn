@@ -9,7 +9,7 @@
 [ext_resource type="Script" path="res://Scenes/CodedAssets/SceneDoor.gd" id="10_02i1u"]
 [ext_resource type="PackedScene" uid="uid://dxbfvlk53cyl3" path="res://Monsters/Gnome.tscn" id="12_6m0vq"]
 [ext_resource type="Texture2D" uid="uid://dl3plqwoor2bt" path="res://ImportedAssets/CharacterArt/Mage Idle.png" id="12_byxew"]
-[ext_resource type="PackedScene" uid="uid://c8khql4r5dw0w" path="res://Monsters/Goblin.tscn" id="12_gppj7"]
+[ext_resource type="PackedScene" uid="uid://cv5gbjo0wolg1" path="res://Monsters/Goblin.tscn" id="12_gppj7"]
 [ext_resource type="Script" path="res://Scenes/OverworldUI.gd" id="26_07yq2"]
 [ext_resource type="Texture2D" uid="uid://bsqtjhlergule" path="res://CustomAssets/CharacterArt/Shopkeep.png" id="26_va63k"]
 [ext_resource type="Script" path="res://Scenes/Shopkeep.gd" id="28_ngbrb"]
@@ -94,7 +94,7 @@ script = ExtResource("1_hijai")
 
 [node name="player" parent="." node_paths=PackedStringArray("monster_roster") instance=ExtResource("2_icr3f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.9048, 5.63985, 26.3588)
-monster_roster = [NodePath("../Monsters/Player Monsters/Hynine"), NodePath("../Monsters/Player Monsters/Gnome")]
+monster_roster = [NodePath("../Monsters/Player Monsters/Hynine"), NodePath("../Monsters/Player Monsters/Gnome"), NodePath("")]
 
 [node name="SceneDoor2" type="Area3D" parent="."]
 transform = Transform3D(-0.00275765, 0, -0.999996, 0, 1, 0, 0.999996, 0, -0.00275765, -8.11297, 3.95873, 20.8433)

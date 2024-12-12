@@ -40,9 +40,9 @@ stat_buffs = Array[Resource("res://Resources/Statuses/stat_status_base.gd")]([])
 
 [sub_resource type="Resource" id="Resource_585sw"]
 script = ExtResource("6_pmbpi")
-num_of_targets = 1
+num_of_targets = 2
 hover_target_outline_clr = Color(0.545098, 0, 0, 1)
-target_type = 0
+target_type = 2
 name = "Poison"
 is_heal = false
 percent_dmg_lifesteal = 0.0

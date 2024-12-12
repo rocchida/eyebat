@@ -94,22 +94,23 @@ func take_blockable_damage(ui : UI, damage : int):
 			decrement_status(ui, first_blocking_status)
 		return 0
 	
-	take_damage(damage)
+	take_damage(ui, damage)
 	if damage > 0: update_statuses_after_taking_damage(ui)
 	return damage
 
-func take_damage(damage : int):
+func take_damage(ui : UI, damage : int):
 	run_damaged_anim()
+	var new_health = max(health - damage, 0)
+	ui.debug(name + " damaged for " + str(damage) + " (" + str(health) + " -> " + str(new_health) + ")")
+	health = new_health
 	if healthbar.get_value() > 0:
-		health -= damage
-		healthbar.set_value(health)
+		healthbar.set_value(new_health)
 
 func take_heal(ui : UI, amount : int):
-	ui.debug(name + " healed for " + str(amount))
-	health = min(health + amount, max_health)
-	if healthbar.get_value() > 0:
-		health += amount
-		healthbar.set_value(health)
+	var new_health = min(health + amount, max_health)
+	ui.debug(name + " healed for " + str(amount) + " (" + str(health) + " -> " + str(new_health) + ")")
+	health = new_health
+	healthbar.set_value(health)
 
 func drain_mana(m : int):
 	if manabar.get_value() > 0:
@@ -169,7 +170,7 @@ func decrement_status(ui : UI, status : Status):
 	current_statuses_dict[status] -= 1
 	if current_statuses_dict[status] <= 0: 
 		current_statuses_dict.erase(status)
-	ui.debug("(" + name  + "'s " + status.name +  " Stacks were: " + stacks_were + ", now are: " + str(current_statuses_dict[status]) + ")")
+	else: ui.debug("(" + name  + "'s " + status.name +  " Stacks were: " + stacks_were + ", now are: " + str(current_statuses_dict[status]) + ")")
 	update_status_tracker()
 
 func increment_status(ui : UI, status : Status):

@@ -103,7 +103,7 @@ func statuses_take_effect(m : Monster):
 			continue
 		if status.gain_stack_on_turn: m.increment_status(UI, status)
 		if status.dmg_is_heal: m.take_heal(UI, status.get_status_damage(UI, m))
-		else: m.take_damage(status.get_status_damage(UI, m))
+		else: m.take_damage(UI, status.get_status_damage(UI, m))
 		get_tree().create_timer(4).timeout
 		if status.lose_stack_on_turn: m.decrement_status(UI, status)
 		update_status_trackers()

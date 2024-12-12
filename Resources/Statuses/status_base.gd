@@ -40,7 +40,7 @@ func get_status_damage(ui : UI, m : Monster):
 	if (flat_dmg_per_turn != 0):
 		var percent_dmg = int(flat_dmg_per_turn * float(m.max_health))
 		ui.debug(m.name + " is " + healed_or_damaged + " by " + name + ", it does " + str(flat_dmg_per_turn) + " HP")
-		if dmg_is_heal: ui.debug("HP: " + str(m.health) + " -> NEW HP: " + str(m.health + flat_dmg_per_turn))
-		else: ui.debug("HP: " + str(m.health) + " -> NEW HP: " + str(m.health - flat_dmg_per_turn))
+		#if dmg_is_heal: ui.debug("HP: " + str(m.health) + " -> NEW HP: " + str(m.health + flat_dmg_per_turn))
+		#else: ui.debug("HP: " + str(m.health) + " -> NEW HP: " + str(m.health - flat_dmg_per_turn))
 		dmg += flat_dmg_per_turn
 	return dmg
