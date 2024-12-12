@@ -101,35 +101,12 @@ func statuses_take_effect(m : Monster):
 		if m.current_statuses_dict[status] <= 0:
 			update_status_trackers()
 			continue
-		var dmg : int = 0
-		if (status.percent_dmg_current_hp_per_turn != 0):
-			var percent_dmg = int(status.percent_dmg_current_hp_per_turn * float(m.max_health))
-			UI.debug(m.name + " is damaged by " + status.name + ", it inflicts " + str(status.percent_dmg_current_hp_per_turn) + "% of current hp (" + str(m.health) + ") for a total of " + str(percent_dmg))
-			dmg += percent_dmg
-		if (status.percent_dmg_max_hp_per_turn != 0):
-			var percent_dmg = int(status.percent_dmg_max_hp_per_turn * float(m.max_health))
-			UI.debug(m.name + " is damaged by " + status.name + ", it inflicts " + str(status.percent_dmg_max_hp_per_turn) + "% of max hp (" + str(m.max_health) + ") for a total of " + str(percent_dmg))
-			dmg += percent_dmg
-		if (status.flat_dmg_per_turn != 0):
-			var percent_dmg = int(status.flat_dmg_per_turn * float(m.max_health))
-			UI.debug(m.name + " is damaged by " + status.name + ", it inflicts " + str(status.flat_dmg_per_turn) + " dmg")
-			UI.debug("HP: " + str(m.health) + " -> NEW HP: " + str(m.health - status.flat_dmg_per_turn))
-			dmg += status.flat_dmg_per_turn
-		m.take_damage(dmg)
+		if status.gain_stack_on_turn: m.increment_status(UI, status)
+		if status.dmg_is_heal: m.take_heal(UI, status.get_status_damage(UI, m))
+		else: m.take_damage(status.get_status_damage(UI, m))
 		get_tree().create_timer(4).timeout
-		var stacks_were : String = str(m.current_statuses_dict[status])
-		if m.current_statuses_dict[status] == 1: 
-			UI.debug(m.name + " wears off status " + status.name)
-		m.current_statuses_dict[status] -= 1
-		if m.current_statuses_dict[status] < 0: 
-			m.current_statuses_dict[status] = 0
-		UI.debug("(" + m.name  + "'s " + status.name +  " Stacks were: " + stacks_were + ", now are: " + str(m.current_statuses_dict[status]) + ")")
+		if status.lose_stack_on_turn: m.decrement_status(UI, status)
 		update_status_trackers()
-	
-	#m.current_statuses = m.current_statuses_dict.filter(func(status : Status): return m.current_statuses_dict[status] > 0)
-func stacks_were_and_are(were : String, are : String):
-	return "(Stacks were: " + were + ", now are: " + are + ")"
-
 
 func battle_is_over():
 	if get_living_enemies().size() <= 0 or get_living_goodguys().size() <= 0:
@@ -165,15 +142,9 @@ func run_attack(attacker : Monster, receivers : Array[Monster], attack : Attack)
 	attacker.run_attack_anim(is_enemy(attacker))
 	attack.play_sound($AudioStreamPlayer)
 	attacker.drain_mana(attack.mana_cost)
+	attacker.update_statuses_after_attacking(UI)
 	for m in receivers:
-		UI.debug(attacker.name + " uses " + attack.name + " on " + m.name)
-		m.take_damage(attack.get_damage(attacker))
-		if (m.is_deadzo()):
-			UI.debug(m.name + " was killed by " + attack.name + "!")
-			m.kill_monster()
-			return
-		if attack.attack_status != null:
-			UI.debug(attack.inflict_statuses(m))
+		m.receive_attack(UI, attack, attacker)
 
 func monster_hovered(monster : Monster):
 	UI.set_hovered_monster_stats(monster)

@@ -1,4 +1,5 @@
 extends Control
+class_name UI
 signal button_clicked(int)
 
 var buttons : Array
