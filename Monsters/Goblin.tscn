@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://c8khql4r5dw0w"]
+[gd_scene load_steps=23 format=3 uid="uid://dgna01scc1yhr"]
 
 [ext_resource type="Script" path="res://Monsters/Monster.gd" id="1_8gmwr"]
 [ext_resource type="Resource" uid="uid://cgu7jdttiq5im" path="res://Resources/Attacks/attack_firebolt.tres" id="2_78hmi"]
