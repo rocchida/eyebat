@@ -9,7 +9,7 @@
 [ext_resource type="Script" path="res://Scenes/CodedAssets/SceneDoor.gd" id="10_02i1u"]
 [ext_resource type="PackedScene" uid="uid://dxbfvlk53cyl3" path="res://Monsters/Gnome.tscn" id="12_6m0vq"]
 [ext_resource type="Texture2D" uid="uid://dl3plqwoor2bt" path="res://ImportedAssets/CharacterArt/Mage Idle.png" id="12_byxew"]
-[ext_resource type="PackedScene" uid="uid://c8khql4r5dw0w" path="res://Monsters/Goblin.tscn" id="12_gppj7"]
+[ext_resource type="PackedScene" uid="uid://dgna01scc1yhr" path="res://Monsters/Goblin.tscn" id="12_gppj7"]
 [ext_resource type="Script" path="res://Scenes/OverworldUI.gd" id="26_07yq2"]
 [ext_resource type="Texture2D" uid="uid://bsqtjhlergule" path="res://CustomAssets/CharacterArt/Shopkeep.png" id="26_va63k"]
 [ext_resource type="Script" path="res://Scenes/Shopkeep.gd" id="28_ngbrb"]
