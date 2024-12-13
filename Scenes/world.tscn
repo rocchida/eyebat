@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://bdsnxtasgjx2o"]
+[gd_scene load_steps=36 format=3 uid="uid://bdsnxtasgjx2o"]
 
 [ext_resource type="Script" path="res://Scripts/world.gd" id="1_hijai"]
 [ext_resource type="PackedScene" uid="uid://dba8t7daowokd" path="res://Scenes/CodedAssets/player.tscn" id="2_icr3f"]
@@ -10,9 +10,10 @@
 [ext_resource type="Resource" uid="uid://cgrusrc42vvnw" path="res://Resources/Attacks/dcdandiscord.tres" id="9_8m8ja"]
 [ext_resource type="PackedScene" uid="uid://0uah50n2ynp4" path="res://ImportedAssets/GridMapAssets/Models/GLTF format/doorLargeClosed.glb" id="10_1iaji"]
 [ext_resource type="Script" path="res://Scenes/CodedAssets/SceneDoor.gd" id="10_02i1u"]
+[ext_resource type="Script" path="res://Resources/Attacks/attack_base.gd" id="10_etfdu"]
 [ext_resource type="PackedScene" uid="uid://dxbfvlk53cyl3" path="res://Monsters/Gnome.tscn" id="12_6m0vq"]
 [ext_resource type="Texture2D" uid="uid://dl3plqwoor2bt" path="res://ImportedAssets/CharacterArt/Mage Idle.png" id="12_byxew"]
-[ext_resource type="PackedScene" uid="uid://c8khql4r5dw0w" path="res://Monsters/Goblin.tscn" id="12_gppj7"]
+[ext_resource type="PackedScene" uid="uid://dgna01scc1yhr" path="res://Monsters/Goblin.tscn" id="12_gppj7"]
 [ext_resource type="Script" path="res://Scenes/OverworldUI.gd" id="26_07yq2"]
 [ext_resource type="Texture2D" uid="uid://bsqtjhlergule" path="res://CustomAssets/CharacterArt/Shopkeep.png" id="26_va63k"]
 [ext_resource type="Script" path="res://Scenes/Shopkeep.gd" id="28_ngbrb"]
@@ -48,6 +49,7 @@ d20s = 0
 percent_buffed = 1.0
 percent_nerfed = 1.0
 attack_statuses = Array[Resource("res://Resources/Statuses/status_base.gd")]([])
+
 [sub_resource type="Animation" id="Animation_r44sn"]
 resource_name = "shopkeep"
 length = 0.80001
@@ -120,7 +122,7 @@ script = ExtResource("1_hijai")
 
 [node name="player" parent="." node_paths=PackedStringArray("monster_roster") instance=ExtResource("2_icr3f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.9129, 5.67045, 26.3472)
-monster_roster = [NodePath("../Monsters/Player Monsters/Hynine2"), NodePath("../Monsters/Player Monsters/Gnome")]
+monster_roster = [NodePath("../Monsters/Player Monsters/Hynine"), NodePath("../Monsters/Player Monsters/Gnome")]
 
 [node name="SceneDoor2" type="Area3D" parent="."]
 transform = Transform3D(-0.00275765, 0, -0.999996, 0, 1, 0, 0.999996, 0, -0.00275765, -8.11297, 3.95873, 20.8433)
@@ -137,7 +139,7 @@ shape = SubResource("SphereShape3D_8hhi2")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.5454, 4.01099, 20.5823)
 script = ExtResource("10_02i1u")
 _target_scene = "res://Scenes/battle.tscn"
-_encounter_monster_roster = [NodePath("../Monsters/Door Monsters/Gnome"), NodePath("../Monsters/Door Monsters/Hynine2")]
+_encounter_monster_roster = [NodePath("../Monsters/Door Monsters/Gnome"), NodePath("../Monsters/Door Monsters/Hynine")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SceneDoor"]
 transform = Transform3D(1.768, 0, 0, 0, 2.058, 0, 0, 0, 1.63479, 0, 0, 0)
@@ -151,15 +153,16 @@ shape = SubResource("SphereShape3D_8hhi2")
 
 [node name="Gnome" parent="Monsters/Door Monsters" instance=ExtResource("12_6m0vq")]
 
-[node name="Hynine2" parent="Monsters/Door Monsters" instance=ExtResource("40_5tjmr")]
+[node name="Hynine" parent="Monsters/Door Monsters" instance=ExtResource("40_5tjmr")]
+attacks = Array[ExtResource("10_etfdu")]([ExtResource("7_ht8g2"), ExtResource("8_8jn3v"), ExtResource("9_8m8ja"), SubResource("Resource_g1hne")])
 
 [node name="Shop Monsters" type="Node" parent="Monsters"]
 
 [node name="Player Monsters" type="Node" parent="Monsters"]
 
-[node name="Gnome" parent="Monsters/Player Monsters" instance=ExtResource("12_6m0vq")]
+[node name="Hynine" parent="Monsters/Player Monsters" instance=ExtResource("40_5tjmr")]
 
-[node name="Hynine2" parent="Monsters/Player Monsters" instance=ExtResource("40_5tjmr")]
+[node name="Gnome" parent="Monsters/Player Monsters" instance=ExtResource("12_6m0vq")]
 
 [node name="Monsters_Player Monsters#Goblin" parent="." instance=ExtResource("12_gppj7")]
 
