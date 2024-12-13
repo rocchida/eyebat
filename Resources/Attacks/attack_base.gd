@@ -27,7 +27,7 @@ enum target_types {ALL, ONLY_ALLIES, ONLY_ENEMIES, ONLY_SELF}
 @export var d20s : int = 0
 @export var percent_buffed : float = 1
 @export var percent_nerfed : float = 1
-@export var attack_status : Status
+@export var attack_statuses : Array[Status]
 
 func get_damage(monster : Monster):
 	var damage = 0
@@ -47,7 +47,11 @@ func get_damage(monster : Monster):
 	
 	return damage
 
-func inflict_statuses(m: Monster):
+func inflict_statuses(ui : UI, m: Monster):
+	for attack_status in attack_statuses:
+		ui.debug(inflict_status(m, attack_status))
+
+func inflict_status(m : Monster, attack_status : Status):
 	if !status_succeeded(attack_status.chance_to_hit):
 		return m.name + " resists against the " + attack_status.name + " status effect"
 	if (m.current_statuses_dict.has(attack_status)):

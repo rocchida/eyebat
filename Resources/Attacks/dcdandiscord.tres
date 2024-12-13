@@ -1,6 +1,28 @@
-[gd_resource type="Resource" script_class="Attack" load_steps=2 format=3 uid="uid://cgrusrc42vvnw"]
+[gd_resource type="Resource" script_class="Attack" load_steps=5 format=3 uid="uid://cgrusrc42vvnw"]
 
+[ext_resource type="Resource" uid="uid://dbwvwjiduwv1k" path="res://Resources/Statuses/torch.tres" id="1_2mia0"]
 [ext_resource type="Script" path="res://Resources/Attacks/attack_base.gd" id="1_gu28j"]
+[ext_resource type="Script" path="res://Resources/Statuses/status_base.gd" id="1_oxsmp"]
+
+[sub_resource type="Resource" id="Resource_20w3x"]
+script = ExtResource("1_oxsmp")
+name = "Block"
+chance_to_hit = 100
+max_stacks_possible = 4
+stacks_on_hit = 1
+percent_dmg_max_hp_per_turn = 0.0
+percent_dmg_current_hp_per_turn = 0.0
+flat_dmg_per_turn = 0
+dmg_is_heal = false
+lose_stack_on_turn = false
+gain_stack_on_turn = false
+lose_stack_when_attacking = false
+gain_stack_when_attacking = false
+lose_stack_when_damaged = true
+gain_stack_when_damaged = false
+block_all_dmg = false
+stat_debuffs = Array[Resource("res://Resources/Statuses/stat_status_base.gd")]([])
+stat_buffs = Array[Resource("res://Resources/Statuses/stat_status_base.gd")]([])
 
 [resource]
 script = ExtResource("1_gu28j")
@@ -24,3 +46,4 @@ d12s = 0
 d20s = 0
 percent_buffed = 1.0
 percent_nerfed = 1.0
+attack_statuses = Array[ExtResource("1_oxsmp")]([ExtResource("1_2mia0"), SubResource("Resource_20w3x")])
