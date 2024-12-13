@@ -83,8 +83,8 @@ func receive_attack(ui : UI, attack : Attack, attacker : Monster):
 		ui.debug(name + " was killed by " + attack.name + "!")
 		kill_monster()
 		return
-	if attack.attack_status != null:
-		ui.debug(attack.inflict_statuses(self))
+	if attack.attack_statuses != null and attack.attack_statuses.size() > 0:
+		attack.inflict_statuses(ui, self)
 
 func take_blockable_damage(ui : UI, damage : int):
 	var first_blocking_status : Status = get_first_status_with_blocking()

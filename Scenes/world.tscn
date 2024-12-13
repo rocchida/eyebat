@@ -5,6 +5,9 @@
 [ext_resource type="PackedScene" uid="uid://dewq4tvuvov5m" path="res://CustomAssets/MapAssets/testnut.glb" id="3_yn2xu"]
 [ext_resource type="Texture2D" uid="uid://c3p2my3ujx7ho" path="res://ImportedAssets/Skyboxes/PurplyBlueSky.png" id="4_21lx8"]
 [ext_resource type="Script" path="res://Scripts/WorldEnvironment.gd" id="5_qeqqs"]
+[ext_resource type="Resource" uid="uid://cgu7jdttiq5im" path="res://Resources/Attacks/attack_firebolt.tres" id="7_ht8g2"]
+[ext_resource type="Resource" uid="uid://1fxil6c6rtoh" path="res://Resources/Attacks/attack_slash.tres" id="8_8jn3v"]
+[ext_resource type="Resource" uid="uid://cgrusrc42vvnw" path="res://Resources/Attacks/dcdandiscord.tres" id="9_8m8ja"]
 [ext_resource type="PackedScene" uid="uid://0uah50n2ynp4" path="res://ImportedAssets/GridMapAssets/Models/GLTF format/doorLargeClosed.glb" id="10_1iaji"]
 [ext_resource type="Script" path="res://Scenes/CodedAssets/SceneDoor.gd" id="10_02i1u"]
 [ext_resource type="PackedScene" uid="uid://dxbfvlk53cyl3" path="res://Monsters/Gnome.tscn" id="12_6m0vq"]
@@ -22,6 +25,29 @@
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_8hhi2"]
 
+[sub_resource type="Resource" id="Resource_g1hne"]
+script = ExtResource("10_etfdu")
+num_of_targets = 1
+hover_target_outline_clr = Color(0.545098, 0, 0, 1)
+target_type = 0
+name = "Default Attack Name"
+is_heal = false
+percent_dmg_lifesteal = 0.0
+atk = false
+def = false
+magic = false
+res = false
+spd = false
+mana_cost = 0
+d4s = 0
+d6s = 0
+d8s = 0
+d10s = 0
+d12s = 0
+d20s = 0
+percent_buffed = 1.0
+percent_nerfed = 1.0
+attack_statuses = Array[Resource("res://Resources/Statuses/status_base.gd")]([])
 [sub_resource type="Animation" id="Animation_r44sn"]
 resource_name = "shopkeep"
 length = 0.80001
