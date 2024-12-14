@@ -25,8 +25,7 @@ enum target_types {ALL, ONLY_ALLIES, ONLY_ENEMIES, ONLY_SELF}
 @export var d10s : int = 0
 @export var d12s : int = 0
 @export var d20s : int = 0
-@export var percent_buffed : float = 1
-@export var percent_nerfed : float = 1
+@export var attacks_x_times : int = 1
 @export var attack_statuses : Array[Status]
 
 func get_damage(monster : Monster):

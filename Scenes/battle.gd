@@ -21,8 +21,9 @@ func _ready():
 	UI.set_buttons(current_monster().get_attack_names())
 	UI.set_current_monster_stats(current_monster())
 	UI.set_initiative_board(initiative)
-	if is_enemy(initiative.front()): perform_ai_turn(current_monster())
-	UI.hide_buttons()
+	if is_enemy(initiative.front()): 
+		perform_ai_turn(current_monster())
+		UI.hide_buttons()
 	UI.set_initiative_text(0, initiative, get_living_enemies())
 
 func _prepare():
@@ -124,7 +125,7 @@ func monster_clicked(clicked_monster : Monster):
 	currently_targeted_monsters.append(clicked_monster)
 	
 	if (currently_targeted_monsters.size() == current_selected_attack().num_of_targets):
-		run_attack(current_monster(), currently_targeted_monsters, current_selected_attack())
+		await run_attack(current_monster(), currently_targeted_monsters, current_selected_attack())
 		currently_targeted_monsters.clear()
 		end_turn()
 
@@ -140,11 +141,10 @@ func get_attacks_possible_targets():
 
 func run_attack(attacker : Monster, receivers : Array[Monster], attack : Attack):
 	attacker.run_attack_anim(is_enemy(attacker))
-	attack.play_sound($AudioStreamPlayer)
 	attacker.drain_mana(attack.mana_cost)
 	attacker.update_statuses_after_attacking(UI)
 	for m in receivers:
-		m.receive_attack(UI, attack, attacker)
+		await m.receive_attack(UI, attack, attacker, $AudioStreamPlayer)
 
 func monster_hovered(monster : Monster):
 	UI.set_hovered_monster_stats(monster)

@@ -70,21 +70,26 @@ func get_stat_with_buffs_and_debuffs(stat : int, statType : StatStatus.stats):
 	var updated_stat = stat + buff_mod + debuff_mod
 	return updated_stat
 
-func receive_attack(ui : UI, attack : Attack, attacker : Monster):
+func receive_attack(ui : UI, attack : Attack, attacker : Monster, audioPlayer : AudioStreamPlayer):
 	ui.debug(attacker.name + " uses " + attack.name + " on " + name)
-	if attack.is_heal:
-		take_heal(ui, attack.get_damage(attacker))
-	else:
-		var dmg_done = take_blockable_damage(ui, attack.get_damage(attacker))
-		if attack.percent_dmg_lifesteal != 0 and dmg_done != 0:
-			ui.debug("Attacking " + attacker.name + " is healed " + str(attack.percent_dmg_lifesteal) + " from lifesteal!")
-			attacker.take_heal(ui, attack.percent_dmg_lifesteal * dmg_done)
-	if (is_deadzo()):
-		ui.debug(name + " was killed by " + attack.name + "!")
-		kill_monster()
-		return
-	if attack.attack_statuses != null and attack.attack_statuses.size() > 0:
-		attack.inflict_statuses(ui, self)
+	for atk in attack.attacks_x_times:
+		if atk > 0: 
+			await get_tree().create_timer(5).timeout
+			ui.debug(name + " recieves hit #" + str(atk) + " from " + attack.name)
+		attack.play_sound(audioPlayer)
+		if attack.is_heal:
+			take_heal(ui, attack.get_damage(attacker))
+		else:
+			var dmg_done = take_blockable_damage(ui, attack.get_damage(attacker))
+			if attack.percent_dmg_lifesteal != 0 and dmg_done != 0:
+				ui.debug("Attacking " + attacker.name + " is healed " + str(attack.percent_dmg_lifesteal) + " from lifesteal!")
+				attacker.take_heal(ui, attack.percent_dmg_lifesteal * dmg_done)
+		if (is_deadzo()):
+			ui.debug(name + " was killed by " + attack.name + "!")
+			kill_monster()
+			return
+		if attack.attack_statuses != null and attack.attack_statuses.size() > 0:
+			attack.inflict_statuses(ui, self)
 
 func take_blockable_damage(ui : UI, damage : int):
 	var first_blocking_status : Status = get_first_status_with_blocking()

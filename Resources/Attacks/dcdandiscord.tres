@@ -44,6 +44,5 @@ d8s = 0
 d10s = 0
 d12s = 0
 d20s = 0
-percent_buffed = 1.0
-percent_nerfed = 1.0
+attacks_x_times = 1
 attack_statuses = Array[ExtResource("1_oxsmp")]([ExtResource("1_2mia0"), SubResource("Resource_20w3x")])
