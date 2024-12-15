@@ -106,14 +106,13 @@ func take_blockable_damage(ui : UI, damage : int):
 func take_damage(damage : int):
 	run_damaged_anim()
 	if healthbar.get_value() > 0:
-		health -= damage
+		health = max(health - damage, 0)
 		healthbar.set_value(health)
 
 func take_heal(ui : UI, amount : int):
 	ui.debug(name + " healed for " + str(amount))
 	health = min(health + amount, max_health)
-	if healthbar.get_value() > 0:
-		healthbar.set_value(health)
+	healthbar.set_value(health)
 
 func drain_mana(m : int):
 	if manabar.get_value() > 0:
@@ -165,6 +164,12 @@ func update_status_tracker():
 func kill_monster():
 	self.visible = false
 	current_statuses_dict.clear()
+
+func make_visible():
+	self.visible = true
+
+func make_invisible():
+	self.visible = false
 
 func decrement_status(ui : UI, status : Status):
 	var stacks_were : String = str(current_statuses_dict[status])

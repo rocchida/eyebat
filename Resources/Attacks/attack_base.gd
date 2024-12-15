@@ -1,7 +1,7 @@
 extends Resource
 class_name Attack
 
-enum target_types {ALL, ONLY_ALLIES, ONLY_ENEMIES, ONLY_SELF}
+enum target_types {ALL, ONLY_ALLIES, ONLY_ENEMIES, ONLY_SELF, ONLY_DEAD_MONSTERS}
 @export var num_of_targets : int = 1
 @export var hover_target_outline_clr : Color = Color.DARK_RED
 @export var target_type : target_types = target_types.ALL

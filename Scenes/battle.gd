@@ -137,10 +137,12 @@ func get_attacks_possible_targets(atk : Attack):
 		Attack.target_types.ALL: return initiative
 		Attack.target_types.ONLY_ALLIES: 
 			if is_enemy(current_monster()): return get_living_enemies() 
-			else: return get_all_goodguys()
+			else: return get_living_goodguys()
 		Attack.target_types.ONLY_ENEMIES: 
-			if is_enemy(current_monster()): return get_all_goodguys()
+			if is_enemy(current_monster()): return get_living_goodguys()
 			return get_living_enemies()
+		Attack.target_types.ONLY_DEAD_MONSTERS:
+			return get_all_dead_monsters()
 		Attack.target_types.ONLY_SELF: 
 			var ret : Array[Monster]
 			ret.append(current_monster())
@@ -183,6 +185,7 @@ func _on_ui_button_clicked(i : int):
 	currently_selected_button = i
 	UI.set_attack_description(current_monster().attacks[i], current_monster())
 	clear_all_monster_outlines()
+	show_dead_monsters_if_targetable()
 	outline_possible_targets()
 
 func clear_all_monster_outlines():
@@ -194,6 +197,14 @@ func outline_possible_targets():
 	var targets = get_attacks_possible_targets(current_selected_attack())
 	for m : Monster in targets:
 		m.set_outline_color(current_selected_attack().hover_target_outline_clr)
+		
+func show_dead_monsters_if_targetable():
+	if current_selected_attack().target_type == Attack.target_types.ONLY_DEAD_MONSTERS:
+		for m : Monster in initiative:
+			if m.is_deadzo(): m.make_visible()
+	else: 
+		for m : Monster in initiative:
+			if m.is_deadzo(): m.make_invisible()
 
 func current_monster():
 	return initiative[current_turn]
@@ -265,5 +276,12 @@ func get_all_goodguys():
 	var ret : Array[Monster]
 	for m in initiative:
 		if !is_enemy(m):
+			ret.append(m)
+	return ret
+
+func get_all_dead_monsters():
+	var ret : Array[Monster]
+	for m in initiative:
+		if m.is_deadzo():
 			ret.append(m)
 	return ret

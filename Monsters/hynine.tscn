@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://djtiph0nrnwyp"]
+[gd_scene load_steps=24 format=3 uid="uid://djtiph0nrnwyp"]
 
 [ext_resource type="Script" path="res://Monsters/Monster.gd" id="1_0dpen"]
 [ext_resource type="PackedScene" uid="uid://l1476gvgrjti" path="res://Scenes/CodedAssets/CharacterPortraits/hynine_portrait.tscn" id="2_mleto"]
@@ -7,7 +7,7 @@
 [ext_resource type="Resource" uid="uid://1fxil6c6rtoh" path="res://Resources/Attacks/attack_slash.tres" id="4_cvwhh"]
 [ext_resource type="PackedScene" uid="uid://0n6qt3r5hf7i" path="res://Scenes/CodedAssets/health_bar_3d.tscn" id="4_qiw4m"]
 [ext_resource type="Resource" uid="uid://cqavgxpfem3q6" path="res://Resources/Attacks/attack_devilfire.tres" id="5_6y6vf"]
-[ext_resource type="Resource" uid="uid://dliqvxokfeu8m" path="res://Resources/Attacks/attack_scorch.tres" id="5_xaakm"]
+[ext_resource type="Script" path="res://Resources/Attacks/attack_base.gd" id="5_i7k5e"]
 [ext_resource type="PackedScene" uid="uid://dyha3hn24vliy" path="res://Scenes/CodedAssets/clickable.tscn" id="5_xcx82"]
 [ext_resource type="Shader" path="res://Monsters/outline.gdshader" id="7_afcvv"]
 [ext_resource type="Script" path="res://Monsters/Outline_Initiate.gd" id="8_03oev"]
@@ -16,6 +16,30 @@
 [ext_resource type="Animation" uid="uid://dpwlpgg8b327o" path="res://idle.res" id="10_wsgst"]
 [ext_resource type="Animation" uid="uid://dronyst6kkj11" path="res://damaged.res" id="11_4yt4q"]
 [ext_resource type="PackedScene" uid="uid://k5amlj5tgi33" path="res://status_tracker.tscn" id="16_evw14"]
+
+[sub_resource type="Resource" id="Resource_hnx7w"]
+script = ExtResource("5_i7k5e")
+num_of_targets = 1
+hover_target_outline_clr = Color(0.545098, 0, 0, 1)
+target_type = 4
+randomly_choose_target = false
+name = "Revive"
+is_heal = true
+percent_dmg_lifesteal = 0.0
+atk = false
+def = false
+magic = true
+res = false
+spd = false
+mana_cost = 8
+d4s = 0
+d6s = 0
+d8s = 0
+d10s = 0
+d12s = 0
+d20s = 0
+attacks_x_times = 1
+attack_statuses = Array[Resource("res://Resources/Statuses/status_base.gd")]([])
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_351w6"]
 resource_local_to_scene = true
@@ -129,7 +153,7 @@ viewport_path = NodePath("ManaBar/SubViewport")
 
 [node name="Hynine2" type="Node3D"]
 script = ExtResource("1_0dpen")
-attacks = Array[Resource("res://Resources/Attacks/attack_base.gd")]([ExtResource("2_sqyfe"), ExtResource("4_cvwhh"), ExtResource("5_xaakm"), ExtResource("5_6y6vf")])
+attacks = Array[ExtResource("5_i7k5e")]([ExtResource("2_sqyfe"), ExtResource("4_cvwhh"), ExtResource("5_6y6vf"), SubResource("Resource_hnx7w")])
 portrait = ExtResource("2_mleto")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
