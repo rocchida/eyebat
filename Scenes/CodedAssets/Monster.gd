@@ -78,9 +78,9 @@ func receive_attack(ui : UI, attack : Attack, attacker : Monster, audioPlayer : 
 			ui.debug(name + " recieves hit #" + str(atk) + " from " + attack.name)
 		attack.play_sound(audioPlayer)
 		if attack.is_heal:
-			take_heal(ui, attack.get_damage(attacker))
+			take_heal(ui, attack.get_damage(ui, attacker))
 		else:
-			var dmg_done = take_blockable_damage(ui, attack.get_damage(attacker))
+			var dmg_done = take_blockable_damage(ui, attack.get_damage(ui, attacker))
 			if attack.percent_dmg_lifesteal != 0 and dmg_done != 0:
 				ui.debug("Attacking " + attacker.name + " is healed " + str(attack.percent_dmg_lifesteal) + " from lifesteal!")
 				attacker.take_heal(ui, attack.percent_dmg_lifesteal * dmg_done)
