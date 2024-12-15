@@ -34,6 +34,7 @@ target_type = 2
 randomly_choose_target = false
 name = "Sick Kick"
 is_heal = false
+is_magic_dmg = false
 percent_dmg_lifesteal = 0.0
 crit_chance = 0
 atk = false

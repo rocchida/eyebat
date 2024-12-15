@@ -80,7 +80,7 @@ func receive_attack(ui : UI, attack : Attack, attacker : Monster, audioPlayer : 
 		if attack.is_heal:
 			take_heal(ui, attack.get_damage(ui, attacker))
 		else:
-			var dmg_done = take_blockable_damage(ui, attack.get_damage(ui, attacker))
+			var dmg_done = take_blockable_damage(ui, attack.get_damage(ui, attacker), attack.is_magic_dmg)
 			if attack.percent_dmg_lifesteal != 0 and dmg_done != 0:
 				ui.debug("Attacking " + attacker.name + " is healed " + str(attack.percent_dmg_lifesteal) + " from lifesteal!")
 				attacker.take_heal(ui, attack.percent_dmg_lifesteal * dmg_done)
@@ -91,7 +91,7 @@ func receive_attack(ui : UI, attack : Attack, attacker : Monster, audioPlayer : 
 		if attack.attack_statuses != null and attack.attack_statuses.size() > 0:
 			attack.inflict_statuses(ui, self)
 
-func take_blockable_damage(ui : UI, damage : int):
+func take_blockable_damage(ui : UI, damage : int, is_magic : bool):
 	var first_blocking_status : Status = get_first_status_with_blocking()
 	if first_blocking_status != null:
 		ui.debug("Damaged blocked by " + first_blocking_status.name + " status!")
@@ -99,7 +99,15 @@ func take_blockable_damage(ui : UI, damage : int):
 			decrement_status(ui, first_blocking_status)
 		return 0
 	
-	take_damage(damage)
+	var damage_after_block
+	if is_magic:
+		damage_after_block = max(damage - get_modded_res(), 0)
+		ui.debug("DMG(" + str(damage) + ") - RES(" + str(get_modded_res()) + ") = " + str(damage_after_block))
+	else:
+		damage_after_block = max(damage - get_modded_def(), 0)
+		ui.debug("DMG(" + str(damage) + ") - DEF(" + str(get_modded_def()) + ") = " + str(damage_after_block))
+	
+	if damage_after_block != 0: take_damage(damage_after_block)
 	if damage > 0: update_statuses_after_taking_damage(ui)
 	return damage
 

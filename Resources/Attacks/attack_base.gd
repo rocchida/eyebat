@@ -10,6 +10,7 @@ enum target_types {ALL, ONLY_ALLIES, ONLY_ENEMIES, ONLY_SELF, ONLY_DEAD_MONSTERS
 @export var sound : AudioStream
 
 @export var is_heal : bool = false
+@export var is_magic_dmg : bool = false
 @export_range(0, 1) var percent_dmg_lifesteal : float = 0
 @export_range(0, 100) var crit_chance : int = 0
 

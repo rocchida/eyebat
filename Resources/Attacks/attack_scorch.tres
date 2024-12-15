@@ -13,6 +13,7 @@ name = "Heal schorch"
 sound = ExtResource("2_5cxt5")
 is_heal = true
 percent_dmg_lifesteal = 0.0
+crit_chance = 0
 atk = true
 def = true
 magic = false

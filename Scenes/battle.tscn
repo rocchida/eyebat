@@ -181,7 +181,7 @@ size = Vector3(1, 4.6582, 0.312988)
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0525, 0.894662, 0.444191)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.40888, 0.894662, 0.444191)
 amount = 300
 lifetime = 3.0
 visibility_aabb = AABB(-4, -4, -4.62292, 8, 8, 8)
@@ -189,7 +189,7 @@ process_material = SubResource("ParticleProcessMaterial_32bhv")
 draw_pass_1 = SubResource("QuadMesh_lvyj0")
 
 [node name="Campfire" parent="." instance=ExtResource("11_en8h7")]
-transform = Transform3D(0.629635, 0, 0, 0, 0.663397, 0, 0, 0, 0.610881, 2.06157, 1.28928, 0.412619)
+transform = Transform3D(0.629635, 0, 0, 0, 0.663397, 0, 0, 0, 0.610881, 1.41795, 1.28928, 0.412619)
 
 [node name="Rock_1" parent="." instance=ExtResource("12_312s8")]
 transform = Transform3D(7.5, 0, 0, 0, 6.6, 0, 0, 0, 8.99, -2, 4, -11.5866)
