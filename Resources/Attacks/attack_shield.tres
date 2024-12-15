@@ -1,41 +1,21 @@
-[gd_resource type="Resource" script_class="Attack" load_steps=5 format=3 uid="uid://bdyylh61s7gpd"]
+[gd_resource type="Resource" script_class="Attack" load_steps=3 format=3 uid="uid://bdyylh61s7gpd"]
 
-[ext_resource type="Script" path="res://Resources/Statuses/status_base.gd" id="1_oaqho"]
 [ext_resource type="Script" path="res://Resources/Attacks/attack_base.gd" id="2_03dpf"]
 [ext_resource type="AudioStream" uid="uid://d3avxnpgk0sgb" path="res://ImportedAssets/Audio/AttackSounds/revive.wav" id="3_gpvst"]
-
-[sub_resource type="Resource" id="Resource_8ya3k"]
-script = ExtResource("1_oaqho")
-name = "SHLD"
-chance_to_hit = 100
-max_stacks_possible = 12
-stacks_on_hit = 1
-percent_dmg_max_hp_per_turn = 0.0
-percent_dmg_current_hp_per_turn = 0.0
-flat_dmg_per_turn = 0
-dmg_is_heal = false
-lose_stack_on_turn = false
-gain_stack_on_turn = false
-lose_stack_when_attacking = false
-gain_stack_when_attacking = false
-lose_stack_when_damaged = true
-gain_stack_when_damaged = false
-block_all_dmg = true
-stat_debuffs = Array[Resource("res://Resources/Statuses/stat_status_base.gd")]([])
-stat_buffs = Array[Resource("res://Resources/Statuses/stat_status_base.gd")]([])
 
 [resource]
 script = ExtResource("2_03dpf")
 num_of_targets = 1
 hover_target_outline_clr = Color(0.545098, 0, 0, 1)
-target_type = 0
-name = "Shield"
+target_type = 1
+randomly_choose_target = false
+name = "Heal"
 sound = ExtResource("3_gpvst")
-is_heal = false
+is_heal = true
 percent_dmg_lifesteal = 0.0
 atk = false
 def = false
-magic = false
+magic = true
 res = false
 spd = false
 mana_cost = 2
@@ -45,6 +25,5 @@ d8s = 0
 d10s = 0
 d12s = 0
 d20s = 0
-percent_buffed = 1.0
-percent_nerfed = 1.0
-attack_status = SubResource("Resource_8ya3k")
+attacks_x_times = 1
+attack_statuses = Array[Resource("res://Resources/Statuses/status_base.gd")]([])

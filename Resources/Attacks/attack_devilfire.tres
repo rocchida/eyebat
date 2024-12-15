@@ -4,9 +4,10 @@
 
 [resource]
 script = ExtResource("3_2jica")
-num_of_targets = 1
+num_of_targets = 4
 hover_target_outline_clr = Color(0.545098, 0, 0, 1)
-target_type = 0
+target_type = 2
+randomly_choose_target = true
 name = "Devilfire"
 is_heal = false
 percent_dmg_lifesteal = 0.0
@@ -22,5 +23,5 @@ d8s = 0
 d10s = 0
 d12s = 0
 d20s = 0
-attacks_x_times = 3
+attacks_x_times = 1
 attack_statuses = Array[Resource("res://Resources/Statuses/status_base.gd")]([])
