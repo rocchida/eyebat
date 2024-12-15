@@ -113,7 +113,6 @@ func take_heal(ui : UI, amount : int):
 	ui.debug(name + " healed for " + str(amount))
 	health = min(health + amount, max_health)
 	if healthbar.get_value() > 0:
-		health += amount
 		healthbar.set_value(health)
 
 func drain_mana(m : int):

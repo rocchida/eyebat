@@ -60,7 +60,7 @@ func end_turn():
 	await get_tree().create_timer(4).timeout
 	
 	if(battle_is_over()):
-		_scene_switcher.goto_overworld_scene("res://Scenes/world.tscn", get_all_goodguys())
+		go_back_to_overworld()
 	
 	current_turn = current_turn + 1
 	if current_turn >= initiative.size(): current_turn = 0
@@ -93,6 +93,9 @@ func end_turn():
 		UI.set_current_monster_stats(current_monster())
 		UI.set_attack_description(null, null)
 
+func go_back_to_overworld():
+	_scene_switcher.goto_overworld_scene("res://Scenes/world.tscn", get_all_goodguys())
+
 func update_status_trackers():
 	for m : Monster in initiative:
 		m.update_status_tracker()
@@ -118,22 +121,26 @@ func monster_clicked(clicked_monster : Monster):
 	if currently_selected_button == -1 or current_monster().mana < current_selected_attack().mana_cost:
 		return
 	
-	var ms : Array[Monster] = get_attacks_possible_targets()
+	var ms : Array[Monster] = get_attacks_possible_targets(current_selected_attack())
 	if clicked_monster not in ms:
 		return
 	
 	currently_targeted_monsters.append(clicked_monster)
 	
-	if (currently_targeted_monsters.size() == current_selected_attack().num_of_targets):
+	if (currently_targeted_monsters.size() == current_selected_attack().num_of_targets or current_selected_attack().randomly_choose_target):
 		await run_attack(current_monster(), currently_targeted_monsters, current_selected_attack())
 		currently_targeted_monsters.clear()
 		end_turn()
 
-func get_attacks_possible_targets():
-	match current_selected_attack().target_type:
+func get_attacks_possible_targets(atk : Attack):
+	match atk.target_type:
 		Attack.target_types.ALL: return initiative
-		Attack.target_types.ONLY_ALLIES: return get_all_goodguys()
-		Attack.target_types.ONLY_ENEMIES: return get_living_enemies()
+		Attack.target_types.ONLY_ALLIES: 
+			if is_enemy(current_monster()): return get_living_enemies() 
+			else: return get_all_goodguys()
+		Attack.target_types.ONLY_ENEMIES: 
+			if is_enemy(current_monster()): return get_all_goodguys()
+			return get_living_enemies()
 		Attack.target_types.ONLY_SELF: 
 			var ret : Array[Monster]
 			ret.append(current_monster())
@@ -143,8 +150,17 @@ func run_attack(attacker : Monster, receivers : Array[Monster], attack : Attack)
 	attacker.run_attack_anim(is_enemy(attacker))
 	attacker.drain_mana(attack.mana_cost)
 	attacker.update_statuses_after_attacking(UI)
-	for m in receivers:
-		await m.receive_attack(UI, attack, attacker, $AudioStreamPlayer)
+	for num in range(attack.num_of_targets):
+		if(battle_is_over()):
+			go_back_to_overworld()
+			
+		var receiver
+		if attack.randomly_choose_target:
+			receiver = choose_random_target(get_attacks_possible_targets(attack))
+		else: receiver = receivers[num]
+		
+		receiver.receive_attack(UI, attack, attacker, $AudioStreamPlayer)
+		if attack.num_of_targets > 1 : await get_tree().create_timer(3.5).timeout
 
 func monster_hovered(monster : Monster):
 	UI.set_hovered_monster_stats(monster)
@@ -175,7 +191,7 @@ func clear_all_monster_outlines():
 			m.toggle_off_shader()
 
 func outline_possible_targets():
-	var targets = get_attacks_possible_targets()
+	var targets = get_attacks_possible_targets(current_selected_attack())
 	for m : Monster in targets:
 		m.set_outline_color(current_selected_attack().hover_target_outline_clr)
 
@@ -195,18 +211,28 @@ func perform_ai_turn(m : Monster):
 	end_turn()
 
 func perform_ai_attack(m : Monster):
-	var chosen_target = ai_choose_target()
-	if (chosen_target == null): return
 	var chosen_attack = ai_choose_attack(m)
-	run_attack(m, chosen_target, chosen_attack)
+	var chosen_targets = choose_random_targets(get_attacks_possible_targets(chosen_attack), chosen_attack.num_of_targets)
+	if (chosen_targets == null): return
+	run_attack(m, chosen_targets, chosen_attack)
 
-func ai_choose_target():
-	var living_goodguys = get_living_goodguys()
-	if (living_goodguys.size() <= 0): return null
-	var num = randi_range(0, living_goodguys.size() - 1)
+#func ai_choose_target():
+	#var living_goodguys = get_attacks_possible_targets()
+	#if (living_goodguys.size() <= 0): return null
+	#var num = randi_range(0, living_goodguys.size() - 1)
+	#var targets : Array[Monster]
+	#targets.append(living_goodguys[num])
+	#return targets
+
+func choose_random_targets(monsters : Array[Monster], num_of_targets : int):
 	var targets : Array[Monster]
-	targets.append(living_goodguys[num])
+	for i in num_of_targets:
+		var num = randi_range(0, monsters.size() - 1)
+		targets.append(monsters[num])
 	return targets
+
+func choose_random_target(monsters : Array[Monster]):
+	return choose_random_targets(monsters, 1)[0]
 
 func ai_choose_attack(m : Monster):
 	var viable_attacks : Array[Attack]
