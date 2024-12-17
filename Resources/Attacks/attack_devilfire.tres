@@ -10,6 +10,7 @@ target_type = 2
 randomly_choose_target = true
 name = "Devilfire"
 is_heal = false
+is_magic_dmg = false
 percent_dmg_lifesteal = 0.0
 crit_chance = 20
 atk = true

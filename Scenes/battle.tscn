@@ -1,8 +1,7 @@
-[gd_scene load_steps=25 format=3 uid="uid://d2yxnxvhqwyjo"]
+[gd_scene load_steps=21 format=3 uid="uid://d2yxnxvhqwyjo"]
 
-[ext_resource type="Texture2D" uid="uid://c3p2my3ujx7ho" path="res://ImportedAssets/Skyboxes/PurplyBlueSky.png" id="1_5kyky"]
 [ext_resource type="Script" path="res://Scenes/battle.gd" id="1_8t3rd"]
-[ext_resource type="Script" path="res://Scripts/WorldEnvironment.gd" id="2_c0w58"]
+[ext_resource type="PackedScene" uid="uid://bhn8c8kmh4j6y" path="res://day_night_cycle.tscn" id="2_6b1su"]
 [ext_resource type="MeshLibrary" uid="uid://b3u22aw7e05yx" path="res://lazaresque.tres" id="4_0yd8n"]
 [ext_resource type="PackedScene" uid="uid://w57g26li1j8e" path="res://Scenes/CodedAssets/battleSpawn.tscn" id="4_gtvef"]
 [ext_resource type="Script" path="res://Scenes/Camera3D.gd" id="5_ah3ax"]
@@ -12,20 +11,6 @@
 [ext_resource type="Texture2D" uid="uid://cbniu1tm214eu" path="res://ImportedAssets/ParticleEffects/particle_sprite_smoke.webp" id="10_0kg4i"]
 [ext_resource type="PackedScene" uid="uid://c38xv4p3ib2mh" path="res://CustomAssets/New folder/objects/campfire/campfire.tscn" id="11_en8h7"]
 [ext_resource type="PackedScene" uid="uid://d0dsmhx747f3p" path="res://CustomAssets/New folder/objects/rocks/rock_1.tscn" id="12_312s8"]
-
-[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_fmb2t"]
-panorama = ExtResource("1_5kyky")
-
-[sub_resource type="Sky" id="Sky_3xhuu"]
-sky_material = SubResource("PanoramaSkyMaterial_fmb2t")
-
-[sub_resource type="Environment" id="Environment_c1sn8"]
-background_mode = 2
-sky = SubResource("Sky_3xhuu")
-ssr_enabled = true
-ssr_max_steps = 32
-ssil_intensity = 2.36
-ssil_sharpness = 0.33
 
 [sub_resource type="Curve" id="Curve_xwvbv"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.142259, 1), 0.0, 0.0, 0, 0, Vector2(0.380753, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -86,19 +71,6 @@ material = SubResource("StandardMaterial3D_04t4i")
 script = ExtResource("1_8t3rd")
 debug = true
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_c1sn8")
-script = ExtResource("2_c0w58")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
-transform = Transform3D(0.873415, 0.280709, -0.39793, 0, 0.817145, 0.576432, 0.486976, -0.503465, 0.713707, -5.70988, 8.41206, 18.9512)
-light_color = Color(0.760784, 0.807843, 0.431373, 1)
-light_energy = 1.552
-shadow_enabled = true
-shadow_bias = 0.0
-shadow_reverse_cull_face = true
-shadow_blur = 2.391
-
 [node name="GridMap" type="GridMap" parent="."]
 mesh_library = ExtResource("4_0yd8n")
 cell_size = Vector3(1, 1, 1)
@@ -116,6 +88,7 @@ script = ExtResource("5_ah3ax")
 [node name="Ui" parent="." instance=ExtResource("9_jbq26")]
 
 [node name="EnemySpawns" parent="." node_paths=PackedStringArray("spawn_points_4") instance=ExtResource("6_72pnm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.97735, -0.0412066, 0)
 spawn_points_4 = [NodePath("BattleSpawn"), NodePath("BattleSpawn2"), NodePath("BattleSpawn3"), NodePath("BattleSpawn4")]
 face_left = true
 
@@ -140,6 +113,7 @@ seeBarrel = false
 enemySpawn = true
 
 [node name="PlayerSpawns" parent="." node_paths=PackedStringArray("spawn_points_4") instance=ExtResource("6_72pnm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.97735, -0.0412066, 0)
 spawn_points_4 = [NodePath("BattleSpawn"), NodePath("BattleSpawn2"), NodePath("BattleSpawn3"), NodePath("BattleSpawn4")]
 
 [node name="BattleSpawn" parent="PlayerSpawns" instance=ExtResource("4_gtvef")]
@@ -199,6 +173,8 @@ transform = Transform3D(-3.75, 0, -7.78557, 0, 6.6, 0, 6.49519, 0, -4.495, 7.705
 
 [node name="Rock_3" parent="." instance=ExtResource("12_312s8")]
 transform = Transform3D(5.3033, 0, 6.35689, 0, 6.6, 0, -5.3033, 0, 6.35689, -7, 3, 3)
+
+[node name="DayNightCycle" parent="." instance=ExtResource("2_6b1su")]
 
 [connection signal="button_clicked" from="Ui" to="." method="_on_ui_button_clicked"]
 [connection signal="monster_clicked" from="EnemySpawns/BattleSpawn" to="." method="_on_battle_spawn_monster_clicked"]

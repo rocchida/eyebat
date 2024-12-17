@@ -1,10 +1,9 @@
-[gd_scene load_steps=36 format=3 uid="uid://bdsnxtasgjx2o"]
+[gd_scene load_steps=32 format=3 uid="uid://bdsnxtasgjx2o"]
 
 [ext_resource type="Script" path="res://Scripts/world.gd" id="1_hijai"]
 [ext_resource type="PackedScene" uid="uid://dba8t7daowokd" path="res://Scenes/CodedAssets/player.tscn" id="2_icr3f"]
+[ext_resource type="PackedScene" uid="uid://bhn8c8kmh4j6y" path="res://day_night_cycle.tscn" id="2_xrqqg"]
 [ext_resource type="PackedScene" uid="uid://dewq4tvuvov5m" path="res://CustomAssets/MapAssets/testnut.glb" id="3_yn2xu"]
-[ext_resource type="Texture2D" uid="uid://c3p2my3ujx7ho" path="res://ImportedAssets/Skyboxes/PurplyBlueSky.png" id="4_21lx8"]
-[ext_resource type="Script" path="res://Scripts/WorldEnvironment.gd" id="5_qeqqs"]
 [ext_resource type="Resource" uid="uid://cgu7jdttiq5im" path="res://Resources/Attacks/attack_firebolt.tres" id="7_ht8g2"]
 [ext_resource type="Resource" uid="uid://1fxil6c6rtoh" path="res://Resources/Attacks/attack_slash.tres" id="8_8jn3v"]
 [ext_resource type="Resource" uid="uid://cgrusrc42vvnw" path="res://Resources/Attacks/dcdandiscord.tres" id="9_8m8ja"]
@@ -105,22 +104,10 @@ particles_anim_loop = false
 [sub_resource type="QuadMesh" id="QuadMesh_m2ivw"]
 material = SubResource("StandardMaterial3D_vuk7a")
 
-[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_mt7vc"]
-panorama = ExtResource("4_21lx8")
-
-[sub_resource type="Sky" id="Sky_6lueu"]
-sky_material = SubResource("PanoramaSkyMaterial_mt7vc")
-
-[sub_resource type="Environment" id="Environment_3knmi"]
-background_mode = 2
-sky = SubResource("Sky_6lueu")
-ssr_enabled = true
-ssr_max_steps = 32
-ssil_intensity = 2.36
-ssil_sharpness = 0.33
-
 [node name="World" type="Node3D"]
 script = ExtResource("1_hijai")
+
+[node name="DayNightCycle" parent="." instance=ExtResource("2_xrqqg")]
 
 [node name="player" parent="." node_paths=PackedStringArray("monster_roster") instance=ExtResource("2_icr3f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.9129, 5.67045, 26.3472)
@@ -294,21 +281,8 @@ transform = Transform3D(0.943958, 0, -3.66071, 0, 4.05227, 0, 3.06344, 0, 1.128,
 [node name="Rock_5" parent="Environment" instance=ExtResource("35_ntgmj")]
 transform = Transform3D(3.20557, 0, 0, 0, 2.77247, -2.79369, 0, 2.95538, 2.62079, -18.3681, 4.69581, 22.8442)
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
-environment = SubResource("Environment_3knmi")
-script = ExtResource("5_qeqqs")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment/WorldEnvironment"]
-transform = Transform3D(0.873415, 0.280709, -0.39793, 0, 0.817145, 0.576432, 0.486976, -0.503465, 0.713707, -5.70988, 8.41206, 18.9512)
-light_color = Color(0.760784, 0.807843, 0.431373, 1)
-light_energy = 1.552
-shadow_enabled = true
-shadow_bias = 0.0
-shadow_reverse_cull_face = true
-shadow_blur = 2.391
-
 [node name="testnut" parent="Environment" instance=ExtResource("3_yn2xu")]
-transform = Transform3D(77.4165, -52.7882, 57.6202, 40.0929, -42.789, -93.068, 67.0764, 86.5015, -10.874, 7.86892, 11.5862, -18.926)
+transform = Transform3D(77.4165, -52.7882, 57.6202, 40.0929, -42.789, -93.068, 67.0764, 86.5015, -10.874, 166.022, 11.5862, -404.713)
 
 [node name="GridMap" type="GridMap" parent="Environment"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 3, 26.3588)
