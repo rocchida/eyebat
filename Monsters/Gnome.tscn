@@ -141,3 +141,4 @@ texture = SubResource("ViewportTexture_7uvk6")
 [node name="Clickable" parent="." instance=ExtResource("11_c5378")]
 
 [node name="Status Tracker" parent="." instance=ExtResource("16_kvqxe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.77808, 0)
