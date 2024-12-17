@@ -1,15 +1,11 @@
-[gd_scene load_steps=32 format=3 uid="uid://bdsnxtasgjx2o"]
+[gd_scene load_steps=27 format=3 uid="uid://bdsnxtasgjx2o"]
 
 [ext_resource type="Script" path="res://Scripts/world.gd" id="1_hijai"]
 [ext_resource type="PackedScene" uid="uid://dba8t7daowokd" path="res://Scenes/CodedAssets/player.tscn" id="2_icr3f"]
 [ext_resource type="PackedScene" uid="uid://bhn8c8kmh4j6y" path="res://day_night_cycle.tscn" id="2_xrqqg"]
 [ext_resource type="PackedScene" uid="uid://dewq4tvuvov5m" path="res://CustomAssets/MapAssets/testnut.glb" id="3_yn2xu"]
-[ext_resource type="Resource" uid="uid://cgu7jdttiq5im" path="res://Resources/Attacks/attack_firebolt.tres" id="7_ht8g2"]
-[ext_resource type="Resource" uid="uid://1fxil6c6rtoh" path="res://Resources/Attacks/attack_slash.tres" id="8_8jn3v"]
-[ext_resource type="Resource" uid="uid://cgrusrc42vvnw" path="res://Resources/Attacks/dcdandiscord.tres" id="9_8m8ja"]
 [ext_resource type="PackedScene" uid="uid://0uah50n2ynp4" path="res://ImportedAssets/GridMapAssets/Models/GLTF format/doorLargeClosed.glb" id="10_1iaji"]
 [ext_resource type="Script" path="res://Scenes/CodedAssets/SceneDoor.gd" id="10_02i1u"]
-[ext_resource type="Script" path="res://Resources/Attacks/attack_base.gd" id="10_etfdu"]
 [ext_resource type="PackedScene" uid="uid://dxbfvlk53cyl3" path="res://Monsters/Gnome.tscn" id="12_6m0vq"]
 [ext_resource type="Texture2D" uid="uid://dl3plqwoor2bt" path="res://ImportedAssets/CharacterArt/Mage Idle.png" id="12_byxew"]
 [ext_resource type="PackedScene" uid="uid://dgna01scc1yhr" path="res://Monsters/Goblin.tscn" id="12_gppj7"]
@@ -24,32 +20,6 @@
 [ext_resource type="PackedScene" uid="uid://djtiph0nrnwyp" path="res://Monsters/hynine.tscn" id="40_5tjmr"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_8hhi2"]
-
-[sub_resource type="Resource" id="Resource_g1hne"]
-script = ExtResource("10_etfdu")
-num_of_targets = 1
-hover_target_outline_clr = Color(0.545098, 0, 0, 1)
-target_type = 2
-randomly_choose_target = false
-name = "Sick Kick"
-is_heal = false
-is_magic_dmg = false
-percent_dmg_lifesteal = 0.0
-crit_chance = 0
-atk = false
-def = false
-magic = false
-res = false
-spd = false
-mana_cost = 2
-d4s = 4
-d6s = 0
-d8s = 0
-d10s = 0
-d12s = 0
-d20s = 0
-attacks_x_times = 1
-attack_statuses = Array[Resource("res://Resources/Statuses/status_base.gd")]([])
 
 [sub_resource type="Animation" id="Animation_r44sn"]
 resource_name = "shopkeep"
@@ -111,7 +81,7 @@ script = ExtResource("1_hijai")
 
 [node name="player" parent="." node_paths=PackedStringArray("monster_roster") instance=ExtResource("2_icr3f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.9129, 5.67045, 26.3472)
-monster_roster = [NodePath("../Monsters/Player Monsters/Hynine"), NodePath("../Monsters/Player Monsters/Gnome")]
+monster_roster = [NodePath("../Monsters/Player Monsters/Hynine2"), NodePath("../Monsters/Player Monsters/Gnome")]
 
 [node name="SceneDoor2" type="Area3D" parent="."]
 transform = Transform3D(-0.00275765, 0, -0.999996, 0, 1, 0, 0.999996, 0, -0.00275765, -8.11297, 3.95873, 20.8433)
@@ -128,7 +98,7 @@ shape = SubResource("SphereShape3D_8hhi2")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.5454, 4.01099, 20.5823)
 script = ExtResource("10_02i1u")
 _target_scene = "res://Scenes/battle.tscn"
-_encounter_monster_roster = [NodePath("../Monsters/Door Monsters/Gnome"), NodePath("../Monsters/Door Monsters/Hynine")]
+_encounter_monster_roster = [NodePath("../Monsters/Door Monsters/Hynine2"), NodePath("../Monsters/Door Monsters/Gnome")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SceneDoor"]
 transform = Transform3D(1.768, 0, 0, 0, 2.058, 0, 0, 0, 1.63479, 0, 0, 0)
@@ -140,17 +110,15 @@ shape = SubResource("SphereShape3D_8hhi2")
 
 [node name="Door Monsters" type="Node" parent="Monsters"]
 
-[node name="Gnome" parent="Monsters/Door Monsters" instance=ExtResource("12_6m0vq")]
+[node name="Hynine2" parent="Monsters/Door Monsters" instance=ExtResource("40_5tjmr")]
 
-[node name="Hynine" parent="Monsters/Door Monsters" instance=ExtResource("40_5tjmr")]
-attacks = Array[ExtResource("10_etfdu")]([ExtResource("7_ht8g2"), ExtResource("8_8jn3v"), ExtResource("9_8m8ja"), SubResource("Resource_g1hne")])
+[node name="Gnome" parent="Monsters/Door Monsters" instance=ExtResource("12_6m0vq")]
 
 [node name="Shop Monsters" type="Node" parent="Monsters"]
 
 [node name="Player Monsters" type="Node" parent="Monsters"]
 
-[node name="Hynine" parent="Monsters/Player Monsters" instance=ExtResource("40_5tjmr")]
-spd = 9
+[node name="Hynine2" parent="Monsters/Player Monsters" instance=ExtResource("40_5tjmr")]
 
 [node name="Gnome" parent="Monsters/Player Monsters" instance=ExtResource("12_6m0vq")]
 

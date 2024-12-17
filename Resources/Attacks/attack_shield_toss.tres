@@ -1,29 +1,29 @@
-[gd_resource type="Resource" script_class="Attack" load_steps=2 format=3 uid="uid://co74tr6mu4aio"]
+[gd_resource type="Resource" script_class="Attack" load_steps=2 format=3 uid="uid://dcy6cdik6d1ww"]
 
-[ext_resource type="Script" path="res://Resources/Attacks/attack_base.gd" id="2_uhkyh"]
+[ext_resource type="Script" path="res://Resources/Attacks/attack_base.gd" id="1_ke3op"]
 
 [resource]
-script = ExtResource("2_uhkyh")
+script = ExtResource("1_ke3op")
 num_of_targets = 1
 hover_target_outline_clr = Color(0.545098, 0, 0, 1)
 target_type = 2
-randomly_choose_target = false
-name = "Struggle"
+randomly_choose_target = true
+name = "Shield Toss"
 is_heal = false
 is_magic_dmg = false
 percent_dmg_lifesteal = 0.0
 crit_chance = 0
 atk = false
-def = false
+def = true
 magic = false
 res = false
 spd = false
-mana_cost = 0
-d4s = 2
+mana_cost = 3
+d4s = 4
 d6s = 0
 d8s = 0
 d10s = 0
 d12s = 0
 d20s = 0
-attacks_x_times = 1
+attacks_x_times = 2
 attack_statuses = Array[Resource("res://Resources/Statuses/status_base.gd")]([])

@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="Attack" load_steps=3 format=3 uid="uid://cokdoudmey8us"]
+
+[ext_resource type="Resource" uid="uid://bh0883mfp4ia7" path="res://Resources/Statuses/status_sapped.tres" id="1_aa4er"]
+[ext_resource type="Script" path="res://Resources/Attacks/attack_base.gd" id="2_ctysi"]
+
+[resource]
+script = ExtResource("2_ctysi")
+num_of_targets = 1
+hover_target_outline_clr = Color(0.545098, 0, 0, 1)
+target_type = 2
+randomly_choose_target = false
+name = "Wither"
+is_heal = false
+is_magic_dmg = false
+percent_dmg_lifesteal = 0.0
+crit_chance = 0
+atk = false
+def = false
+magic = false
+res = false
+spd = false
+mana_cost = 2
+d4s = 0
+d6s = 0
+d8s = 0
+d10s = 0
+d12s = 0
+d20s = 0
+attacks_x_times = 2
+attack_statuses = Array[Resource("res://Resources/Statuses/status_base.gd")]([ExtResource("1_aa4er")])
