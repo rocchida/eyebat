@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="Status" load_steps=3 format=3 uid="uid://dhgv05g0lq63u"]
+
+[ext_resource type="Script" path="res://Resources/Statuses/status_base.gd" id="1_01pum"]
+[ext_resource type="Resource" uid="uid://dxyr3abrveuft" path="res://Resources/Statuses/statstatus_brittleDEF.tres" id="2_aoon5"]
+
+[resource]
+script = ExtResource("1_01pum")
+name = "Brittle"
+chance_to_hit = 100
+max_stacks_possible = 4
+stacks_on_hit = 1
+percent_dmg_max_hp_per_turn = 0.0
+percent_dmg_current_hp_per_turn = 0.0
+flat_dmg_per_turn = 0
+dmg_is_heal = false
+lose_stack_on_turn = false
+gain_stack_on_turn = false
+lose_stack_when_attacking = false
+gain_stack_when_attacking = false
+lose_stack_when_damaged = true
+gain_stack_when_damaged = false
+block_all_dmg = false
+stat_debuffs = Array[Resource("res://Resources/Statuses/stat_status_base.gd")]([ExtResource("2_aoon5")])
+stat_buffs = Array[Resource("res://Resources/Statuses/stat_status_base.gd")]([])

@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="StatStatus" load_steps=2 format=3 uid="uid://dxyr3abrveuft"]
+
+[ext_resource type="Script" path="res://Resources/Statuses/stat_status_base.gd" id="1_a27jn"]
+
+[resource]
+script = ExtResource("1_a27jn")
+stat = 1
+percent_affected = 0.5

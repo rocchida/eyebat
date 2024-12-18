@@ -1,15 +1,15 @@
-[gd_resource type="Resource" script_class="Attack" load_steps=2 format=3 uid="uid://co74tr6mu4aio"]
+[gd_resource type="Resource" script_class="Attack" load_steps=2 format=3 uid="uid://bu004oo3nvc5l"]
 
-[ext_resource type="Script" path="res://Resources/Attacks/attack_base.gd" id="2_uhkyh"]
+[ext_resource type="Script" path="res://Resources/Attacks/attack_base.gd" id="1_7ynvk"]
 
 [resource]
-script = ExtResource("2_uhkyh")
+script = ExtResource("1_7ynvk")
 num_of_targets = 1
 hover_target_outline_clr = Color(0.545098, 0, 0, 1)
-target_type = 2
+target_type = 4
 randomly_choose_target = false
-name = "Struggle"
-is_heal = false
+name = "Revive"
+is_heal = true
 is_magic_dmg = false
 percent_dmg_lifesteal = 0.0
 crit_chance = 0
@@ -19,7 +19,7 @@ magic = false
 res = false
 spd = false
 mana_cost = 0
-d4s = 2
+d4s = 60
 d6s = 0
 d8s = 0
 d10s = 0

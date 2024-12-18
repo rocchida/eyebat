@@ -1,0 +1,84 @@
+[gd_scene load_steps=12 format=3 uid="uid://bhn8c8kmh4j6y"]
+
+[ext_resource type="Script" path="res://DayNightCycle.gd" id="1_2vn7q"]
+
+[sub_resource type="Gradient" id="Gradient_53unx"]
+offsets = PackedFloat32Array(0, 0.463918, 0.521355, 1)
+colors = PackedColorArray(0.745627, 0.381476, 5.77569e-07, 1, 0.968627, 0.921569, 0.858824, 1, 0.968627, 0.921569, 0.858824, 1, 0.900737, 0.386023, 0.111412, 1)
+
+[sub_resource type="Curve" id="Curve_28w86"]
+_data = [Vector2(0.171875, 0), 0.0, 0.0, 0, 0, Vector2(0.322917, 1), 0.0, 0.0, 0, 0, Vector2(0.664063, 1), 0.0, 0.0, 0, 0, Vector2(0.846354, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Gradient" id="Gradient_aam3u"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.301961, 0.266667, 0.823529, 1)
+
+[sub_resource type="Curve" id="Curve_uepdm"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.252604, 0), 0.0, 0.0, 0, 0, Vector2(0.760417, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Gradient" id="Gradient_eqfnt"]
+offsets = PackedFloat32Array(0.1, 0.512301, 0.9)
+colors = PackedColorArray(0.317647, 0.333333, 0.65098, 1, 0.0823529, 0.521569, 1, 1, 0.317647, 0.333333, 0.65098, 1)
+
+[sub_resource type="Gradient" id="Gradient_7bhvi"]
+offsets = PackedFloat32Array(0.1, 0.301915, 0.493373, 0.5243, 0.69514, 0.9)
+colors = PackedColorArray(0.317647, 0.333333, 0.65098, 1, 0.70222, 0.356809, 0.173813, 1, 0.669007, 0.984138, 0.98253, 1, 0.731236, 0.986552, 0.984512, 1, 0.772459, 0.409378, 0.291753, 1, 0.317647, 0.333333, 0.65098, 1)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ya0yw"]
+sky_top_color = Color(0.207843, 0.529412, 0.717647, 1)
+sky_horizon_color = Color(0.529412, 0.776471, 0.901961, 1)
+ground_bottom_color = Color(0.207843, 0.529412, 0.717647, 1)
+ground_horizon_color = Color(0.529412, 0.776471, 0.901961, 1)
+
+[sub_resource type="Sky" id="Sky_bw04u"]
+sky_material = SubResource("ProceduralSkyMaterial_ya0yw")
+
+[sub_resource type="Environment" id="Environment_ajwo0"]
+background_mode = 2
+sky = SubResource("Sky_bw04u")
+ssr_enabled = true
+ssr_max_steps = 32
+ssil_enabled = true
+ssil_intensity = 3.0
+ssil_sharpness = 0.3
+sdfgi_enabled = true
+sdfgi_use_occlusion = true
+glow_enabled = true
+glow_normalized = true
+adjustment_enabled = true
+adjustment_brightness = 1.05
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_twugt"]
+dof_blur_far_enabled = true
+dof_blur_far_distance = 9.86
+dof_blur_far_transition = 216.16
+
+[node name="DayNightCycle" type="Node3D"]
+script = ExtResource("1_2vn7q")
+day_length = 2000.0
+sun_color = SubResource("Gradient_53unx")
+sun_intensity = SubResource("Curve_28w86")
+moon_color = SubResource("Gradient_aam3u")
+moon_intensity = SubResource("Curve_uepdm")
+sky_top_color = SubResource("Gradient_eqfnt")
+sky_horizon_color = SubResource("Gradient_7bhvi")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ajwo0")
+camera_attributes = SubResource("CameraAttributesPractical_twugt")
+
+[node name="Sun" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.77437, 0.466336, -0.427647, -0.0490592, 0.718089, 0.69422, 0.630829, -0.516603, 0.578945, 0, 5.32977, 0)
+light_energy = 0.6
+light_indirect_energy = 2.0
+shadow_enabled = true
+shadow_transmittance_bias = 0.8
+shadow_opacity = 0.8
+shadow_blur = 1.444
+
+[node name="Moon" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.829348, 0.416604, -0.37232, -0.0490592, 0.718089, 0.69422, 0.556574, -0.557484, 0.615985, 0, 5.32977, 0)
+shadow_enabled = true
+sky_mode = 1

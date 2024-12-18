@@ -66,21 +66,20 @@ func get_stat_with_buffs_and_debuffs(stat : int, statType : StatStatus.stats):
 				debuffs_debug = debuffs_debug + key.name + " subtracts " + str(statDebuff.percent_affected * stat) + " from " + str(StatStatus.stats.keys()[statType]) + ". "
 	print(buffs_debug)
 	print(debuffs_debug)
-	print("Updated " + str(StatStatus.stats.keys()[statType]) + " value: Base(" + str(stat) + ") + Buff(" + str(buff_mod) + ") - Debuff(" + str(debuff_mod) + ") = "  + str(stat + buff_mod - debuff_mod))
-	var updated_stat = stat + buff_mod + debuff_mod
+	var updated_stat = stat + buff_mod - debuff_mod
+	print("Updated " + str(StatStatus.stats.keys()[statType]) + " value: Base(" + str(stat) + ") + Buff(" + str(buff_mod) + ") - Debuff(" + str(debuff_mod) + ") = "  + str(updated_stat))
 	return updated_stat
 
 func receive_attack(ui : UI, attack : Attack, attacker : Monster, audioPlayer : AudioStreamPlayer):
-	ui.debug(attacker.name + " uses " + attack.name + " on " + name)
 	for atk in attack.attacks_x_times:
 		if atk > 0: 
 			await get_tree().create_timer(5).timeout
-			ui.debug(name + " recieves hit #" + str(atk) + " from " + attack.name)
+			ui.debug(name + " recieves hit #" + str(atk + 1) + " from " + attack.name)
 		attack.play_sound(audioPlayer)
 		if attack.is_heal:
-			take_heal(ui, attack.get_damage(attacker))
+			take_heal(ui, attack.get_damage(ui, attacker))
 		else:
-			var dmg_done = take_blockable_damage(ui, attack.get_damage(attacker))
+			var dmg_done = take_blockable_damage(ui, attack.get_damage(ui, attacker), attack.is_magic_dmg)
 			if attack.percent_dmg_lifesteal != 0 and dmg_done != 0:
 				ui.debug("Attacking " + attacker.name + " is healed " + str(attack.percent_dmg_lifesteal) + " from lifesteal!")
 				attacker.take_heal(ui, attack.percent_dmg_lifesteal * dmg_done)
@@ -90,8 +89,13 @@ func receive_attack(ui : UI, attack : Attack, attacker : Monster, audioPlayer : 
 			return
 		if attack.attack_statuses != null and attack.attack_statuses.size() > 0:
 			attack.inflict_statuses(ui, self)
+			update_status_tracker()
 
-func take_blockable_damage(ui : UI, damage : int):
+func take_blockable_damage(ui : UI, damage : int, is_magic : bool):
+	#// TODO come back to this.. In current state we may need boolean to check if a move is only a status inflicter
+	if damage == 0:
+		return 0
+	
 	var first_blocking_status : Status = get_first_status_with_blocking()
 	if first_blocking_status != null:
 		ui.debug("Damaged blocked by " + first_blocking_status.name + " status!")
@@ -99,21 +103,28 @@ func take_blockable_damage(ui : UI, damage : int):
 			decrement_status(ui, first_blocking_status)
 		return 0
 	
-	take_damage(damage)
+	var damage_after_block
+	if is_magic:
+		damage_after_block = max(damage - get_modded_res(), 0)
+		ui.debug("DMG(" + str(damage) + ") - RES(" + str(get_modded_res()) + ") = " + str(damage_after_block))
+	else:
+		damage_after_block = max(damage - get_modded_def(), 0)
+		ui.debug("DMG(" + str(damage) + ") - DEF(" + str(get_modded_def()) + ") = " + str(damage_after_block))
+	
+	if damage_after_block != 0: take_damage(damage_after_block)
 	if damage > 0: update_statuses_after_taking_damage(ui)
 	return damage
 
 func take_damage(damage : int):
 	run_damaged_anim()
 	if healthbar.get_value() > 0:
-		health -= damage
+		health = max(health - damage, 0)
 		healthbar.set_value(health)
 
 func take_heal(ui : UI, amount : int):
 	ui.debug(name + " healed for " + str(amount))
 	health = min(health + amount, max_health)
-	if healthbar.get_value() > 0:
-		healthbar.set_value(health)
+	healthbar.set_value(health)
 
 func drain_mana(m : int):
 	if manabar.get_value() > 0:
@@ -165,6 +176,12 @@ func update_status_tracker():
 func kill_monster():
 	self.visible = false
 	current_statuses_dict.clear()
+
+func make_visible():
+	self.visible = true
+
+func make_invisible():
+	self.visible = false
 
 func decrement_status(ui : UI, status : Status):
 	var stacks_were : String = str(current_statuses_dict[status])

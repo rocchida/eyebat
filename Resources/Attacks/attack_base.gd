@@ -1,7 +1,7 @@
 extends Resource
 class_name Attack
 
-enum target_types {ALL, ONLY_ALLIES, ONLY_ENEMIES, ONLY_SELF}
+enum target_types {ALL, ONLY_ALLIES, ONLY_ENEMIES, ONLY_SELF, ONLY_DEAD_MONSTERS}
 @export var num_of_targets : int = 1
 @export var hover_target_outline_clr : Color = Color.DARK_RED
 @export var target_type : target_types = target_types.ALL
@@ -10,7 +10,9 @@ enum target_types {ALL, ONLY_ALLIES, ONLY_ENEMIES, ONLY_SELF}
 @export var sound : AudioStream
 
 @export var is_heal : bool = false
+@export var is_magic_dmg : bool = false
 @export_range(0, 1) var percent_dmg_lifesteal : float = 0
+@export_range(0, 100) var crit_chance : int = 0
 
 @export var atk : bool = false
 @export var def : bool = false
@@ -29,7 +31,7 @@ enum target_types {ALL, ONLY_ALLIES, ONLY_ENEMIES, ONLY_SELF}
 @export var attacks_x_times : int = 1
 @export var attack_statuses : Array[Status]
 
-func get_damage(monster : Monster):
+func get_damage(ui : UI, monster : Monster):
 	var damage = 0
 	
 	if (atk): damage += monster.get_modded_atk()
@@ -44,6 +46,10 @@ func get_damage(monster : Monster):
 	damage += add_rolls(d10s, 10)
 	damage += add_rolls(d12s, 12)
 	damage += add_rolls(d20s, 20)
+	
+	if is_crit():
+		ui.debug("CRITICAL HIT!! POWER " + str(damage) + " -> " + str(floor(damage * 1.5)))
+		damage = floor(damage * 1.5)
 	
 	return damage
 
@@ -100,6 +106,12 @@ func play_sound(audio_player: AudioStreamPlayer):
 	if sound != null:
 		audio_player.stream = sound
 		audio_player.play()
+
+func is_crit():
+	var chance_roll = randi_range(1,100)
+	if (chance_roll < crit_chance): 
+		return true
+	else: return false
 
 func status_succeeded(chance : int):
 	if (chance == 100): return true

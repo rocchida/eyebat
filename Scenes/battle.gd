@@ -20,7 +20,7 @@ func _ready():
 	SceneTool.set_root(self)
 	UI.set_buttons(current_monster().get_attack_names())
 	UI.set_current_monster_stats(current_monster())
-	UI.set_initiative_board(initiative)
+	#UI.set_initiative_board(initiative)
 	if is_enemy(initiative.front()): 
 		perform_ai_turn(current_monster())
 		UI.hide_buttons()
@@ -137,10 +137,12 @@ func get_attacks_possible_targets(atk : Attack):
 		Attack.target_types.ALL: return initiative
 		Attack.target_types.ONLY_ALLIES: 
 			if is_enemy(current_monster()): return get_living_enemies() 
-			else: return get_all_goodguys()
+			else: return get_living_goodguys()
 		Attack.target_types.ONLY_ENEMIES: 
-			if is_enemy(current_monster()): return get_all_goodguys()
+			if is_enemy(current_monster()): return get_living_goodguys()
 			return get_living_enemies()
+		Attack.target_types.ONLY_DEAD_MONSTERS:
+			return get_all_dead_monsters()
 		Attack.target_types.ONLY_SELF: 
 			var ret : Array[Monster]
 			ret.append(current_monster())
@@ -159,7 +161,10 @@ func run_attack(attacker : Monster, receivers : Array[Monster], attack : Attack)
 			receiver = choose_random_target(get_attacks_possible_targets(attack))
 		else: receiver = receivers[num]
 		
-		receiver.receive_attack(UI, attack, attacker, $AudioStreamPlayer)
+		var team = "EVOKER'S "
+		if is_enemy(receiver): team = "ENEMY "
+		UI.debug(attacker.name + " uses " + attack.name + " on " + team + receiver.name)
+		await receiver.receive_attack(UI, attack, attacker, $AudioStreamPlayer)
 		if attack.num_of_targets > 1 : await get_tree().create_timer(3.5).timeout
 
 func monster_hovered(monster : Monster):
@@ -183,6 +188,7 @@ func _on_ui_button_clicked(i : int):
 	currently_selected_button = i
 	UI.set_attack_description(current_monster().attacks[i], current_monster())
 	clear_all_monster_outlines()
+	show_dead_monsters_if_targetable()
 	outline_possible_targets()
 
 func clear_all_monster_outlines():
@@ -194,6 +200,14 @@ func outline_possible_targets():
 	var targets = get_attacks_possible_targets(current_selected_attack())
 	for m : Monster in targets:
 		m.set_outline_color(current_selected_attack().hover_target_outline_clr)
+		
+func show_dead_monsters_if_targetable():
+	if current_selected_attack().target_type == Attack.target_types.ONLY_DEAD_MONSTERS:
+		for m : Monster in initiative:
+			if m.is_deadzo(): m.make_visible()
+	else: 
+		for m : Monster in initiative:
+			if m.is_deadzo(): m.make_invisible()
 
 func current_monster():
 	return initiative[current_turn]
@@ -207,14 +221,14 @@ func is_enemy(m : Monster):
 func perform_ai_turn(m : Monster):
 	print("ENEMY TURN")
 	await get_tree().create_timer(3.5).timeout
-	perform_ai_attack(current_monster())
+	await perform_ai_attack(current_monster())
 	end_turn()
 
 func perform_ai_attack(m : Monster):
 	var chosen_attack = ai_choose_attack(m)
 	var chosen_targets = choose_random_targets(get_attacks_possible_targets(chosen_attack), chosen_attack.num_of_targets)
 	if (chosen_targets == null): return
-	run_attack(m, chosen_targets, chosen_attack)
+	await run_attack(m, chosen_targets, chosen_attack)
 
 #func ai_choose_target():
 	#var living_goodguys = get_attacks_possible_targets()
@@ -265,5 +279,12 @@ func get_all_goodguys():
 	var ret : Array[Monster]
 	for m in initiative:
 		if !is_enemy(m):
+			ret.append(m)
+	return ret
+
+func get_all_dead_monsters():
+	var ret : Array[Monster]
+	for m in initiative:
+		if m.is_deadzo():
 			ret.append(m)
 	return ret
