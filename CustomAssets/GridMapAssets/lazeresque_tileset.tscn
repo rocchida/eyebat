@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://ki2w3othe8yn" path="res://CustomAssets/New folder/objects/trees/pine_tree.tscn" id="5_pmp3d"]
 [ext_resource type="PackedScene" uid="uid://d0dsmhx747f3p" path="res://CustomAssets/New folder/objects/rocks/rock_1.tscn" id="6_6q8de"]
 [ext_resource type="PackedScene" uid="uid://c38xv4p3ib2mh" path="res://CustomAssets/New folder/objects/campfire/campfire.tscn" id="7_i3088"]
-[ext_resource type="PackedScene" uid="uid://d2wgtjqv6a0kk" path="res://water.tscn" id="8_omli5"]
+[ext_resource type="PackedScene" uid="uid://cthwrhffkft1q" path="res://water.tscn" id="8_omli5"]
 
 [node name="LazeresqueTileset" type="Node3D"]
 

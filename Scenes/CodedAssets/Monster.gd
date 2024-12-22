@@ -21,6 +21,9 @@ var manabar
 @onready var status_tracker = $"Status Tracker"
 
 var current_statuses_dict = {}
+var dmg_threat : int = 0
+var heal_threat : int = 0
+var low_hp_threat : int = 0
 
 
 func _ready():

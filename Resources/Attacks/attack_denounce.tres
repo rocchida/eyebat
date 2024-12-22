@@ -1,6 +1,6 @@
-[gd_resource type="Resource" script_class="Attack" load_steps=3 format=3 uid="uid://ciipdkpsdv8p4"]
+[gd_resource type="Resource" script_class="Attack" load_steps=3 format=3 uid="uid://2b80ae3omgg5"]
 
-[ext_resource type="Resource" uid="uid://cuywj53445x2e" path="res://Resources/Statuses/status_stunted.tres" id="1_lih7y"]
+[ext_resource type="Resource" uid="uid://dcekffhrebfnp" path="res://Resources/Statuses/status_stunted.tres" id="1_lih7y"]
 [ext_resource type="Script" path="res://Resources/Attacks/attack_base.gd" id="2_4nyi8"]
 
 [resource]

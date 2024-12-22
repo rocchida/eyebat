@@ -1,6 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://d2wgtjqv6a0kk"]
+[gd_scene load_steps=4 format=3 uid="uid://cthwrhffkft1q"]
 
-[ext_resource type="Shader" uid="uid://biydokv2mvww5" path="res://water.tres" id="1_2h3xb"]
+[ext_resource type="Shader" uid="uid://pg15apwcariy" path="res://water.tres" id="1_2h3xb"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gbo73"]
 render_priority = 0
