@@ -4,7 +4,7 @@
 [ext_resource type="Resource" uid="uid://bs1n1gh1rfxfi" path="res://Resources/Attacks/attack_bulwark.tres" id="2_rmykd"]
 [ext_resource type="Resource" uid="uid://2b80ae3omgg5" path="res://Resources/Attacks/attack_denounce.tres" id="3_ijktf"]
 [ext_resource type="Resource" uid="uid://lqupr5diak70" path="res://Resources/Attacks/attack_devilfire.tres" id="4_88l2m"]
-[ext_resource type="Resource" path="res://Resources/Attacks/attack_freezing_breath.tres" id="5_oo4k8"]
+[ext_resource type="Resource" uid="uid://b3krgo6083gbk" path="res://Resources/Attacks/attack_freezing_breath.tres" id="5_oo4k8"]
 [ext_resource type="PackedScene" uid="uid://l1476gvgrjti" path="res://Scenes/CodedAssets/CharacterPortraits/hynine_portrait.tscn" id="6_n3qpe"]
 [ext_resource type="Shader" path="res://Monsters/outline.gdshader" id="7_lhvbi"]
 [ext_resource type="Texture2D" uid="uid://cge3ick3vajqp" path="res://CustomAssets/CharacterArt/Monster Sheet/Gnome_Spritesheet.png" id="7_u0kwc"]

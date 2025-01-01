@@ -6,6 +6,8 @@ enum target_types {ALL, ONLY_ALLIES, ONLY_ENEMIES, ONLY_SELF, ONLY_DEAD_MONSTERS
 @export var hover_target_outline_clr : Color = Color.DARK_RED
 @export var target_type : target_types = target_types.ALL
 @export var randomly_choose_target : bool = false
+@export var threatens_all_enemies : bool = false
+@export var flat_threat_added : int = 0
 @export var name : String = "Default Attack Name"
 @export var sound : AudioStream
 

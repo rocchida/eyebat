@@ -25,6 +25,10 @@ func _ready():
 		perform_ai_turn(current_monster())
 		UI.hide_buttons()
 	UI.set_initiative_text(0, initiative, get_living_enemies())
+	for m in initiative:
+		if is_enemy(m):
+			m.get_brain().set_threats(get_living_goodguys())
+		else: m.get_brain().set_threats(get_living_enemies())
 
 func _prepare():
 	enemy_spawns = $EnemySpawns
@@ -164,8 +168,26 @@ func run_attack(attacker : Monster, receivers : Array[Monster], attack : Attack)
 		var team = "EVOKER'S "
 		if is_enemy(receiver): team = "ENEMY "
 		UI.debug(attacker.name + " uses " + attack.name + " on " + team + receiver.name)
-		await receiver.receive_attack(UI, attack, attacker, $AudioStreamPlayer)
+		var threat_generated : int = await receiver.receive_attack(UI, attack, attacker, $AudioStreamPlayer)
+		generate_threat_from_attack(threat_generated, attacker, receiver, attack)
 		if attack.num_of_targets > 1 : await get_tree().create_timer(3.5).timeout
+
+func generate_threat_from_attack(threat_generated : int, attacker : Monster, receiver : Monster, attack : Attack):
+	var threatened_monsters : Array[Monster]
+	
+	if attack.threatens_all_enemies:
+		if is_enemy(attacker):
+			threatened_monsters = get_all_goodguys()
+		else:
+			threatened_monsters = get_living_enemies()
+	else: threatened_monsters.append(receiver)
+	
+	for m in threatened_monsters:
+		if attack.is_heal:
+			m.get_brain().add_heal_threat(attacker, threat_generated, attack.flat_threat_added)
+		else: m.get_brain().add_dmg_threat(attacker, threat_generated, attack.flat_threat_added)
+		
+	
 
 func monster_hovered(monster : Monster):
 	UI.set_hovered_monster_stats(monster)

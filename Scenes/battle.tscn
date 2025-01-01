@@ -1,7 +1,7 @@
 [gd_scene load_steps=21 format=3 uid="uid://d2yxnxvhqwyjo"]
 
 [ext_resource type="Script" path="res://Scenes/battle.gd" id="1_8t3rd"]
-[ext_resource type="PackedScene" path="res://day_night_cycle.tscn" id="2_6b1su"]
+[ext_resource type="PackedScene" uid="uid://bhn8c8kmh4j6y" path="res://day_night_cycle.tscn" id="2_6b1su"]
 [ext_resource type="MeshLibrary" uid="uid://b3u22aw7e05yx" path="res://lazaresque.tres" id="4_0yd8n"]
 [ext_resource type="PackedScene" uid="uid://w57g26li1j8e" path="res://Scenes/CodedAssets/battleSpawn.tscn" id="4_gtvef"]
 [ext_resource type="Script" path="res://Scenes/Camera3D.gd" id="5_ah3ax"]
