@@ -28,5 +28,5 @@ d8s = 0
 d10s = 0
 d12s = 0
 d20s = 0
-attacks_x_times = 2
+attacks_x_times = 1
 attack_statuses = Array[Resource("res://Resources/Statuses/status_base.gd")]([ExtResource("1_aa4er")])

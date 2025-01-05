@@ -5,8 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://l1476gvgrjti" path="res://Scenes/CodedAssets/CharacterPortraits/hynine_portrait.tscn" id="2_mleto"]
 [ext_resource type="Texture2D" uid="uid://ioavpxax8o61" path="res://CustomAssets/CharacterArt/Monster Sheet/Hynine_Spritesheet.png" id="2_t4hbm"]
 [ext_resource type="Resource" uid="uid://drujqidwegn4a" path="res://Resources/Attacks/attack_spore_song.tres" id="3_4t7pu"]
-[ext_resource type="Resource" uid="uid://b2fj5386weku1" path="res://Resources/Attacks/attack_wild_slash.tres" id="4_eiay7"]
 [ext_resource type="PackedScene" uid="uid://0n6qt3r5hf7i" path="res://Scenes/CodedAssets/health_bar_3d.tscn" id="4_qiw4m"]
+[ext_resource type="Resource" uid="uid://bs1n1gh1rfxfi" path="res://Resources/Attacks/attack_bulwark.tres" id="5_gknvo"]
 [ext_resource type="PackedScene" uid="uid://dyha3hn24vliy" path="res://Scenes/CodedAssets/clickable.tscn" id="5_xcx82"]
 [ext_resource type="Resource" uid="uid://ceqjgsbxfwbux" path="res://Resources/Attacks/attack_wither.tres" id="5_xmhs6"]
 [ext_resource type="Shader" path="res://Monsters/outline.gdshader" id="7_afcvv"]
@@ -132,7 +132,7 @@ viewport_path = NodePath("ManaBar/SubViewport")
 script = ExtResource("1_0dpen")
 atk = 30
 magic = 25
-attacks = Array[Resource("res://Resources/Attacks/attack_base.gd")]([ExtResource("2_8w1lq"), ExtResource("3_4t7pu"), ExtResource("4_eiay7"), ExtResource("5_xmhs6")])
+attacks = Array[Resource("res://Resources/Attacks/attack_base.gd")]([ExtResource("2_8w1lq"), ExtResource("5_xmhs6"), ExtResource("3_4t7pu"), ExtResource("5_gknvo")])
 portrait = ExtResource("2_mleto")
 brain = ExtResource("7_icmyi")
 

@@ -10,6 +10,9 @@ class_name Brain
 
 var target_threat_dict = {}
 
+func _ready():
+	threat_added_from_targeting_status = 80
+
 #func choose_target(possible_targets : Array[Monster], num_of_targets : int): 
 	##// Attack hightest threat first if multiple targets then rest can be random if more targets than 1
 	#var targets : Array[Monster]
