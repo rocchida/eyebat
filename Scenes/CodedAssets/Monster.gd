@@ -22,9 +22,6 @@ var manabar
 @onready var status_tracker = $"Status Tracker"
 
 var current_statuses_dict = {}
-var dmg_threat : int = 0
-var heal_threat : int = 0
-var low_hp_threat : int = 0
 
 
 func _ready():
@@ -74,29 +71,29 @@ func get_stat_with_buffs_and_debuffs(stat : int, statType : StatStatus.stats):
 	print("Updated " + str(StatStatus.stats.keys()[statType]) + " value: Base(" + str(stat) + ") + Buff(" + str(buff_mod) + ") - Debuff(" + str(debuff_mod) + ") = "  + str(updated_stat))
 	return updated_stat
 
-func receive_attack(ui : UI, attack : Attack, attacker : Monster, audioPlayer : AudioStreamPlayer):
-	var threat_generated : int = 0
-	for atk in attack.attacks_x_times:
-		if atk > 0: 
-			await get_tree().create_timer(5).timeout
-			ui.debug(name + " recieves hit #" + str(atk + 1) + " from " + attack.name)
-		attack.play_sound(audioPlayer)
-		if attack.is_heal:
-			threat_generated += take_heal(ui, attack.get_damage(ui, attacker))
-		else:
-			var dmg_done = take_blockable_damage(ui, attack.get_damage(ui, attacker), attack.is_magic_dmg)
-			threat_generated += dmg_done
-			if attack.percent_dmg_lifesteal != 0 and dmg_done != 0:
-				ui.debug("Attacking " + attacker.name + " is healed " + str(attack.percent_dmg_lifesteal) + " from lifesteal!")
-				attacker.take_heal(ui, attack.percent_dmg_lifesteal * dmg_done)
-		if (is_deadzo()):
-			ui.debug(name + " was killed by " + attack.name + "!")
-			kill_monster()
-			return threat_generated
-		if attack.attack_statuses != null and attack.attack_statuses.size() > 0:
-			attack.inflict_statuses(ui, self)
-			update_status_tracker()
-	return threat_generated
+#func receive_attack(ui : UI, attack : Attack, attacker : Monster, audioPlayer : AudioStreamPlayer):
+	#var threat_generated : int = 0
+	#for atk in attack.attacks_x_times:
+		#if atk > 0: 
+			#await get_tree().create_timer(5).timeout
+			#ui.debug(name + " recieves hit #" + str(atk + 1) + " from " + attack.name)
+		#attack.play_sound(audioPlayer)
+		#if attack.is_heal:
+			#threat_generated += take_heal(ui, attack.get_damage(ui, attacker))
+		#else:
+			#var dmg_done = take_blockable_damage(ui, attack.get_damage(ui, attacker), attack.is_magic_dmg)
+			#threat_generated += dmg_done
+			#if attack.percent_dmg_lifesteal != 0 and dmg_done != 0:
+				#ui.debug("Attacking " + attacker.name + " is healed " + str(attack.percent_dmg_lifesteal) + " from lifesteal!")
+				#attacker.take_heal(ui, attack.percent_dmg_lifesteal * dmg_done)
+		#if (is_deadzo()):
+			#ui.debug(name + " was killed by " + attack.name + "!")
+			#kill_monster()
+			#return threat_generated
+		#if attack.attack_statuses != null and attack.attack_statuses.size() > 0:
+			#attack.inflict_statuses(ui, self)
+			#update_status_tracker()
+	#return threat_generated
 
 func take_blockable_damage(ui : UI, damage : int, is_magic : bool):
 	#// TODO come back to this.. In current state we may need boolean to check if a move is only a status inflicter
@@ -233,3 +230,9 @@ func get_first_status_with_blocking():
 
 func get_brain() -> Brain:
 	return brain
+
+func has_status_as_threatening(status : Status):
+	return get_brain().targeting_statuses.has(status)
+
+func has_monster_as_threat(monster : Monster):
+	return get_brain().target_threat_dict.keys().has(monster)
