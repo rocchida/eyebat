@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Status" load_steps=3 format=3 uid="uid://dhgv05g0lq63u"]
+[gd_resource type="Resource" script_class="Status" load_steps=3 format=3 uid="uid://d62wll2f0x02"]
 
 [ext_resource type="Script" path="res://Resources/Statuses/status_base.gd" id="1_01pum"]
 [ext_resource type="Resource" uid="uid://dxyr3abrveuft" path="res://Resources/Statuses/statstatus_brittleDEF.tres" id="2_aoon5"]

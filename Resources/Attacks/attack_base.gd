@@ -1,11 +1,13 @@
 extends Resource
 class_name Attack
 
-enum target_types {ALL, ONLY_ALLIES, ONLY_ENEMIES, ONLY_SELF, ONLY_DEAD_MONSTERS}
+enum target_types {ALL, ONLY_ALLIES, ONLY_ENEMIES, ONLY_SELF, ONLY_DEAD_MONSTERS, ONLY_DEAD_ALLIES, ONLY_DEAD_ENEMIES}
 @export var num_of_targets : int = 1
 @export var hover_target_outline_clr : Color = Color.DARK_RED
 @export var target_type : target_types = target_types.ALL
 @export var randomly_choose_target : bool = false
+@export var threatens_all_enemies : bool = false
+@export var flat_threat_added : int = 0
 @export var name : String = "Default Attack Name"
 @export var sound : AudioStream
 
@@ -31,6 +33,8 @@ enum target_types {ALL, ONLY_ALLIES, ONLY_ENEMIES, ONLY_SELF, ONLY_DEAD_MONSTERS
 @export var attacks_x_times : int = 1
 @export var attack_statuses : Array[Status]
 
+signal status_inflicted(monster: Monster, status: Status)
+
 func get_damage(ui : UI, monster : Monster):
 	var damage = 0
 	
@@ -54,21 +58,30 @@ func get_damage(ui : UI, monster : Monster):
 	return damage
 
 func inflict_statuses(ui : UI, m: Monster):
+	var inflicted_statuses : Array[Status]
 	for attack_status in attack_statuses:
-		ui.debug(inflict_status(m, attack_status))
+		if(inflict_status(ui, m, attack_status)): inflicted_statuses.append(attack_status)
+	return inflicted_statuses
 
-func inflict_status(m : Monster, attack_status : Status):
+func inflict_status(ui : UI, m : Monster, attack_status : Status):
 	if !status_succeeded(attack_status.chance_to_hit):
-		return m.name + " resists against the " + attack_status.name + " status effect"
+		ui.debug(m.name + " resists against the " + attack_status.name + " status effect")
+		return false
 	if (m.current_statuses_dict.has(attack_status)):
+		status_inflicted.emit()
 		var stacks_were : String = str(m.current_statuses_dict[attack_status])
 		m.current_statuses_dict[attack_status] += attack_status.stacks_on_hit
 		m.current_statuses_dict[attack_status] = min(m.current_statuses_dict[attack_status], attack_status.max_stacks_possible)
 		if (m.current_statuses_dict[attack_status] == attack_status.max_stacks_possible):
-			return name + " is affected by " + attack_status.name + ", stacks are at max value! " + stacks_were_and_are(stacks_were, str( m.current_statuses_dict[attack_status])) 
-		return name + " is affected by " + attack_status.name + " again from attack" + stacks_were_and_are(stacks_were, str(m.current_statuses_dict[attack_status]))
-	else: m.current_statuses_dict[attack_status] = attack_status.stacks_on_hit
-	return m.name + " recieves " + attack_status.name + " from attack (" + str(attack_status.stacks_on_hit) + " stacks)"
+			ui.debug(name + " is affected by " + attack_status.name + ", stacks are at max value! " + stacks_were_and_are(stacks_were, str( m.current_statuses_dict[attack_status])))
+			return true
+		ui.debug(name + " is affected by " + attack_status.name + " again from attack" + stacks_were_and_are(stacks_were, str(m.current_statuses_dict[attack_status])))
+		return true
+	else: 
+		status_inflicted.emit()
+		m.current_statuses_dict[attack_status] = attack_status.stacks_on_hit
+	ui.debug(m.name + " recieves " + attack_status.name + " from attack (" + str(attack_status.stacks_on_hit) + " stacks)")
+	return true
 
 func stacks_were_and_are(were : String, are : String):
 	return "(Stacks were: " + were + ", now are: " + are + ")"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://bdsnxtasgjx2o"]
+[gd_scene load_steps=26 format=3 uid="uid://bdsnxtasgjx2o"]
 
 [ext_resource type="Script" path="res://Scripts/world.gd" id="1_hijai"]
 [ext_resource type="PackedScene" uid="uid://dba8t7daowokd" path="res://Scenes/CodedAssets/player.tscn" id="2_icr3f"]
@@ -8,7 +8,6 @@
 [ext_resource type="Script" path="res://Scenes/CodedAssets/SceneDoor.gd" id="10_02i1u"]
 [ext_resource type="PackedScene" uid="uid://dxbfvlk53cyl3" path="res://Monsters/Gnome.tscn" id="12_6m0vq"]
 [ext_resource type="Texture2D" uid="uid://dl3plqwoor2bt" path="res://ImportedAssets/CharacterArt/Mage Idle.png" id="12_byxew"]
-[ext_resource type="PackedScene" uid="uid://dgna01scc1yhr" path="res://Monsters/Goblin.tscn" id="12_gppj7"]
 [ext_resource type="Script" path="res://Scenes/OverworldUI.gd" id="26_07yq2"]
 [ext_resource type="Texture2D" uid="uid://bsqtjhlergule" path="res://CustomAssets/CharacterArt/Shopkeep.png" id="26_va63k"]
 [ext_resource type="Script" path="res://Scenes/Shopkeep.gd" id="28_ngbrb"]
@@ -121,8 +120,6 @@ shape = SubResource("SphereShape3D_8hhi2")
 [node name="Hynine2" parent="Monsters/Player Monsters" instance=ExtResource("40_5tjmr")]
 
 [node name="Gnome" parent="Monsters/Player Monsters" instance=ExtResource("12_6m0vq")]
-
-[node name="Monsters_Player Monsters#Goblin" parent="." instance=ExtResource("12_gppj7")]
 
 [node name="Monsters_Player Monsters#Hynine" parent="." instance=ExtResource("40_5tjmr")]
 

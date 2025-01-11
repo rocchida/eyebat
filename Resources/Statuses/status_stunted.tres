@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Status" load_steps=3 format=3 uid="uid://cuywj53445x2e"]
+[gd_resource type="Resource" script_class="Status" load_steps=3 format=3 uid="uid://dcekffhrebfnp"]
 
 [ext_resource type="Script" path="res://Resources/Statuses/status_base.gd" id="1_g3a8b"]
 [ext_resource type="Resource" uid="uid://lseyhfkgt5ei" path="res://Resources/Statuses/statstatus_stuntedMAG.tres" id="2_d6hja"]

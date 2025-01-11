@@ -25,6 +25,11 @@ func _ready():
 		perform_ai_turn(current_monster())
 		UI.hide_buttons()
 	UI.set_initiative_text(0, initiative, get_living_enemies())
+	for m in initiative:
+		m.brain = m.get_brain().duplicate()
+		if is_enemy(m):
+			m.get_brain().set_threats(get_living_goodguys())
+		else: m.get_brain().set_threats(get_living_enemies())
 
 func _prepare():
 	enemy_spawns = $EnemySpawns
@@ -51,6 +56,7 @@ func sort_by_speed(a:Monster, b:Monster):
 	return false
 
 func end_turn():
+	current_monster().get_brain().decay_threats()
 	update_status_trackers()
 	UI.hide_buttons()
 	UI.debug(current_monster().name + " ends their turn \n")
@@ -147,6 +153,12 @@ func get_attacks_possible_targets(atk : Attack):
 			var ret : Array[Monster]
 			ret.append(current_monster())
 			return ret
+		Attack.target_types.ONLY_DEAD_ALLIES:
+			if is_enemy(current_monster()): return get_dead_enemies()
+			else: return get_dead_goodguys()
+		Attack.target_types.ONLY_DEAD_ENEMIES:
+			if is_enemy(current_monster()): return get_dead_goodguys()
+			else: return get_dead_enemies()
 
 func run_attack(attacker : Monster, receivers : Array[Monster], attack : Attack):
 	attacker.run_attack_anim(is_enemy(attacker))
@@ -164,8 +176,59 @@ func run_attack(attacker : Monster, receivers : Array[Monster], attack : Attack)
 		var team = "EVOKER'S "
 		if is_enemy(receiver): team = "ENEMY "
 		UI.debug(attacker.name + " uses " + attack.name + " on " + team + receiver.name)
-		await receiver.receive_attack(UI, attack, attacker, $AudioStreamPlayer)
+		var threat_generated : int = await receive_attack(UI, attack, receiver, attacker, $AudioStreamPlayer)
+		if !on_same_team(attacker, receiver):
+			generate_threat_from_attack(threat_generated, attacker, receiver, attack)
 		if attack.num_of_targets > 1 : await get_tree().create_timer(3.5).timeout
+
+func receive_attack(ui : UI, attack : Attack, receiver : Monster, attacker : Monster, audioPlayer : AudioStreamPlayer):
+	var threat_generated : int = 0
+	for atk in attack.attacks_x_times:
+		if atk > 0: 
+			await get_tree().create_timer(5).timeout
+			ui.debug(name + " recieves hit #" + str(atk + 1) + " from " + attack.name)
+		attack.play_sound(audioPlayer)
+		if attack.is_heal:
+			threat_generated += receiver.take_heal(ui, attack.get_damage(ui, attacker))
+		else:
+			var dmg_done = receiver.take_blockable_damage(ui, attack.get_damage(ui, attacker), attack.is_magic_dmg)
+			threat_generated += dmg_done
+			if attack.percent_dmg_lifesteal != 0 and dmg_done != 0:
+				ui.debug("Attacking " + attacker.name + " is healed " + str(attack.percent_dmg_lifesteal) + " from lifesteal!")
+				attacker.take_heal(ui, attack.percent_dmg_lifesteal * dmg_done)
+		if (receiver.is_deadzo()):
+			ui.debug(name + " was killed by " + attack.name + "!")
+			receiver.kill_monster()
+			return threat_generated
+		if attack.attack_statuses != null and attack.attack_statuses.size() > 0:
+			var inflicted_statuses : Array[Status] = attack.inflict_statuses(ui, receiver)
+			if !inflicted_statuses.is_empty(): generate_threat_for_inflicted_statuses(receiver, inflicted_statuses)
+			receiver.update_status_tracker()
+	return threat_generated
+
+func generate_threat_from_attack(threat_generated : int, attacker : Monster, receiver : Monster, attack : Attack):
+	var threatened_monsters : Array[Monster]
+	
+	if attack.threatens_all_enemies:
+		if is_enemy(attacker):
+			threatened_monsters = get_all_goodguys()
+		else:
+			threatened_monsters = get_living_enemies()
+	else: threatened_monsters.append(receiver)
+	
+	for m in threatened_monsters:
+		var total_threat_added : int = 0
+		if attack.is_heal:
+			total_threat_added += m.get_brain().add_heal_threat(attacker, threat_generated, attack.flat_threat_added)
+		else: total_threat_added += m.get_brain().add_dmg_threat(attacker, threat_generated, attack.flat_threat_added)
+		UI.debug(attacker.name + " threat level increased by " + str(total_threat_added) + " for " + m.name + " when they used " + attack.name)
+
+func generate_threat_for_inflicted_statuses(status_inflicted_monster : Monster, new_statuses : Array[Status]):
+	for m : Monster in initiative:
+		for status : Status in new_statuses:
+			if m.has_status_as_threatening(status) and m.has_monster_as_threat(status_inflicted_monster):
+				m.get_brain().add_targeting_status_threat(status_inflicted_monster)
+	
 
 func monster_hovered(monster : Monster):
 	UI.set_hovered_monster_stats(monster)
@@ -225,18 +288,16 @@ func perform_ai_turn(m : Monster):
 	end_turn()
 
 func perform_ai_attack(m : Monster):
-	var chosen_attack = ai_choose_attack(m)
-	var chosen_targets = choose_random_targets(get_attacks_possible_targets(chosen_attack), chosen_attack.num_of_targets)
+	var chosen_attack : Attack = ai_choose_attack(m)
+	var chosen_targets : Array[Monster]
+	if chosen_attack.is_heal:
+		chosen_targets = choose_random_targets(get_attacks_possible_targets(chosen_attack), chosen_attack.num_of_targets)
+	else:
+		chosen_targets.append(m.get_brain().get_most_threatening_target())
+		if chosen_attack.num_of_targets > 1:
+			chosen_targets.append_array(choose_random_targets(get_attacks_possible_targets(chosen_attack), chosen_attack.num_of_targets - 1))
 	if (chosen_targets == null): return
 	await run_attack(m, chosen_targets, chosen_attack)
-
-#func ai_choose_target():
-	#var living_goodguys = get_attacks_possible_targets()
-	#if (living_goodguys.size() <= 0): return null
-	#var num = randi_range(0, living_goodguys.size() - 1)
-	#var targets : Array[Monster]
-	#targets.append(living_goodguys[num])
-	#return targets
 
 func choose_random_targets(monsters : Array[Monster], num_of_targets : int):
 	var targets : Array[Monster]
@@ -268,7 +329,7 @@ func get_living_enemies():
 			ret.append(m)
 	return ret
 
-func get_living_goodguys():
+func get_living_goodguys() -> Array[Monster]:
 	var ret : Array[Monster]
 	for m in initiative:
 		if !is_enemy(m) and !m.is_deadzo():
@@ -288,3 +349,22 @@ func get_all_dead_monsters():
 		if m.is_deadzo():
 			ret.append(m)
 	return ret
+
+func get_dead_goodguys():
+	var ret : Array[Monster]
+	for m in initiative:
+		if !is_enemy(m) and m.is_deadzo():
+			ret.append(m)
+	return ret
+
+func get_dead_enemies():
+	var ret : Array[Monster]
+	for m in initiative:
+		if is_enemy(m) and m.is_deadzo():
+			ret.append(m)
+	return ret
+
+func on_same_team(m1 : Monster, m2 : Monster):
+	if (is_enemy(m1) and is_enemy(m2)) or (!is_enemy(m1) and !is_enemy(m2)): return true
+	else: return false
+	

@@ -1,11 +1,12 @@
-[gd_scene load_steps=21 format=3 uid="uid://dxbfvlk53cyl3"]
+[gd_scene load_steps=22 format=3 uid="uid://dxbfvlk53cyl3"]
 
 [ext_resource type="Script" path="res://Monsters/Monster.gd" id="1_0nr25"]
-[ext_resource type="Resource" uid="uid://cnj1xlf72cwmr" path="res://Resources/Attacks/attack_bulwark.tres" id="2_rmykd"]
-[ext_resource type="Resource" uid="uid://ciipdkpsdv8p4" path="res://Resources/Attacks/attack_denounce.tres" id="3_ijktf"]
+[ext_resource type="Resource" uid="uid://2b80ae3omgg5" path="res://Resources/Attacks/attack_denounce.tres" id="3_ijktf"]
+[ext_resource type="Resource" uid="uid://drujqidwegn4a" path="res://Resources/Attacks/attack_spore_song.tres" id="4_4wsyu"]
 [ext_resource type="Resource" uid="uid://lqupr5diak70" path="res://Resources/Attacks/attack_devilfire.tres" id="4_88l2m"]
-[ext_resource type="Resource" uid="uid://b3krgo6083gbk" path="res://Resources/Attacks/attack_freezing_breath.tres" id="5_oo4k8"]
+[ext_resource type="Resource" uid="uid://ceqjgsbxfwbux" path="res://Resources/Attacks/attack_wither.tres" id="5_e3s54"]
 [ext_resource type="PackedScene" uid="uid://l1476gvgrjti" path="res://Scenes/CodedAssets/CharacterPortraits/hynine_portrait.tscn" id="6_n3qpe"]
+[ext_resource type="Resource" uid="uid://cxw0ecwqbblhv" path="res://Resources/default_brain.tres" id="7_lhitn"]
 [ext_resource type="Shader" path="res://Monsters/outline.gdshader" id="7_lhvbi"]
 [ext_resource type="Texture2D" uid="uid://cge3ick3vajqp" path="res://CustomAssets/CharacterArt/Monster Sheet/Gnome_Spritesheet.png" id="7_u0kwc"]
 [ext_resource type="Script" path="res://Monsters/Outline_Initiate.gd" id="8_dx7x3"]
@@ -48,8 +49,9 @@ viewport_path = NodePath("ManaBar/SubViewport")
 script = ExtResource("1_0nr25")
 atk = 25
 magic = 30
-attacks = Array[Resource("res://Resources/Attacks/attack_base.gd")]([ExtResource("2_rmykd"), ExtResource("3_ijktf"), ExtResource("4_88l2m"), ExtResource("5_oo4k8")])
+attacks = Array[Resource("res://Resources/Attacks/attack_base.gd")]([ExtResource("4_88l2m"), ExtResource("3_ijktf"), ExtResource("4_4wsyu"), ExtResource("5_e3s54")])
 portrait = ExtResource("6_n3qpe")
+brain = ExtResource("7_lhitn")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(0.075, 1.90139e-07, 0, -1.90139e-07, 0.075, 0, 0, 0, -0.075, 0, 0.694815, 0)
