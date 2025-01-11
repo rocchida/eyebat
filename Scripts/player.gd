@@ -1,7 +1,7 @@
 extends CharacterBody3D
 class_name Player
 
-@export var monster_roster : Array[Monster] 
+@export var monster_roster : Array[PackedScene] 
 @onready var _playerBody = $"."
 const _SPEED = 5.0
 const _JUMP_VELOCITY = 4.5

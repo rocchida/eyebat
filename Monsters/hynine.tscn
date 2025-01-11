@@ -1,14 +1,13 @@
-[gd_scene load_steps=24 format=3 uid="uid://djtiph0nrnwyp"]
+[gd_scene load_steps=23 format=3 uid="uid://djtiph0nrnwyp"]
 
 [ext_resource type="Script" path="res://Monsters/Monster.gd" id="1_0dpen"]
-[ext_resource type="Resource" uid="uid://dcy6cdik6d1ww" path="res://Resources/Attacks/attack_shield_toss.tres" id="2_8w1lq"]
-[ext_resource type="PackedScene" uid="uid://l1476gvgrjti" path="res://Scenes/CodedAssets/CharacterPortraits/hynine_portrait.tscn" id="2_mleto"]
 [ext_resource type="Texture2D" uid="uid://ioavpxax8o61" path="res://CustomAssets/CharacterArt/Monster Sheet/Hynine_Spritesheet.png" id="2_t4hbm"]
-[ext_resource type="Resource" uid="uid://drujqidwegn4a" path="res://Resources/Attacks/attack_spore_song.tres" id="3_4t7pu"]
+[ext_resource type="Resource" uid="uid://lqupr5diak70" path="res://Resources/Attacks/attack_devilfire.tres" id="3_kenfy"]
+[ext_resource type="Resource" uid="uid://b2fj5386weku1" path="res://Resources/Attacks/attack_wild_slash.tres" id="4_gkt2d"]
 [ext_resource type="PackedScene" uid="uid://0n6qt3r5hf7i" path="res://Scenes/CodedAssets/health_bar_3d.tscn" id="4_qiw4m"]
+[ext_resource type="Resource" uid="uid://2b80ae3omgg5" path="res://Resources/Attacks/attack_denounce.tres" id="5_ae5ts"]
 [ext_resource type="Resource" uid="uid://bs1n1gh1rfxfi" path="res://Resources/Attacks/attack_bulwark.tres" id="5_gknvo"]
 [ext_resource type="PackedScene" uid="uid://dyha3hn24vliy" path="res://Scenes/CodedAssets/clickable.tscn" id="5_xcx82"]
-[ext_resource type="Resource" uid="uid://ceqjgsbxfwbux" path="res://Resources/Attacks/attack_wither.tres" id="5_xmhs6"]
 [ext_resource type="Shader" path="res://Monsters/outline.gdshader" id="7_afcvv"]
 [ext_resource type="Resource" uid="uid://cxw0ecwqbblhv" path="res://Resources/default_brain.tres" id="7_icmyi"]
 [ext_resource type="Script" path="res://Monsters/Outline_Initiate.gd" id="8_03oev"]
@@ -128,12 +127,12 @@ viewport_path = NodePath("HealthBar/SubViewport")
 [sub_resource type="ViewportTexture" id="ViewportTexture_7uvk6"]
 viewport_path = NodePath("ManaBar/SubViewport")
 
-[node name="Hynine2" type="Node3D"]
+[node name="Hynine2" type="Node3D" node_paths=PackedStringArray("healthbar", "manabar", "status_tracker")]
 script = ExtResource("1_0dpen")
-atk = 30
-magic = 25
-attacks = Array[Resource("res://Resources/Attacks/attack_base.gd")]([ExtResource("2_8w1lq"), ExtResource("5_xmhs6"), ExtResource("3_4t7pu"), ExtResource("5_gknvo")])
-portrait = ExtResource("2_mleto")
+healthbar = NodePath("HealthBar/SubViewport/HealthBar3D")
+manabar = NodePath("ManaBar/SubViewport/ManaBar3D")
+status_tracker = NodePath("Status Tracker")
+attacks = Array[Resource("res://Resources/Attacks/attack_base.gd")]([ExtResource("5_gknvo"), ExtResource("3_kenfy"), ExtResource("4_gkt2d"), ExtResource("5_ae5ts")])
 brain = ExtResource("7_icmyi")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]

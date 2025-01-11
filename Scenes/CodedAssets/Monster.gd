@@ -1,32 +1,30 @@
 extends Node3D
 class_name Monster
 
+@export var healthbar : ProgressBar
+@export var manabar : ProgressBar
+@export var status_tracker : StatusTracker
 
 @export var max_health: int = 120
 @export var max_mana : int = 50
 @export var health : int = 120
-var healthbar
 @export var atk : int = 5
 @export var def : int = 5
 @export var mana : int = 50
-var manabar
 @export var magic : int = 5
 @export var res : int = 5
 @export var spd : int = 5
 
-
 @export var attacks : Array[Attack]
-@export var portrait: PackedScene
+#@export var portrait: PackedScene
 @export var brain : Brain
-
-@onready var status_tracker = $"Status Tracker"
 
 var current_statuses_dict = {}
 
 
-func _ready():
-	healthbar = $HealthBar/SubViewport/HealthBar3D
-	manabar = $ManaBar/SubViewport/ManaBar3D
+#func _ready():
+	#healthbar = $HealthBar/SubViewport/HealthBar3D
+	#manabar = $ManaBar/SubViewport/ManaBar3D
 
 func init_health_and_mana_bar():
 	healthbar.set_max(float(max_health))
@@ -161,8 +159,8 @@ func get_attack_names():
 func is_deadzo():
 	return health <= 0
 
-func get_portrait():
-	return portrait.instantiate() as Node2D
+#func get_portrait():
+	#return portrait.instantiate() as Node2D
 
 func has_status(status : Status):
 	return current_statuses_dict.has(status)

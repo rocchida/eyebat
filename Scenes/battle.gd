@@ -35,11 +35,20 @@ func _prepare():
 	enemy_spawns = $EnemySpawns
 	player_spawns = $PlayerSpawns
 
-func populate_spawns(enemy_monster_roster: Array[Monster], player_monster_roster: Array[Monster]):
+func populate_spawns(enemy_monster_roster: Array[PackedScene], player_monster_roster: Array[PackedScene]):
 	_prepare()
-	enemy_spawns.populate_spawns(enemy_monster_roster)
-	player_spawns.populate_spawns(player_monster_roster)
-	set_initiative(enemy_monster_roster, player_monster_roster)
+	
+	var player_monsters : Array[Monster]
+	for ps : PackedScene in player_monster_roster:
+		player_monsters.append(ps.instantiate() as Monster)
+	
+	var enemy_monsters : Array[Monster]
+	for ps : PackedScene in enemy_monster_roster:
+		enemy_monsters.append(ps.instantiate() as Monster)
+	
+	enemy_spawns.populate_spawns(enemy_monsters)
+	player_spawns.populate_spawns(player_monsters)
+	set_initiative(enemy_monsters, player_monsters)
 	for m in initiative:
 		m.toggle_off_shader()
 	initiative[0].toggle_on_shader()

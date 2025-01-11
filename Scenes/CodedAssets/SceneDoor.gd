@@ -2,7 +2,7 @@ extends Area3D
 
 
 @export var _target_scene : String
-@export var _encounter_monster_roster : Array[Monster]
+@export var _encounter_monster_roster : Array[PackedScene]
 var _scene_switcher
 var _entered = false
 var _player : Player

@@ -78,9 +78,9 @@ script = ExtResource("1_hijai")
 
 [node name="DayNightCycle" parent="." instance=ExtResource("2_xrqqg")]
 
-[node name="player" parent="." node_paths=PackedStringArray("monster_roster") instance=ExtResource("2_icr3f")]
+[node name="player" parent="." instance=ExtResource("2_icr3f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.9129, 5.67045, 26.3472)
-monster_roster = [NodePath("../Monsters/Player Monsters/Hynine2"), NodePath("../Monsters/Player Monsters/Gnome")]
+monster_roster = Array[PackedScene]([ExtResource("40_5tjmr")])
 
 [node name="SceneDoor2" type="Area3D" parent="."]
 transform = Transform3D(-0.00275765, 0, -0.999996, 0, 1, 0, 0.999996, 0, -0.00275765, -8.11297, 3.95873, 20.8433)
@@ -93,11 +93,11 @@ shape = SubResource("SphereShape3D_8hhi2")
 
 [node name="doorLargeClosed2" parent="SceneDoor2" instance=ExtResource("10_1iaji")]
 
-[node name="SceneDoor" type="Area3D" parent="." node_paths=PackedStringArray("_encounter_monster_roster")]
+[node name="SceneDoor" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.5454, 4.01099, 20.5823)
 script = ExtResource("10_02i1u")
 _target_scene = "res://Scenes/battle.tscn"
-_encounter_monster_roster = [NodePath("../Monsters/Door Monsters/Hynine2"), NodePath("../Monsters/Door Monsters/Gnome")]
+_encounter_monster_roster = Array[PackedScene]([ExtResource("12_6m0vq")])
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SceneDoor"]
 transform = Transform3D(1.768, 0, 0, 0, 2.058, 0, 0, 0, 1.63479, 0, 0, 0)
@@ -110,18 +110,38 @@ shape = SubResource("SphereShape3D_8hhi2")
 [node name="Door Monsters" type="Node" parent="Monsters"]
 
 [node name="Hynine2" parent="Monsters/Door Monsters" instance=ExtResource("40_5tjmr")]
+atk = 5
+magic = 5
+attacks = Array[Resource("res://Resources/Attacks/attack_base.gd")]([])
+brain = null
 
 [node name="Gnome" parent="Monsters/Door Monsters" instance=ExtResource("12_6m0vq")]
+atk = 5
+magic = 5
+attacks = Array[Resource("res://Resources/Attacks/attack_base.gd")]([])
+brain = null
 
 [node name="Shop Monsters" type="Node" parent="Monsters"]
 
 [node name="Player Monsters" type="Node" parent="Monsters"]
 
 [node name="Hynine2" parent="Monsters/Player Monsters" instance=ExtResource("40_5tjmr")]
+atk = 5
+magic = 5
+attacks = Array[Resource("res://Resources/Attacks/attack_base.gd")]([])
+brain = null
 
 [node name="Gnome" parent="Monsters/Player Monsters" instance=ExtResource("12_6m0vq")]
+atk = 5
+magic = 5
+attacks = Array[Resource("res://Resources/Attacks/attack_base.gd")]([])
+brain = null
 
 [node name="Monsters_Player Monsters#Hynine" parent="." instance=ExtResource("40_5tjmr")]
+atk = 5
+magic = 5
+attacks = Array[Resource("res://Resources/Attacks/attack_base.gd")]([])
+brain = null
 
 [node name="UI" type="Control" parent="."]
 visible = false
