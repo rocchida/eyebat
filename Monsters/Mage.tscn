@@ -127,11 +127,8 @@ viewport_path = NodePath("HealthBar/SubViewport")
 [sub_resource type="ViewportTexture" id="ViewportTexture_7uvk6"]
 viewport_path = NodePath("ManaBar/SubViewport")
 
-[node name="Mage" type="Node3D" node_paths=PackedStringArray("healthbar", "manabar", "status_tracker")]
+[node name="Mage" type="Node3D"]
 script = ExtResource("1_4020y")
-healthbar = NodePath("HealthBar/SubViewport/HealthBar3D")
-manabar = NodePath("ManaBar/SubViewport/ManaBar3D")
-status_tracker = NodePath("Status Tracker")
 attacks = Array[Resource("res://Resources/Attacks/attack_base.gd")]([ExtResource("2_8vrny"), ExtResource("3_khi4g"), ExtResource("4_ofdcu"), ExtResource("5_wc3rv")])
 brain = ExtResource("6_awiwf")
 

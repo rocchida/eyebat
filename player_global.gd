@@ -1,4 +1,4 @@
 extends Node
 
 
-var monster_dict = []
+var monster_list : Array[Monster]
