@@ -16,7 +16,6 @@ class_name Monster
 @export var spd : int = 5
 
 @export var attacks : Array[Attack]
-#@export var portrait: PackedScene
 @export var brain : Brain
 
 var current_statuses_dict = {}

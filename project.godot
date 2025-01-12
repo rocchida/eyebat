@@ -18,7 +18,7 @@ config/features=PackedStringArray("4.2", "Forward Plus")
 
 SceneSwitcher="*res://SceneSwitcher.gd"
 SceneTool="*res://scene_tool.gd"
-PlayerMonsterRoster="*res://player_monster_roster.gd"
+PlayerGlobal="*res://player_global.gd"
 
 [display]
 

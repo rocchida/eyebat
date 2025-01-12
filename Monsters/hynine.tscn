@@ -1,27 +1,26 @@
-[gd_scene load_steps=23 format=3 uid="uid://djtiph0nrnwyp"]
+[gd_scene load_steps=23 format=3 uid="uid://fwgw0ehetm20"]
 
-[ext_resource type="Script" path="res://Monsters/Monster.gd" id="1_0dpen"]
-[ext_resource type="Texture2D" uid="uid://ioavpxax8o61" path="res://CustomAssets/CharacterArt/Monster Sheet/Hynine_Spritesheet.png" id="2_t4hbm"]
-[ext_resource type="Resource" uid="uid://lqupr5diak70" path="res://Resources/Attacks/attack_devilfire.tres" id="3_kenfy"]
-[ext_resource type="Resource" uid="uid://b2fj5386weku1" path="res://Resources/Attacks/attack_wild_slash.tres" id="4_gkt2d"]
-[ext_resource type="PackedScene" uid="uid://0n6qt3r5hf7i" path="res://Scenes/CodedAssets/health_bar_3d.tscn" id="4_qiw4m"]
-[ext_resource type="Resource" uid="uid://2b80ae3omgg5" path="res://Resources/Attacks/attack_denounce.tres" id="5_ae5ts"]
-[ext_resource type="Resource" uid="uid://bs1n1gh1rfxfi" path="res://Resources/Attacks/attack_bulwark.tres" id="5_gknvo"]
-[ext_resource type="PackedScene" uid="uid://dyha3hn24vliy" path="res://Scenes/CodedAssets/clickable.tscn" id="5_xcx82"]
-[ext_resource type="Shader" path="res://Monsters/outline.gdshader" id="7_afcvv"]
-[ext_resource type="Resource" uid="uid://cxw0ecwqbblhv" path="res://Resources/default_brain.tres" id="7_icmyi"]
-[ext_resource type="Script" path="res://Monsters/Outline_Initiate.gd" id="8_03oev"]
-[ext_resource type="Animation" uid="uid://bmi0kajb71q28" path="res://attack.res" id="10_4fqv8"]
-[ext_resource type="PackedScene" uid="uid://mmylq3dq6hon" path="res://Scenes/CodedAssets/mana_bar_3d.tscn" id="10_tp2vr"]
-[ext_resource type="Animation" uid="uid://dpwlpgg8b327o" path="res://idle.res" id="10_wsgst"]
-[ext_resource type="Animation" uid="uid://dronyst6kkj11" path="res://damaged.res" id="11_4yt4q"]
-[ext_resource type="PackedScene" uid="uid://k5amlj5tgi33" path="res://status_tracker.tscn" id="16_evw14"]
+[ext_resource type="Script" path="res://Monsters/Monster.gd" id="1_r56ha"]
+[ext_resource type="Resource" uid="uid://bs1n1gh1rfxfi" path="res://Resources/Attacks/attack_bulwark.tres" id="2_og47l"]
+[ext_resource type="Resource" uid="uid://lqupr5diak70" path="res://Resources/Attacks/attack_devilfire.tres" id="3_ethv4"]
+[ext_resource type="Resource" uid="uid://b2fj5386weku1" path="res://Resources/Attacks/attack_wild_slash.tres" id="4_ojcup"]
+[ext_resource type="Resource" uid="uid://2b80ae3omgg5" path="res://Resources/Attacks/attack_denounce.tres" id="5_hkkwf"]
+[ext_resource type="Resource" uid="uid://cxw0ecwqbblhv" path="res://Resources/default_brain.tres" id="6_fug7n"]
+[ext_resource type="Shader" path="res://Monsters/outline.gdshader" id="7_4su3h"]
+[ext_resource type="Texture2D" uid="uid://ioavpxax8o61" path="res://CustomAssets/CharacterArt/Monster Sheet/Hynine_Spritesheet.png" id="8_ijuky"]
+[ext_resource type="Script" path="res://Monsters/Outline_Initiate.gd" id="9_ydxqe"]
+[ext_resource type="Animation" uid="uid://bmi0kajb71q28" path="res://attack.res" id="10_p2qm5"]
+[ext_resource type="Animation" uid="uid://dronyst6kkj11" path="res://damaged.res" id="11_q6ej5"]
+[ext_resource type="Animation" uid="uid://dpwlpgg8b327o" path="res://idle.res" id="12_yydc4"]
+[ext_resource type="PackedScene" uid="uid://0n6qt3r5hf7i" path="res://Scenes/CodedAssets/health_bar_3d.tscn" id="13_6e8r3"]
+[ext_resource type="PackedScene" uid="uid://mmylq3dq6hon" path="res://Scenes/CodedAssets/mana_bar_3d.tscn" id="14_kt3o2"]
+[ext_resource type="PackedScene" uid="uid://dyha3hn24vliy" path="res://Scenes/CodedAssets/clickable.tscn" id="15_a3ia7"]
+[ext_resource type="PackedScene" uid="uid://k5amlj5tgi33" path="res://status_tracker.tscn" id="16_jvw4r"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_351w6"]
-resource_local_to_scene = true
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j2ovc"]
 render_priority = 0
-shader = ExtResource("7_afcvv")
-shader_parameter/onoff = 1.0
+shader = ExtResource("7_4su3h")
+shader_parameter/onoff = null
 shader_parameter/line_color = Color(1, 1, 1, 0)
 shader_parameter/glowSize = 15.0
 shader_parameter/glowDensity = 3
@@ -29,7 +28,7 @@ shader_parameter/glowRadialCoverage = 4
 shader_parameter/glowAngle = 1.57
 shader_parameter/glowSharpness = 1.0
 shader_parameter/alphaThreshold = 0.2
-shader_parameter/sprite_texture = ExtResource("2_t4hbm")
+shader_parameter/sprite_texture = ExtResource("8_ijuky")
 
 [sub_resource type="Animation" id="Animation_yva54"]
 length = 0.001
@@ -115,9 +114,9 @@ tracks/2/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_dimbn"]
 _data = {
 "RESET": SubResource("Animation_yva54"),
-"attack": ExtResource("10_4fqv8"),
-"damaged": ExtResource("11_4yt4q"),
-"idle": ExtResource("10_wsgst"),
+"attack": ExtResource("10_p2qm5"),
+"damaged": ExtResource("11_q6ej5"),
+"idle": ExtResource("12_yydc4"),
 "selected": SubResource("Animation_13ln1")
 }
 
@@ -127,24 +126,24 @@ viewport_path = NodePath("HealthBar/SubViewport")
 [sub_resource type="ViewportTexture" id="ViewportTexture_7uvk6"]
 viewport_path = NodePath("ManaBar/SubViewport")
 
-[node name="Hynine2" type="Node3D" node_paths=PackedStringArray("healthbar", "manabar", "status_tracker")]
-script = ExtResource("1_0dpen")
+[node name="Hynine" type="Node3D" node_paths=PackedStringArray("healthbar", "manabar", "status_tracker")]
+script = ExtResource("1_r56ha")
 healthbar = NodePath("HealthBar/SubViewport/HealthBar3D")
 manabar = NodePath("ManaBar/SubViewport/ManaBar3D")
 status_tracker = NodePath("Status Tracker")
-attacks = Array[Resource("res://Resources/Attacks/attack_base.gd")]([ExtResource("5_gknvo"), ExtResource("3_kenfy"), ExtResource("4_gkt2d"), ExtResource("5_ae5ts")])
-brain = ExtResource("7_icmyi")
+attacks = Array[Resource("res://Resources/Attacks/attack_base.gd")]([ExtResource("2_og47l"), ExtResource("3_ethv4"), ExtResource("4_ojcup"), ExtResource("5_hkkwf")])
+brain = ExtResource("6_fug7n")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(0.0747146, 0.00653639, 0, -0.00653639, 0.0747146, 0, 0, 0, -0.075, 0, 0.722, 0)
-material_override = SubResource("ShaderMaterial_351w6")
+material_override = SubResource("ShaderMaterial_j2ovc")
 alpha_cut = 2
 texture_filter = 0
-texture = ExtResource("2_t4hbm")
+texture = ExtResource("8_ijuky")
 hframes = 8
 vframes = 4
 frame = 2
-script = ExtResource("8_03oev")
+script = ExtResource("9_ydxqe")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -153,31 +152,32 @@ libraries = {
 autoplay = "idle"
 
 [node name="HealthBar" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0976116, 0.16116, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00276499, 0.367212, 0)
 
 [node name="SubViewport" type="SubViewport" parent="HealthBar"]
 disable_3d = true
 transparent_bg = true
 
-[node name="HealthBar3D" parent="HealthBar/SubViewport" instance=ExtResource("4_qiw4m")]
+[node name="HealthBar3D" parent="HealthBar/SubViewport" instance=ExtResource("13_6e8r3")]
 
 [node name="HealthBar" type="Sprite3D" parent="HealthBar"]
 transform = Transform3D(0.174239, 0, 0, 0, 0.0701671, 0, 0, 0, 1, 0, 1.19833, 0)
 texture = SubResource("ViewportTexture_fsr5g")
 
 [node name="ManaBar" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0976116, 0.0810282, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00276499, 0.28708, 0)
 
 [node name="SubViewport" type="SubViewport" parent="ManaBar"]
 disable_3d = true
 transparent_bg = true
 
-[node name="ManaBar3D" parent="ManaBar/SubViewport" instance=ExtResource("10_tp2vr")]
+[node name="ManaBar3D" parent="ManaBar/SubViewport" instance=ExtResource("14_kt3o2")]
 
 [node name="ManaBar" type="Sprite3D" parent="ManaBar"]
 transform = Transform3D(0.174239, 0, 0, 0, 0.0701671, 0, 0, 0, 1, 0, 1.19833, 0)
 texture = SubResource("ViewportTexture_7uvk6")
 
-[node name="Clickable" parent="." instance=ExtResource("5_xcx82")]
+[node name="Clickable" parent="." instance=ExtResource("15_a3ia7")]
 
-[node name="Status Tracker" parent="." instance=ExtResource("16_evw14")]
+[node name="Status Tracker" parent="." instance=ExtResource("16_jvw4r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0948466, 1.72402, 0)

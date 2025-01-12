@@ -109,7 +109,14 @@ func end_turn():
 		UI.set_attack_description(null, null)
 
 func go_back_to_overworld():
-	_scene_switcher.goto_overworld_scene("res://Scenes/world.tscn", get_all_goodguys())
+	
+	var packed_monsters : Array[PackedScene]
+	for m : Monster in get_all_goodguys():
+		var packed_monster = PackedScene.new()
+		packed_monster.pack(m)
+		packed_monsters.append(packed_monster)
+	
+	_scene_switcher.goto_overworld_scene("res://Scenes/world.tscn", packed_monsters)
 
 func update_status_trackers():
 	for m : Monster in initiative:

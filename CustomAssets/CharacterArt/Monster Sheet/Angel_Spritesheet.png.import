@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://xxu70bssf5m2"
-path.s3tc="res://.godot/imported/Djinni_Spritesheet.png-3cc88c25b31d2410a3628b26ad1971ea.s3tc.ctex"
+uid="uid://djntn2gtqutdk"
+path.s3tc="res://.godot/imported/Angel_Spritesheet.png-0adc07d5a4ff630109a1c29095c916d2.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://CustomAssets/CharacterArt/Monster Sheet/Djinni_Spritesheet.png"
-dest_files=["res://.godot/imported/Djinni_Spritesheet.png-3cc88c25b31d2410a3628b26ad1971ea.s3tc.ctex"]
+source_file="res://CustomAssets/CharacterArt/Monster Sheet/Angel_Spritesheet.png"
+dest_files=["res://.godot/imported/Angel_Spritesheet.png-0adc07d5a4ff630109a1c29095c916d2.s3tc.ctex"]
 
 [params]
 
