@@ -2,7 +2,7 @@ extends Area3D
 
 
 @export var _target_scene : String
-@export var _encounter_monster_roster : Array[Monster]
+@export var _encounter_monster_roster : Array[PackedScene]
 var _scene_switcher
 var _entered = false
 var _player : Player
@@ -15,7 +15,7 @@ func _ready():
 func _process(delta):
 	if _entered:
 		if Input.is_action_just_pressed("ui_accept"):
-			_scene_switcher.goto_battle_scene(_target_scene, _player.monster_roster, _encounter_monster_roster, _player.get_global_position())
+			_scene_switcher.goto_battle_scene(_target_scene,  _encounter_monster_roster, _player.get_global_position())
 
 
 func _on_body_entered(body: Player):

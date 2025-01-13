@@ -35,11 +35,16 @@ func _prepare():
 	enemy_spawns = $EnemySpawns
 	player_spawns = $PlayerSpawns
 
-func populate_spawns(enemy_monster_roster: Array[Monster], player_monster_roster: Array[Monster]):
+func populate_spawns(enemy_monster_roster: Array[PackedScene]):
 	_prepare()
-	enemy_spawns.populate_spawns(enemy_monster_roster)
-	player_spawns.populate_spawns(player_monster_roster)
-	set_initiative(enemy_monster_roster, player_monster_roster)
+	
+	var enemy_monsters : Array[Monster]
+	for ps : PackedScene in enemy_monster_roster:
+		enemy_monsters.append(ps.instantiate() as Monster)
+	
+	enemy_spawns.populate_spawns(enemy_monsters)
+	player_spawns.populate_spawns(PlayerGlobal.monster_list)
+	set_initiative(enemy_monsters, PlayerGlobal.monster_list)
 	for m in initiative:
 		m.toggle_off_shader()
 	initiative[0].toggle_on_shader()
@@ -100,6 +105,13 @@ func end_turn():
 		UI.set_attack_description(null, null)
 
 func go_back_to_overworld():
+	
+	#var packed_monsters : Array[PackedScene]
+	#for m : Monster in get_all_goodguys():
+		#var packed_monster = PackedScene.new()
+		#packed_monster.pack(m)
+		#packed_monsters.append(packed_monster)
+	
 	_scene_switcher.goto_overworld_scene("res://Scenes/world.tscn", get_all_goodguys())
 
 func update_status_trackers():
@@ -134,6 +146,7 @@ func monster_clicked(clicked_monster : Monster):
 	currently_targeted_monsters.append(clicked_monster)
 	
 	if (currently_targeted_monsters.size() == current_selected_attack().num_of_targets or current_selected_attack().randomly_choose_target):
+		UI.hide_buttons()
 		await run_attack(current_monster(), currently_targeted_monsters, current_selected_attack())
 		currently_targeted_monsters.clear()
 		end_turn()
@@ -185,7 +198,7 @@ func receive_attack(ui : UI, attack : Attack, receiver : Monster, attacker : Mon
 	var threat_generated : int = 0
 	for atk in attack.attacks_x_times:
 		if atk > 0: 
-			await get_tree().create_timer(5).timeout
+			await get_tree().create_timer(2.5).timeout
 			ui.debug(name + " recieves hit #" + str(atk + 1) + " from " + attack.name)
 		attack.play_sound(audioPlayer)
 		if attack.is_heal:
