@@ -10,11 +10,12 @@ func _ready():
 func _process(delta):
 	pass
 
-
-func _on_body_exited(body: Player):
-	$"../UI".visible = false 
+#
+#func _on_body_exited(body: Player):
+	#Dialogic.end("timeline"
+	##$"../UI".visible = false 
 
 
 func _on_body_entered(body: Player):
-	$"../UI".visible = true
-	$"../UI/Panel/Control/AnimationPlayer".play("shopkeep")
+	Dialogic.start("timeline")
+

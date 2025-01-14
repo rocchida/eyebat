@@ -129,6 +129,8 @@ viewport_path = NodePath("ManaBar/SubViewport")
 
 [node name="Angel" type="Node3D"]
 script = ExtResource("1_kwu4x")
+atk = 20
+def = 3
 attacks = Array[Resource("res://Resources/Attacks/attack_base.gd")]([ExtResource("2_cms6x"), ExtResource("3_gngv2"), ExtResource("4_s8xlf"), ExtResource("5_sij8i")])
 brain = ExtResource("6_kq11o")
 

@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_1mls4")
-threat_from_dmg = 1.0
+threat_from_dmg = 0.694
 threat_from_healing = 1.0
 threat_from_missing_hp = 0.0
 threat_decay = 0.2
