@@ -2,7 +2,6 @@ extends Node3D
 class_name World
 
 @onready var player : Player = $player
-@onready var worldEnv : WorldEnvironment = $Environment/WorldEnvironment
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
