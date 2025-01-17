@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://bdsnxtasgjx2o"]
+[gd_scene load_steps=25 format=3 uid="uid://bdsnxtasgjx2o"]
 
 [ext_resource type="Script" path="res://Scripts/world.gd" id="1_hijai"]
 [ext_resource type="PackedScene" uid="uid://dba8t7daowokd" path="res://Scenes/CodedAssets/player.tscn" id="2_icr3f"]
@@ -8,10 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://coi1mepd6vqcu" path="res://Monsters/Angel.tscn" id="8_f2fia"]
 [ext_resource type="PackedScene" uid="uid://0uah50n2ynp4" path="res://ImportedAssets/GridMapAssets/Models/GLTF format/doorLargeClosed.glb" id="10_1iaji"]
 [ext_resource type="Script" path="res://Scenes/CodedAssets/SceneDoor.gd" id="10_02i1u"]
-[ext_resource type="Texture2D" uid="uid://dl3plqwoor2bt" path="res://ImportedAssets/CharacterArt/Mage Idle.png" id="12_byxew"]
+[ext_resource type="PackedScene" uid="uid://cxuhakeow7874" path="res://Scenes/shopkeep.tscn" id="10_88q86"]
 [ext_resource type="Script" path="res://Scenes/OverworldUI.gd" id="26_07yq2"]
 [ext_resource type="Texture2D" uid="uid://bsqtjhlergule" path="res://CustomAssets/CharacterArt/Shopkeep.png" id="26_va63k"]
-[ext_resource type="Script" path="res://Scenes/Shopkeep.gd" id="28_ngbrb"]
 [ext_resource type="PackedScene" uid="uid://c38xv4p3ib2mh" path="res://CustomAssets/New folder/objects/campfire/campfire.tscn" id="30_6y506"]
 [ext_resource type="Material" uid="uid://chvymj2xaq44q" path="res://deep_fire.tres" id="32_3ywun"]
 [ext_resource type="Texture2D" uid="uid://cbniu1tm214eu" path="res://ImportedAssets/ParticleEffects/particle_sprite_smoke.webp" id="33_imrae"]
@@ -187,20 +186,7 @@ text = "Hi there, Sonny. What can I getcha?"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Shopkeep" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.8633, 4.40482, 21.3903)
-script = ExtResource("28_ngbrb")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Shopkeep"]
-transform = Transform3D(1.768, 0, 0, 0, 2.058, 0, 0, 0, 1.63479, 0, 0, 0)
-shape = SubResource("SphereShape3D_8hhi2")
-
-[node name="Sprite3D" type="Sprite3D" parent="Shopkeep"]
-transform = Transform3D(4.10053, 0, 0, 0, 3.89533, 0, 0, 0, 1, 0.0631123, 0.158037, 0.740541)
-texture_filter = 0
-texture = ExtResource("12_byxew")
-hframes = 6
-frame = 4
+[node name="Shopkeep" parent="." instance=ExtResource("10_88q86")]
 
 [node name="Environment" type="Node" parent="."]
 
@@ -245,5 +231,3 @@ metadata/_editor_floor_ = Vector3(0, 1, 0)
 [connection signal="body_exited" from="SceneDoor2" to="SceneDoor2" method="_on_body_exited"]
 [connection signal="body_entered" from="SceneDoor" to="SceneDoor" method="_on_body_entered"]
 [connection signal="body_exited" from="SceneDoor" to="SceneDoor" method="_on_body_exited"]
-[connection signal="body_entered" from="Shopkeep" to="Shopkeep" method="_on_body_entered"]
-[connection signal="body_exited" from="Shopkeep" to="Shopkeep" method="_on_body_exited"]
