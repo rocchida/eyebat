@@ -1,0 +1,183 @@
+[gd_scene load_steps=23 format=3 uid="uid://djng6mr4y6a6m"]
+
+[ext_resource type="Script" path="res://Monsters/Monster.gd" id="1_hxdrw"]
+[ext_resource type="Resource" uid="uid://bs1n1gh1rfxfi" path="res://Resources/Attacks/attack_bulwark.tres" id="2_aflbn"]
+[ext_resource type="Resource" uid="uid://lqupr5diak70" path="res://Resources/Attacks/attack_devilfire.tres" id="3_04cep"]
+[ext_resource type="Resource" uid="uid://b2fj5386weku1" path="res://Resources/Attacks/attack_wild_slash.tres" id="4_m63wn"]
+[ext_resource type="Resource" uid="uid://2b80ae3omgg5" path="res://Resources/Attacks/attack_denounce.tres" id="5_owjar"]
+[ext_resource type="Resource" uid="uid://cxw0ecwqbblhv" path="res://Resources/default_brain.tres" id="6_y3cb5"]
+[ext_resource type="Shader" path="res://Monsters/outline.gdshader" id="7_iinwy"]
+[ext_resource type="Texture2D" uid="uid://cexj46igq5tin" path="res://Monsters/Aonin_Spritesheet.png" id="8_l4rm7"]
+[ext_resource type="Script" path="res://Monsters/Outline_Initiate.gd" id="9_sbtck"]
+[ext_resource type="Animation" uid="uid://bmi0kajb71q28" path="res://attack.res" id="10_qcc7l"]
+[ext_resource type="Animation" uid="uid://dronyst6kkj11" path="res://damaged.res" id="11_14bhx"]
+[ext_resource type="Animation" uid="uid://dpwlpgg8b327o" path="res://idle.res" id="12_gfx5v"]
+[ext_resource type="PackedScene" uid="uid://0n6qt3r5hf7i" path="res://Scenes/CodedAssets/health_bar_3d.tscn" id="13_dcpdl"]
+[ext_resource type="PackedScene" uid="uid://mmylq3dq6hon" path="res://Scenes/CodedAssets/mana_bar_3d.tscn" id="14_n6p5y"]
+[ext_resource type="PackedScene" uid="uid://dyha3hn24vliy" path="res://Scenes/CodedAssets/clickable.tscn" id="15_h4rns"]
+[ext_resource type="PackedScene" uid="uid://k5amlj5tgi33" path="res://status_tracker.tscn" id="16_58bqy"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ctyft"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("7_iinwy")
+shader_parameter/onoff = null
+shader_parameter/line_color = Color(1, 1, 1, 0)
+shader_parameter/glowSize = 15.0
+shader_parameter/glowDensity = 3
+shader_parameter/glowRadialCoverage = 4
+shader_parameter/glowAngle = 1.57
+shader_parameter/glowSharpness = 1.0
+shader_parameter/alphaThreshold = 0.2
+shader_parameter/sprite_texture = ExtResource("8_l4rm7")
+
+[sub_resource type="Animation" id="Animation_yva54"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.722, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite3D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.075, -0.075, -0.075)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite3D:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 3.05433)]
+}
+
+[sub_resource type="Animation" id="Animation_13ln1"]
+resource_name = "selected"
+length = 0.750005
+loop_mode = 1
+step = 0.0416667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite3D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.375),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0.695, 0), Vector3(0, 0.61, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite3D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.375),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.075, -0.075, -0.075), Vector3(-0.075, -0.065, -0.075)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dimbn"]
+_data = {
+"RESET": SubResource("Animation_yva54"),
+"attack": ExtResource("10_qcc7l"),
+"damaged": ExtResource("11_14bhx"),
+"idle": ExtResource("12_gfx5v"),
+"selected": SubResource("Animation_13ln1")
+}
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_fsr5g"]
+viewport_path = NodePath("HealthBar/SubViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_7uvk6"]
+viewport_path = NodePath("ManaBar/SubViewport")
+
+[node name="Aonin" type="Node3D"]
+script = ExtResource("1_hxdrw")
+atk = 20
+def = 3
+attacks = Array[Resource("res://Resources/Attacks/attack_base.gd")]([ExtResource("2_aflbn"), ExtResource("3_04cep"), ExtResource("4_m63wn"), ExtResource("5_owjar")])
+brain = ExtResource("6_y3cb5")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(0.0747146, 0.00653639, 0, -0.00653639, 0.0747146, 0, 0, 0, -0.075, 0, 0.722, 0)
+material_override = SubResource("ShaderMaterial_ctyft")
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("8_l4rm7")
+hframes = 8
+vframes = 4
+frame = 2
+script = ExtResource("9_sbtck")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_dimbn")
+}
+autoplay = "idle"
+
+[node name="HealthBar" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00276499, 0.390708, 0)
+
+[node name="SubViewport" type="SubViewport" parent="HealthBar"]
+disable_3d = true
+transparent_bg = true
+
+[node name="HealthBar3D" parent="HealthBar/SubViewport" instance=ExtResource("13_dcpdl")]
+
+[node name="HealthBar" type="Sprite3D" parent="HealthBar"]
+transform = Transform3D(0.174239, 0, 0, 0, 0.0701671, 0, 0, 0, 1, 0, 1.19833, 0)
+texture = SubResource("ViewportTexture_fsr5g")
+
+[node name="ManaBar" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00276499, 0.310576, 0)
+
+[node name="SubViewport" type="SubViewport" parent="ManaBar"]
+disable_3d = true
+transparent_bg = true
+
+[node name="ManaBar3D" parent="ManaBar/SubViewport" instance=ExtResource("14_n6p5y")]
+
+[node name="ManaBar" type="Sprite3D" parent="ManaBar"]
+transform = Transform3D(0.174239, 0, 0, 0, 0.0701671, 0, 0, 0, 1, 0, 1.19833, 0)
+texture = SubResource("ViewportTexture_7uvk6")
+
+[node name="Clickable" parent="." instance=ExtResource("15_h4rns")]
+
+[node name="Status Tracker" parent="." instance=ExtResource("16_58bqy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0948466, 1.74752, 0)
