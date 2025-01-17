@@ -18,9 +18,10 @@ func _process(delta):
 			_scene_switcher.goto_battle_scene(_target_scene,  _encounter_monster_roster, _player.get_global_position())
 
 
-func _on_body_entered(body: Player):
-	_entered = true
-	_player = body
+func _on_body_entered(body: Node3D):	
+	if(body is Player):
+		_entered = true
+		_player = body
 
-func _on_body_exited(body: CharacterBody3D):
+func _on_body_exited(body: Node3D):
 	_entered = false
