@@ -2,7 +2,7 @@
 
 [ext_resource type="Shader" path="res://Scenes/stylized-sky.gdshader" id="1_mjlfm"]
 [ext_resource type="Texture2D" path="res://CustomAssets/New folder/models/Sun.png" id="2_rlsb2"]
-[ext_resource type="Script" path="res://Scripts/WorldEnvironment.gd" id="3_s3fak"]
+[ext_resource type="Script" path="res://Scripts/world_environment.gd" id="3_s3fak"]
 
 [sub_resource type="Curve" id="Curve_i7cpy"]
 _data = [Vector2(0.00909092, 0.010989), 0.0, 0.0, 0, 0, Vector2(0.0863636, 0.989011), 0.0, 0.0, 0, 0, Vector2(1, 0.582418), 0.0, 0.0, 0, 0]

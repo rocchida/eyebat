@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dba8t7daowokd" path="res://Scenes/CodedAssets/player.tscn" id="2_mbqng"]
 [ext_resource type="PackedScene" uid="uid://dewq4tvuvov5m" path="res://CustomAssets/MapAssets/testnut.glb" id="3_8l5d3"]
 [ext_resource type="Texture2D" uid="uid://c3p2my3ujx7ho" path="res://ImportedAssets/Skyboxes/PurplyBlueSky.png" id="4_cwyah"]
-[ext_resource type="Script" path="res://Scripts/WorldEnvironment.gd" id="5_2mr72"]
+[ext_resource type="Script" path="res://Scripts/world_environment.gd" id="5_2mr72"]
 [ext_resource type="PackedScene" uid="uid://b5w3hur261lbq" path="res://CustomAssets/MapAssets/npcs_y_billboard.tscn" id="6_kv1nm"]
 [ext_resource type="PackedScene" uid="uid://c8u6vq6rer1x4" path="res://CustomAssets/MapAssets/npcs_full_billboard.tscn" id="7_cttpy"]
 [ext_resource type="Shader" path="res://ImportedAssets/Shaders/ocean.gdshader" id="8_2ebta"]

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scenes/battle.gd" id="1_ohe57"]
 [ext_resource type="Texture2D" uid="uid://c7g1ncri8fqbt" path="res://ImportedAssets/Skyboxes/SunsetSky.png" id="2_dl5ac"]
-[ext_resource type="Script" path="res://Scripts/WorldEnvironment.gd" id="3_npo0w"]
+[ext_resource type="Script" path="res://Scripts/world_environment.gd" id="3_npo0w"]
 [ext_resource type="Texture2D" uid="uid://c744l3on2jnh6" path="res://CustomAssets/GridMapAssets/Dirt_Reloaded_Grass Block.png" id="4_s2ffy"]
 [ext_resource type="Script" path="res://Scenes/Camera3D.gd" id="5_l1i74"]
 [ext_resource type="PackedScene" uid="uid://c84m8tsicb84m" path="res://Scenes/CodedAssets/SpawnGroup.tscn" id="6_0eg2x"]
