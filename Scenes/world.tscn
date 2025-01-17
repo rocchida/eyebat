@@ -42,6 +42,11 @@ _data = {
 "shopkeep": SubResource("Animation_r44sn")
 }
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_06bma"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xjv20"]
+bg_color = Color(0.427451, 0.317647, 0.647059, 1)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b5afm"]
 content_margin_left = 7.0
 content_margin_top = 7.0
@@ -53,11 +58,6 @@ border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
 border_color = Color(0, 0, 0, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xjv20"]
-bg_color = Color(0.427451, 0.317647, 0.647059, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_06bma"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vuk7a"]
 transparency = 1
@@ -165,11 +165,11 @@ grow_vertical = 0
 [node name="MenuButton3" type="MenuButton" parent="UI/Panel/VBoxContainer"]
 visible = false
 layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
-theme_override_styles/normal = SubResource("StyleBoxFlat_b5afm")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_xjv20")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_styles/hover = SubResource("StyleBoxFlat_06bma")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_xjv20")
+theme_override_styles/normal = SubResource("StyleBoxFlat_b5afm")
 toggle_mode = false
 text = "Attack"
 flat = false
