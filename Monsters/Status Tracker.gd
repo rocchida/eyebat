@@ -4,9 +4,9 @@ class_name StatusTracker
 @onready var this = $"."
 
 func update_text(statuses : Dictionary):
-	var str : String = ""
+	var new_text : String = ""
 	for key in statuses.keys():
 		var stacks : String = str(statuses[key])
-		str = str + key.name + ":" + stacks + " "
-	this.text = str
+		new_text = new_text + key.name + ":" + stacks + " "
+	this.text = new_text
 	
