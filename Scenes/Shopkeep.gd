@@ -16,6 +16,6 @@ func _process(delta):
 	##$"../UI".visible = false 
 
 
-func _on_body_entered(body: Player):
+func _on_body_entered(body: Node3D):
 	Dialogic.start("timeline")
 
