@@ -190,6 +190,7 @@ text = "Hi there, Sonny. What can I getcha?"
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Shopkeep" parent="." instance=ExtResource("10_88q86")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.5654, 4.22117, 23.3353)
 
 [node name="Environment" type="Node" parent="."]
 
