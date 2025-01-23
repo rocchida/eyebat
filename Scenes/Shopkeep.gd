@@ -17,5 +17,6 @@ func _process(delta):
 
 
 func _on_body_entered(body: Node3D):
-	Dialogic.start("timeline")
+	if(body is Player):
+		Dialogic.start("timeline")
 
