@@ -78,6 +78,7 @@ func _process(_delta: float) -> void:
 
 
 func _on_focus_entered() -> void:
+	if self.disabled: return;
 	used_shortcut = false # focus changing implies not using shortcuts
 	
 	if tween and tween.is_running(): # Kill the running tween
@@ -118,6 +119,7 @@ func _on_focus_exited() -> void:
 
 #func _input(event : InputEvent):
 func _unhandled_input(event: InputEvent) -> void:
+	if self.disabled: return;
 	if in_context():
 		if shortcut and shortcut.matches_event(event):
 			# let other CogitoButtons know that the current context has had a shortcut used
