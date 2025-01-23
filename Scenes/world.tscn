@@ -1,10 +1,10 @@
-[gd_scene load_steps=25 format=3 uid="uid://bdsnxtasgjx2o"]
+[gd_scene load_steps=27 format=3 uid="uid://bdsnxtasgjx2o"]
 
 [ext_resource type="Script" path="res://Scripts/world.gd" id="1_hijai"]
 [ext_resource type="PackedScene" uid="uid://dba8t7daowokd" path="res://Scenes/CodedAssets/player.tscn" id="2_icr3f"]
 [ext_resource type="PackedScene" uid="uid://bhn8c8kmh4j6y" path="res://day_night_cycle.tscn" id="2_xrqqg"]
 [ext_resource type="PackedScene" uid="uid://dewq4tvuvov5m" path="res://CustomAssets/MapAssets/testnut.glb" id="3_yn2xu"]
-[ext_resource type="PackedScene" uid="uid://fwgw0ehetm20" path="res://Monsters/Hynine.tscn" id="5_ohnpj"]
+[ext_resource type="PackedScene" uid="uid://fwgw0ehetm20" path="res://Monsters/hynine.tscn" id="5_ohnpj"]
 [ext_resource type="PackedScene" uid="uid://djng6mr4y6a6m" path="res://Monsters/Aonin.tscn" id="6_4mr5w"]
 [ext_resource type="PackedScene" uid="uid://coi1mepd6vqcu" path="res://Monsters/Angel.tscn" id="8_f2fia"]
 [ext_resource type="PackedScene" uid="uid://dxbfvlk53cyl3" path="res://Monsters/Gnome.tscn" id="8_pfhsy"]

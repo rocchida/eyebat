@@ -5,6 +5,8 @@ enum state {ENEMIES_AND_PLAYERS_ALIVE, ENEMIES_DEAD, PLAYERS_DEAD, ALL_DEAD}
 enum turn_state {SELECTING_ACTION, ACTION_SELECTED}
 var enemy_spawns : SpawnGroup
 var player_spawns : SpawnGroup
+var enemy_monsters : Array[Monster]
+var player_monsters : Array[Monster]
 var initiative : Array[Monster]
 var current_turn_state : turn_state = turn_state.SELECTING_ACTION
 var current_turn : int = 0
@@ -12,15 +14,42 @@ var currently_selected_button : int = -1
 var struggle_atk = "res://Resources/Attacks/struggle.tres"
 @export var debug : bool
 @onready var UI = $Ui
-var _scene_switcher
 var currently_targeted_monsters : Array[Monster]
 
 func _ready():
-	_scene_switcher = get_node("/root/SceneSwitcher")
-	SceneTool.set_root(self)
 	UI.set_buttons(current_monster().get_attack_names())
 	UI.set_current_monster_stats(current_monster())
 	#UI.set_initiative_board(initiative)
+	print("Initiative (Ready): ", initiative)
+
+func _prepare():
+	enemy_spawns = $EnemySpawns
+	player_spawns = $PlayerSpawns
+
+func instantiate_monsters(enemy_monster_roster: Array[PackedScene]):
+	# unpack the enemy_monster_roster
+	for ps : PackedScene in enemy_monster_roster:
+		enemy_monsters.append(ps.instantiate() as Monster)
+
+	# unpack the player_monster_roster
+	for ps : PackedScene in PlayerGlobal.monster_list:
+		player_monsters.append(ps.instantiate() as Monster)
+
+	# instantiate initiative
+	set_initiative(enemy_monsters, player_monsters)
+
+	#print("Initiative: (Insantiated)", initiative)
+
+func populate_spawns():
+	_prepare()
+	enemy_spawns.populate_spawns(enemy_monsters)
+	player_spawns.populate_spawns(player_monsters)
+	for m in initiative:
+		m.toggle_off_shader()
+	initiative[0].toggle_on_shader()
+
+	# first turn logic here so that it happens only after spawns are populated
+	# may want to move it somewhere else
 	if is_enemy(initiative.front()): 
 		perform_ai_turn(current_monster())
 		UI.hide_buttons()
@@ -30,24 +59,6 @@ func _ready():
 		if is_enemy(m):
 			m.get_brain().set_threats(get_living_goodguys())
 		else: m.get_brain().set_threats(get_living_enemies())
-
-func _prepare():
-	enemy_spawns = $EnemySpawns
-	player_spawns = $PlayerSpawns
-
-func populate_spawns(enemy_monster_roster: Array[PackedScene]):
-	_prepare()
-	
-	var enemy_monsters : Array[Monster]
-	for ps : PackedScene in enemy_monster_roster:
-		enemy_monsters.append(ps.instantiate() as Monster)
-	
-	enemy_spawns.populate_spawns(enemy_monsters)
-	player_spawns.populate_spawns(PlayerGlobal.monster_list)
-	set_initiative(enemy_monsters, PlayerGlobal.monster_list)
-	for m in initiative:
-		m.toggle_off_shader()
-	initiative[0].toggle_on_shader()
 	
 func set_initiative(enemy_monster_roster: Array[Monster], player_monster_roster: Array[Monster]):
 	initiative.append_array(enemy_monster_roster)
@@ -112,7 +123,14 @@ func go_back_to_overworld():
 		#packed_monster.pack(m)
 		#packed_monsters.append(packed_monster)
 	
-	_scene_switcher.goto_overworld_scene("res://Scenes/world.tscn", get_all_goodguys())
+	#was: _scene_switcher.goto_overworld_scene("res://Scenes/world.tscn", get_all_goodguys())
+	var current_scene_statename = get_tree().get_current_scene().get_name()
+	SaveManager.save_scene_state(current_scene_statename,"temp")
+	SaveManager.save_player_state(SaveManager._current_player_node, "temp")	
+	SaveManager.fade_out()
+	await SaveManager.fade_finished	
+	SceneSwitcher.load_next_scene("res://Scenes/world.tscn", "", "temp", SceneSwitcher.SceneLoadMode.TEMP)
+	
 
 func update_status_trackers():
 	for m : Monster in initiative:

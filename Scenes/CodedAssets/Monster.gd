@@ -63,11 +63,11 @@ func get_stat_with_buffs_and_debuffs(stat : int, statType : StatStatus.stats):
 	for key : Status in current_statuses_dict:
 		for statBuff : StatStatus in key.stat_buffs:
 			if statBuff.stat == statType:
-				buff_mod += (statBuff.percent_affected * stat)
+				buff_mod += (int)(statBuff.percent_affected * stat)
 				buffs_debug = buffs_debug + key.name + " adds " + str(statBuff.percent_affected * stat) + " to " + str(StatStatus.stats.keys()[statType]) + ". "
 		for statDebuff : StatStatus in key.stat_debuffs:
 			if statDebuff.stat == statType:
-				debuff_mod += (statDebuff.percent_affected * stat)
+				debuff_mod += (int)(statDebuff.percent_affected * stat)
 				debuffs_debug = debuffs_debug + key.name + " subtracts " + str(statDebuff.percent_affected * stat) + " from " + str(StatStatus.stats.keys()[statType]) + ". "
 	print(buffs_debug)
 	print(debuffs_debug)

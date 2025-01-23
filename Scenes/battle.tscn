@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://d2yxnxvhqwyjo"]
+[gd_scene load_steps=22 format=3 uid="uid://d2yxnxvhqwyjo"]
 
 [ext_resource type="Script" path="res://Scenes/battle.gd" id="1_8t3rd"]
 [ext_resource type="PackedScene" uid="uid://bhn8c8kmh4j6y" path="res://day_night_cycle.tscn" id="2_6b1su"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://cbniu1tm214eu" path="res://ImportedAssets/ParticleEffects/particle_sprite_smoke.webp" id="10_0kg4i"]
 [ext_resource type="PackedScene" uid="uid://c38xv4p3ib2mh" path="res://CustomAssets/New folder/objects/campfire/campfire.tscn" id="11_en8h7"]
 [ext_resource type="PackedScene" uid="uid://d0dsmhx747f3p" path="res://CustomAssets/New folder/objects/rocks/rock_1.tscn" id="12_312s8"]
+[ext_resource type="PackedScene" uid="uid://dkie3md1cmsip" path="res://Menus/Scenes/PauseMenu.tscn" id="12_mb3tp"]
 
 [sub_resource type="Curve" id="Curve_xwvbv"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.142259, 1), 0.0, 0.0, 0, 0, Vector2(0.380753, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -178,6 +179,8 @@ transform = Transform3D(5.3033, 0, 6.35689, 0, 6.6, 0, -5.3033, 0, 6.35689, -7.0
 transform = Transform3D(3.94223, -4.73334e-08, -12.0831, 0.755325, 10.0955, 0.695708, 7.15161, -1.06625, 6.58714, -9.93051, 4.68597, -7.3086)
 
 [node name="DayNightCycle" parent="." instance=ExtResource("2_6b1su")]
+
+[node name="PauseMenu" parent="." instance=ExtResource("12_mb3tp")]
 
 [connection signal="button_clicked" from="Ui" to="." method="_on_ui_button_clicked"]
 [connection signal="monster_clicked" from="EnemySpawns/BattleSpawn" to="." method="_on_battle_spawn_monster_clicked"]

@@ -31,12 +31,12 @@ func get_most_threatening_target():
 	return target
 
 func add_heal_threat(m : Monster, amount : int, flat_threat_added : int):
-	var threat_added : int = (amount * threat_from_healing) + flat_threat_added
+	var threat_added : int = (int)(amount * threat_from_healing) + flat_threat_added
 	target_threat_dict[m] += threat_added
 	return threat_added
 
 func add_dmg_threat(m : Monster, amount : int, flat_threat_added : int):
-	var threat_added : int = (amount * threat_from_dmg) + flat_threat_added
+	var threat_added : int = (int)(amount * threat_from_dmg) + flat_threat_added
 	target_threat_dict[m] += threat_added
 	return threat_added
 
