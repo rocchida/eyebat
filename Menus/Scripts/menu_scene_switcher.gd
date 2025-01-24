@@ -7,7 +7,7 @@ extends Node
 
 func _on_main_menu_start_game_pressed():
 	if start_game_scene: 
-		SceneSwitcher.load_next_scene(start_game_scene, "", "temp", SceneSwitcher.CogitoSceneLoadMode.RESET) #Load_mode 2 means there's no attempt to load a state.
+		SceneSwitcher.load_next_scene(start_game_scene, "", "temp", SceneSwitcher.SceneLoadMode.RESET) #Load_mode 2 means there's no attempt to load a state.
 	else:
 		print("No start game scene set in the Scene switcher.")
 

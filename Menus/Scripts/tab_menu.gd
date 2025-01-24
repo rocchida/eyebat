@@ -1,4 +1,4 @@
-class_name CogitoTabMenu
+class_name CustomTabMenu
 extends TabContainer
 ## This class can be extended to create a tab menu with controller support.
 

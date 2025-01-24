@@ -3,7 +3,7 @@ extends Control
 signal options_updated
 
 # Grabbing TabContainer node for gamepad navigation
-@onready var tab_container: CogitoTabMenu = $VBoxContainer/TabContainer
+@onready var tab_container: CustomTabMenu = $VBoxContainer/TabContainer
 
 const HSliderWLabel = preload("res://Menus/Scripts/slider_w_labels.gd")
 var config = ConfigFile.new()

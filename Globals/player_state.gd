@@ -74,11 +74,11 @@ func clear_saved_player_monster_roster_data():
 func add_to_world_dictionary(world_property_name: String, world_property_data):
 	if world_dictionary.has(world_property_name):
 		world_dictionary[world_property_name] = world_property_data
-		print("CogitoPlayerState: world dict key found and value saved: ", world_property_name, world_property_data)
+		print("PlayerState: world dict key found and value saved: ", world_property_name, world_property_data)
 	else:
 		world_dictionary.get_or_add(world_property_name)
 		world_dictionary[world_property_name] = world_property_data
-		print("CogitoPlayerState: world dict key not found. Added and value saved: ", world_property_name, world_property_data)
+		print("PlayerState: world dict key not found. Added and value saved: ", world_property_name, world_property_data)
 
 
 func clear_world_dictionary():
@@ -109,7 +109,7 @@ func write_state(state_slot : String) -> void:
 	print("Player state saved as ", player_state_file)
 	
 	## For debug save as .tres
-	#var player_state_file_tres = str(Global.STATE_DIR + state_slot + "/" + SceneManager.cogito_player_state_prefix + ".tres")
+	#var player_state_file_tres = str(Global.STATE_DIR + state_slot + "/" + SceneManager.player_state_prefix + ".tres")
 	#ResourceSaver.save(self, player_state_file_tres, ResourceSaver.FLAG_CHANGE_PATH | ResourceSaver.FLAG_RELATIVE_PATHS)
 	#print("Scene state saved as .tres: ", player_state_file_tres)
 

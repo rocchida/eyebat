@@ -117,7 +117,7 @@ func load_player_state(player, passed_slot:String):
 		
 		# QuestManager.failed.clear_group()
 		# for quest in _player_state.player_failed_quests:
-		# 	CogitoQuestManager.failed.add_quest(quest)
+		# 	QuestManager.failed.add_quest(quest)
 		
 		
 		# Loading saved charges of wieldables
@@ -240,7 +240,7 @@ func save_player_state(player, slot:String):
 	# var local_dict_copy : Dictionary = _current_world_dict.duplicate(true)
 	# _player_state.clear_world_dictionary()
 	# for entry in local_dict_copy:
-	# 	print("CogitoSceneManager: World Dict: attemtping to save key: ", entry)
+	# 	print("SaveManager: World Dict: attemtping to save key: ", entry)
 	# 	_player_state.add_to_world_dictionary(entry, local_dict_copy[entry])
 
 	## Adding a screenshot
@@ -386,7 +386,7 @@ func save_scene_state(_scene_name_to_save, slot: String):
 	_scene_state.write_state(slot, _scene_name_to_save)
 
 func delete_save(passed_slot: String) -> void:
-	#var file_to_remove = Global.STATE_DIR + cogito_player_state_prefix + passed_slot + ".res"
+	#var file_to_remove = Global.STATE_DIR + player_state_prefix + passed_slot + ".res"
 	var dir_to_remove = Global.STATE_DIR + passed_slot
 	OS.move_to_trash(ProjectSettings.globalize_path(dir_to_remove))
 	Global.debug_log("SaveManager","Save file removed: "+ dir_to_remove)
@@ -422,12 +422,11 @@ func copy_slot_saves_to_temp(passed_slot:String) -> bool:
 	
 	
 func copy_temp_saves_to_slot(passed_slot:String) -> bool:
-	Global.debug_log("SaveManager","Attpemting to copy files from temp to slot " + passed_slot)
+	Global.debug_log("SaveManager","Attempting to copy files from temp to slot " + passed_slot)
 	var files : Dictionary
 	var temp_dir = DirAccess.open(Global.STATE_DIR + "temp")
 	
-	var cogito_dir = DirAccess.open(Global.STATE_DIR)
-	cogito_dir.make_dir(passed_slot)
+	DirAccess.open(Global.STATE_DIR).make_dir(passed_slot)
 
 	if temp_dir:
 		temp_dir.list_dir_begin()

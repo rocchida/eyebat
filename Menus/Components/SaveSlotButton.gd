@@ -1,5 +1,5 @@
 extends AnimatedButton
-class_name CogitoSaveSlotButton
+class_name SaveSlotButton
 
 @onready var screenshot_spot: TextureRect = $MarginContainer/HBoxContainer/Screenshot_Spot
 @onready var slot_name_label: Label = $MarginContainer/HBoxContainer/VBoxContainer/SlotName
