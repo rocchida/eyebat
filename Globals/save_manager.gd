@@ -467,7 +467,7 @@ func delete_temp_saves():
 		var file_name = dir2.get_next()
 		while file_name != "":
 			if dir2.current_is_dir():
-				Global.debug_log("SaveManager","Deleting temp saves: Detected dir = " + file_name)
+				#Global.debug_log("SaveManager","Deleting temp saves: Detected dir = " + file_name)
 				if file_name == "temp":
 					Global.debug_log("SaveManager","Deleting temp directory: " + file_name)
 					if dir2.remove(file_name) != OK:
