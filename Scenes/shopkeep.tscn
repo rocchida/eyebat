@@ -3,22 +3,21 @@
 [ext_resource type="Script" path="res://Scenes/Shopkeep.gd" id="1_ns3aa"]
 [ext_resource type="Texture2D" uid="uid://dl3plqwoor2bt" path="res://ImportedAssets/CharacterArt/Mage Idle.png" id="2_mqwgn"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_8hhi2"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_qw6er"]
 
 [node name="Shopkeep" type="Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.8633, 4.40482, 21.3903)
+transform = Transform3D(20.89, 0, 0, 0, 20.89, 0, 0, 0, 20.89, 0, 0, 0)
 script = ExtResource("1_ns3aa")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1.768, 0, 0, 0, 2.058, 0, 0, 0, 1.63479, 0, 0, 0)
-shape = SubResource("SphereShape3D_8hhi2")
-
 [node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform3D(4.10053, 0, 0, 0, 3.89533, 0, 0, 0, 1, 0.0631123, 0.158037, 0.740541)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 texture_filter = 0
 texture = ExtResource("2_mqwgn")
 hframes = 6
 frame = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_qw6er")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

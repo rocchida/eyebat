@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://cjkfyiudhqpqc"]
+
+[ext_resource type="Texture2D" uid="uid://bw8o27u7o3alu" path="res://Menus/Loading/Spinner/spinner_progress.png" id="1_xabsn"]
+[ext_resource type="Script" path="res://Menus/Loading/Spinner/spinner.gd" id="2_eo6tu"]
+
+[node name="Spinner" type="TextureProgressBar"]
+z_index = 2
+offset_right = 120.0
+offset_bottom = 120.0
+value = 20.0
+fill_mode = 4
+texture_progress = ExtResource("1_xabsn")
+script = ExtResource("2_eo6tu")

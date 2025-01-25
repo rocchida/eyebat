@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://nyo0j2wnimo6" path="res://ImportedAssets/GridMapAssets/Models/GLTF format/barrel.glb" id="1_82t1x"]
 [ext_resource type="Script" path="res://Scenes/CodedAssets/battleSpawn.gd" id="1_r2t2p"]
 
-[node name="BattleSpawn" type="Node3D"]
+[node name="BattleSpawn" type="Node3D" groups=["Persist"]]
 script = ExtResource("1_r2t2p")
 
 [node name="barrel2" parent="." instance=ExtResource("1_82t1x")]

@@ -1,7 +1,11 @@
 extends CharacterBody3D
 class_name Player
 
+#signals
+signal player_state_loaded()
+
 @export var monster_roster : Array[PackedScene] 
+#@export var inventory_data : Inventory
 @onready var _playerBody = $"."
 const _SPEED = 5.0
 const _JUMP_VELOCITY = 4.5
@@ -9,9 +13,11 @@ var _gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 
 func _ready():
+	SaveManager._current_player_node = self
 	if PlayerGlobal.monster_list.is_empty():
 		for ps : PackedScene in monster_roster:
-			PlayerGlobal.monster_list.append(ps.instantiate() as Monster)
+			# PlayerGlobal.monster_list.append(ps.instantiate() as Monster)
+			PlayerGlobal.monster_list.append(ps)
 	
 # _physics_process is a function provided by Godot. TLDR - It runs like once a frame
 # I used this as a main method and broke down all logic into smaller functions for readability
@@ -50,3 +56,6 @@ func set_monster_roster(roster : Array[Monster]):
 	for m in roster:
 		monster_roster.append(m)
 	
+func _on_player_state_loaded():
+	# apply custom logic, like resetting parameters that weren't saved
+	pass
