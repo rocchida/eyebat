@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="2DHD Demo"
-run/main_scene="res://Menus/Scenes/main_menu.tscn"
+run/main_scene="res://Menus/Main/main_menu.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://CustomAssets/CharacterArt/icon.png"
 config/windows_native_icon="res://CustomAssets/icon.ico"
@@ -24,7 +24,7 @@ Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
 Global="*res://Globals/global.gd"
 InputHelper="*res://addons/input_helper/input_helper.gd"
 SaveManager="*res://Globals/save_manager.gd"
-MenuTemplateManager="*res://Menus/Nodes/menu_template_manager.tscn"
+LoadSavedOptions="*res://Menus/Scripts/load_saved_options.gd"
 
 [dialogic]
 

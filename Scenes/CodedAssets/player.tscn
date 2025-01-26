@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_rpphu"]
 [ext_resource type="Texture2D" uid="uid://b3hrrrhy5pwlf" path="res://CustomAssets/CharacterArt/jb4KQ6O.png" id="2_e2akw"]
-[ext_resource type="PackedScene" uid="uid://dkie3md1cmsip" path="res://Menus/Scenes/PauseMenu.tscn" id="3_cxisc"]
+[ext_resource type="PackedScene" uid="uid://dkie3md1cmsip" path="res://Menus/Pause/PauseMenu.tscn" id="3_cxisc"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_s6gl6"]
 size = Vector3(0.14679, 0.161408, 0.14801)

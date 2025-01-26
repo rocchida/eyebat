@@ -1,4 +1,3 @@
-extends Node
 class_name OptionsConstants
 
 const sfx_bus_name = "SFX"

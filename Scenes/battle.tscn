@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://cbniu1tm214eu" path="res://ImportedAssets/ParticleEffects/particle_sprite_smoke.webp" id="10_0kg4i"]
 [ext_resource type="PackedScene" uid="uid://c38xv4p3ib2mh" path="res://CustomAssets/New folder/objects/campfire/campfire.tscn" id="11_en8h7"]
 [ext_resource type="PackedScene" uid="uid://d0dsmhx747f3p" path="res://CustomAssets/New folder/objects/rocks/rock_1.tscn" id="12_312s8"]
-[ext_resource type="PackedScene" uid="uid://dkie3md1cmsip" path="res://Menus/Scenes/PauseMenu.tscn" id="12_mb3tp"]
+[ext_resource type="PackedScene" uid="uid://dkie3md1cmsip" path="res://Menus/Pause/PauseMenu.tscn" id="12_mb3tp"]
 
 [sub_resource type="Curve" id="Curve_xwvbv"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.142259, 1), 0.0, 0.0, 0, 0, Vector2(0.380753, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
