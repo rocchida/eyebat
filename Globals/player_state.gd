@@ -1,31 +1,32 @@
 class_name PlayerState
 extends Resource
 
-var player_state_dir : String = Global.STATE_DIR + SaveManager.player_state_prefix
+var player_state_dir : String = Global.STATE_DIR + Global.player_state_prefix
 
 @export var version : int = 1
 #@export var player_inventory : Inventory
 @export var saved_wieldable_charges : Array
 
-@export var player_current_scene : String
-@export var player_current_scene_path : String
-@export var player_position : Vector3
-@export var player_rotation : Vector3
-@export var player_try_crouch : bool
+@export var current_scene : String
+@export var current_scene_path : String
+@export var position : Vector3
+@export var sprite_direction : Vector2
+# @export var rotation : Vector3
+# @export var player_try_crouch : bool
 
 #Using Vector2 for saving player attributes. X = current, Y = max.
-@export var player_health: Vector2
-@export var player_stamina : Vector2
-@export var player_sanity : Vector2
+@export var health: Vector2
+@export var stamina : Vector2
+@export var sanity : Vector2
 
 #New way of saving player attributes
-@export var player_attributes : Dictionary
+@export var attributes : Dictionary
 
 # Saving currencies
-@export var player_currencies : Dictionary
+@export var currencies : Dictionary
 
 #Saving Monster roster
-@export var player_monster_roster : Array[PackedScene]
+@export var monster_roster : Array[PackedScene]
 
 # Saving world dict
 @export var world_dictionary : Dictionary
@@ -39,35 +40,35 @@ var player_state_dir : String = Global.STATE_DIR + SaveManager.player_state_pref
 # @export var player_failed_quests : Array[Quest]
 
 #Saving some extra data for save game management/UI
-@export var player_state_screenshot_file : String
-@export var player_state_savetime : int
-@export var player_state_slot_name : String
+@export var save_screenshot_path : String
+@export var save_time : int
+@export var save_name : String
 
 
 # Functions for attributes
 func add_player_attribute_to_state_data(name: String, attribute_data:Vector2):
-	player_attributes[name] = attribute_data
+	attributes[name] = attribute_data
 
 
 func clear_saved_attribute_data():
-	player_attributes.clear()
+	attributes.clear()
 
 
 # Functions for currencies
 func add_player_currency_to_state_data(name: String, currency_data:Vector2):
-	player_currencies[name] = currency_data
+	currencies[name] = currency_data
 
 
 func clear_saved_currency_data():
-	player_currencies.clear()
+	currencies.clear()
 
 # Functions for Monster roster
 func add_player_monster_roster_to_state_data(monster:PackedScene):
-	player_monster_roster.append(monster)
+	monster_roster.append(monster)
 
 
 func clear_saved_player_monster_roster_data():
-	player_monster_roster.clear()
+	monster_roster.clear()
 
 
 # Functions for world dictionary
@@ -114,13 +115,7 @@ func write_state(state_slot : String) -> void:
 	#print("Scene state saved as .tres: ", player_state_file_tres)
 
 
-func state_exists(state_slot : String) -> bool:
-	#var player_state_file = str(player_state_dir + state_slot + ".res")
-	var player_state_file = str(Global.STATE_DIR + state_slot + "/" + Global.player_state_prefix + ".res")
-	return ResourceLoader.exists(player_state_file)
- 
-
-func load_state(state_slot : String) -> Resource:
-	#var player_state_file = str(player_state_dir + state_slot + ".res")
-	var player_state_file = str(Global.STATE_DIR + state_slot + "/" + Global.player_state_prefix + ".res")
-	return ResourceLoader.load(player_state_file, "", ResourceLoader.CACHE_MODE_IGNORE)
+# func load_state(state_slot : String) -> PlayerState:
+# 	#var player_state_file = str(player_state_dir + state_slot + ".res")
+# 	var player_state_file = str(Global.STATE_DIR + state_slot + "/" + Global.player_state_prefix + ".res")
+# 	return ResourceLoader.load(player_state_file, "", ResourceLoader.CACHE_MODE_IGNORE)

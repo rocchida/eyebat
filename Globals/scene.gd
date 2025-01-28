@@ -7,8 +7,8 @@ func move_player_to_connector(connector_name:String):
 	for node in connectors:
 		if node.get_name() == connector_name:
 			Global.debug_log("Scene.gd", "Connector found, moving player to " + node.get_name() )
-			SceneSwitcher._current_player_node.global_position = node.global_position
-			SceneSwitcher._current_player_node.body.global_rotation = node.global_rotation
+			PlayerGlobal.player.global_position = node.global_position
+			PlayerGlobal.player.body.global_rotation = node.global_rotation
 			return
 	
 	Global.debug_log("Scene.gd",  "No connector with name " + connector_name + " found.")

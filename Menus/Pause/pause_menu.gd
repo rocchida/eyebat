@@ -69,7 +69,7 @@ func _play_pressed() -> void:
 func open_pause_menu():
 	#Stops game and shows pause menu
 	get_tree().paused = true
-	label_active_slot.text = "Current Slot: " + SaveManager._active_slot
+	label_active_slot.text = "Current Slot: " + SaveManager._active_save_name
 	temp_screenshot = grab_temp_screenshot()
 	show()
 	game_menu.show()
@@ -99,12 +99,12 @@ func load_current_slot_data():
 		%Screenshot_Spot.texture = texture
 	else:
 		%Screenshot_Spot.texture = empty_slot_texture
-		print("No screenshot for slot ", SaveManager._active_slot, " found.")
+		print("No screenshot for slot ", SaveManager._active_save_name, " found.")
 		
 	# Load save state time
 	var savetime : int
 	if SaveManager._player_state:
-		savetime = SaveManager._player_state.player_state_savetime
+		savetime = SaveManager._player_state.save_time
 	if savetime == null or typeof(savetime) != TYPE_INT or savetime == 0:
 		%Label_SaveTime.text = ""
 	else:
@@ -153,21 +153,19 @@ func _input(event):
 
 
 func _on_save_button_pressed() -> void:
-	SaveManager._current_scene_name = get_tree().get_current_scene().get_name()
-	SaveManager._current_scene_path = get_tree().current_scene.scene_file_path
-	SaveManager._screenshot_to_save = temp_screenshot
-	SaveManager.save_player_state(SaveManager._current_player_node,SaveManager._active_slot)
-	SaveManager.save_scene_state(SaveManager._current_scene_name,"temp")
-	SaveManager.copy_temp_saves_to_slot(SaveManager._active_slot)
+	var current_scene_name = get_tree().get_current_scene().get_name()
+	var current_scene_path = get_tree().current_scene.scene_file_path
+	var screenshot_to_save = temp_screenshot
+	SaveManager.save_player_state(current_scene_name, current_scene_path,PlayerGlobal.player, screenshot_to_save, SaveManager._active_save_name)
+	SaveManager.save_scene_state(get_tree(),"temp")
+	SaveManager.copy_temp_saves_to_slot(SaveManager._active_save_name)
 	
 	_on_resume_game_button_pressed()
 
 
 func _on_load_button_pressed() -> void:
 	Global.debug_log("pause_menu_controller.gd","LOAD button pressed.")
-	SaveManager._current_scene_name = get_tree().get_current_scene().get_name()
-	SaveManager._current_scene_path = get_tree().current_scene.scene_file_path
 	SaveManager.delete_temp_saves()
-	SaveManager.copy_slot_saves_to_temp(SaveManager._active_slot)
-	
+	SaveManager.copy_slot_saves_to_temp(get_tree(), SaveManager._active_save_name)
+	SaveManager.load_saved_game(get_tree(),"temp")
 	_on_resume_game_button_pressed()

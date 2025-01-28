@@ -65,7 +65,7 @@ theme_override_constants/separation = 15
 [node name="PauseMenuLabel" type="Label" parent="Content"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 45
-text = "Pause Menu"
+text = "Paused"
 horizontal_alignment = 1
 
 [node name="HSeparator" type="HSeparator" parent="Content"]

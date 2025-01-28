@@ -124,11 +124,12 @@ func go_back_to_overworld():
 		#packed_monsters.append(packed_monster)
 	
 	#was: _scene_switcher.goto_overworld_scene("res://Scenes/world.tscn", get_all_goodguys())
-	var current_scene_statename = get_tree().get_current_scene().get_name()
-	SaveManager.save_scene_state(current_scene_statename,"temp")
-	SaveManager.save_player_state(SaveManager._current_player_node, "temp")	
-	SaveManager.fade_out()
-	await SaveManager.fade_finished	
+	var current_scene_name = get_tree().get_current_scene().get_name()
+	var current_scene_path = get_tree().current_scene.scene_file_path
+	SaveManager.save_scene_state(get_tree(), "temp")
+	SaveManager.save_player_state(current_scene_name, current_scene_path,PlayerGlobal.player, null, "temp")	
+	SceneSwitcher.fade_out()
+	await SceneSwitcher.fade_finished	
 	SceneSwitcher.load_next_scene("res://Scenes/world.tscn", "", "temp", SceneSwitcher.SceneLoadMode.TEMP)
 	
 

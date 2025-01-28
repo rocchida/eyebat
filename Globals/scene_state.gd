@@ -23,10 +23,10 @@ func add_state_data_to_array(state_data):
 	saved_states.append(state_data)
 
 
-func write_state(state_slot : String, scene_name : String) -> void:
+func write_state(save_name : String, scene_name : String) -> void:
 	var dir = DirAccess.open(Global.STATE_DIR)
-	dir.make_dir(str(state_slot))
-	var scene_state_file = str(Global.STATE_DIR + state_slot + "/" + Global.scene_state_prefix + scene_name + ".res")
+	dir.make_dir(str(save_name))
+	var scene_state_file = str(Global.STATE_DIR + save_name + "/" + Global.scene_state_prefix + scene_name + ".res")
 	ResourceSaver.save(self, scene_state_file, ResourceSaver.FLAG_CHANGE_PATH)
 	print("Scene state saved as ", scene_state_file)
 	# For debug save as .tres
@@ -35,12 +35,6 @@ func write_state(state_slot : String, scene_name : String) -> void:
 	#print("Scene state saved as .tres: ", scene_state_file_tres)
 
 
-func state_exists(state_slot : String, scene_name : String) -> bool:
-	var scene_state_file = str(Global.STATE_DIR + state_slot + "/" + Global.scene_state_prefix + scene_name + ".res")
-	print("scene_state.gd: Looking if state exists: ", scene_state_file)
-	return ResourceLoader.exists(scene_state_file)
- 
-
-func load_state(state_slot : String, scene_name : String) -> Resource:
-	var scene_state_file = str(Global.STATE_DIR + state_slot + "/" + Global.scene_state_prefix + scene_name + ".res")
-	return ResourceLoader.load(scene_state_file, "", ResourceLoader.CACHE_MODE_IGNORE)
+# func load_state(save_name : String, scene_name : String) -> EvokerSceneState:
+# 	var scene_state_file = str(Global.STATE_DIR + save_name + "/" + Global.scene_state_prefix + scene_name + ".res")
+# 	return ResourceLoader.load(scene_state_file, "", ResourceLoader.CACHE_MODE_IGNORE)

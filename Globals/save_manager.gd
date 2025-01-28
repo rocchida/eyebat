@@ -1,107 +1,93 @@
-extends Node
-
-## Emitted when a fade finishes
-signal fade_finished
+class_name SaveManager
 
 # Used to set active save slot. This could be set/modified, when selecting a save slot from the MainMenu.
-@export var _active_slot : String = "A"
+static var _active_save_name : String = "A"
 
 # Cached World State Dictionary, used for checks while game is running
-@export var _current_world_dict : Dictionary
+static var _current_world_dict : Dictionary
 
 # Variables for player state
-@export var _current_player_node : Node
-@export var _player_state : PlayerState
+static var _player_state : PlayerState
 # Used to pass a screenshot to the player state when saved. This is created by the TabMenu/PauseMenu
-@export var _screenshot_to_save : Image
-# Variables for scene state
-@export var _current_scene_name : String
-@export var _current_scene_path : String
-@export var _scene_state : EvokerSceneState
-@warning_ignore("unused_private_class_variable")
-@export var _current_scene_root_node : Node
+static var _scene_state : EvokerSceneState
 
-@export var state_dir : String = "user://"
+static var state_dir : String = "user://"
 
-@onready var scene_state_prefix : String = Global.scene_state_prefix
-@onready var player_state_prefix : String = Global.player_state_prefix
-
-@onready var default_fade_duration : float = Global.default_transition_duration
-@export var fade_panel : Panel = null
-
-
-func _ready() -> void:
-	_player_state = get_existing_player_state(_active_slot) #Setting active slot (per default it's A)
-	_scene_state = get_existing_scene_state(_active_slot)
+static func _init() -> void:
+	_player_state = load_player_state(_active_save_name) #Setting active slot (per default it's A)
+	if(_player_state):
+		_scene_state = load_scene_state(_active_save_name, _player_state.current_scene)
 
 	reset_scene_states()
-	instantiate_fade_panel()
+	
 
 
-func switch_active_slot_to(slot_name:String):
+static func switch_active_slot_to(save_name:String):
 	_player_state = null
-	_player_state = get_existing_player_state(slot_name)
-	if !_player_state:
-		Global.debug_log("SaveManager","Existing player state for slot " + slot_name + " not found.")
-	_active_slot = slot_name
-	#Global.debug_log("SaveManager","Active slot switched to " + _active_slot)
+	_player_state = load_player_state(save_name)
+	#if !_player_state:
+		#Global.debug_log("SaveManager","Player state for slot \"" + slot_name + "\" not found.")
+	_active_save_name = save_name
+	#Global.debug_log("SaveManager","Active slot switched to " + _active_save_name)
 
 
-func get_existing_player_state(passed_slot) -> PlayerState:
-	var player_state_file : String = Global.STATE_DIR + passed_slot + "/" + Global.player_state_prefix + ".res"
-	Global.debug_log("SaveManager","Looking for file: "+ player_state_file)
-	if ResourceLoader.exists(player_state_file):
-		Global.debug_log("SaveManager","SaveManager: Get existing player state: found for slot "+ passed_slot)
-		return ResourceLoader.load(player_state_file, "", ResourceLoader.CACHE_MODE_IGNORE)
+static func load_player_state(save_name : String) -> PlayerState:
+	var player_state_file_path : String = get_saved_player_state_path(save_name)
+	if ResourceLoader.exists(player_state_file_path):
+		Global.debug_log("SaveManager","Player state found for save name \""+ save_name + "\"")
+		return ResourceLoader.load(player_state_file_path, "", ResourceLoader.CACHE_MODE_IGNORE)
 	else:
-		Global.debug_log("SaveManager","Get existing player state: No player state found for slot "+ passed_slot)
+		Global.debug_log("SaveManager","No player state found for save name \""+ save_name + "\"")
 		return null
 
+static func get_saved_player_state_path(save_name : String) -> String:
+	return Global.STATE_DIR + save_name + "/" + Global.player_state_prefix + ".res"
 
-func get_existing_scene_state(passed_slot) -> EvokerSceneState:
-	var current_scene : String = ""
-	if _player_state:
-		current_scene = _player_state.player_current_scene
-	var scene_state_file : String = Global.STATE_DIR + passed_slot + "/" + Global.scene_state_prefix + current_scene + ".res"
-	Global.debug_log("SaveManager","Looking for file: "+ scene_state_file)
+static func get_saved_scene_state_path(save_name : String, scene_name: String) -> String:
+	return Global.STATE_DIR + save_name + "/" + Global.scene_state_prefix + scene_name + ".res"
+
+static func player_state_path_exists(save_name : String) -> bool:
+	return ResourceLoader.exists(get_saved_player_state_path(save_name))
+
+static func load_scene_state(save_name : String, scene_name: String) -> EvokerSceneState:
+	var scene_state_file : String = get_saved_scene_state_path(save_name, scene_name)
+	#Global.debug_log("SaveManager","Looking for file: "+ scene_state_file)
 	if ResourceLoader.exists(scene_state_file):
-		Global.debug_log("SaveManager","Get existing scene state: found for slot "+ passed_slot)
+		Global.debug_log("SaveManager","Existing scene state found for save name \"" + save_name + "\"")
 		return ResourceLoader.load(scene_state_file, "", ResourceLoader.CACHE_MODE_IGNORE)
 	else:
-		Global.debug_log("SaveManager","Get existing scene state: No scene state found for slot "+ passed_slot)
+		Global.debug_log("SaveManager","No existing scene state found for save name \""+ save_name + "\"")
 		return null
 
 
-func loading_saved_game(passed_slot: String):
-	Global.debug_log("SaveManager","SaveManager: Loading saved game from slot "+ passed_slot)
-	if !_player_state or !_player_state.state_exists(passed_slot):
-		Global.debug_log("SaveManager","SaveManager: Player state of passed slot doesn't exist.")
-		return
-		
-	_player_state = _player_state.load_state(_active_slot) as PlayerState
-	
-	Global.debug_log("SaveManager","Current scene detected as "+ get_tree().current_scene.get_name())
+static func load_saved_game(scene_tree:SceneTree, save_name: String):
+	Global.debug_log("SaveManager","SaveManager: Loading saved game from save name \""+ save_name + "\"")
+
+	_player_state = load_player_state(save_name)
+
 	# Check if player is currently in the same scene as in the game that is being attempted to load:
-	if _current_scene_name == _player_state.player_current_scene:
-		# ABOVE used to be: get_tree().current_scene.get_name() == 
-		Global.debug_log("SaveManager","Player state for slot "+ passed_slot+ " is from current scene.")
-		# Do a simple scene state load and player state load.
-		load_scene_state(_player_state.player_current_scene, passed_slot)
-		load_player_state(_current_player_node, passed_slot)
+	if scene_tree.current_scene.name == _player_state.current_scene:
+		Global.debug_log("SaveManager","Player state for save name \""+ save_name+ "\" is from current scene.")
+		apply_scene_state(scene_tree,_player_state.current_scene, save_name)
+		apply_player_state(PlayerGlobal.player, save_name)
 	else:
 		# Transition to target scene and then attempt to load the saved game again.
-		Global.debug_log("SaveManager","Player state for slot "+ passed_slot + " is in different scene (" + _player_state.player_current_scene + "). Transitioning...")
-		SceneSwitcher.load_next_scene(_player_state.player_current_scene_path, "", passed_slot, SceneSwitcher.SceneLoadMode.LOAD_SAVE) 
+		Global.debug_log("SaveManager","Player state for save name \""+ save_name + "\" is in different scene (" + _player_state.current_scene + "). Transitioning...")
+		var load_mode : SceneSwitcher.SceneLoadMode
+		if(save_name == "temp"):
+			load_mode = SceneSwitcher.SceneLoadMode.TEMP
+		else: 
+			load_mode = SceneSwitcher.SceneLoadMode.LOAD_SAVE
+		SceneSwitcher.load_next_scene(_player_state.current_scene_path, "", save_name, load_mode) 
 
 
 #region PLAYER SAVE HANDLING
-func load_player_state(player, passed_slot:String):
-	Global.debug_log("SaveManager","Loading player state...")
+static func apply_player_state(player : Player, save_name:String):
+	#Global.debug_log("SaveManager","Loading player state...")
 	if !_player_state:
-		_player_state = PlayerState.new()
-	if _player_state and _player_state.state_exists(passed_slot):
-		Global.debug_log("SaveManager","Player State in slot " + passed_slot + " exists. Loading " + str(_player_state))
-		_player_state = _player_state.load_state(passed_slot) as PlayerState
+		_player_state = load_player_state(save_name)
+	if _player_state:
+		Global.debug_log("SaveManager","Applying loaded player state from save: \"" + save_name + "\". Res: " + str(_player_state))
 		
 		# Applying the save state to player node.
 		#player.inventory_data = _player_state.player_inventory #Loading inventory data from saved player state to current player inventory.
@@ -156,7 +142,8 @@ func load_player_state(player, passed_slot:String):
 		# 	_current_world_dict.get_or_add(entry, local_dict_copy[entry])
 
 
-		player.global_position = _player_state.player_position
+		player.global_position = _player_state.position
+		player.set_sprite_direction(_player_state.sprite_direction)
 		
 		#Loading player interaction component state
 		# var player_interaction_component_state = _player_state.interaction_component_state
@@ -166,15 +153,12 @@ func load_player_state(player, passed_slot:String):
 		# 	player.player_interaction_component.set_state.call_deferred() #Calling this deferred as some state calls need to make sure the scene is finished loading.
 		
 		player.player_state_loaded.emit()
-		fade_in()
-	else:
-		Global.debug_log("SaveManager","Player state of slot " + passed_slot + " doesn't exist.")
 		
 
 
-func save_player_state(player, slot:String):
+static func save_player_state(current_scene_name:String, current_scene_path:String, player:Player, screenshot:Image, slot:String):
 	if !_player_state:
-		Global.debug_log("SaveManager","State doesn't exist. Creating for slot " + slot + "...")
+		Global.debug_log("SaveManager","State doesn't exist. Creating for slot \"" + slot + "\"...")
 		_player_state = PlayerState.new()
 	
 	# Writing the save state from current player node.
@@ -201,10 +185,11 @@ func save_player_state(player, slot:String):
 	# 		_player_state.append_saved_wieldable_charges(item_save_data)
 	# 		Global.debug_log("SaveManager","Saved charge for " + str(item_slot.inventory_item) )
 	
-	_player_state.player_current_scene = _current_scene_name
-	Global.debug_log("SaveManager","Save_player_state(): setting player_current_scene to " + _current_scene_name)
-	_player_state.player_current_scene_path = _current_scene_path
-	_player_state.player_position = player.global_position
+	_player_state.current_scene = current_scene_name
+	Global.debug_log("SaveManager","Save_player_state(): setting player_current_scene to " + current_scene_name)
+	_player_state.current_scene_path = current_scene_path
+	_player_state.position = player.global_position
+	_player_state.sprite_direction = player.get_current_sprite_direction()
 	
 	## Saving attributes:
 	# _player_state.clear_saved_attribute_data()
@@ -244,16 +229,16 @@ func save_player_state(player, slot:String):
 	# 	_player_state.add_to_world_dictionary(entry, local_dict_copy[entry])
 
 	## Adding a screenshot
-	var screenshot_path : String = str(_player_state.player_state_dir + _active_slot + ".png")
-	if _screenshot_to_save:
-		_screenshot_to_save.save_png(screenshot_path)
-		_player_state.player_state_screenshot_file = screenshot_path
+	if screenshot:
+		var screenshot_path : String = str(_player_state.player_state_dir + _active_save_name + ".png")
+		screenshot.save_png(screenshot_path)
+		_player_state.save_screenshot_path = screenshot_path
 	else:
-		Global.debug_log("SaveManager","SaveManager: No screenshot to save was passed.")
+		Global.debug_log("SaveManager","No screenshot to save was passed.")
 	
 	## Getting time of saving
-	_player_state.player_state_savetime = int(Time.get_unix_time_from_system())
-	_player_state.player_state_slot_name = _active_slot
+	_player_state.save_time = int(Time.get_unix_time_from_system())
+	_player_state.save_name = _active_save_name
 
 	#Writing the state from current player interaction component:
 	# var current_player_interaction_component = player.player_interaction_component
@@ -265,25 +250,21 @@ func save_player_state(player, slot:String):
 #endregion
 
 
-func get_active_slot_player_state_screenshot_path() -> String:
-	if _player_state and _player_state.state_exists(_active_slot):
-		_player_state = _player_state.load_state(_active_slot) as PlayerState
-		return _player_state.player_state_screenshot_file
+static func get_active_slot_player_state_screenshot_path() -> String:
+	if(_player_state):
+		return _player_state.save_screenshot_path
 	else:
 		return ""
 
 
-
-func load_scene_state(_scene_name_to_load:String, slot:String):
-	Global.debug_log("SaveManager","Load scene state for:"+ _scene_name_to_load+ ". Slot: "+ slot)
+static func apply_scene_state(scene_tree: SceneTree, save_name:String, scene_name:String):
 	if !_scene_state:
-		_scene_state = EvokerSceneState.new()
-	if _scene_state and _scene_state.state_exists(slot, _scene_name_to_load):
-		Global.debug_log("SaveManager","Scene state exists. Loading " + str(_scene_state))
-		_scene_state = _scene_state.load_state(slot,_scene_name_to_load) as EvokerSceneState
+		_scene_state = load_scene_state(save_name, scene_name)
+	if _scene_state:
+		Global.debug_log("SaveManager","Applying loaded scene state... Res: " + str(_scene_state))
 		
 		# Deleting all current nodes that are in the Persist group as to not clone objects.
-		var save_nodes = get_tree().get_nodes_in_group("Persist")
+		var save_nodes = scene_tree.get_nodes_in_group("Persist")
 		for i in save_nodes:
 			Global.debug_log("SaveManager","Deleting existing node: "+ i.name)
 			i.queue_free()
@@ -291,8 +272,8 @@ func load_scene_state(_scene_name_to_load:String, slot:String):
 		var array_of_node_data = _scene_state.saved_nodes
 		for node_data in array_of_node_data:
 			var new_object = load(node_data["filename"]).instantiate()
-			if get_node(node_data["parent"]):
-				get_node(node_data["parent"]).add_child(new_object)
+			if scene_tree.current_scene.get_node(node_data["parent"]):
+				scene_tree.current_scene.get_node(node_data["parent"]).add_child(new_object)
 				Global.debug_log("SaveManager","Adding to scene: "+ new_object.get_name())
 				
 			new_object.position = Vector3(node_data["pos_x"],node_data["pos_y"],node_data["pos_z"])
@@ -319,7 +300,7 @@ func load_scene_state(_scene_name_to_load:String, slot:String):
 		#Loading states of objects in save_object_state
 		var array_of_state_data = _scene_state.saved_states
 		for state_data in array_of_state_data:
-			var node_to_set = get_node(state_data["node_path"])
+			var node_to_set = scene_tree.current_scene.get_node(state_data["node_path"])
 			# Set variables here
 			node_to_set.position = Vector3(state_data["pos_x"],state_data["pos_y"],state_data["pos_z"])
 			node_to_set.rotation = Vector3(state_data["rot_x"],state_data["rot_y"],state_data["rot_z"])
@@ -329,24 +310,23 @@ func load_scene_state(_scene_name_to_load:String, slot:String):
 				node_to_set.set(data, state_data[data])
 			node_to_set.set_state()
 		
-		Global.debug_log("SaveManager","SaveManager: Loading scene state finished.")
+		#Global.debug_log("SaveManager","SaveManager: Loading scene state finished.")
 			
 	else:
 		Global.debug_log("SaveManager","SaveManager: Scene state doesn't exist.")
 
 
-func save_scene_state(_scene_name_to_save, slot: String):
+static func save_scene_state(scene_tree: SceneTree, slot: String):
 	if !_scene_state:
 		Global.debug_log("SaveManager","SaveManager: Save doesn't exist. Creating...")
 		_scene_state = EvokerSceneState.new()
 		
-	var save_nodes = get_tree().get_nodes_in_group("Persist")
-	if !save_nodes:
-		Global.debug_log("SaveManager","No nodes in Persist group!")
-	else:
-		_scene_state.clear_saved_nodes() # Clearing out old saved nodes
+	var persistent_nodes : Array[Node] = scene_tree.get_nodes_in_group("Persist")
 	
-		for node in save_nodes:
+	if persistent_nodes.size() > 0:
+		_scene_state.clear_saved_nodes()
+	
+		for node in persistent_nodes:
 			if node.scene_file_path.is_empty(): # Check the node is an instanced scene so it can be instanced again during load.
 				Global.debug_log("SaveManager","persistent node '%s' is not an instanced scene, skipped" % node.name)
 				continue
@@ -370,10 +350,9 @@ func save_scene_state(_scene_name_to_save, slot: String):
 		
 	
 	# Saving states of objects
-	var state_nodes = get_tree().get_nodes_in_group("save_object_state")
-	if !state_nodes:
-		Global.debug_log("SaveManager","No nodes in save_object_state group!")
-	else:
+	var state_nodes : Array[Node] = scene_tree.get_nodes_in_group("save_object_state")
+	
+	if state_nodes.size() > 0:
 		_scene_state.clear_saved_states()
 		
 		for node in state_nodes:
@@ -383,9 +362,9 @@ func save_scene_state(_scene_name_to_save, slot: String):
 				
 			_scene_state.add_state_data_to_array(node.save())
 			
-	_scene_state.write_state(slot, _scene_name_to_save)
+	_scene_state.write_state(slot, scene_tree.current_scene.name)
 
-func delete_save(passed_slot: String) -> void:
+static func delete_save(passed_slot: String) -> void:
 	#var file_to_remove = Global.STATE_DIR + player_state_prefix + passed_slot + ".res"
 	var dir_to_remove = Global.STATE_DIR + passed_slot
 	OS.move_to_trash(ProjectSettings.globalize_path(dir_to_remove))
@@ -394,13 +373,12 @@ func delete_save(passed_slot: String) -> void:
 	#var scene_to_remove = Global.STATE_DIR + cogito_scene_state_prefix + passed_slot + ".res"
 
 
-func copy_slot_saves_to_temp(passed_slot:String) -> bool:
-	Global.debug_log("SaveManager","Attpemting to copy files from slot " + passed_slot + " to temp.")
+static func copy_slot_saves_to_temp(scene_tree:SceneTree,passed_slot:String) -> bool:
+	#Global.debug_log("SaveManager","Copying files from slot " + passed_slot + " to temp.")
 	var files : Dictionary
 	var slot_dir = DirAccess.open(Global.STATE_DIR + passed_slot)
 	
-	var cogito_dir = DirAccess.open(Global.STATE_DIR)
-	cogito_dir.make_dir("temp")
+	DirAccess.open(Global.STATE_DIR).make_dir("temp")
 
 	if slot_dir:
 		slot_dir.list_dir_begin()
@@ -414,16 +392,15 @@ func copy_slot_saves_to_temp(passed_slot:String) -> bool:
 			# iterate to next file
 			file_name = slot_dir.get_next()
 	
-	Global.debug_log("SaveManager", "Copying files to temp finished.")
+	#Global.debug_log("SaveManager", "Copying files to temp finished.")
 	
-	loading_saved_game("temp") # This loads the temp save states after moving them from the slot.
 	return true
 	
 	
 	
-func copy_temp_saves_to_slot(passed_slot:String) -> bool:
-	Global.debug_log("SaveManager","Attempting to copy files from temp to slot " + passed_slot)
-	var files : Dictionary
+static func copy_temp_saves_to_slot(passed_slot:String) -> bool:
+	#Global.debug_log("SaveManager","Copying files from temp to slot " + passed_slot)
+	
 	var temp_dir = DirAccess.open(Global.STATE_DIR + "temp")
 	
 	DirAccess.open(Global.STATE_DIR).make_dir(passed_slot)
@@ -440,14 +417,14 @@ func copy_temp_saves_to_slot(passed_slot:String) -> bool:
 			# iterate to next file
 			file_name = temp_dir.get_next()
 	
-	Global.debug_log("SaveManager","Copying temp files to slot " + passed_slot + " finished.")
+	#Global.debug_log("SaveManager","Copying temp files to slot " + passed_slot + " finished.")
 	return true
 
 
-func delete_temp_saves():
-	Global.debug_log("SaveManager","Attempting to delete temp saves...")
+static func delete_temp_saves():
+	#Global.debug_log("SaveManager","Deleting temp saves...")
 	
-	var scene_temp_files : Dictionary
+	#var scene_temp_files : Dictionary
 	var dir = DirAccess.open(Global.STATE_DIR + "temp/")
 
 	if dir:
@@ -475,10 +452,8 @@ func delete_temp_saves():
 			file_name = dir2.get_next()
 
 
-func reset_scene_states():
-	# TODO: CREATE FUNCTION THAT DELETES SCENE STATE FILES.
-	
-	var scene_state_files : Dictionary
+static func reset_scene_states():
+	#var scene_state_files : Dictionary
 
 	var dir = DirAccess.open(Global.STATE_DIR)
 	if dir:
@@ -490,7 +465,7 @@ func reset_scene_states():
 			# 	Global.debug_log("SaveManager","Found directory: " + file_name + ". skipping ahead.")
 
 			# Look for _temp_ files
-			if file_name.find(SaveManager.scene_state_prefix,0) != -1:
+			if file_name.find(Global.scene_state_prefix,0) != -1:
 				Global.debug_log("SaveManager","Found scene state file file: " + file_name)
 				if file_name.find("temp",0) != -1:
 					Global.debug_log("SaveManager","This file is a temp scene state.")
@@ -503,48 +478,7 @@ func reset_scene_states():
 		Global.debug_log("SaveManager","An error occurred when trying to access the path.")
 
 
-func _exit_tree() -> void:
-	delete_temp_saves()
+func _notification(what:int) -> void:
+	if(what == NOTIFICATION_PREDELETE ):
+		delete_temp_saves()
 	
-
-
-### FUNCTIONS TO HANDLE SCREEN FADING
-func instantiate_fade_panel() -> void:
-	fade_panel = Panel.new()
-	
-	var black_stylebox := StyleBoxFlat.new()
-	black_stylebox.bg_color = Color.BLACK
-	
-	fade_panel.set_anchors_preset(Control.PRESET_FULL_RECT)
-	fade_panel.focus_mode = Control.FOCUS_NONE
-	fade_panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	fade_panel.set_modulate(Color.TRANSPARENT)
-	fade_panel.add_theme_stylebox_override("panel", black_stylebox)
-	
-	add_child(fade_panel)
-
-
-func fade_in(fade_duration:float = default_fade_duration) -> void:
-	fade_panel.set_modulate(Color.BLACK)
-	var fade_tween = get_tree().create_tween()
-	
-	fade_tween.tween_property(fade_panel, "modulate", Color.TRANSPARENT, fade_duration).set_trans(Tween.TRANS_CUBIC)
-	await fade_tween.finished
-	fade_finished.emit()
-
-
-func fade_out(fade_duration:float = default_fade_duration) -> void:
-	fade_panel.set_modulate(Color.TRANSPARENT)
-	var fade_tween = get_tree().create_tween()
-	
-	fade_tween.tween_property(fade_panel, "modulate", Color.BLACK, fade_duration).set_trans(Tween.TRANS_CUBIC)
-	await fade_tween.finished
-	fade_finished.emit()
-
-func transition_to_next_scene():
-	var current_scene_statename = get_tree().get_current_scene().get_name()
-	SaveManager.save_scene_state(current_scene_statename,"temp")
-	SaveManager.save_player_state(SaveManager._current_player_node, "temp")	
-	SaveManager.fade_out()
-	await SaveManager.fade_finished	
-	SceneSwitcher.load_next_scene("res://Scenes/world.tscn", "", "temp", SceneSwitcher.SceneLoadMode.TEMP)

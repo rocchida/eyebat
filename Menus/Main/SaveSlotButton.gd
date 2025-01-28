@@ -46,14 +46,14 @@ func set_data_from_state(_player_state:PlayerState):
 	else:
 		player_state = _player_state
 	
-	if player_state.player_state_slot_name:
-		slot_name_label.text = "SLOT " + player_state.player_state_slot_name
+	if player_state.save_name:
+		slot_name_label.text = "SLOT " + player_state.save_name
 	else:
 		slot_name_label.text = "NEW GAME"
 
 	var savetime : int
 	if player_state:
-		savetime = player_state.player_state_savetime
+		savetime = player_state.save_time
 	if savetime == null or typeof(savetime) != TYPE_INT:
 		save_time_label.text = ""
 	else:
@@ -61,13 +61,13 @@ func set_data_from_state(_player_state:PlayerState):
 		save_time_label.text = Time.get_datetime_string_from_unix_time(savetime+timeoffset,true)
 
 	# Set screenshot
-	var image_path : String = player_state.player_state_screenshot_file
+	var image_path : String = player_state.save_screenshot_path
 	if image_path != "":
 		var image : Image = Image.load_from_file(image_path)
 		var texture = ImageTexture.create_from_image(image)
 		screenshot_spot.texture = texture
 	else:
-		Global.debug_log("SaveSlotButton.gd","No screenshot for slot " + SaveManager._active_slot + " found.")
+		Global.debug_log("SaveSlotButton.gd","No screenshot for slot " + SaveManager._active_save_name + " found.")
 
 
 func _on_save_slot_button_pressed() -> void:
@@ -77,13 +77,12 @@ func _on_save_slot_button_pressed() -> void:
 			SaveManager.switch_active_slot_to(manual_save_slot_name)
 			save_slot_manager_node.start_new_game()
 	else:
-		Global.debug_log("SaveSlotButton.gd","Attempting to load player_state " + player_state.player_state_slot_name)
+		Global.debug_log("SaveSlotButton.gd","Attempting to load player_state " + player_state.save_name)
 		SaveManager._player_state = player_state
-		SaveManager.switch_active_slot_to(player_state.player_state_slot_name)
-		SaveManager._current_scene_name = get_tree().get_current_scene().get_name()
-		SaveManager._current_scene_path = get_tree().current_scene.scene_file_path
+		SaveManager.switch_active_slot_to(player_state.save_name)
 		SaveManager.delete_temp_saves()
-		SaveManager.copy_slot_saves_to_temp(SaveManager._active_slot)
+		SaveManager.copy_slot_saves_to_temp(get_tree(), SaveManager._active_save_name)
+		SaveManager.load_saved_game(get_tree(),"temp")
 
 
 

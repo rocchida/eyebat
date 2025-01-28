@@ -1,4 +1,4 @@
-extends Node
+class_name PlayerGlobal
 
-
-var monster_list : Array[PackedScene] = []
+static var monster_list : Array[PackedScene] = []
+static var player : Player;

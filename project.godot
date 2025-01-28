@@ -19,11 +19,9 @@ config/windows_native_icon="res://CustomAssets/icon.ico"
 [autoload]
 
 SceneSwitcher="*res://Globals/scene_switcher.gd"
-PlayerGlobal="*res://Globals/player_global.gd"
 Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
 Global="*res://Globals/global.gd"
 InputHelper="*res://addons/input_helper/input_helper.gd"
-SaveManager="*res://Globals/save_manager.gd"
 LoadSavedOptions="*res://Menus/Scripts/load_saved_options.gd"
 
 [dialogic]
