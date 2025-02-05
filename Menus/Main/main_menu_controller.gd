@@ -48,21 +48,27 @@ func _play_pressed() -> void:
 func _ready():
 	first_focus_button.grab_focus()
 
+	# connect to options menu back button pressed
+	options_tab_menu.back_button_pressed.connect(_go_back_to_main_menu)
+
 
 func quit():
 	get_tree().quit()
 
 
-func _input(event):
+func _input(event : InputEvent) -> void:
 	if (event.is_action_pressed("ui_cancel") or event.is_action_pressed("menu")) and !game_menu.visible:
 		accept_event()
-		options_tab_menu.hide()
-		game_menu.show()
-		options_button.grab_focus.call_deferred()
+		_go_back_to_main_menu()
 
 	# used for debugging menu visibility
 	# if event is not InputEventMouseMotion:
 	# 	print("Main Menu: Menu Input: ", event, "\nMain menu visible: ", game_menu.visible)
+
+func _go_back_to_main_menu() -> void:
+	options_tab_menu.hide()
+	game_menu.show()
+	options_button.grab_focus.call_deferred()
 
 
 func open_options_menu():

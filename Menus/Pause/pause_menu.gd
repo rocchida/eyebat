@@ -33,6 +33,9 @@ func _ready():
 	if(get_parent() is BattleScene):
 		save_button.disabled = true
 
+	# connect to options menu back button pressed
+	options_tab_menu.back_button_pressed.connect(_go_back_to_pause_menu)
+
 func _enter_tree() -> void:
 	# Create an audio player
 	var player = AudioStreamPlayer.new()
@@ -71,10 +74,13 @@ func open_pause_menu():
 	get_tree().paused = true
 	label_active_slot.text = "Current Slot: " + SaveManager._active_save_name
 	temp_screenshot = grab_temp_screenshot()
+	load_current_slot_data()
+	_go_back_to_pause_menu()
+
+func _go_back_to_pause_menu():
 	show()
 	game_menu.show()
 	options_tab_menu.hide()
-	load_current_slot_data()
 	resume_game_button.grab_focus.call_deferred()
 
 
@@ -138,6 +144,12 @@ func _on_back_to_menu_button_pressed():
 
 func _input(event):
 	var pause_pressed = event.is_action_pressed("ui_cancel") or event.is_action_pressed("menu");
+
+	if pause_pressed and options_tab_menu.visible:
+		accept_event()
+		_go_back_to_pause_menu()
+		return
+
 	if pause_pressed and !game_menu.visible:
 		accept_event()
 		open_pause_menu()
@@ -146,6 +158,7 @@ func _input(event):
 	if pause_pressed and visible:
 		accept_event()
 		close_pause_menu()
+		return
 
 	# used for debugging menu visibility
 	# if event is not InputEventMouseMotion:

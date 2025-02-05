@@ -1,6 +1,7 @@
 class_name OptionsTabMenu
 extends Control
 signal options_updated
+signal back_button_pressed
 
 # Grabbing TabContainer node for gamepad navigation
 @onready var tab_container: CustomTabMenu = $VBoxContainer/TabContainer
@@ -130,6 +131,8 @@ func _ready() -> void:
 	load_keybindings_from_config()
 	create_action_remap_items()
 
+# func _input(event : InputEvent) -> void:
+# 	pass
 
 # Called from outside initializes the options menu
 func on_open():
@@ -416,3 +419,7 @@ func _on_apply_changes_pressed() -> void:
 func _on_tab_menu_resume():
 	# reload options
 	load_options.call_deferred()
+
+
+func _on_back_pressed() -> void:
+	back_button_pressed.emit()
