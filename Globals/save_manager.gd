@@ -119,7 +119,7 @@ static func apply_player_state(player : Player, save_name:String):
 						
 		# player.inventory_data.force_inventory_update()
 		
-		# New way of loading player attributes:
+		# Loading player attributes:
 		# var loaded_attribute_data = _player_state.player_attributes
 		# for attribute in loaded_attribute_data:
 		# 	var attribute_data: Vector2 = loaded_attribute_data[attribute]
@@ -141,10 +141,13 @@ static func apply_player_state(player : Player, save_name:String):
 		# for entry in local_dict_copy:
 		# 	_current_world_dict.get_or_add(entry, local_dict_copy[entry])
 
-
+		# Loading player sprite positioning
 		player.global_position = _player_state.position
 		player.set_sprite_direction(_player_state.sprite_direction)
-		
+
+		# Loading monster roster
+		player.monster_roster = _player_state.monster_roster
+
 		#Loading player interaction component state
 		# var player_interaction_component_state = _player_state.interaction_component_state
 		# for state_data in player_interaction_component_state:
@@ -216,10 +219,7 @@ static func save_player_state(current_scene_name:String, current_scene_path:Stri
 	# 	_player_state.add_player_currency_to_state_data(currency, currency_data)
 
 	## Saving monster roster
-	_player_state.clear_saved_player_monster_roster_data()
-	for monster in player.monster_roster:
-		_player_state.add_player_monster_roster_to_state_data(monster)
-	
+	_player_state.monster_roster = player.monster_roster
 	
 	## Saving world dictionary
 	# var local_dict_copy : Dictionary = _current_world_dict.duplicate(true)
@@ -372,7 +372,7 @@ static func delete_save(passed_slot: String) -> void:
 	
 	#var scene_to_remove = Global.STATE_DIR + cogito_scene_state_prefix + passed_slot + ".res"
 
-
+## Save the passed save slot data to a temporary data file
 static func copy_slot_saves_to_temp(scene_tree:SceneTree,passed_slot:String) -> bool:
 	#Global.debug_log("SaveManager","Copying files from slot " + passed_slot + " to temp.")
 	var files : Dictionary
@@ -396,8 +396,7 @@ static func copy_slot_saves_to_temp(scene_tree:SceneTree,passed_slot:String) -> 
 	
 	return true
 	
-	
-	
+## Copy the temporary save data to the passed save slot
 static func copy_temp_saves_to_slot(passed_slot:String) -> bool:
 	#Global.debug_log("SaveManager","Copying files from temp to slot " + passed_slot)
 	
@@ -479,6 +478,7 @@ static func reset_scene_states():
 
 
 func _notification(what:int) -> void:
+	# delete the temp files when the game is closed
 	if(what == NOTIFICATION_PREDELETE ):
 		delete_temp_saves()
 	

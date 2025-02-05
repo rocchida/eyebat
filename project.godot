@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="2DHD Demo"
+config/name="Evoker"
 run/main_scene="res://Menus/Main/main_menu.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://CustomAssets/CharacterArt/icon.png"
@@ -22,7 +22,7 @@ SceneSwitcher="*res://Globals/scene_switcher.gd"
 Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
 Global="*res://Globals/global.gd"
 InputHelper="*res://addons/input_helper/input_helper.gd"
-LoadSavedOptions="*res://Menus/Scripts/load_saved_options.gd"
+LoadSavedOptions="*res://Globals/load_saved_options.gd"
 
 [dialogic]
 
@@ -66,7 +66,7 @@ window/size/mode=2
 
 [dotnet]
 
-project/assembly_name="2DHD Demo"
+project/assembly_name="Evoker"
 
 [editor_plugins]
 

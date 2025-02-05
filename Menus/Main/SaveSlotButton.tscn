@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://k0i6k7mcajfm"]
 
-[ext_resource type="Theme" uid="uid://by44nnjeu6u4n" path="res://Menus/Assets/Cogito_Theme_A.tres" id="2_le1ck"]
+[ext_resource type="Theme" uid="uid://by44nnjeu6u4n" path="res://Menus/Shared/Assets/Cogito_Theme_A.tres" id="2_le1ck"]
 [ext_resource type="Script" path="res://Menus/Main/SaveSlotButton.gd" id="2_rvlrs"]
 [ext_resource type="Texture2D" uid="uid://tjkesqff2f4g" path="res://Menus/Options/EmptySaveSlot.png" id="4_ifjpb"]
 

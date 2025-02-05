@@ -1,0 +1,337 @@
+[gd_scene load_steps=11 format=3 uid="uid://dfull3k6wh36"]
+
+[ext_resource type="Texture2D" uid="uid://vrqrau81y8l7" path="res://Shared/ImportedAssets/UI/MenuBackground.png" id="1_f0uyr"]
+[ext_resource type="Script" path="res://BattleScenes/BattleBase/ui.gd" id="1_v5ee4"]
+[ext_resource type="Texture2D" uid="uid://cr4sr5cpvb3pm" path="res://CustomAssets/CharacterArt/30_monster_art/19 - ni5OBEL.png" id="3_1ncel"]
+[ext_resource type="ButtonGroup" uid="uid://bht5ncmkd0p2x" path="res://BattleScenes/BattleBase/battle_ui_ability_button_group.tres" id="3_f18yb"]
+[ext_resource type="Script" path="res://BattleScenes/BattleBase/ability_button.gd" id="4_j3u7c"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ovv5h"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xo6x5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pndsv"]
+content_margin_left = 7.0
+content_margin_top = 7.0
+content_margin_right = 7.0
+content_margin_bottom = 7.0
+bg_color = Color(0.627451, 0.537255, 0.847059, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_4rcnh"]
+font_color = Color(0, 0, 0, 1)
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_y8v18"]
+font_color = Color(0, 0, 0, 1)
+
+[node name="Ui" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_v5ee4")
+
+[node name="ColorMenu" type="NinePatchRect" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -159.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("1_f0uyr")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorMenu"]
+visible = false
+layout_mode = 1
+offset_right = 435.0
+offset_bottom = 101.0
+mouse_filter = 2
+
+[node name="CheckButton" type="CheckButton" parent="ColorMenu/VBoxContainer"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+theme_override_colors/font_hover_color = Color(0.796078, 0.796078, 0.796078, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ovv5h")
+text = "Text Button 1"
+
+[node name="CheckButton2" type="CheckButton" parent="ColorMenu/VBoxContainer"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ovv5h")
+text = "Text Button 2"
+
+[node name="CheckButton3" type="CheckButton" parent="ColorMenu/VBoxContainer"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ovv5h")
+text = "Text Button 3"
+
+[node name="GridContainer" type="GridContainer" parent="ColorMenu"]
+visible = false
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -137.0
+offset_top = -44.5
+offset_bottom = 44.5
+grow_horizontal = 0
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/h_separation = 45
+theme_override_constants/v_separation = 45
+columns = 3
+
+[node name="Panel" type="Panel" parent="ColorMenu/GridContainer"]
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="ColorMenu/GridContainer/Panel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0, 0.427451, 0.427451, 1)
+
+[node name="Panel2" type="Panel" parent="ColorMenu/GridContainer"]
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="ColorMenu/GridContainer/Panel2"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0, 0.427451, 0.427451, 1)
+
+[node name="Panel3" type="Panel" parent="ColorMenu/GridContainer"]
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="ColorMenu/GridContainer/Panel3"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0, 0.427451, 0.427451, 1)
+
+[node name="Panel4" type="Panel" parent="ColorMenu/GridContainer"]
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="ColorMenu/GridContainer/Panel4"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0, 0.427451, 0.427451, 1)
+
+[node name="Panel5" type="Panel" parent="ColorMenu/GridContainer"]
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="ColorMenu/GridContainer/Panel5"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0, 0.427451, 0.427451, 1)
+
+[node name="Panel6" type="Panel" parent="ColorMenu/GridContainer"]
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="ColorMenu/GridContainer/Panel6"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0, 0.427451, 0.427451, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ColorMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -134.0
+offset_top = -38.5
+offset_right = 134.0
+offset_bottom = 38.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Ability1Button" type="MenuButton" parent="ColorMenu/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_hover_color = Color(0.431373, 0.431373, 0.431373, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/hover = SubResource("StyleBoxFlat_xo6x5")
+theme_override_styles/normal = SubResource("StyleBoxFlat_pndsv")
+button_group = ExtResource("3_f18yb")
+text = "Attack"
+flat = false
+icon_alignment = 1
+switch_on_hover = true
+script = ExtResource("4_j3u7c")
+
+[node name="Ability2Button" type="MenuButton" parent="ColorMenu/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_hover_color = Color(0.431373, 0.431373, 0.431373, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/hover = SubResource("StyleBoxFlat_xo6x5")
+theme_override_styles/normal = SubResource("StyleBoxFlat_pndsv")
+button_group = ExtResource("3_f18yb")
+text = "Attack"
+flat = false
+icon_alignment = 1
+switch_on_hover = true
+script = ExtResource("4_j3u7c")
+
+[node name="Ability3Button" type="MenuButton" parent="ColorMenu/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_hover_color = Color(0.431373, 0.431373, 0.431373, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/hover = SubResource("StyleBoxFlat_xo6x5")
+theme_override_styles/normal = SubResource("StyleBoxFlat_pndsv")
+button_group = ExtResource("3_f18yb")
+text = "Attack"
+flat = false
+icon_alignment = 1
+switch_on_hover = true
+script = ExtResource("4_j3u7c")
+
+[node name="Ability4Button" type="MenuButton" parent="ColorMenu/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_hover_color = Color(0.431373, 0.431373, 0.431373, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/hover = SubResource("StyleBoxFlat_xo6x5")
+theme_override_styles/normal = SubResource("StyleBoxFlat_pndsv")
+button_group = ExtResource("3_f18yb")
+text = "Attack"
+flat = false
+icon_alignment = 1
+switch_on_hover = true
+script = ExtResource("4_j3u7c")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ColorMenu"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 249.0
+offset_top = -53.5
+offset_right = 409.0
+offset_bottom = 52.5
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="ColorMenu/ScrollContainer"]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_4rcnh")
+
+[node name="CurrentMonsterStats" type="ScrollContainer" parent="ColorMenu"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 6.0
+offset_top = -51.5
+offset_right = 245.0
+offset_bottom = 51.5
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="ColorMenu/CurrentMonsterStats"]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_y8v18")
+
+[node name="HoveredMonsterStats" type="ScrollContainer" parent="ColorMenu"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -284.0
+offset_top = -73.5
+offset_bottom = 73.5
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="ColorMenu/HoveredMonsterStats"]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_y8v18")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ColorMenu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.635
+anchor_right = 0.866
+anchor_bottom = 1.0
+offset_left = 3.47992
+offset_top = 7.0
+offset_right = -1.63208
+offset_bottom = -8.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+
+[node name="InitiativeBoard" type="NinePatchRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 95.0
+grow_horizontal = 2
+texture = ExtResource("1_f0uyr")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="InitiativeBoard"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.505
+offset_left = -41.0
+offset_top = -17.5
+offset_right = 42.0
+offset_bottom = 17.025
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="InitiativeBoard/HBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture = ExtResource("3_1ncel")
+expand_mode = 5
+stretch_mode = 4
+
+[node name="Initiative" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -367.0
+offset_right = 366.0
+offset_bottom = 92.0
+grow_horizontal = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/normal_font_size = 33
+bbcode_enabled = true
+text = "[center]Example[/center]"
+
+[connection signal="pressed" from="ColorMenu/HBoxContainer/Ability1Button" to="." method="_on_menu_button_pressed"]
+[connection signal="pressed" from="ColorMenu/HBoxContainer/Ability2Button" to="." method="_on_menu_button_2_pressed"]
+[connection signal="pressed" from="ColorMenu/HBoxContainer/Ability3Button" to="." method="_on_menu_button_3_pressed"]
+[connection signal="pressed" from="ColorMenu/HBoxContainer/Ability4Button" to="." method="_on_menu_button_4_pressed"]

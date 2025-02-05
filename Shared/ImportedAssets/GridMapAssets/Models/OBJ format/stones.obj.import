@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bxci28wviept"
+path="res://.godot/imported/stones.obj-44cecf881aad6cb06a86413a3e9a3400.mesh"
+
+[deps]
+
+files=["res://.godot/imported/stones.obj-44cecf881aad6cb06a86413a3e9a3400.mesh"]
+
+source_file="res://Shared/ImportedAssets/GridMapAssets/Models/OBJ format/stones.obj"
+dest_files=["res://.godot/imported/stones.obj-44cecf881aad6cb06a86413a3e9a3400.mesh", "res://.godot/imported/stones.obj-44cecf881aad6cb06a86413a3e9a3400.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false
