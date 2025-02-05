@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bh3anfh3p2rqb"]
 
-[ext_resource type="PackedScene" uid="uid://0n6qt3r5hf7i" path="res://BattleScenes/BattleBase/health_bar_3d.tscn" id="1_wxaq1"]
+[ext_resource type="PackedScene" uid="uid://0n6qt3r5hf7i" path="res://BattleScenes/BaseBattle/health_bar_3d.tscn" id="1_wxaq1"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_gis6v"]
 viewport_path = NodePath("HealthBar/SubViewport")

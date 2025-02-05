@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c84m8tsicb84m"]
 
-[ext_resource type="Script" path="res://BattleScenes/BattleBase/SpawnGroup.gd" id="1_kyhug"]
+[ext_resource type="Script" path="res://BattleScenes/BaseBattle/SpawnGroup.gd" id="1_kyhug"]
 
 [node name="PlayerSpawns" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.97735, 0, 0)

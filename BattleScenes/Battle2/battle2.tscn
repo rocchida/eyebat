@@ -1,13 +1,13 @@
 [gd_scene load_steps=36 format=4 uid="uid://b1tks00q6kjr3"]
 
-[ext_resource type="Script" path="res://BattleScenes/BattleBase/battle.gd" id="1_ohe57"]
+[ext_resource type="Script" path="res://BattleScenes/BaseBattle/battle.gd" id="1_ohe57"]
 [ext_resource type="Texture2D" uid="uid://c7g1ncri8fqbt" path="res://Shared/ImportedAssets/Skyboxes/SunsetSky.png" id="2_dl5ac"]
 [ext_resource type="Script" path="res://Shared/WorldAssets/world_environment.gd" id="3_npo0w"]
 [ext_resource type="Texture2D" uid="uid://c744l3on2jnh6" path="res://CustomAssets/GridMapAssets/Dirt_Reloaded_Grass Block.png" id="4_s2ffy"]
-[ext_resource type="Script" path="res://BattleScenes/BattleBase/Camera3D.gd" id="5_l1i74"]
-[ext_resource type="PackedScene" uid="uid://c84m8tsicb84m" path="res://BattleScenes/BattleBase/SpawnGroup.tscn" id="6_0eg2x"]
-[ext_resource type="PackedScene" uid="uid://w57g26li1j8e" path="res://BattleScenes/BattleBase/battleSpawn.tscn" id="7_qoywg"]
-[ext_resource type="PackedScene" uid="uid://dfull3k6wh36" path="res://BattleScenes/BattleBase/ui.tscn" id="9_y82gk"]
+[ext_resource type="Script" path="res://BattleScenes/BaseBattle/Camera3D.gd" id="5_l1i74"]
+[ext_resource type="PackedScene" uid="uid://c84m8tsicb84m" path="res://BattleScenes/BaseBattle/SpawnGroup.tscn" id="6_0eg2x"]
+[ext_resource type="PackedScene" uid="uid://w57g26li1j8e" path="res://BattleScenes/BaseBattle/battleSpawn.tscn" id="7_qoywg"]
+[ext_resource type="PackedScene" uid="uid://dfull3k6wh36" path="res://BattleScenes/BaseBattle/ui.tscn" id="9_y82gk"]
 [ext_resource type="Texture2D" uid="uid://cbniu1tm214eu" path="res://Shared/ImportedAssets/ParticleEffects/particle_sprite_smoke.webp" id="10_1e3rg"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_fmb2t"]

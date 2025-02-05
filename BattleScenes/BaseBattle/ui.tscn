@@ -1,10 +1,10 @@
 [gd_scene load_steps=11 format=3 uid="uid://dfull3k6wh36"]
 
 [ext_resource type="Texture2D" uid="uid://vrqrau81y8l7" path="res://Shared/ImportedAssets/UI/MenuBackground.png" id="1_f0uyr"]
-[ext_resource type="Script" path="res://BattleScenes/BattleBase/ui.gd" id="1_v5ee4"]
+[ext_resource type="Script" path="res://BattleScenes/BaseBattle/ui.gd" id="1_v5ee4"]
 [ext_resource type="Texture2D" uid="uid://cr4sr5cpvb3pm" path="res://CustomAssets/CharacterArt/30_monster_art/19 - ni5OBEL.png" id="3_1ncel"]
-[ext_resource type="ButtonGroup" uid="uid://bht5ncmkd0p2x" path="res://BattleScenes/BattleBase/battle_ui_ability_button_group.tres" id="3_f18yb"]
-[ext_resource type="Script" path="res://BattleScenes/BattleBase/ability_button.gd" id="4_j3u7c"]
+[ext_resource type="ButtonGroup" uid="uid://bht5ncmkd0p2x" path="res://BattleScenes/BaseBattle/battle_ui_ability_button_group.tres" id="3_f18yb"]
+[ext_resource type="Script" path="res://BattleScenes/BaseBattle/ability_button.gd" id="4_j3u7c"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ovv5h"]
 
