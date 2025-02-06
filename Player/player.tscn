@@ -407,6 +407,7 @@ states/walk/position = Vector2(664, 100)
 transitions = ["walk", "idle", SubResource("AnimationNodeStateMachineTransition_pvlrc"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_5avmn"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_wjglv")]
 
 [node name="player" type="CharacterBody3D"]
+collision_layer = 257
 script = ExtResource("1_rpphu")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
