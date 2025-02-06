@@ -10,7 +10,7 @@ var player_monsters : Array[Monster]
 var initiative : Array[Monster]
 var current_turn_state : turn_state = turn_state.SELECTING_ACTION
 var current_turn : int = 0
-var currently_selected_button : int = -1
+var currently_selected_attack : Attack = null
 var struggle_atk = "res://Resources/Attacks/struggle.tres"
 var current_monster : Monster:
 	get:
@@ -109,7 +109,7 @@ func end_turn():
 	if current_turn >= initiative.size(): current_turn = 0
 	UI.set_initiative_text(current_turn, initiative, get_living_enemies())
 	
-	currently_selected_button = -1
+	currently_selected_attack = null;
 	if (current_monster in get_all_goodguys()):
 		UI.debug("Player's " + current_monster.name + " begins their turn")
 	else:
@@ -164,18 +164,18 @@ func battle_is_over() -> bool:
 	return false
 
 func monster_clicked(clicked_monster : Monster):
-	if currently_selected_button == -1 or current_monster.mana < current_selected_attack().mana_cost:
+	if currently_selected_attack == null or current_monster.mana < currently_selected_attack.mana_cost:
 		return
 	
-	var ms : Array[Monster] = get_attacks_possible_targets(current_selected_attack())
+	var ms : Array[Monster] = get_attacks_possible_targets(currently_selected_attack)
 	if clicked_monster not in ms:
 		return
 	
 	currently_targeted_monsters.append(clicked_monster)
 	
-	if (currently_targeted_monsters.size() == current_selected_attack().num_of_targets or current_selected_attack().randomly_choose_target):
+	if (currently_targeted_monsters.size() == currently_selected_attack.num_of_targets or currently_selected_attack.randomly_choose_target):
 		UI.hide_buttons()
-		await run_attack(current_monster, currently_targeted_monsters, current_selected_attack())
+		await run_attack(current_monster, currently_targeted_monsters, currently_selected_attack)
 		currently_targeted_monsters.clear()
 		end_turn()
 
@@ -273,11 +273,11 @@ func generate_threat_for_inflicted_statuses(status_inflicted_monster : Monster, 
 
 func monster_hovered(monster : Monster):
 	# do a white smoke outline if no ability is selected
-	if (currently_selected_button == -1):
+	if (currently_selected_attack == null):
 		monster.set_outline_color(Color.WHITE_SMOKE)
 	#elif(selected ability is offensive and monster is enemy)
 	else:
-		monster.set_outline_color(current_selected_attack().hover_target_outline_clr)
+		monster.set_outline_color(currently_selected_attack.hover_target_outline_clr)
 	pass
 
 func monster_unhovered(monster : Monster):
@@ -291,11 +291,11 @@ func monster_unhovered(monster : Monster):
 	monster.set_outline_color(clear)
 	pass
 
-func _on_ui_button_clicked(i : int):
-	if currently_selected_button != -1:
+func _on_ui_ability_clicked(ability: Attack) -> void:
+	if currently_selected_attack != null:
 		current_monster.toggle_on_shader()
-	currently_selected_button = i
-	UI.set_attack_description(current_monster.attacks[i], current_monster)
+	currently_selected_attack = ability
+	UI.set_attack_description(ability, current_monster)
 	clear_all_monster_outlines()
 	show_dead_monsters_if_targetable()
 	outline_possible_targets()
@@ -306,20 +306,17 @@ func clear_all_monster_outlines():
 			m.toggle_off_shader()
 
 func outline_possible_targets():
-	var targets = get_attacks_possible_targets(current_selected_attack())
+	var targets = get_attacks_possible_targets(currently_selected_attack)
 	for m : Monster in targets:
-		m.set_outline_color(current_selected_attack().hover_target_outline_clr)
+		m.set_outline_color(currently_selected_attack.hover_target_outline_clr)
 		
 func show_dead_monsters_if_targetable():
-	if current_selected_attack().target_type == Attack.target_types.ONLY_DEAD_MONSTERS:
+	if currently_selected_attack.target_type == Attack.target_types.ONLY_DEAD_MONSTERS:
 		for m : Monster in initiative:
 			if m.is_deadzo(): m.make_visible()
 	else: 
 		for m : Monster in initiative:
 			if m.is_deadzo(): m.make_invisible()
-
-func current_selected_attack() -> Attack:
-	return current_monster.attacks[currently_selected_button]
 
 func is_enemy(m : Monster) -> bool:
 	return (m.get_parent().get_parent() == enemy_spawns)

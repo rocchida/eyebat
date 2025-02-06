@@ -1,6 +1,6 @@
 extends Control
 class_name UI
-signal ability_clicked(int)
+signal ability_clicked(ability : Attack)
 
 var buttons : Array[AbilityButton]
 var btn : Button
@@ -92,17 +92,14 @@ func set_initiative_board(initiative: Array[Monster]):
 	for m in initiative:
 		initiative_board.add_child(m.get_portrait())
 
-func _on_menu_button_pressed():
-	ability_clicked.emit(0)
+func _on_ability_button_1_pressed(ability : Attack):
+	ability_clicked.emit(ability)
 
+func _on_ability_button_2_pressed(ability : Attack):
+	ability_clicked.emit(ability)
 
-func _on_menu_button_2_pressed():
-	ability_clicked.emit(1)
+func _on_ability_button_3_pressed(ability : Attack):
+	ability_clicked.emit(ability)
 
-
-func _on_menu_button_3_pressed():
-	ability_clicked.emit(2)
-
-
-func _on_menu_button_4_pressed():
-	ability_clicked.emit(3)
+func _on_ability_button_4_pressed(ability : Attack):
+	ability_clicked.emit(ability)

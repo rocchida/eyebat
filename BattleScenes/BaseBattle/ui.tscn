@@ -169,56 +169,56 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Ability1Button" type="MenuButton" parent="ColorMenu/HBoxContainer"]
+[node name="Ability1Button" type="Button" parent="ColorMenu/HBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_hover_color = Color(0.431373, 0.431373, 0.431373, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_styles/hover = SubResource("StyleBoxFlat_xo6x5")
 theme_override_styles/normal = SubResource("StyleBoxFlat_pndsv")
+toggle_mode = true
+action_mode = 0
 button_group = ExtResource("3_f18yb")
 text = "Attack"
-flat = false
 icon_alignment = 1
-switch_on_hover = true
 script = ExtResource("4_j3u7c")
 
-[node name="Ability2Button" type="MenuButton" parent="ColorMenu/HBoxContainer"]
+[node name="Ability2Button" type="Button" parent="ColorMenu/HBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_hover_color = Color(0.431373, 0.431373, 0.431373, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_styles/hover = SubResource("StyleBoxFlat_xo6x5")
 theme_override_styles/normal = SubResource("StyleBoxFlat_pndsv")
+toggle_mode = true
+action_mode = 0
 button_group = ExtResource("3_f18yb")
 text = "Attack"
-flat = false
 icon_alignment = 1
-switch_on_hover = true
 script = ExtResource("4_j3u7c")
 
-[node name="Ability3Button" type="MenuButton" parent="ColorMenu/HBoxContainer"]
+[node name="Ability3Button" type="Button" parent="ColorMenu/HBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_hover_color = Color(0.431373, 0.431373, 0.431373, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_styles/hover = SubResource("StyleBoxFlat_xo6x5")
 theme_override_styles/normal = SubResource("StyleBoxFlat_pndsv")
+toggle_mode = true
+action_mode = 0
 button_group = ExtResource("3_f18yb")
 text = "Attack"
-flat = false
 icon_alignment = 1
-switch_on_hover = true
 script = ExtResource("4_j3u7c")
 
-[node name="Ability4Button" type="MenuButton" parent="ColorMenu/HBoxContainer"]
+[node name="Ability4Button" type="Button" parent="ColorMenu/HBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_hover_color = Color(0.431373, 0.431373, 0.431373, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_styles/hover = SubResource("StyleBoxFlat_xo6x5")
 theme_override_styles/normal = SubResource("StyleBoxFlat_pndsv")
+toggle_mode = true
+action_mode = 0
 button_group = ExtResource("3_f18yb")
 text = "Attack"
-flat = false
 icon_alignment = 1
-switch_on_hover = true
 script = ExtResource("4_j3u7c")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="ColorMenu"]
@@ -331,7 +331,7 @@ theme_override_font_sizes/normal_font_size = 33
 bbcode_enabled = true
 text = "[center]Example[/center]"
 
-[connection signal="pressed" from="ColorMenu/HBoxContainer/Ability1Button" to="." method="_on_menu_button_pressed"]
-[connection signal="pressed" from="ColorMenu/HBoxContainer/Ability2Button" to="." method="_on_menu_button_2_pressed"]
-[connection signal="pressed" from="ColorMenu/HBoxContainer/Ability3Button" to="." method="_on_menu_button_3_pressed"]
-[connection signal="pressed" from="ColorMenu/HBoxContainer/Ability4Button" to="." method="_on_menu_button_4_pressed"]
+[connection signal="ability_pressed" from="ColorMenu/HBoxContainer/Ability1Button" to="." method="_on_ability_button_1_pressed"]
+[connection signal="ability_pressed" from="ColorMenu/HBoxContainer/Ability2Button" to="." method="_on_ability_button_2_pressed"]
+[connection signal="ability_pressed" from="ColorMenu/HBoxContainer/Ability3Button" to="." method="_on_ability_button_3_pressed"]
+[connection signal="ability_pressed" from="ColorMenu/HBoxContainer/Ability4Button" to="." method="_on_ability_button_4_pressed"]

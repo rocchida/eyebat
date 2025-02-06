@@ -79,6 +79,7 @@ visible = false
 
 [node name="Arena" type="Node" parent="."]
 
+[connection signal="ability_clicked" from="UI" to="." method="_on_ui_ability_clicked"]
 [connection signal="monster_clicked" from="EnemySpawns/BattleSpawn" to="." method="_on_battle_spawn_monster_clicked"]
 [connection signal="monster_clicked" from="EnemySpawns/BattleSpawn" to="EnemySpawns" method="_on_battle_spawn_monster_clicked"]
 [connection signal="monster_clicked" from="PlayerSpawns/BattleSpawn" to="PlayerSpawns" method="_on_battle_spawn_monster_clicked"]
