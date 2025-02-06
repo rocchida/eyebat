@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://c8u6vq6rer1x4" path="res://CustomAssets/MapAssets/npcs_full_billboard.tscn" id="7_cttpy"]
 [ext_resource type="Shader" path="res://Shared/ImportedAssets/Shaders/ocean.gdshader" id="8_2ebta"]
 [ext_resource type="MeshLibrary" uid="uid://bignsdns4h2ag" path="res://CustomAssets/GridMapAssets/Mesh_Library.tres" id="9_e02lp"]
-[ext_resource type="Script" path="res://Overworld/SceneDoor.gd" id="10_u8ur4"]
+[ext_resource type="Script" path="res://Overworld/Components/scene_portal.gd" id="10_u8ur4"]
 [ext_resource type="PackedScene" uid="uid://0uah50n2ynp4" path="res://Shared/ImportedAssets/GridMapAssets/Models/GLTF format/doorLargeClosed.glb" id="11_sc87g"]
 [ext_resource type="PackedScene" path="res://Monsters/Simo.tscn" id="12_88ulv"]
 [ext_resource type="PackedScene" path="res://Monsters/GhostDog.tscn" id="13_mfpve"]
