@@ -15,7 +15,10 @@ var struggle_atk = "res://Resources/Attacks/struggle.tres"
 var current_monster : Monster:
 	get:
 		return initiative[current_turn]
-@export var debug : bool
+
+## If On, will print extra debug messages
+@export var debug_mode : bool
+
 @onready var UI : UI = $UI
 var currently_targeted_monsters : Array[Monster]
 
@@ -78,7 +81,7 @@ func set_initiative(enemy_monster_roster: Array[Monster], player_monster_roster:
 	initiative.append_array(enemy_monster_roster)
 	initiative.append_array(player_monster_roster)
 	initiative.sort_custom(sort_by_speed)
-	if (debug): for m in initiative: print(m.name + ", speed: " + str(m.get_speed()))
+	if (debug_mode): for m in initiative: print(m.name + ", speed: " + str(m.get_speed()))
 
 func sort_by_speed(a:Monster, b:Monster):
 	if a.get_speed() > b.get_speed():
