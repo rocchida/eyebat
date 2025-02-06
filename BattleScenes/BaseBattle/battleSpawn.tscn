@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://w57g26li1j8e"]
 
-[ext_resource type="PackedScene" uid="uid://nyo0j2wnimo6" path="res://Shared/ImportedAssets/GridMapAssets/Models/GLTF format/barrel.glb" id="1_82t1x"]
+[ext_resource type="PackedScene" uid="uid://nyo0j2wnimo6" path="res://Shared/GridMapAssets/Models/GLTF format/barrel.glb" id="1_82t1x"]
 [ext_resource type="Script" path="res://BattleScenes/BaseBattle/battleSpawn.gd" id="1_r2t2p"]
 
 [node name="BattleSpawn" type="Node3D" groups=["Persist"]]

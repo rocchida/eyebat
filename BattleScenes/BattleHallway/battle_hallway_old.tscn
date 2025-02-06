@@ -1,34 +1,39 @@
-[gd_scene load_steps=16 format=3 uid="uid://dy8lxp6x2x1vp"]
+[gd_scene load_steps=21 format=3 uid="uid://b2wdb6pux767n"]
 
-[ext_resource type="PackedScene" uid="uid://bwq86knwtmwxs" path="res://BattleScenes/BaseBattle/base_battle.tscn" id="1_ci678"]
+[ext_resource type="Script" path="res://BattleScenes/BaseBattle/battle.gd" id="1_pe8wa"]
 [ext_resource type="MeshLibrary" uid="uid://b3u22aw7e05yx" path="res://Shared/WorldAssets/lazaresque.tres" id="2_h67lk"]
+[ext_resource type="Script" path="res://BattleScenes/BaseBattle/Camera3D.gd" id="3_xibmg"]
+[ext_resource type="PackedScene" uid="uid://dfull3k6wh36" path="res://BattleScenes/BaseBattle/ui.tscn" id="4_utvag"]
+[ext_resource type="PackedScene" uid="uid://c84m8tsicb84m" path="res://BattleScenes/BaseBattle/SpawnGroup.tscn" id="5_1gmc2"]
+[ext_resource type="PackedScene" uid="uid://w57g26li1j8e" path="res://BattleScenes/BaseBattle/battleSpawn.tscn" id="6_smqby"]
+[ext_resource type="Texture2D" uid="uid://csi1selua1vgf" path="res://Shared/CharacterArt/22 - y6pKJjj.png" id="7_wgnw1"]
 [ext_resource type="Texture2D" uid="uid://cbniu1tm214eu" path="res://Shared/ImportedAssets/ParticleEffects/particle_sprite_smoke.webp" id="8_xqccs"]
 [ext_resource type="PackedScene" uid="uid://c38xv4p3ib2mh" path="res://Shared/New folder/objects/campfire/campfire.tscn" id="9_y7u7f"]
 [ext_resource type="PackedScene" uid="uid://d0dsmhx747f3p" path="res://Shared/New folder/objects/rocks/rock_1.tscn" id="10_dnhio"]
 [ext_resource type="PackedScene" uid="uid://bhn8c8kmh4j6y" path="res://Shared/WorldEnvironments/day_night_cycle.tscn" id="11_twjvf"]
 
-[sub_resource type="Curve" id="Curve_t88e5"]
+[sub_resource type="Curve" id="Curve_xwvbv"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.142259, 1), 0.0, 0.0, 0, 0, Vector2(0.380753, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 4
 
 [sub_resource type="CurveTexture" id="CurveTexture_ckyog"]
-curve = SubResource("Curve_t88e5")
+curve = SubResource("Curve_xwvbv")
 
-[sub_resource type="Gradient" id="Gradient_vo0w6"]
+[sub_resource type="Gradient" id="Gradient_7cxi0"]
 offsets = PackedFloat32Array(0, 0.2891, 0.767772)
 colors = PackedColorArray(1, 0.286275, 0, 1, 0, 0, 0, 0.733333, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_j4vin"]
-gradient = SubResource("Gradient_vo0w6")
+gradient = SubResource("Gradient_7cxi0")
 
-[sub_resource type="Curve" id="Curve_ruodo"]
+[sub_resource type="Curve" id="Curve_2hpbl"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_dibu5"]
-curve = SubResource("Curve_ruodo")
+curve = SubResource("Curve_2hpbl")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sq3vq"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_32bhv"]
 emission_shape = 6
 emission_ring_axis = Vector3(0, 1, 1)
 emission_ring_height = 0.0
@@ -59,38 +64,14 @@ particles_anim_h_frames = 8
 particles_anim_v_frames = 8
 particles_anim_loop = false
 
-[sub_resource type="QuadMesh" id="QuadMesh_0xvm4"]
+[sub_resource type="QuadMesh" id="QuadMesh_lvyj0"]
 material = SubResource("StandardMaterial3D_04t4i")
 
-[node name="Battle" instance=ExtResource("1_ci678")]
+[node name="Battle" type="Node3D"]
+script = ExtResource("1_pe8wa")
+debug = true
 
-[node name="BattleSpawn" parent="EnemySpawns" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.13609, 0.9947, 4.53548)
-
-[node name="BattleSpawn2" parent="EnemySpawns" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.47962, 0.9947, 3.54658)
-
-[node name="BattleSpawn3" parent="EnemySpawns" index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.0562, 0.9947, 4.63601)
-
-[node name="BattleSpawn4" parent="EnemySpawns" index="3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.3699, 0.99397, 3.45889)
-
-[node name="BattleSpawn" parent="PlayerSpawns" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.79502, 0.9947, 4.57371)
-
-[node name="BattleSpawn2" parent="PlayerSpawns" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.21594, 0.9947, 3.64471)
-
-[node name="BattleSpawn3" parent="PlayerSpawns" index="2"]
-transform = Transform3D(0.999949, -0.0101402, 0, 0.0101402, 0.999949, 0, 0, 0, 1, -4.65786, 0.997508, 4.83288)
-
-[node name="BattleSpawn4" parent="PlayerSpawns" index="3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.56726, 0.99397, 3.53878)
-
-[node name="DayNightCycle" parent="Arena" index="0" instance=ExtResource("11_twjvf")]
-
-[node name="GridMap" type="GridMap" parent="Arena" index="1"]
+[node name="GridMap" type="GridMap" parent="."]
 mesh_library = ExtResource("2_h67lk")
 cell_size = Vector3(1, 1, 1)
 data = {
@@ -98,35 +79,107 @@ data = {
 }
 metadata/_editor_floor_ = Vector3(0, 4, 0)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="Arena" index="2"]
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.989016, 0.147809, 0, -0.147809, 0.989016, -0.930223, 2.75974, 9.28488)
+keep_aspect = 0
+current = true
+script = ExtResource("3_xibmg")
+
+[node name="Ui" parent="." instance=ExtResource("4_utvag")]
+
+[node name="EnemySpawns" parent="." node_paths=PackedStringArray("spawn_points_4") instance=ExtResource("5_1gmc2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.92405, 0.0525217, -0.871554)
+spawn_points_4 = [NodePath("BattleSpawn"), NodePath("BattleSpawn2"), NodePath("BattleSpawn3"), NodePath("BattleSpawn4")]
+face_left = true
+
+[node name="BattleSpawn" parent="EnemySpawns" instance=ExtResource("6_smqby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.66151, 0.9947, 5.15409)
+seeBarrel = false
+enemySpawn = true
+
+[node name="BattleSpawn2" parent="EnemySpawns" instance=ExtResource("6_smqby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.16285, 0.9947, 4.29696)
+seeBarrel = false
+enemySpawn = true
+
+[node name="BattleSpawn3" parent="EnemySpawns" instance=ExtResource("6_smqby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.05315, 0.9947, 5.09703)
+seeBarrel = false
+enemySpawn = true
+
+[node name="BattleSpawn4" parent="EnemySpawns" instance=ExtResource("6_smqby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.035, 0.99397, 4.19542)
+seeBarrel = false
+enemySpawn = true
+
+[node name="PlayerSpawns" parent="." node_paths=PackedStringArray("spawn_points_4") instance=ExtResource("5_1gmc2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.65852, 0.0525217, -0.871554)
+spawn_points_4 = [NodePath("BattleSpawn"), NodePath("BattleSpawn2"), NodePath("BattleSpawn3"), NodePath("BattleSpawn4")]
+
+[node name="BattleSpawn" parent="PlayerSpawns" instance=ExtResource("6_smqby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.7179, 0.9947, 4.19522)
+seeBarrel = false
+
+[node name="BattleSpawn2" parent="PlayerSpawns" instance=ExtResource("6_smqby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.57488, 0.9947, 4.17671)
+seeBarrel = false
+
+[node name="BattleSpawn3" parent="PlayerSpawns" instance=ExtResource("6_smqby")]
+transform = Transform3D(0.999949, -0.0101402, 0, 0.0101402, 0.999949, 0, 0, 0, 1, -6.59926, 0.997508, 5.15655)
+seeBarrel = false
+
+[node name="BattleSpawn4" parent="PlayerSpawns" instance=ExtResource("6_smqby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.14325, 0.99397, 5.17958)
+seeBarrel = false
+
+[node name="PlayerArt" type="Node3D" parent="."]
+visible = false
+
+[node name="Sprite3D" type="Sprite3D" parent="PlayerArt"]
+transform = Transform3D(-0.650691, -0.000157831, 0, 0.000295324, -0.347752, 0, 0, 0, 1, 4.97794, 4.91916, 0.27571)
+flip_h = true
+texture = ExtResource("7_wgnw1")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(1.75942, 0, 0, 0, 5.53934, 0, 0, 0, 7.17728, -3.56939, 1.8291, -25.9696)
 use_collision = true
 size = Vector3(1, 4.6582, 0.312988)
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="Arena" index="3"]
+[node name="CSGBox3D2" type="CSGBox3D" parent="."]
 transform = Transform3D(1.75942, 0, 0, 0, 5.53934, 0, 0, 0, 7.17728, -7.74095, 1.8291, -25.9696)
 use_collision = true
 size = Vector3(1, 4.6582, 0.312988)
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="Arena" index="4"]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.40888, 0.894662, 0.444191)
 amount = 300
 lifetime = 3.0
 visibility_aabb = AABB(-4, -4, -4.62292, 8, 8, 8)
-process_material = SubResource("ParticleProcessMaterial_sq3vq")
-draw_pass_1 = SubResource("QuadMesh_0xvm4")
+process_material = SubResource("ParticleProcessMaterial_32bhv")
+draw_pass_1 = SubResource("QuadMesh_lvyj0")
 
-[node name="Campfire" parent="Arena" index="5" instance=ExtResource("9_y7u7f")]
+[node name="Campfire" parent="." instance=ExtResource("9_y7u7f")]
 transform = Transform3D(0.629635, 0, 0, 0, 0.663397, 0, 0, 0, 0.610881, 1.41795, 1.28928, 0.412619)
 
-[node name="Rock_1" parent="Arena" index="6" instance=ExtResource("10_dnhio")]
+[node name="Rock_1" parent="." instance=ExtResource("10_dnhio")]
 transform = Transform3D(7.5, 0, 0, 0, 6.6, 0, 0, 0, 8.99, -2, 4, -11.5866)
 
-[node name="Rock_2" parent="Arena" index="7" instance=ExtResource("10_dnhio")]
+[node name="Rock_2" parent="." instance=ExtResource("10_dnhio")]
 transform = Transform3D(-3.75, 0, -7.78557, 0, 6.6, 0, 6.49519, 0, -4.495, 7.70595, 4.8178, -11.5298)
 
-[node name="Rock_3" parent="Arena" index="8" instance=ExtResource("10_dnhio")]
+[node name="Rock_3" parent="." instance=ExtResource("10_dnhio")]
 transform = Transform3D(5.3033, 0, 6.35689, 0, 6.6, 0, -5.3033, 0, 6.35689, -7.02982, 3, 2.99877)
 
-[node name="Rock_4" parent="Arena" index="9" instance=ExtResource("10_dnhio")]
+[node name="Rock_4" parent="." instance=ExtResource("10_dnhio")]
 transform = Transform3D(3.94223, -4.73334e-08, -12.0831, 0.755325, 10.0955, 0.695708, 7.15161, -1.06625, 6.58714, -9.93051, 4.68597, -7.3086)
+
+[node name="DayNightCycle" parent="." instance=ExtResource("11_twjvf")]
+
+[connection signal="button_clicked" from="Ui" to="." method="_on_ui_button_clicked"]
+[connection signal="monster_clicked" from="EnemySpawns/BattleSpawn" to="." method="_on_battle_spawn_monster_clicked"]
+[connection signal="monster_clicked" from="EnemySpawns/BattleSpawn" to="EnemySpawns" method="_on_battle_spawn_monster_clicked"]
+[connection signal="monster_clicked" from="PlayerSpawns/BattleSpawn" to="PlayerSpawns" method="_on_battle_spawn_monster_clicked"]

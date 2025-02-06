@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cvtroqqp2yfol"]
 
-[ext_resource type="PackedScene" uid="uid://nyo0j2wnimo6" path="res://Shared/ImportedAssets/GridMapAssets/Models/GLTF format/barrel.glb" id="2_mu56t"]
+[ext_resource type="PackedScene" uid="uid://nyo0j2wnimo6" path="res://Shared/GridMapAssets/Models/GLTF format/barrel.glb" id="2_mu56t"]
 
 [sub_resource type="GDScript" id="GDScript_wnao3"]
 script/source = "extends Node
