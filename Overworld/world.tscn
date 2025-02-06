@@ -83,7 +83,7 @@ monster_roster = Array[PackedScene]([ExtResource("8_y81i5"), ExtResource("8_y81i
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.5454, 4.01099, 20.5823)
 
 [node name="ScenePortal" parent="doorLargeClosed2" instance=ExtResource("6_enkwq")]
-_target_scene = "res://BattleScenes/Battle1/battle.tscn"
+_target_scene = "res://BattleScenes/Battle1/battle1.tscn"
 _encounter_monster_roster_paths = Array[String](["res://Monsters/Angel/Angel.tscn"])
 
 [node name="doorLargeClosed3" parent="." instance=ExtResource("10_1iaji")]
@@ -91,6 +91,7 @@ transform = Transform3D(-0.00275765, 0, -0.999996, 0, 1, 0, 0.999996, 0, -0.0027
 
 [node name="ScenePortal" parent="doorLargeClosed3" instance=ExtResource("6_enkwq")]
 _target_scene = "res://BattleScenes/Battle2/battle2.tscn"
+_encounter_monster_roster_paths = Array[String](["res://Monsters/Angel/Angel.tscn", "res://Monsters/Aonin/Aonin.tscn"])
 
 [node name="UI" type="Control" parent="."]
 visible = false
