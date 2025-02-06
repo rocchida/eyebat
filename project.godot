@@ -13,7 +13,7 @@ config_version=5
 config/name="Evoker"
 run/main_scene="res://Menus/Main/main_menu.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
-config/icon="res://CustomAssets/CharacterArt/icon.png"
+config/icon="res://Shared/CharacterArt/icon.png"
 config/windows_native_icon="res://CustomAssets/icon.ico"
 
 [autoload]

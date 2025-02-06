@@ -1,0 +1,25 @@
+[gd_scene load_steps=7 format=3 uid="uid://d2qsp20d3ml2"]
+
+[ext_resource type="PackedScene" uid="uid://0n008ohugou7" path="res://Shared/New folder/models/grass_models/GrassCube_Basic.glb" id="1_7qinn"]
+[ext_resource type="Texture2D" uid="uid://dquo77at8068h" path="res://Shared/New folder/textures/DirtTexture.png" id="2_mv3hc"]
+[ext_resource type="Texture2D" uid="uid://dhln30vd5jf1m" path="res://Shared/New folder/textures/GrassTexture.png" id="3_7rbwu"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hvua4"]
+albedo_texture = ExtResource("2_mv3hc")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vadho"]
+albedo_texture = ExtResource("3_7rbwu")
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_lrkfn"]
+points = PackedVector3Array(-0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5)
+
+[node name="GrassCube_Basic" instance=ExtResource("1_7qinn")]
+
+[node name="GrassCube_Basic" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_hvua4")
+surface_material_override/1 = SubResource("StandardMaterial3D_vadho")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="GrassCube_Basic" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GrassCube_Basic/StaticBody3D" index="0"]
+shape = SubResource("ConvexPolygonShape3D_lrkfn")
