@@ -75,6 +75,8 @@ texture = ExtResource("7_75kpr")
 [node name="PauseMenu" parent="." instance=ExtResource("12_5q1s2")]
 visible = false
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
 [node name="Arena" type="Node" parent="."]
 
 [connection signal="monster_clicked" from="EnemySpawns/BattleSpawn" to="." method="_on_battle_spawn_monster_clicked"]
