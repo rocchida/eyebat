@@ -164,22 +164,52 @@ func battle_is_over() -> bool:
 	return false
 
 func monster_clicked(clicked_monster : Monster):
+
+	if currently_selected_attack == null:
+		# TODO: do something to indicate that no attacked is selected
+		return
+
 	if currently_selected_attack == null or current_monster.mana < currently_selected_attack.mana_cost:
+		# TODO: do something to indicate that the current monster doesn't have enough mana
 		return
 	
-	var ms : Array[Monster] = get_attacks_possible_targets(currently_selected_attack)
-	if clicked_monster not in ms:
+	# get all possible targets. If this selection is impossible, return
+	var all_possible_targets : Array[Monster] = get_attacks_possible_targets(currently_selected_attack)
+	if clicked_monster not in all_possible_targets:
 		return
 	
-	currently_targeted_monsters.append(clicked_monster)
+	var forced_selected_all_targets = false
+
+	# handle abilities with random targets
+	if(currently_selected_attack.randomly_choose_target):
+		choose_random_targets(all_possible_targets, currently_selected_attack.num_of_targets)
+		forced_selected_all_targets = true		
+	# if the number of targets this ability can select is greater than the number of all possible targets, then select all possible targets
+	elif(currently_selected_attack.num_of_targets >= all_possible_targets.size()):
+		currently_targeted_monsters = all_possible_targets;
+		forced_selected_all_targets = true
+	else:
+		# if the monster is not already targeted, target it. If not, remove it from the target list
+		# TODO: make some mechanism so that you can confirm your target selection (or don't...)
+		if not currently_targeted_monsters.has(clicked_monster):
+			currently_targeted_monsters.append(clicked_monster)
+		else:
+			currently_targeted_monsters.erase(clicked_monster)
+
+	# Used to debug multi-targeting
+	print("Currently Targeted Monsters: ", currently_targeted_monsters, " Size: ", currently_targeted_monsters.size())
+	print("Selected Attack Targets: ", currently_selected_attack.num_of_targets)
 	
-	if (currently_targeted_monsters.size() == currently_selected_attack.num_of_targets or currently_selected_attack.randomly_choose_target):
+	var correct_number_of_monsters_targeted = currently_targeted_monsters.size() == currently_selected_attack.num_of_targets \
+		or forced_selected_all_targets
+	
+	if (correct_number_of_monsters_targeted):
 		UI.hide_buttons()
 		await run_attack(current_monster, currently_targeted_monsters, currently_selected_attack)
 		currently_targeted_monsters.clear()
 		end_turn()
 
-func get_attacks_possible_targets(atk : Attack):
+func get_attacks_possible_targets(atk : Attack) -> Array[Monster]:
 	match atk.target_type:
 		Attack.target_types.ALL: return initiative
 		Attack.target_types.ONLY_ALLIES: 
@@ -200,27 +230,24 @@ func get_attacks_possible_targets(atk : Attack):
 		Attack.target_types.ONLY_DEAD_ENEMIES:
 			if is_enemy(current_monster): return get_dead_goodguys()
 			else: return get_dead_enemies()
+		_: return []
 
-func run_attack(attacker : Monster, receivers : Array[Monster], attack : Attack):
-	attacker.run_attack_anim(is_enemy(attacker))
-	attacker.drain_mana(attack.mana_cost)
-	attacker.update_statuses_after_attacking(UI)
-	for num in range(attack.num_of_targets):
+func run_attack(source : Monster, targets : Array[Monster], ability : Attack):
+	source.run_attack_anim(is_enemy(source))
+	source.drain_mana(ability.mana_cost)
+	source.update_statuses_after_attacking(UI)
+
+	for target in targets:
 		if(battle_is_over()):
 			go_back_to_overworld()
-			
-		var receiver
-		if attack.randomly_choose_target:
-			receiver = choose_random_target(get_attacks_possible_targets(attack))
-		else: receiver = receivers[num]
 		
 		var team = "EVOKER'S "
-		if is_enemy(receiver): team = "ENEMY "
-		UI.debug(attacker.name + " uses " + attack.name + " on " + team + receiver.name)
-		var threat_generated : int = await receive_attack(UI, attack, receiver, attacker, $AudioStreamPlayer)
-		if !on_same_team(attacker, receiver):
-			generate_threat_from_attack(threat_generated, attacker, receiver, attack)
-		if attack.num_of_targets > 1 : await get_tree().create_timer(3.5).timeout
+		if is_enemy(target): team = "ENEMY "
+		UI.debug(source.name + " uses " + ability.name + " on " + team + target.name)
+		var threat_generated : int = await receive_attack(UI, ability, target, source, $AudioStreamPlayer)
+		if !on_same_team(source, target):
+			generate_threat_from_attack(threat_generated, source, target, ability)
+		if ability.num_of_targets > 1 : await get_tree().create_timer(3.5).timeout
 
 func receive_attack(ui : UI, attack : Attack, receiver : Monster, attacker : Monster, audioPlayer : AudioStreamPlayer) -> int:
 	var threat_generated : int = 0
@@ -271,25 +298,27 @@ func generate_threat_for_inflicted_statuses(status_inflicted_monster : Monster, 
 				m.get_brain().add_targeting_status_threat(status_inflicted_monster)
 	
 
-func monster_hovered(monster : Monster):
-	# do a white smoke outline if no ability is selected
-	if (currently_selected_attack == null):
-		monster.set_outline_color(Color.WHITE_SMOKE)
-	#elif(selected ability is offensive and monster is enemy)
-	else:
-		monster.set_outline_color(currently_selected_attack.hover_target_outline_clr)
-	pass
+func monster_hovered(monster : Monster) -> void:
+	# Logic for outlining monsters when hovered
+	#if the monster is already targeted by an ability, don't change the outline
+	if (!currently_targeted_monsters.has(monster)):
+		# do a white smoke outline if no ability is selected
+		if (currently_selected_attack == null):
+			monster.set_outline_color(Color.WHITE_SMOKE)
+		else:
+			# still do WhiteSmoke if this monster is an invalid target
+			if(!get_attacks_possible_targets(currently_selected_attack).has(monster)):
+				monster.set_outline_color(Color.WHITE_SMOKE)
+			else:
+				monster.set_outline_color(currently_selected_attack.hover_target_outline_clr)
+		
 
-func monster_unhovered(monster : Monster):
-	#if (monster != current_monster):
-		#monster.toggle_off_shader()
-	#elif (currently_targeted_monsters.has(monster)): 
-		#return
-	#else:
-		#monster.toggle_on_shader()
-	var clear = Color(0, 0, 0, 0)
-	monster.set_outline_color(clear)
-	pass
+func monster_unhovered(monster : Monster) -> void:
+	# Logic for outlining monsters when unhovered
+	# if the monster isn't currently targeted by an ability, remove the outline
+	if(!currently_targeted_monsters.has(monster)):
+		var clear = Color(0, 0, 0, 0)
+		monster.set_outline_color(clear)
 
 func _on_ui_ability_clicked(ability: Attack) -> void:
 	if currently_selected_attack != null:
