@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cqoi32fodt1ba"
+path="res://.godot/imported/blockCornerSmall.obj-2f0a38bced76c055b1cdca544608735d.mesh"
+
+[deps]
+
+files=["res://.godot/imported/blockCornerSmall.obj-2f0a38bced76c055b1cdca544608735d.mesh"]
+
+source_file="res://Shared/ImportedAssets/GridMapAssets/Models/OBJ format/blockCornerSmall.obj"
+dest_files=["res://.godot/imported/blockCornerSmall.obj-2f0a38bced76c055b1cdca544608735d.mesh", "res://.godot/imported/blockCornerSmall.obj-2f0a38bced76c055b1cdca544608735d.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

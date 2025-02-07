@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cen3hqwu35pdx"
+path="res://.godot/imported/blockMovingLarge.obj-2b13c442bf7d3de8d8bcefdd281a6644.mesh"
+
+[deps]
+
+files=["res://.godot/imported/blockMovingLarge.obj-2b13c442bf7d3de8d8bcefdd281a6644.mesh"]
+
+source_file="res://Shared/ImportedAssets/GridMapAssets/Models/OBJ format/blockMovingLarge.obj"
+dest_files=["res://.godot/imported/blockMovingLarge.obj-2b13c442bf7d3de8d8bcefdd281a6644.mesh", "res://.godot/imported/blockMovingLarge.obj-2b13c442bf7d3de8d8bcefdd281a6644.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

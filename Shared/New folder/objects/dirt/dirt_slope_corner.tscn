@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://vmiui4o0x1v1"]
+
+[ext_resource type="PackedScene" uid="uid://6cglniqnqqlf" path="res://Shared/New folder/models/dirt_models/DirtSlopeCorner.glb" id="1_1a5y1"]
+[ext_resource type="Texture2D" uid="uid://dquo77at8068h" path="res://Shared/New folder/textures/DirtTexture.png" id="2_6u8l3"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_paqik"]
+albedo_texture = ExtResource("2_6u8l3")
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_lf3f1"]
+points = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5, 0.5)
+
+[node name="DirtSlopeCorner" instance=ExtResource("1_1a5y1")]
+
+[node name="DirtSlopeCorner" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_paqik")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="DirtSlopeCorner" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DirtSlopeCorner/StaticBody3D" index="0"]
+shape = SubResource("ConvexPolygonShape3D_lf3f1")

@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://cxuhakeow7874"]
+
+[ext_resource type="Script" path="res://NPCs/Shopkeep/Shopkeep.gd" id="1_ns3aa"]
+[ext_resource type="Texture2D" uid="uid://dl3plqwoor2bt" path="res://NPCs/Shopkeep/Mage Idle.png" id="2_mqwgn"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_qw6er"]
+
+[node name="Shopkeep" type="Area3D"]
+transform = Transform3D(20.89, 0, 0, 0, 20.89, 0, 0, 0, 20.89, 0, 0, 0)
+script = ExtResource("1_ns3aa")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+texture_filter = 0
+texture = ExtResource("2_mqwgn")
+hframes = 6
+frame = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_qw6er")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

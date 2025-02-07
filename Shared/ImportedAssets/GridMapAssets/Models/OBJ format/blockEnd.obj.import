@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bwoxhup1v1bwi"
+path="res://.godot/imported/blockEnd.obj-8781fe526dfae4b1ea6b39479950c49f.mesh"
+
+[deps]
+
+files=["res://.godot/imported/blockEnd.obj-8781fe526dfae4b1ea6b39479950c49f.mesh"]
+
+source_file="res://Shared/ImportedAssets/GridMapAssets/Models/OBJ format/blockEnd.obj"
+dest_files=["res://.godot/imported/blockEnd.obj-8781fe526dfae4b1ea6b39479950c49f.mesh", "res://.godot/imported/blockEnd.obj-8781fe526dfae4b1ea6b39479950c49f.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

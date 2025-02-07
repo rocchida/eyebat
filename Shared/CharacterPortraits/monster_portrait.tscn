@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bagcpa02s6f4j"]
+
+[ext_resource type="Texture2D" uid="uid://cr4sr5cpvb3pm" path="res://Shared/CharacterArt/30_monster_art/19 - ni5OBEL.png" id="1_g6u2r"]
+
+[node name="TextureRect" type="TextureRect"]
+custom_minimum_size = Vector2(100, 100)
+texture = ExtResource("1_g6u2r")
+expand_mode = 5
+stretch_mode = 4

@@ -62,15 +62,6 @@ func add_player_currency_to_state_data(name: String, currency_data:Vector2):
 func clear_saved_currency_data():
 	currencies.clear()
 
-# Functions for Monster roster
-func add_player_monster_roster_to_state_data(monster:PackedScene):
-	monster_roster.append(monster)
-
-
-func clear_saved_player_monster_roster_data():
-	monster_roster.clear()
-
-
 # Functions for world dictionary
 func add_to_world_dictionary(world_property_name: String, world_property_data):
 	if world_dictionary.has(world_property_name):

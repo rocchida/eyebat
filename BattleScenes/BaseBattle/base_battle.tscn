@@ -1,0 +1,85 @@
+[gd_scene load_steps=8 format=3 uid="uid://bwq86knwtmwxs"]
+
+[ext_resource type="Script" path="res://BattleScenes/BaseBattle/battle.gd" id="1_6lsab"]
+[ext_resource type="Script" path="res://BattleScenes/BaseBattle/Camera3D.gd" id="3_nsjoi"]
+[ext_resource type="PackedScene" uid="uid://dfull3k6wh36" path="res://BattleScenes/BaseBattle/ui.tscn" id="4_s1g56"]
+[ext_resource type="PackedScene" uid="uid://c84m8tsicb84m" path="res://BattleScenes/BaseBattle/SpawnGroup.tscn" id="5_eyvjd"]
+[ext_resource type="PackedScene" uid="uid://w57g26li1j8e" path="res://BattleScenes/BaseBattle/battleSpawn.tscn" id="6_xtwy1"]
+[ext_resource type="Texture2D" uid="uid://csi1selua1vgf" path="res://Shared/CharacterArt/22 - y6pKJjj.png" id="7_75kpr"]
+[ext_resource type="PackedScene" uid="uid://dkie3md1cmsip" path="res://Menus/Pause/PauseMenu.tscn" id="12_5q1s2"]
+
+[node name="Battle" type="Node3D"]
+script = ExtResource("1_6lsab")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.982058, 0.188581, 0, -0.188581, 0.982058, -1.22368, 3.18863, 9.31259)
+keep_aspect = 0
+current = true
+script = ExtResource("3_nsjoi")
+
+[node name="UI" parent="." instance=ExtResource("4_s1g56")]
+
+[node name="EnemySpawns" parent="." node_paths=PackedStringArray("spawn_points_4") instance=ExtResource("5_eyvjd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.97735, -0.0412066, 0)
+spawn_points_4 = [NodePath("BattleSpawn"), NodePath("BattleSpawn2"), NodePath("BattleSpawn3"), NodePath("BattleSpawn4")]
+face_left = true
+
+[node name="BattleSpawn" parent="EnemySpawns" instance=ExtResource("6_xtwy1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.52456, 0.9947, 4.09382)
+seeBarrel = false
+enemySpawn = true
+
+[node name="BattleSpawn2" parent="EnemySpawns" instance=ExtResource("6_xtwy1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.31922, 0.9947, 1.34986)
+seeBarrel = false
+enemySpawn = true
+
+[node name="BattleSpawn3" parent="EnemySpawns" instance=ExtResource("6_xtwy1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.01102, 0.9947, 2.71265)
+seeBarrel = false
+enemySpawn = true
+
+[node name="BattleSpawn4" parent="EnemySpawns" instance=ExtResource("6_xtwy1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.0086, 0.99397, 5.17958)
+seeBarrel = false
+enemySpawn = true
+
+[node name="PlayerSpawns" parent="." node_paths=PackedStringArray("spawn_points_4") instance=ExtResource("5_eyvjd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.97735, -0.0412066, 0)
+spawn_points_4 = [NodePath("BattleSpawn"), NodePath("BattleSpawn2"), NodePath("BattleSpawn3"), NodePath("BattleSpawn4")]
+
+[node name="BattleSpawn" parent="PlayerSpawns" instance=ExtResource("6_xtwy1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.947, 0.9947, 4.09382)
+seeBarrel = false
+
+[node name="BattleSpawn2" parent="PlayerSpawns" instance=ExtResource("6_xtwy1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.97755, 0.9947, 1.33337)
+seeBarrel = false
+
+[node name="BattleSpawn3" parent="PlayerSpawns" instance=ExtResource("6_xtwy1")]
+transform = Transform3D(0.999949, -0.0101402, 0, 0.0101402, 0.999949, 0, 0, 0, 1, -5.30012, 0.997508, 2.71265)
+seeBarrel = false
+
+[node name="BattleSpawn4" parent="PlayerSpawns" instance=ExtResource("6_xtwy1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.33338, 0.99397, 5.17958)
+seeBarrel = false
+
+[node name="PlayerArt" type="Node3D" parent="."]
+visible = false
+
+[node name="Sprite3D" type="Sprite3D" parent="PlayerArt"]
+transform = Transform3D(-0.650691, -0.000157831, 0, 0.000295324, -0.347752, 0, 0, 0, 1, 4.97794, 4.91916, 0.27571)
+flip_h = true
+texture = ExtResource("7_75kpr")
+
+[node name="PauseMenu" parent="." instance=ExtResource("12_5q1s2")]
+visible = false
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="Arena" type="Node" parent="."]
+
+[connection signal="ability_clicked" from="UI" to="." method="_on_ui_ability_clicked"]
+[connection signal="monster_clicked" from="EnemySpawns/BattleSpawn" to="." method="_on_battle_spawn_monster_clicked"]
+[connection signal="monster_clicked" from="EnemySpawns/BattleSpawn" to="EnemySpawns" method="_on_battle_spawn_monster_clicked"]
+[connection signal="monster_clicked" from="PlayerSpawns/BattleSpawn" to="PlayerSpawns" method="_on_battle_spawn_monster_clicked"]

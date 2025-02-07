@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dkxjks776u26f"
+path="res://.godot/imported/blockRounded.obj-3fbe375bf15a7b34ee6809cff55ef71d.mesh"
+
+[deps]
+
+files=["res://.godot/imported/blockRounded.obj-3fbe375bf15a7b34ee6809cff55ef71d.mesh"]
+
+source_file="res://Shared/ImportedAssets/GridMapAssets/Models/OBJ format/blockRounded.obj"
+dest_files=["res://.godot/imported/blockRounded.obj-3fbe375bf15a7b34ee6809cff55ef71d.mesh", "res://.godot/imported/blockRounded.obj-3fbe375bf15a7b34ee6809cff55ef71d.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

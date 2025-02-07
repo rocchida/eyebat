@@ -1,15 +1,15 @@
 [gd_scene load_steps=11 format=3 uid="uid://bly6wti1q8bsu"]
 
-[ext_resource type="Theme" uid="uid://by44nnjeu6u4n" path="res://Menus/Assets/Cogito_Theme_A.tres" id="1_2rp0o"]
+[ext_resource type="Theme" uid="uid://by44nnjeu6u4n" path="res://Menus/Shared/Assets/Cogito_Theme_A.tres" id="1_2rp0o"]
 [ext_resource type="Script" path="res://Menus/Options/OptionsTabMenu.gd" id="2_ri0w1"]
 [ext_resource type="PackedScene" uid="uid://yjrkuurlcylb" path="res://Menus/Options/RemapEntry.tscn" id="3_huuus"]
 [ext_resource type="PackedScene" uid="uid://cbv85ok0isnb3" path="res://Menus/Options/MenuSeparator.tscn" id="4_646u1"]
-[ext_resource type="FontFile" uid="uid://bfavdpnmorag5" path="res://Menus/Assets/Fonts/Montserrat/Montserrat-Regular.ttf" id="5_bm8pc"]
+[ext_resource type="FontFile" uid="uid://bfavdpnmorag5" path="res://Menus/Shared/Assets/Fonts/Montserrat/Montserrat-Regular.ttf" id="5_bm8pc"]
 [ext_resource type="Script" path="res://Menus/Options/tab_menu.gd" id="6_bj2b7"]
 [ext_resource type="Script" path="res://Menus/Options/follow_focus_center.gd" id="7_t2360"]
 [ext_resource type="PackedScene" uid="uid://cqniig2ks0xs2" path="res://Menus/Options/gamepad_closable.tscn" id="8_4e2jk"]
 [ext_resource type="Script" path="res://Menus/Options/slider_w_labels.gd" id="9_7nxnh"]
-[ext_resource type="Script" path="res://Menus/Components/AnimatedButton.gd" id="10_ipxcu"]
+[ext_resource type="Script" path="res://Menus/Shared/Components/AnimatedButton.gd" id="10_ipxcu"]
 
 [node name="OptionsTabMenu" type="MarginContainer"]
 offset_right = 500.0
@@ -459,31 +459,42 @@ theme_override_constants/margin_right = 5
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer"]
 layout_mode = 2
-size_flags_horizontal = 8
 size_flags_vertical = 0
+
+[node name="Back" type="Button" parent="VBoxContainer/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Back"
+script = ExtResource("10_ipxcu")
+
+[node name="Spacer" type="Control" parent="VBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="Restore Default" type="Button" parent="VBoxContainer/MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(230, 0)
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
+size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 25
 text = "Restore Defaults"
 script = ExtResource("10_ipxcu")
 
+[node name="Spacer2" type="Control" parent="VBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
 [node name="ApplyChanges" type="Button" parent="VBoxContainer/MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(230, 0)
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
 theme_override_font_sizes/font_size = 25
 text = "Apply changes"
 script = ExtResource("10_ipxcu")
 
 [connection signal="value_changed" from="VBoxContainer/TabContainer/Audio/ScrollContainer/VBoxContainer/HBoxContainer_SFXVolumeSlider/HSlider" to="VBoxContainer/TabContainer/Audio/ScrollContainer/VBoxContainer/HBoxContainer_SFXVolumeSlider" method="_on_h_slider_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/TabContainer/Audio/ScrollContainer/VBoxContainer/HBoxContainer_MusicVolumeSlider/HSlider" to="VBoxContainer/TabContainer/Audio/ScrollContainer/VBoxContainer/HBoxContainer_MusicVolumeSlider" method="_on_h_slider_value_changed"]
+[connection signal="pressed" from="VBoxContainer/MarginContainer/HBoxContainer/Back" to="." method="_on_back_pressed"]
 [connection signal="pressed" from="VBoxContainer/MarginContainer/HBoxContainer/ApplyChanges" to="." method="_on_apply_changes_pressed"]
 [connection signal="pressed" from="VBoxContainer/MarginContainer/HBoxContainer/ApplyChanges" to="VBoxContainer/TabContainer/Bindings" method="save_keybindings_to_config"]

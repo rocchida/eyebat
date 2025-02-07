@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://d2ix6isnfuk1t"
+path="res://.godot/imported/blockSnow.obj-6fcde608af6a7dff9aea124e7089bacd.mesh"
+
+[deps]
+
+files=["res://.godot/imported/blockSnow.obj-6fcde608af6a7dff9aea124e7089bacd.mesh"]
+
+source_file="res://Shared/ImportedAssets/GridMapAssets/Models/OBJ format/blockSnow.obj"
+dest_files=["res://.godot/imported/blockSnow.obj-6fcde608af6a7dff9aea124e7089bacd.mesh", "res://.godot/imported/blockSnow.obj-6fcde608af6a7dff9aea124e7089bacd.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false
