@@ -1,6 +1,8 @@
 extends Node3D
 class_name BattleScene
 
+signal activated_ability_completed(source : Monster, targets : Array[Monster], ability : Attack)
+
 enum state {ENEMIES_AND_PLAYERS_ALIVE, ENEMIES_DEAD, PLAYERS_DEAD, ALL_DEAD}
 enum turn_state {SELECTING_ACTION, ACTION_SELECTED}
 var enemy_spawns : SpawnGroup
@@ -238,16 +240,24 @@ func run_attack(source : Monster, targets : Array[Monster], ability : Attack):
 	source.update_statuses_after_attacking(UI)
 
 	for target in targets:
-		if(battle_is_over()):
-			go_back_to_overworld()
-		
 		var team = "EVOKER'S "
 		if is_enemy(target): team = "ENEMY "
 		UI.debug(source.name + " uses " + ability.name + " on " + team + target.name)
 		var threat_generated : int = await receive_attack(UI, ability, target, source, $AudioStreamPlayer)
+
+		# check if all monsters are defeated and end the battle
+		if(battle_is_over()):
+			go_back_to_overworld()
+
+		# apply generated threat from the ability
 		if !on_same_team(source, target):
 			generate_threat_from_attack(threat_generated, source, target, ability)
+
+		# pause between multi-target ability
 		if ability.num_of_targets > 1 : await get_tree().create_timer(3.5).timeout
+
+	activated_ability_completed.emit(source, targets, ability)
+	
 
 func receive_attack(ui : UI, attack : Attack, receiver : Monster, attacker : Monster, audioPlayer : AudioStreamPlayer) -> int:
 	var threat_generated : int = 0

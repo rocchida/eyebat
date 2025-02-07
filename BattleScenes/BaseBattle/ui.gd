@@ -3,7 +3,6 @@ class_name UI
 signal ability_clicked(ability : Attack)
 
 var buttons : Array[AbilityButton]
-var btn : Button
 var battle_scene : BattleScene
 @onready var attack_desc_text : Label = $ColorMenu/ScrollContainer/Label
 @onready var monster_desc_text : Label = $ColorMenu/CurrentMonsterStats/Label
@@ -27,6 +26,9 @@ func _ready():
 		connect_monster_signals(monster)
 	for monster in battle_scene.enemy_monsters:
 		connect_monster_signals(monster)
+
+	# connect signals on the battle which affact the UI nodes
+	battle_scene.activated_ability_completed.connect(_on_selected_ability_completed)
 
 ## Connect UI changes to monster signals
 func connect_monster_signals(monster : Monster):
@@ -103,3 +105,9 @@ func _on_ability_button_3_pressed(ability : Attack):
 
 func _on_ability_button_4_pressed(ability : Attack):
 	ability_clicked.emit(ability)
+
+## called whenever the battle scene class finishes using a selected ability.
+func _on_selected_ability_completed(source : Monster, targets : Array[Monster], ability : Attack):
+	# deselect the currently selected AbilityButton
+	for btn in buttons:
+		btn.set_pressed_no_signal(false)
