@@ -8,7 +8,7 @@ func _ready() -> void:
 
     parent_button.pressed.connect(func() -> void:
         if scene_to_load:
-            SceneSwitcher.load_next_scene(scene_to_load, "", "temp", SceneSwitcher.SceneLoadMode.RESET)
+            SceneSwitcher.load_next_scene(scene_to_load, "temp", SceneSwitcher.SceneLoadMode.RESET)
         else:
             print("No scene set in the scene switcher on " + parent_button.get_name() + ".")
     )
