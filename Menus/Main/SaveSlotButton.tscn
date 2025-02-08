@@ -36,7 +36,7 @@ alignment = 1
 layout_mode = 2
 theme = ExtResource("2_le1ck")
 theme_type_variation = &"HUDLabel"
-text = "SLOT A"
+text = "Save Slot 1"
 
 [node name="SaveTime" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2

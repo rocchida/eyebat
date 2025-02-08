@@ -19,7 +19,7 @@ func _ready():
 func _process(delta: float) -> void:
 	if _entered:
 		if _forced_entry or Input.is_action_just_pressed("ui_accept"):
-			SceneSwitcher.goto_battle_scene(_target_scene,  _encounter_monster_roster_paths, _player.get_global_position())
+			SceneSwitcher.goto_battle_scene(_target_scene,  _encounter_monster_roster_paths)
 
 
 func _on_body_entered(body: Node3D):	

@@ -72,7 +72,7 @@ func _play_pressed() -> void:
 func open_pause_menu():
 	#Stops game and shows pause menu
 	get_tree().paused = true
-	label_active_slot.text = "Current Slot: " + SaveManager._active_save_name
+	label_active_slot.text = "Current Slot: " + SaveManager.active_save_name
 	temp_screenshot = grab_temp_screenshot()
 	load_current_slot_data()
 	_go_back_to_pause_menu()
@@ -98,19 +98,18 @@ func grab_temp_screenshot() -> Image:
 
 func load_current_slot_data():
 	# Load screenshot
-	var image_path : String = SaveManager.get_active_slot_player_state_screenshot_path()
-	if image_path != "":
-		var image : Image = Image.load_from_file(image_path)
-		var texture = ImageTexture.create_from_image(image)
+	var screenshot : Image = SaveManager.get_active_slot_screenshot()
+	if screenshot != null:
+		var texture = ImageTexture.create_from_image(screenshot)
 		%Screenshot_Spot.texture = texture
 	else:
 		%Screenshot_Spot.texture = empty_slot_texture
-		print("No screenshot for slot ", SaveManager._active_save_name, " found.")
+		print("No screenshot for slot ", SaveManager.active_save_name, " found.")
 		
 	# Load save state time
 	var savetime : int
-	if SaveManager._player_state:
-		savetime = SaveManager._player_state.save_time
+	if SaveManager.save_data:
+		savetime = SaveManager.save_data.save_time
 	if savetime == null or typeof(savetime) != TYPE_INT or savetime == 0:
 		%Label_SaveTime.text = ""
 	else:
@@ -124,7 +123,7 @@ func close_pause_menu():
 	get_tree().paused = false
 	hide()
 	game_menu.hide()
-	emit_signal("resume")
+	resume.emit()
 
 
 func _on_resume_game_button_pressed():
@@ -139,7 +138,8 @@ func _on_quit_button_pressed():
 func _on_back_to_menu_button_pressed():
 	close_pause_menu()
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	emit_signal("back_to_main_pressed")
+	back_to_main_pressed.emit()
+	SaveManager.unload_save()
 
 
 func _input(event):
@@ -169,16 +169,17 @@ func _on_save_button_pressed() -> void:
 	var current_scene_name = get_tree().get_current_scene().get_name()
 	var current_scene_path = get_tree().current_scene.scene_file_path
 	var screenshot_to_save = temp_screenshot
-	SaveManager.save_player_state(current_scene_name, current_scene_path,PlayerGlobal.player, screenshot_to_save, SaveManager._active_save_name)
-	SaveManager.save_scene_state(get_tree(),"temp")
-	SaveManager.copy_temp_saves_to_slot(SaveManager._active_save_name)
-	
+	SaveManager.save_player_state(current_scene_name, current_scene_path,PlayerGlobal.player, SaveManager.active_save_name)
+	SaveManager.save_scene_state(get_tree(),SaveManager.active_save_name)
+	SaveManager.save_save_data(current_scene_name, current_scene_path, screenshot_to_save,SaveManager.active_save_name)
 	_on_resume_game_button_pressed()
 
 
 func _on_load_button_pressed() -> void:
-	Global.debug_log("pause_menu_controller.gd","LOAD button pressed.")
-	SaveManager.delete_temp_saves()
-	SaveManager.copy_slot_saves_to_temp(get_tree(), SaveManager._active_save_name)
-	SaveManager.load_saved_game(get_tree(),"temp")
+	# For optionally storing data on disk rather than memory. Not using unless we have to.
+	#SaveManager.delete_temp_saves()
+	#SaveManager.copy_slot_saves_to_temp(get_tree(), SaveManager._active_save_name)
+
+	# Load game and resume
+	SaveManager.load_saved_game(get_tree(),SaveManager.active_save_name)
 	_on_resume_game_button_pressed()

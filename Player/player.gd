@@ -13,10 +13,6 @@ var _gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 func _ready():
 	PlayerGlobal.player = self
-	if PlayerGlobal.monster_list.is_empty():
-		for ps : PackedScene in monster_roster:
-			# PlayerGlobal.monster_list.append(ps.instantiate() as Monster)
-			PlayerGlobal.monster_list.append(ps)
 	
 # _physics_process is a function provided by Godot. TLDR - It runs like once a frame
 # I used this as a main method and broke down all logic into smaller functions for readability

@@ -1,7 +1,7 @@
 extends Control
 signal start_game_pressed
 
-@export var first_focus_button: Button
+#@export var first_focus_button: Button
 @onready var game_menu: MarginContainer = $ContentMain/GameMenu
 @onready var options_tab_menu: OptionsTabMenu = $ContentMain/OptionsTabMenu
 @onready var options_button: AnimatedButton = $ContentMain/GameMenu/VBoxContainer/OptionsButton
@@ -46,8 +46,6 @@ func _play_pressed() -> void:
 
 
 func _ready():
-	first_focus_button.grab_focus()
-
 	# connect to options menu back button pressed
 	options_tab_menu.back_button_pressed.connect(_go_back_to_main_menu)
 

@@ -25,21 +25,7 @@ var current_monster : Monster:
 var currently_targeted_monsters : Array[Monster]
 
 func _ready():
-	UI.set_ability_buttons(current_monster.attacks)
-	UI.set_current_monster_stats(current_monster)
-
-	# connect monster signals
-	for monster in player_monsters:
-		monster.sprite_clicked.connect(monster_clicked)
-		monster.sprite_hovered.connect(monster_hovered)
-		monster.sprite_unhovered.connect(monster_unhovered)
-	for monster in enemy_monsters:
-		monster.sprite_clicked.connect(monster_clicked)
-		monster.sprite_hovered.connect(monster_hovered)
-		monster.sprite_unhovered.connect(monster_unhovered)
-	
-	#UI.set_initiative_board(initiative)
-	print("Initiative (Ready): ", initiative)
+	pass
 
 func _prepare():
 	enemy_spawns = $EnemySpawns
@@ -51,8 +37,11 @@ func instantiate_monsters(enemy_monster_roster: Array[PackedScene]):
 		enemy_monsters.append(ps.instantiate() as Monster)
 
 	# unpack the player_monster_roster
-	for ps : PackedScene in PlayerGlobal.monster_list:
-		player_monsters.append(ps.instantiate() as Monster)
+	#print(SceneSwitcher.current_player_state.monster_roster)
+	for ps : PackedScene in SceneSwitcher.current_player_state.monster_roster:
+		var unpacked_monster = ps.instantiate() as Monster
+		player_monsters.append(unpacked_monster)
+		#print(unpacked_monster)
 
 	# instantiate initiative
 	set_initiative(enemy_monsters, player_monsters)
@@ -78,6 +67,27 @@ func populate_spawns():
 		if is_enemy(m):
 			m.get_brain().set_threats(get_living_goodguys())
 		else: m.get_brain().set_threats(get_living_enemies())
+
+func initialize(enemy_monster_roster: Array[PackedScene]):
+	instantiate_monsters(enemy_monster_roster)
+
+	UI.set_ability_buttons(current_monster.attacks)
+	UI.set_current_monster_stats(current_monster)
+
+	# connect monster signals
+	for monster in player_monsters:
+		monster.sprite_clicked.connect(monster_clicked)
+		monster.sprite_hovered.connect(monster_hovered)
+		monster.sprite_unhovered.connect(monster_unhovered)
+	for monster in enemy_monsters:
+		monster.sprite_clicked.connect(monster_clicked)
+		monster.sprite_hovered.connect(monster_hovered)
+		monster.sprite_unhovered.connect(monster_unhovered)
+
+	populate_spawns()
+	
+	#UI.set_initiative_board(initiative)
+	print("Initiative (Ready): ", initiative)
 	
 func set_initiative(enemy_monster_roster: Array[Monster], player_monster_roster: Array[Monster]):
 	initiative.append_array(enemy_monster_roster)
@@ -135,14 +145,7 @@ func end_turn():
 		UI.set_attack_description(null, null)
 
 func go_back_to_overworld():
-	var current_scene_name = get_tree().get_current_scene().get_name()
-	var current_scene_path = get_tree().current_scene.scene_file_path
-	SaveManager.save_scene_state(get_tree(), "temp")
-	SaveManager.save_player_state(current_scene_name, current_scene_path,PlayerGlobal.player, null, "temp")	
-	SceneSwitcher.fade_out()
-	await SceneSwitcher.fade_finished	
-	SceneSwitcher.load_next_scene("res://Scenes/world.tscn", "", "temp", SceneSwitcher.SceneLoadMode.TEMP)
-	
+	SceneSwitcher.goto_overworld_scene_from_battle("res://Overworld/world.tscn",player_monsters)
 
 func update_status_trackers():
 	for m : Monster in initiative:

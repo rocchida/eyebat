@@ -23,9 +23,7 @@ var current_player_state : PlayerState = null
 var overworld_scene_state : EvokerSceneState = null
 var current_scene : Node = null
 var _new_scene : Node = null
-var _scene_parameters: Dictionary
 var _next_scene_path : String
-var next_scene_name : String
 var _passed_slot : String
 var _load_mode : SceneSwitcher.SceneLoadMode
 var _new_scene_monster_roster_scene_paths : Array[String]
@@ -65,15 +63,9 @@ func _process(_delta):
 				for m in _new_scene_monster_roster_scene_paths:
 					enemy_monster_roster.append(ResourceLoader.load_threaded_get(m))
 				new_scene_node.initialize(enemy_monster_roster)
-		elif _load_mode == SceneSwitcher.SceneLoadMode.OVERWORLD:
-			next_scene_name = new_scene_node.get_name()
+		elif(_load_mode == SceneSwitcher.SceneLoadMode.OVERWORLD):
 			current_player_state.apply(PlayerGlobal.player)
 			overworld_scene_state.apply(get_tree())
-		elif _load_mode == SceneSwitcher.SceneLoadMode.LOAD_SAVE:
-			#Global.debug_log("scene_switcher.gd", "Attempting to load a save for Slot: " + _passed_slot)
-			SaveManager.load_saved_game(get_tree(), _passed_slot)
-		elif _load_mode == SceneSwitcher.SceneLoadMode.TEMP:
-			SaveManager.apply_loaded_states(PlayerGlobal.player, get_tree())
 		
 		fade_in()
 
@@ -87,35 +79,28 @@ func _process(_delta):
 		
 		old_scene.queue_free()
 
-func goto_overworld_scene(path: String, player_monster_roster: Array[Monster]):
-	print("SceneSwitcher.gd: Now switching from current scene: " + str(get_tree().current_scene) + ", to overworld scene: " + path)
-	detatch_monsters_from_scene(player_monster_roster)
-	_new_scene.free()
-	
-	var s = ResourceLoader.load(path)
-	_new_scene = s.instantiate()
-
-	get_tree().root.add_child(_new_scene)
-	get_tree().current_scene = _new_scene
-	current_scene = _new_scene
-	#_new_scene.set_player_monsters(player_monster_roster)
-	var player : Player = _new_scene.get_node("player")
-	player.set_global_position(current_player_state.player_position)
-	
-	# convert monster roster to an Array of PackedScenes and set it to the global player monster list
+func goto_overworld_scene_from_battle(path: String, player_monster_roster: Array[Monster] = []):
+	# TODO: apply the results of the battle to the player's state
+	# convert monster roster to an Array of PackedScenes
 	var monster_roster : Array[PackedScene] = []
-	for m in player_monster_roster:
-		monster_roster.append(m.get_scene())
-	PlayerGlobal.monster_list = monster_roster
+	for monster in player_monster_roster:
+		var monster_packed : PackedScene = PackedScene.new()
+		monster_packed.pack(monster)
+		monster_roster.append(monster_packed)
+	current_player_state.monster_roster = monster_roster
+	#print(current_player_state.monster_roster)
+
+	SceneSwitcher.fade_out()
+	await SceneSwitcher.fade_finished	
+	SceneSwitcher.load_next_scene(path, SceneSwitcher.SceneLoadMode.OVERWORLD)
 	
 
 func goto_battle_scene(path: String, enemy_monster_roster_paths : Array[String]):
 	print("SceneSwitcher.gd: Now switching from current scene: " + str(get_tree().current_scene) + ", to battle scene: " + path)
-	print("Enter battle position: ", PlayerGlobal.player.global_position)
+	#print("Enter battle position: ", PlayerGlobal.player.global_position)
 	current_player_state = PlayerState.get_player_state(PlayerGlobal.player, current_scene.name, current_scene.scene_file_path)
-	#current_player_state.player_position = player_location
 	overworld_scene_state = EvokerSceneState.get_scene_state(get_tree())
-	load_next_scene(path, "", SceneLoadMode.BATTLE, enemy_monster_roster_paths)
+	load_next_scene(path, SceneLoadMode.BATTLE, enemy_monster_roster_paths)
 
 
 func detatch_monsters_from_scene(monsters: Array):
@@ -124,15 +109,15 @@ func detatch_monsters_from_scene(monsters: Array):
 
 ## Start a new game
 func start_new_game(save_slot_name : String):
-	SaveManager._active_save_name = save_slot_name
-	load_next_scene(Global.new_game_scene_path, "", SceneLoadMode.RESET)
+	Global.debug_log("SceneSwitcher","Starting a new game.")
+	SaveManager.active_save_name = save_slot_name
+	load_next_scene(Global.new_game_scene_path, SceneLoadMode.RESET)
 
 ## Load & transition to another scene
-func load_next_scene(scene_path : String, passed_slot: String, load_mode: SceneLoadMode, monster_roster_paths : Array[String] = []) -> void:
+func load_next_scene(scene_path : String, load_mode: SceneLoadMode, monster_roster_paths : Array[String] = []) -> void:
 	
 	get_tree().paused = true
 	_next_scene_path = scene_path
-	_passed_slot = passed_slot
 	_load_mode = load_mode
 	_new_scene_monster_roster_scene_paths = monster_roster_paths
 
@@ -191,18 +176,3 @@ func fade_out(fade_duration:float = default_fade_duration) -> void:
 	fade_tween.tween_property(fade_panel, "modulate", Color.BLACK, fade_duration).set_trans(Tween.TRANS_CUBIC)
 	await get_tree().create_timer(fade_duration).timeout
 	fade_finished.emit()
-
-## example of transitioning to a scene from another scene
-# func transition_to_next_scene(next_scene_name: String, battle_scene_monster_roster_paths : Array[String] = []):
-# 	var scene_tree = get_tree()
-# 	var current_scene_name = scene_tree.get_current_scene().get_name()
-# 	var current_scene_path = get_tree().current_scene.scene_file_path
-# 	if(!battle_scene_monster_roster_paths.is_empty()):
-# 		SaveManager.save_player_state(current_scene_name, current_scene_path, PlayerGlobal.player, null, "temp")
-# 		SaveManager.save_scene_state(scene_tree,"temp")
-# 	else:
-# 		SaveManager.apply_player_state(PlayerGlobal.player, "temp")	
-# 		SaveManager.apply_scene_state(scene_tree,"temp",next_scene_name)
-# 	fade_out()
-# 	await fade_finished	
-# 	SceneSwitcher.load_next_scene(next_scene_name, "temp", SceneSwitcher.SceneLoadMode.TEMP, battle_scene_monster_roster_paths)

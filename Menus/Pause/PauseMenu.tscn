@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://Menus/Shared/Components/AnimatedButton.gd" id="6_a8sll"]
 [ext_resource type="Shader" uid="uid://j8xrfaa1f33x" path="res://Menus/Pause/BlurShader.tres" id="6_fg7i3"]
 [ext_resource type="PackedScene" uid="uid://bly6wti1q8bsu" path="res://Menus/Options/OptionsTabMenu.tscn" id="6_xdpcn"]
-[ext_resource type="Script" path="res://Menus/Pause/switch_scenes.gd" id="8_qjwhs"]
+[ext_resource type="Script" path="res://Menus/Pause/scene_switcher_component.gd" id="8_qjwhs"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8kcia"]
 shader = ExtResource("6_fg7i3")
