@@ -113,12 +113,9 @@ static func save_save_data(current_scene_name:String, current_scene_path:String,
 	write_save_resource_to_disk(save_data, slot, get_saved_save_data_path(slot))
 
 static func delete_save(passed_slot: String) -> void:
-	#var file_to_remove = Global.STATE_DIR + player_state_prefix + passed_slot + ".res"
 	var dir_to_remove = Global.STATE_DIR + passed_slot
 	OS.move_to_trash(ProjectSettings.globalize_path(dir_to_remove))
 	Global.debug_log("SaveManager","Save file removed: "+ dir_to_remove)
-	
-	#var scene_to_remove = Global.STATE_DIR + cogito_scene_state_prefix + passed_slot + ".res"
 
 ## Save the passed save slot data to a temporary data file
 static func copy_slot_saves_to_temp(scene_tree:SceneTree,passed_slot:String) -> bool:

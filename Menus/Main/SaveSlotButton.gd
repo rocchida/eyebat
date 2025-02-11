@@ -40,10 +40,10 @@ func _ready() -> void:
 ## Set the display and save data of the button. If save_data is null, will set it to a default state.
 func set_save_data(save_data:SaveData):
 	print("Save data: ", save_data)
+	_save_data = save_data
 
 	# set the default
-	if save_data == null:
-		_save_data = null
+	if _save_data == null:
 		slot_name_label.text = "NEW GAME"
 		save_time_label.text = ""
 		screenshot_spot.texture = empty_slot_screenshot
@@ -51,7 +51,6 @@ func set_save_data(save_data:SaveData):
 		save_slot_name = default_save_slot_name
 		return
 	
-	_save_data = save_data
 	slot_name_label.text =  _save_data.save_name
 	save_slot_name = _save_data.save_name
 	var savetime : int
@@ -67,15 +66,12 @@ func set_save_data(save_data:SaveData):
 		Global.debug_log("SaveSlotButton.gd","No screenshot for slot " + SaveManager.active_save_name + " found.")
 
 func _on_save_slot_button_pressed() -> void:
-	if !_save_data:
-		SceneSwitcher.start_new_game(save_slot_name);
-	else:
+	if _save_data:
 		SaveManager.load_saved_game(get_tree(),save_slot_name)
+	else:
+		SceneSwitcher.start_new_game(save_slot_name);
 
 func _on_delete_slot_pressed() -> void:
 	if _save_data != null:
 		SaveManager.delete_save(_save_data.save_name)
-		_save_data = null
-		set_save_data(_save_data)
-	else:
-		Global.debug_log("SaveSlotButton.gd","Slot is already empty!")
+		set_save_data(null)
