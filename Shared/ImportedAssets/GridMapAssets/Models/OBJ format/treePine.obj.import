@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://d0vmupu4goxph"
+path="res://.godot/imported/treePine.obj-db7634a8a8de85763caad5b7188cc05c.mesh"
+
+[deps]
+
+files=["res://.godot/imported/treePine.obj-db7634a8a8de85763caad5b7188cc05c.mesh"]
+
+source_file="res://Shared/ImportedAssets/GridMapAssets/Models/OBJ format/treePine.obj"
+dest_files=["res://.godot/imported/treePine.obj-db7634a8a8de85763caad5b7188cc05c.mesh", "res://.godot/imported/treePine.obj-db7634a8a8de85763caad5b7188cc05c.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

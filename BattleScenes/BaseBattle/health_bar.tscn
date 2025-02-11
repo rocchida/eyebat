@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bh3anfh3p2rqb"]
+
+[ext_resource type="PackedScene" uid="uid://0n6qt3r5hf7i" path="res://BattleScenes/BaseBattle/health_bar_3d.tscn" id="1_wxaq1"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_gis6v"]
+viewport_path = NodePath("HealthBar/SubViewport")
+
+[node name="HealthBar" type="Node3D"]
+
+[node name="SubViewport" type="SubViewport" parent="."]
+disable_3d = true
+transparent_bg = true
+
+[node name="HealthBar3D" parent="SubViewport" instance=ExtResource("1_wxaq1")]
+
+[node name="HealthBar" type="Sprite3D" parent="."]
+transform = Transform3D(0.174239, 0, 0, 0, 0.0701671, 0, 0, 0, 1, 0, 1.61934, 0)
+texture = SubResource("ViewportTexture_gis6v")

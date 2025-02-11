@@ -1,15 +1,17 @@
-extends AnimatedButton
-class_name SaveSlotButton
+## This button holds save data and emits the save data when pressed.
+class_name SaveSlotButton extends AnimatedButton
 
 @onready var screenshot_spot: TextureRect = $MarginContainer/HBoxContainer/Screenshot_Spot
 @onready var slot_name_label: Label = $MarginContainer/HBoxContainer/VBoxContainer/SlotName
 @onready var save_time_label: Label = $MarginContainer/HBoxContainer/VBoxContainer/SaveTime
 
-@export var save_slot_manager_node : Control
-@export var manual_save_slot_name : String
 @export var empty_slot_screenshot : Texture2D
 
-var player_state : PlayerState
+var _save_data : SaveData
+## The save slot name
+var save_slot_name : String
+## The default save slot name for if the save data gets deleted
+var default_save_slot_name : String
 
 func _ready() -> void:
 	pressed.connect(_on_save_slot_button_pressed)
@@ -35,63 +37,41 @@ func _ready() -> void:
 	add_theme_stylebox_override('focus', tween_stylebox)
 	add_theme_stylebox_override('pressed', tween_stylebox)
 
+## Set the display and save data of the button. If save_data is null, will set it to a default state.
+func set_save_data(save_data:SaveData):
+	print("Save data: ", save_data)
+	_save_data = save_data
 
-func set_data_from_state(_player_state:PlayerState):
-	if _player_state == null:
+	# set the default
+	if _save_data == null:
 		slot_name_label.text = "NEW GAME"
 		save_time_label.text = ""
 		screenshot_spot.texture = empty_slot_screenshot
-		player_state = null
-		return
-	else:
-		player_state = _player_state
-	
-	if player_state.save_name:
-		slot_name_label.text = "SLOT " + player_state.save_name
-	else:
-		slot_name_label.text = "NEW GAME"
-
-	var savetime : int
-	if player_state:
-		savetime = player_state.save_time
-	if savetime == null or typeof(savetime) != TYPE_INT:
 		save_time_label.text = ""
-	else:
-		var timeoffset = Time.get_time_zone_from_system().bias*60
-		save_time_label.text = Time.get_datetime_string_from_unix_time(savetime+timeoffset,true)
+		save_slot_name = default_save_slot_name
+		return
+	
+	slot_name_label.text =  _save_data.save_name
+	save_slot_name = _save_data.save_name
+	var savetime : int
+	savetime = _save_data.save_time
+	var timeoffset = Time.get_time_zone_from_system().bias*60
+	save_time_label.text = Time.get_datetime_string_from_unix_time(savetime+timeoffset,true)
 
 	# Set screenshot
-	var image_path : String = player_state.save_screenshot_path
-	if image_path != "":
-		var image : Image = Image.load_from_file(image_path)
-		var texture = ImageTexture.create_from_image(image)
-		screenshot_spot.texture = texture
+	var screenshot : Image = _save_data.screenshot
+	if screenshot != null:
+		screenshot_spot.texture = ImageTexture.create_from_image(screenshot)
 	else:
-		Global.debug_log("SaveSlotButton.gd","No screenshot for slot " + SaveManager._active_save_name + " found.")
-
+		Global.debug_log("SaveSlotButton.gd","No screenshot for slot " + SaveManager.active_save_name + " found.")
 
 func _on_save_slot_button_pressed() -> void:
-	if !player_state:
-		Global.debug_log("SaveSlotButton.gd","No player state. Should start a new game.")
-		if save_slot_manager_node:
-			SaveManager.switch_active_slot_to(manual_save_slot_name)
-			save_slot_manager_node.start_new_game()
+	if _save_data:
+		SaveManager.load_saved_game(get_tree(),save_slot_name)
 	else:
-		Global.debug_log("SaveSlotButton.gd","Attempting to load player_state " + player_state.save_name)
-		SaveManager._player_state = player_state
-		SaveManager.switch_active_slot_to(player_state.save_name)
-		SaveManager.delete_temp_saves()
-		SaveManager.copy_slot_saves_to_temp(get_tree(), SaveManager._active_save_name)
-		SaveManager.load_saved_game(get_tree(),"temp")
+		SceneSwitcher.start_new_game(save_slot_name);
 
-
-
-
-func _on_delete_slot_pressed():
-	SaveManager.switch_active_slot_to(manual_save_slot_name)
-	if SaveManager._player_state != null:
-		SaveManager.delete_save(manual_save_slot_name)
-		save_slot_manager_node.load_all_save_slots()
-	else:
-		Global.debug_log("SaveSlotButton.gd","Slot is already empty!")
-	
+func _on_delete_slot_pressed() -> void:
+	if _save_data != null:
+		SaveManager.delete_save(_save_data.save_name)
+		set_save_data(null)

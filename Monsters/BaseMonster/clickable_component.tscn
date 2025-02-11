@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://dyha3hn24vliy"]
+
+[ext_resource type="Script" path="res://Monsters/BaseMonster/clickable_component.gd" id="1_j0ix2"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_s17of"]
+
+[node name="Clickable" type="Node3D"]
+
+[node name="ClickableObject" type="StaticBody3D" parent="."]
+script = ExtResource("1_j0ix2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ClickableObject"]
+shape = SubResource("BoxShape3D_s17of")
+
+[connection signal="input_event" from="ClickableObject" to="ClickableObject" method="_on_input_event"]
+[connection signal="mouse_entered" from="ClickableObject" to="ClickableObject" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="ClickableObject" to="ClickableObject" method="_on_mouse_exited"]

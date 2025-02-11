@@ -135,3 +135,6 @@ func status_succeeded(chance : int):
 		return true
 	print('STATUS FAILED, CHANCE:' + str(chance) + '   ROLL:' + str(chance_roll))
 	return false
+
+func targets_living_enemies() -> bool:
+	return target_type == target_types.ALL || target_type == target_types.ONLY_ENEMIES
