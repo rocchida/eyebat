@@ -34,8 +34,10 @@ func _ready():
 func connect_monster_signals(monster : Monster):
 	monster.sprite_hovered.connect(set_hovered_monster_stats)
 
+## Adds line of text to the action_text RichTextLabel AKA the battle log
 func debug(text : String):
 	action_text.append_text(text + '\n')
+	action_text.scroll_to_line(action_text.get_line_count())
 	
 func set_initiative_text(current_turn : int, initiative : Array[Monster], enemies : Array[Monster]):
 	initiative_text.clear()
