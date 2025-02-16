@@ -9,6 +9,7 @@ signal resume
 signal back_to_main_pressed
 
 #region Variables
+@export var canvas_layer : CanvasLayer
 @export var nodes_to_focus: Array[Control]
 @export var sound_hover : AudioStream
 @export var sound_click : AudioStream
@@ -27,7 +28,7 @@ var temp_screenshot : Image
 
 func _ready():
 	game_menu.hide()
-	hide();
+	canvas_layer.hide();
 
 	# no saving during battle
 	if(get_parent() is BattleScene):
@@ -78,7 +79,7 @@ func open_pause_menu():
 	_go_back_to_pause_menu()
 
 func _go_back_to_pause_menu():
-	show()
+	canvas_layer.show()
 	game_menu.show()
 	options_tab_menu.hide()
 	resume_game_button.grab_focus.call_deferred()
@@ -121,7 +122,7 @@ func load_current_slot_data():
 
 func close_pause_menu():
 	get_tree().paused = false
-	hide()
+	canvas_layer.hide()
 	game_menu.hide()
 	resume.emit()
 

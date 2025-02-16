@@ -18,7 +18,10 @@ shader_parameter/BlurStrength = 0.7
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3a44o"]
 
-[node name="PauseMenu" type="Control"]
+[node name="CanvasLayer" type="CanvasLayer"]
+layer = 100
+
+[node name="PauseMenu" type="Control" parent="." node_paths=PackedStringArray("canvas_layer")]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -28,11 +31,12 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_1djt0")
 script = ExtResource("2_473pa")
+canvas_layer = NodePath("..")
 sound_hover = ExtResource("3_cekij")
 sound_click = ExtResource("4_ccwo8")
 empty_slot_texture = ExtResource("5_18sdt")
 
-[node name="BlurBG" type="TextureRect" parent="."]
+[node name="BlurBG" type="TextureRect" parent="PauseMenu"]
 material = SubResource("ShaderMaterial_8kcia")
 layout_mode = 1
 anchors_preset = 15
@@ -42,7 +46,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("PlaceholderTexture2D_gjw0g")
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Panel" type="Panel" parent="PauseMenu"]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -51,7 +55,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Content" type="VBoxContainer" parent="."]
+[node name="Content" type="VBoxContainer" parent="PauseMenu"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -61,28 +65,28 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 15
 
-[node name="PauseMenuLabel" type="Label" parent="Content"]
+[node name="PauseMenuLabel" type="Label" parent="PauseMenu/Content"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 45
 text = "Paused"
 horizontal_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="Content"]
+[node name="HSeparator" type="HSeparator" parent="PauseMenu/Content"]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
-[node name="GameMenu" type="MarginContainer" parent="Content"]
+[node name="GameMenu" type="MarginContainer" parent="PauseMenu/Content"]
 layout_mode = 2
 theme_override_constants/margin_left = 0
 theme_override_constants/margin_top = 25
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 25
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Content/GameMenu"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/Content/GameMenu"]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="ResumeGameButton" type="Button" parent="Content/GameMenu/VBoxContainer"]
+[node name="ResumeGameButton" type="Button" parent="PauseMenu/Content/GameMenu/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 4
@@ -90,41 +94,41 @@ theme_override_font_sizes/font_size = 30
 text = "Resume"
 script = ExtResource("6_a8sll")
 
-[node name="HSeparator" type="HSeparator" parent="Content/GameMenu/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="PauseMenu/Content/GameMenu/VBoxContainer"]
 visible = false
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="Separator_PanelContainer" type="PanelContainer" parent="Content/GameMenu/VBoxContainer"]
+[node name="Separator_PanelContainer" type="PanelContainer" parent="PauseMenu/Content/GameMenu/VBoxContainer"]
 custom_minimum_size = Vector2(0, 15)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_3a44o")
 
-[node name="Label_ActiveSlot" type="Label" parent="Content/GameMenu/VBoxContainer"]
+[node name="Label_ActiveSlot" type="Label" parent="PauseMenu/Content/GameMenu/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "Current Slot: ?"
 horizontal_alignment = 1
 
-[node name="PanelContainer" type="PanelContainer" parent="Content/GameMenu/VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="PauseMenu/Content/GameMenu/VBoxContainer"]
 custom_minimum_size = Vector2(130, 160)
 layout_mode = 2
 theme = ExtResource("1_1djt0")
 theme_type_variation = &"HUDPanel"
 
-[node name="MarginContainer" type="MarginContainer" parent="Content/GameMenu/VBoxContainer/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="PauseMenu/Content/GameMenu/VBoxContainer/PanelContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 2
 theme_override_constants/margin_top = 2
 theme_override_constants/margin_right = 2
 theme_override_constants/margin_bottom = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Content/GameMenu/VBoxContainer/PanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/Content/GameMenu/VBoxContainer/PanelContainer/MarginContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="Screenshot_Spot" type="TextureRect" parent="Content/GameMenu/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Screenshot_Spot" type="TextureRect" parent="PauseMenu/Content/GameMenu/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
@@ -132,24 +136,24 @@ texture = ExtResource("5_18sdt")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Label_SaveTime2" type="Label" parent="Content/GameMenu/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Label_SaveTime2" type="Label" parent="PauseMenu/Content/GameMenu/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 16
 text = "Last save:"
 horizontal_alignment = 1
 
-[node name="Label_SaveTime" type="Label" parent="Content/GameMenu/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Label_SaveTime" type="Label" parent="PauseMenu/Content/GameMenu/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 16
 text = "YYYY-MM-DD HH:MM"
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Content/GameMenu/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PauseMenu/Content/GameMenu/VBoxContainer"]
 layout_mode = 2
 
-[node name="LoadButton" type="Button" parent="Content/GameMenu/VBoxContainer/HBoxContainer"]
+[node name="LoadButton" type="Button" parent="PauseMenu/Content/GameMenu/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -158,7 +162,7 @@ theme_override_font_sizes/font_size = 30
 text = "Load"
 script = ExtResource("6_a8sll")
 
-[node name="SaveButton" type="Button" parent="Content/GameMenu/VBoxContainer/HBoxContainer"]
+[node name="SaveButton" type="Button" parent="PauseMenu/Content/GameMenu/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -167,43 +171,43 @@ theme_override_font_sizes/font_size = 30
 text = "Save"
 script = ExtResource("6_a8sll")
 
-[node name="Separator_PanelContainer2" type="PanelContainer" parent="Content/GameMenu/VBoxContainer"]
+[node name="Separator_PanelContainer2" type="PanelContainer" parent="PauseMenu/Content/GameMenu/VBoxContainer"]
 custom_minimum_size = Vector2(0, 15)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_3a44o")
 
-[node name="OptionsButton" type="Button" parent="Content/GameMenu/VBoxContainer"]
+[node name="OptionsButton" type="Button" parent="PauseMenu/Content/GameMenu/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_font_sizes/font_size = 30
 text = "Options"
 script = ExtResource("6_a8sll")
 
-[node name="BackToMainMenuButton" type="Button" parent="Content/GameMenu/VBoxContainer"]
+[node name="BackToMainMenuButton" type="Button" parent="PauseMenu/Content/GameMenu/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_font_sizes/font_size = 30
 text = "Back to Main Menu"
 script = ExtResource("6_a8sll")
 
-[node name="SwitchScenes" type="Node" parent="Content/GameMenu/VBoxContainer/BackToMainMenuButton"]
+[node name="SwitchScenes" type="Node" parent="PauseMenu/Content/GameMenu/VBoxContainer/BackToMainMenuButton"]
 script = ExtResource("8_qjwhs")
 scene_to_load = "res://Menus/Main/main_menu.tscn"
 
-[node name="QuitButton" type="Button" parent="Content/GameMenu/VBoxContainer"]
+[node name="QuitButton" type="Button" parent="PauseMenu/Content/GameMenu/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_font_sizes/font_size = 30
 text = "Quit"
 script = ExtResource("6_a8sll")
 
-[node name="OptionsTabMenu" parent="Content" instance=ExtResource("6_xdpcn")]
+[node name="OptionsTabMenu" parent="PauseMenu/Content" instance=ExtResource("6_xdpcn")]
 visible = false
 layout_mode = 2
 
-[connection signal="pressed" from="Content/GameMenu/VBoxContainer/ResumeGameButton" to="." method="_on_resume_game_button_pressed"]
-[connection signal="pressed" from="Content/GameMenu/VBoxContainer/HBoxContainer/LoadButton" to="." method="_on_load_button_pressed"]
-[connection signal="pressed" from="Content/GameMenu/VBoxContainer/HBoxContainer/SaveButton" to="." method="_on_save_button_pressed"]
-[connection signal="pressed" from="Content/GameMenu/VBoxContainer/OptionsButton" to="." method="open_options_menu"]
-[connection signal="pressed" from="Content/GameMenu/VBoxContainer/BackToMainMenuButton" to="." method="_on_back_to_menu_button_pressed"]
-[connection signal="pressed" from="Content/GameMenu/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="PauseMenu/Content/GameMenu/VBoxContainer/ResumeGameButton" to="PauseMenu" method="_on_resume_game_button_pressed"]
+[connection signal="pressed" from="PauseMenu/Content/GameMenu/VBoxContainer/HBoxContainer/LoadButton" to="PauseMenu" method="_on_load_button_pressed"]
+[connection signal="pressed" from="PauseMenu/Content/GameMenu/VBoxContainer/HBoxContainer/SaveButton" to="PauseMenu" method="_on_save_button_pressed"]
+[connection signal="pressed" from="PauseMenu/Content/GameMenu/VBoxContainer/OptionsButton" to="PauseMenu" method="open_options_menu"]
+[connection signal="pressed" from="PauseMenu/Content/GameMenu/VBoxContainer/BackToMainMenuButton" to="PauseMenu" method="_on_back_to_menu_button_pressed"]
+[connection signal="pressed" from="PauseMenu/Content/GameMenu/VBoxContainer/QuitButton" to="PauseMenu" method="_on_quit_button_pressed"]
