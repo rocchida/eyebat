@@ -439,6 +439,9 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/idle/blend_position = Vector2(0.096577, -0.873767)
 parameters/walk/blend_position = Vector2(-0.997555, -0.00213218)
 
-[node name="PauseMenu" parent="." instance=ExtResource("3_cxisc")]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 3
+
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("3_cxisc")]
 
 [connection signal="player_state_loaded" from="." to="." method="_on_player_state_loaded"]

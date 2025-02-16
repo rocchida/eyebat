@@ -24,6 +24,7 @@ sound_hover = ExtResource("3_cfl52")
 sound_click = ExtResource("4_mhv4c")
 
 [node name="ContentMain" type="VBoxContainer" parent="."]
+z_index = 1
 layout_mode = 1
 anchors_preset = -1
 offset_left = 50.0
