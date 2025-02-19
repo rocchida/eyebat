@@ -10,7 +10,10 @@ func populate_spawns(monsters : Array[Monster]):
 		spawn_points_4[m].set_occupying_monster(monsters[m], face_left)
 
 func contains(m: Monster):
-	return spawn_points_4.has(m)
+	for s in spawn_points_4:
+		if s.get_occupying_monster() == m:
+			return true
+	return false
 
 func _on_battle_spawn_monster_clicked():
 	pass # Replace with function body.

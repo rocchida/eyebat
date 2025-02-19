@@ -17,3 +17,6 @@ func set_occupying_monster(_monster: Monster, face_left: bool):
 	if (face_left):
 		_monster.flip_sprite()
 
+func get_occupying_monster():
+	return _occupying_monster
+

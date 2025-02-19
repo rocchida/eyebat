@@ -361,7 +361,7 @@ func show_dead_monsters_if_targetable():
 			if m.is_deadzo(): m.make_invisible()
 
 func is_enemy(m : Monster) -> bool:
-	return (m.get_parent().get_parent() == enemy_spawns)
+	return enemy_spawns.contains(m)
 
 func perform_ai_turn(m : Monster) -> void:
 	print("ENEMY TURN")
