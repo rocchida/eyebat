@@ -60,7 +60,14 @@ static func load_scene_state(save_name : String, scene_name: String) -> EvokerSc
 static func load_saved_game(scene_tree:SceneTree, save_name: String):
 	Global.debug_log("SaveManager","SaveManager: Loading saved game from save name \""+ save_name + "\"")
 
+
+	if save_data == null:
+		Global.debug_log("SaveManager","SaveManager: No save data found for save name \""+ save_name + "\". Load aborted.")
+		return
 	_player_state = load_player_state(save_name)
+	if _player_state == null:
+		Global.debug_log("SaveManager","SaveManager: No player state found for save name \""+ save_name + "\" Load aborted.")
+		return
 	_scene_state = load_scene_state(save_name, _player_state.current_scene)
 	save_data = load_save_data(save_name)
 	active_save_name = save_data.save_name
