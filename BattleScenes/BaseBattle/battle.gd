@@ -372,12 +372,14 @@ func perform_ai_turn(m : Monster) -> void:
 func perform_ai_attack(m : Monster):
 	var chosen_attack : Attack = ai_choose_attack(m)
 	var chosen_targets : Array[Monster]
+	var possible_targets : Array[Monster] = get_attacks_possible_targets(chosen_attack)
+	if(possible_targets.is_empty()): return
 	if chosen_attack.is_heal:
-		chosen_targets = choose_random_targets(get_attacks_possible_targets(chosen_attack), chosen_attack.num_of_targets)
+		chosen_targets = choose_random_targets(possible_targets, chosen_attack.num_of_targets)
 	else:
 		chosen_targets.append(m.get_brain().get_most_threatening_target())
 		if chosen_attack.num_of_targets > 1:
-			chosen_targets.append_array(choose_random_targets(get_attacks_possible_targets(chosen_attack), chosen_attack.num_of_targets - 1))
+			chosen_targets.append_array(choose_random_targets(possible_targets, chosen_attack.num_of_targets - 1))
 	if (chosen_targets == null): return
 	await run_attack(m, chosen_targets, chosen_attack)
 
