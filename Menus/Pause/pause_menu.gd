@@ -16,6 +16,7 @@ signal back_to_main_pressed
 @export var empty_slot_texture : Texture
 
 var playback : AudioStreamPlaybackPolyphonic
+## A screenshot taken right before the pause menu is shown
 var temp_screenshot : Image
 
 @onready var resume_game_button: Button = %ResumeGameButton
@@ -74,7 +75,7 @@ func open_pause_menu():
 	#Stops game and shows pause menu
 	get_tree().paused = true
 	label_active_slot.text = "Current Slot: " + SaveManager.active_save_name
-	temp_screenshot = grab_temp_screenshot()
+	temp_screenshot = grab_temp_screenshot() # grab a screenshot of the game before the pause menu is shown
 	load_current_slot_data()
 	_go_back_to_pause_menu()
 
@@ -167,12 +168,7 @@ func _input(event):
 
 
 func _on_save_button_pressed() -> void:
-	var current_scene_name = get_tree().get_current_scene().get_name()
-	var current_scene_path = get_tree().current_scene.scene_file_path
-	var screenshot_to_save = temp_screenshot
-	SaveManager.save_player_state(current_scene_name, current_scene_path,PlayerGlobal.player, SaveManager.active_save_name)
-	SaveManager.save_scene_state(get_tree(),SaveManager.active_save_name)
-	SaveManager.save_save_data(current_scene_name, current_scene_path, screenshot_to_save,SaveManager.active_save_name)
+	SaveManager.save_game(get_tree(), temp_screenshot)
 	_on_resume_game_button_pressed()
 
 
@@ -182,5 +178,5 @@ func _on_load_button_pressed() -> void:
 	#SaveManager.copy_slot_saves_to_temp(get_tree(), SaveManager._active_save_name)
 
 	# Load game and resume
-	SaveManager.load_saved_game(get_tree(),SaveManager.active_save_name)
+	SaveManager.load_saved_game(SaveManager.active_save_name)
 	_on_resume_game_button_pressed()

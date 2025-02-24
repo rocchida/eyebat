@@ -67,7 +67,7 @@ func set_save_data(save_data:SaveData):
 
 func _on_save_slot_button_pressed() -> void:
 	if _save_data:
-		SaveManager.load_saved_game(get_tree(),save_slot_name)
+		SaveManager.load_saved_game(save_slot_name)
 	else:
 		SceneSwitcher.start_new_game(save_slot_name);
 
