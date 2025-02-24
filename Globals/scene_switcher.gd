@@ -22,9 +22,7 @@ signal fade_finished
 var current_player_state : PlayerState = null
 var overworld_scene_state : EvokerSceneState = null
 var current_scene : Node = null
-var _new_scene : Node = null
 var _next_scene_path : String
-var _passed_slot : String
 var _load_mode : SceneSwitcher.SceneLoadMode
 var _new_scene_monster_roster_scene_paths : Array[String]
 
